@@ -401,7 +401,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QWebView" name="webView">
+             <widget class="QWebView" name="passengerCars_webView">
               <property name="url">
                <url>
                 <string>about:blank</string>
@@ -417,7 +417,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
-             <widget class="QWebView" name="webView_2">
+             <widget class="QWebView" name="lightDutyVehicles_webView">
               <property name="url">
                <url>
                 <string>about:blank</string>
@@ -433,7 +433,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
-             <widget class="QWebView" name="webView_3">
+             <widget class="QWebView" name="heavyDutyVehicles_webView">
               <property name="url">
                <url>
                 <string>about:blank</string>
@@ -449,7 +449,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
-             <widget class="QWebView" name="webView_4">
+             <widget class="QWebView" name="buses_webView">
               <property name="url">
                <url>
                 <string>about:blank</string>
@@ -465,7 +465,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
-             <widget class="QWebView" name="webView_5">
+             <widget class="QWebView" name="motors_webView">
               <property name="url">
                <url>
                 <string>about:blank</string>
@@ -481,7 +481,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
-             <widget class="QWebView" name="webView_6">
+             <widget class="QWebView" name="alternativeFuels_webView">
               <property name="url">
                <url>
                 <string>about:blank</string>
