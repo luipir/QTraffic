@@ -48,7 +48,9 @@ PY_FILES = \
 	qtraffic_dialog.py \
 	__init__.py
 
-UI_FILES = qtraffic_dialog_base.ui
+#UI_FILES = qtraffic_dialog_base.ui
+UI_SOURCES = $(wildcard ui/*.ui)
+UI_FILES=$(patsubst %.ui,%_ui.py,$(UI_SOURCES))
 
 EXTRAS = icon.png metadata.txt
 
@@ -71,7 +73,10 @@ QGISDIR=.qgis2
 
 default: compile
 
-compile: $(COMPILED_RESOURCE_FILES)
+compile: $(COMPILED_RESOURCE_FILES) $(UI_FILES)
+
+$(UI_FILES): %_ui.py: %.ui
+	pyuic4 -o $@ $<
 
 %_rc.py : %.qrc $(RESOURCES_SRC)
 	pyrcc4 -o $*_rc.py  $<
