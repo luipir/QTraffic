@@ -1,0 +1,63 @@
+{
+	"fleetComposition": {
+		"1": {
+			"description":"highway"
+			"PC":{
+				"Gasoline":{
+					"avalilable":1   # 1 MEANS AVAILABLE, 0 MEANS NOT AVAILABLE = SWITHCED OFF
+					"value":40
+					"Euro1":{
+						"avalilable":1   # 1 MEANS AVAILABLE, 0 MEANS NOT AVAILABLE = SWITHCED OFF
+						"value":10
+						"class 1":{
+							"avalilable":1   # 1 MEANS AVAILABLE, 0 MEANS NOT AVAILABLE = SWITHCED OFF
+							"value":30
+						}
+						"class 2":{
+							"avalilable":1   # 1 MEANS AVAILABLE, 0 MEANS NOT AVAILABLE = SWITHCED OFF
+							"value":30
+						}
+						"class 3":{
+							"avalilable":1   # 1 MEANS AVAILABLE, 0 MEANS NOT AVAILABLE = SWITHCED OFF
+							"value":30
+						}
+					}
+					"Euro2":{
+						"value":10
+					}
+					"Euro3":{
+						"value":10
+					}
+					"Euro4":{
+						"value":10
+					}
+					.
+					.
+					.
+					.
+					"EuroN":{
+						"value":20
+					}
+				}
+				"Diesel":{
+					"value":30
+				}
+				"GPL":{
+					"value":30
+				}
+				...and so on...
+			},
+			"LDV":{
+			},
+			"HDV":{
+			},
+			"Bus":{
+			}
+			"Moto":{
+			}
+		}
+		"2": {
+		}
+	}
+
+}

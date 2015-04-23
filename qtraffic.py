@@ -25,7 +25,7 @@ from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
 import resources_rc
 # Import the code for the dialog
-from qtraffic_dialog import QTrafficDialog
+from qtraffic_dockWidget import QTrafficDockWidget
 import os.path
 
 
@@ -59,7 +59,7 @@ class QTraffic:
                 QCoreApplication.installTranslator(self.translator)
 
         # Create the dialog (after translation) and keep reference
-        self.dlg = QTrafficDialog()
+        self.dlg = QTrafficDockWidget(self.iface.mainWindow())
 
         # Declare instance attributes
         self.actions = []
@@ -184,9 +184,9 @@ class QTraffic:
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
-        result = self.dlg.exec_()
-        # See if OK was pressed
-        if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            pass
+#         result = self.dlg.exec_()
+#         # See if OK was pressed
+#         if result:
+#             # Do something useful here - delete the line containing pass and
+#             # substitute with your code.
+#             pass

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- QTrafficDialog
+ QTrafficDockWidget
                                  A QGIS plugin
  Road contamination modelling for EMSURE Project
                              -------------------
@@ -23,19 +23,23 @@
 
 import os
 
-from PyQt4 import QtGui, uic
+from PyQt4 import QtGui, QtCore, uic
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'ui', 'qtraffic_dialog_base.ui'))
+# FORM_CLASS, _ = uic.loadUiType(os.path.join(
+#     os.path.dirname(__file__), 'ui', 'qtraffic_dialog_base.ui'))
+# 
+# class QTrafficDockWidget(FORM_CLASS):
 
+from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
 
-class QTrafficDialog(QtGui.QDialog, FORM_CLASS):
+class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     def __init__(self, parent=None):
         """Constructor."""
-        super(QTrafficDialog, self).__init__(parent)
+        super(QTrafficDockWidget, self).__init__(parent)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
+        parent.addDockWidget(QtCore.Qt.BottomDockWidgetArea, self)
