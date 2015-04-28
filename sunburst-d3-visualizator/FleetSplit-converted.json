@@ -11,30 +11,30 @@
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 50-250 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 50-250 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, >750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, >750 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "2-stroke, >50 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "2-stroke, >50 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 250-750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 250-750 cm3"
 								}
 							],
 							"name": "EURO 4",
-							"value": 0.0,
+							"percentage": 0.0,
 							"description": "EURO 4"
 						}, {
 							"available": 1,
@@ -43,30 +43,30 @@
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 50-250 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 50-250 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, >750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, >750 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "2-stroke, >50 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "2-stroke, >50 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 250-750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 250-750 cm3"
 								}
 							],
 							"name": "CONVENTIONAL",
-							"value": 28.9,
+							"percentage": 28.9,
 							"description": "CONVENTIONAL"
 						}, {
 							"available": 1,
@@ -75,30 +75,30 @@
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 50-250 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 50-250 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, >750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, >750 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "2-stroke, >50 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "2-stroke, >50 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 250-750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 250-750 cm3"
 								}
 							],
 							"name": "EURO 1",
-							"value": 28.0,
+							"percentage": 28.0,
 							"description": "EURO 1"
 						}, {
 							"available": 1,
@@ -107,30 +107,30 @@
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 50-250 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 50-250 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, >750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, >750 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "2-stroke, >50 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "2-stroke, >50 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 250-750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 250-750 cm3"
 								}
 							],
 							"name": "EURO 3",
-							"value": 27.5,
+							"percentage": 27.5,
 							"description": "EURO 3"
 						}, {
 							"available": 1,
@@ -139,30 +139,30 @@
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 50-250 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 50-250 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, >750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, >750 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "2-stroke, >50 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "2-stroke, >50 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 250-750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 250-750 cm3"
 								}
 							],
 							"name": "EURO 2",
-							"value": 15.6,
+							"percentage": 15.6,
 							"description": "EURO 2"
 						}, {
 							"available": 1,
@@ -171,30 +171,30 @@
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 50-250 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 50-250 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, >750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, >750 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "2-stroke, >50 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "2-stroke, >50 cm3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "4-stroke, 250-750 cm3",
-									"value": 25.0,
+									"percentage": 25.0,
 									"description": "4-stroke, 250-750 cm3"
 								}
 							],
 							"name": "EURO 5",
-							"value": 0.0,
+							"percentage": 0.0,
 							"description": "EURO 5"
 						}
 					],
@@ -209,48 +209,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 15.4,
+									"percentage": 15.4,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 14.5,
+									"percentage": 14.5,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 22.6,
+									"percentage": 22.6,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 19.1,
+									"percentage": 19.1,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 22.1,
+									"percentage": 22.1,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 6.3,
+									"percentage": 6.3,
 									"description": "EURO 5"
 								}
 							],
 							"name": "LPG",
-							"value": 2.4,
+							"percentage": 2.4,
 							"description": "LPG"
 						}, {
 							"available": 1,
@@ -261,22 +261,22 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 72.3,
+											"percentage": 72.3,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 14.8,
+											"percentage": 14.8,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 12.9,
+											"percentage": 12.9,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 4",
-									"value": 31.7,
+									"percentage": 31.7,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
@@ -284,17 +284,17 @@
 										{
 											"available": 1,
 											"name": "CC<2.0 l",
-											"value": 65.6,
+											"percentage": 65.6,
 											"description": "CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 34.4,
+											"percentage": 34.4,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "CONVENTIONAL",
-									"value": 3.8,
+									"percentage": 3.8,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
@@ -302,22 +302,22 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 0,
+											"percentage": 0,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 0,
+											"percentage": 0,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 0,
+											"percentage": 0,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 6",
-									"value": 0,
+									"percentage": 0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
@@ -325,17 +325,17 @@
 										{
 											"available": 1,
 											"name": "CC<2.0 l",
-											"value": 71.9,
+											"percentage": 71.9,
 											"description": "CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 28.1,
+											"percentage": 28.1,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 1",
-									"value": 7.7,
+									"percentage": 7.7,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
@@ -343,17 +343,17 @@
 										{
 											"available": 1,
 											"name": "CC<2.0 l",
-											"value": 77.1,
+											"percentage": 77.1,
 											"description": "CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 22.9,
+											"percentage": 22.9,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 3",
-									"value": 32.7,
+									"percentage": 32.7,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
@@ -361,17 +361,17 @@
 										{
 											"available": 1,
 											"name": "CC<2.0 l",
-											"value": 72.7,
+											"percentage": 72.7,
 											"description": "CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 27.3,
+											"percentage": 27.3,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 2",
-									"value": 16.3,
+									"percentage": 16.3,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
@@ -379,27 +379,27 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 70.9,
+											"percentage": 70.9,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 17.7,
+											"percentage": 17.7,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 11.4,
+											"percentage": 11.4,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 5",
-									"value": 7.8,
+									"percentage": 7.8,
 									"description": "EURO 5"
 								}
 							],
 							"name": "Diesel",
-							"value": 36.2,
+							"percentage": 36.2,
 							"description": "Diesel"
 						}, {
 							"available": 0,
@@ -410,22 +410,22 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 63.7,
+											"percentage": 63.7,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 29.5,
+											"percentage": 29.5,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 6.8,
+											"percentage": 6.8,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 4",
-									"value": 75.8,
+									"percentage": 75.8,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
@@ -433,22 +433,22 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
@@ -456,27 +456,27 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 59.8,
+											"percentage": 59.8,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 34.7,
+											"percentage": 34.7,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 5.5,
+											"percentage": 5.5,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 5",
-									"value": 24.2,
+									"percentage": 24.2,
 									"description": "EURO 5"
 								}
 							],
 							"name": "Hybrids",
-							"value": 0.1,
+							"percentage": 0.1,
 							"description": "Hybrids"
 						}, {
 							"available": 1,
@@ -487,27 +487,27 @@
 										{
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 15.0,
+											"percentage": 15.0,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "0.8 1<CC<1.4 l",
-											"value": 29.5,
+											"percentage": 29.5,
 											"description": "0.8 1<CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "CC<0.8 l",
-											"value": 44.8,
+											"percentage": 44.8,
 											"description": "CC<0.8 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 10.7,
+											"percentage": 10.7,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 4",
-									"value": 19.9,
+									"percentage": 19.9,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
@@ -515,27 +515,27 @@
 										{
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 0,
+											"percentage": 0,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "0.8 1<CC<1.4 l",
-											"value": 0,
+											"percentage": 0,
 											"description": "0.8 1<CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "CC<0.8 l",
-											"value": 0,
+											"percentage": 0,
 											"description": "CC<0.8 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 0,
+											"percentage": 0,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 6",
-									"value": 0,
+									"percentage": 0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
@@ -543,22 +543,22 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 82.9,
+											"percentage": 82.9,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 9.1,
+											"percentage": 9.1,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 8.0,
+											"percentage": 8.0,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 1",
-									"value": 15.2,
+									"percentage": 15.2,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
@@ -566,22 +566,22 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 81.8,
+											"percentage": 81.8,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 11.1,
+											"percentage": 11.1,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 7.1,
+											"percentage": 7.1,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 3",
-									"value": 27.2,
+									"percentage": 27.2,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
@@ -589,22 +589,22 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 82.9,
+											"percentage": 82.9,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 10.6,
+											"percentage": 10.6,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 6.5,
+											"percentage": 6.5,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 2",
-									"value": 23.8,
+									"percentage": 23.8,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
@@ -612,27 +612,27 @@
 										{
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 14.6,
+											"percentage": 14.6,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "0.8 1<CC<1.4 l",
-											"value": 27.9,
+											"percentage": 27.9,
 											"description": "0.8 1<CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "CC<0.8 l",
-											"value": 46.9,
+											"percentage": 46.9,
 											"description": "CC<0.8 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 10.6,
+											"percentage": 10.6,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "EURO 5",
-									"value": 4.3,
+									"percentage": 4.3,
 									"description": "EURO 5"
 								}, {
 									"available": 1,
@@ -640,27 +640,27 @@
 										{
 											"available": 1,
 											"name": "CC<1.4 l",
-											"value": 83.9,
+											"percentage": 83.9,
 											"description": "CC<1.4 l"
 										}, {
 											"available": 1,
 											"name": "1.4 1<CC<2.0 l",
-											"value": 7,
+											"percentage": 7,
 											"description": "1.4 1<CC<2.0 l"
 										}, {
 											"available": 1,
 											"name": "CC>2.0 l",
-											"value": 9.1,
+											"percentage": 9.1,
 											"description": "CC>2.0 l"
 										}
 									],
 									"name": "PRE EURO",
-									"value": 9.6,
+									"percentage": 9.6,
 									"description": "PRE EURO"
 								}
 							],
 							"name": "Gasoline",
-							"value": 61.1,
+							"percentage": 61.1,
 							"description": "Gasoline"
 						}, {
 							"available": 0,
@@ -669,48 +669,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 36.5,
+									"percentage": 36.5,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 7.9,
+									"percentage": 7.9,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0,
+									"percentage": 0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 21.4,
+									"percentage": 21.4,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 11.9,
+									"percentage": 11.9,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 12.9,
+									"percentage": 12.9,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 9.4,
+									"percentage": 9.4,
 									"description": "EURO 5"
 								}
 							],
 							"name": "New fuel",
-							"value": 0.2,
+							"percentage": 0.2,
 							"description": "New fuel"
 						}
 					],
@@ -725,48 +725,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 26.8,
+									"percentage": 26.8,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 11.6,
+									"percentage": 11.6,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 13.2,
+									"percentage": 13.2,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 33.5,
+									"percentage": 33.5,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 9.4,
+									"percentage": 9.4,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 5.5,
+									"percentage": 5.5,
 									"description": "EURO 5"
 								}
 							],
 							"name": "Diesel",
-							"value": 89.4,
+							"percentage": 89.4,
 							"description": "Diesel"
 						}, {
 							"available": 1,
@@ -775,48 +775,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 17.2,
+									"percentage": 17.2,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 24.2,
+									"percentage": 24.2,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 20.2,
+									"percentage": 20.2,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 24.8,
+									"percentage": 24.8,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 10.4,
+									"percentage": 10.4,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 3.2,
+									"percentage": 3.2,
 									"description": "EURO 5"
 								}
 							],
 							"name": "Gasoline",
-							"value": 10.5,
+							"percentage": 10.5,
 							"description": "Gasoline"
 						}, {
 							"available": 0,
@@ -825,48 +825,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 32.3,
+									"percentage": 32.3,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 13.5,
+									"percentage": 13.5,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 23.7,
+									"percentage": 23.7,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 12.4,
+									"percentage": 12.4,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 8.2,
+									"percentage": 8.2,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 9.9,
+									"percentage": 9.9,
 									"description": "EURO 5"
 								}
 							],
 							"name": "New fuel",
-							"value": 0.1,
+							"percentage": 0.1,
 							"description": "New fuel"
 						}
 					],
@@ -883,17 +883,17 @@
 										{
 											"available": 1,
 											"name": "Standard<=18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Standard<=18 t"
 										}, {
 											"available": 1,
 											"name": "Articulated>18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Articulated>18 t"
 										}
 									],
 									"name": "EURO 4",
-									"value": 19.7,
+									"percentage": 19.7,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
@@ -901,17 +901,17 @@
 										{
 											"available": 1,
 											"name": "Standard<=18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Standard<=18 t"
 										}, {
 											"available": 1,
 											"name": "Articulated>18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Articulated>18 t"
 										}
 									],
 									"name": "CONVENTIONAL",
-									"value": 10.8,
+									"percentage": 10.8,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
@@ -919,17 +919,17 @@
 										{
 											"available": 1,
 											"name": "Standard<=18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Standard<=18 t"
 										}, {
 											"available": 1,
 											"name": "Articulated>18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Articulated>18 t"
 										}
 									],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
@@ -937,17 +937,17 @@
 										{
 											"available": 1,
 											"name": "Standard<=18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Standard<=18 t"
 										}, {
 											"available": 1,
 											"name": "Articulated>18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Articulated>18 t"
 										}
 									],
 									"name": "EURO 1",
-									"value": 11.2,
+									"percentage": 11.2,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
@@ -955,17 +955,17 @@
 										{
 											"available": 1,
 											"name": "Standard<=18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Standard<=18 t"
 										}, {
 											"available": 1,
 											"name": "Articulated>18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Articulated>18 t"
 										}
 									],
 									"name": "EURO 3",
-									"value": 30.0,
+									"percentage": 30.0,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
@@ -973,17 +973,17 @@
 										{
 											"available": 1,
 											"name": "Standard<=18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Standard<=18 t"
 										}, {
 											"available": 1,
 											"name": "Articulated>18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Articulated>18 t"
 										}
 									],
 									"name": "EURO 2",
-									"value": 17.2,
+									"percentage": 17.2,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
@@ -991,22 +991,22 @@
 										{
 											"available": 1,
 											"name": "Standard<=18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Standard<=18 t"
 										}, {
 											"available": 1,
 											"name": "Articulated>18 t",
-											"value": 50.0,
+											"percentage": 50.0,
 											"description": "Articulated>18 t"
 										}
 									],
 									"name": "EURO 5",
-									"value": 11.1,
+									"percentage": 11.1,
 									"description": "EURO 5"
 								}
 							],
 							"name": "Diesel",
-							"value": 99.1,
+							"percentage": 99.1,
 							"description": "Diesel"
 						}, {
 							"available": 0,
@@ -1015,48 +1015,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 16.7,
+									"percentage": 16.7,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 7.5,
+									"percentage": 7.5,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 19.5,
+									"percentage": 19.5,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 33.0,
+									"percentage": 33.0,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 11.5,
+									"percentage": 11.5,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 11.8,
+									"percentage": 11.8,
 									"description": "EURO 5"
 								}
 							],
 							"name": "New fuel",
-							"value": 0.9,
+							"percentage": 0.9,
 							"description": "New fuel"
 						}
 					],
@@ -1073,77 +1073,77 @@
 										{
 											"available": 1,
 											"name": "Rigid 14 t - 20 t",
-											"value": 12.1,
+											"percentage": 12.1,
 											"description": "Rigid 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 34 t - 40 t",
-											"value": 9.3,
+											"percentage": 9.3,
 											"description": "Articulated 34 t - 40 t"
 										}, {
 											"available": 1,
 											"name": "Rigid>32 t",
-											"value": 1.2,
+											"percentage": 1.2,
 											"description": "Rigid>32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 50 t - 60 t",
-											"value": 0.3,
+											"percentage": 0.3,
 											"description": "Articulated 50 t - 60 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 26 t - 28 t",
-											"value": 2.9,
+											"percentage": 2.9,
 											"description": "Rigid 26 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 28 t - 34 t",
-											"value": 1.3,
+											"percentage": 1.3,
 											"description": "Articulated 28 t - 34 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 20 t - 26 t",
-											"value": 8.9,
+											"percentage": 8.9,
 											"description": "Rigid 20 t - 26 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 12 t - 14 t",
-											"value": 3.2,
+											"percentage": 3.2,
 											"description": "Rigid 12 t - 14 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 40 t - 50 t",
-											"value": 13.7,
+											"percentage": 13.7,
 											"description": "Articulated 40 t - 50 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 20 t - 28 t",
-											"value": 2.7,
+											"percentage": 2.7,
 											"description": "Articulated 20 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 28 t - 32 t",
-											"value": 2.7,
+											"percentage": 2.7,
 											"description": "Rigid 28 t - 32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 14 t - 20 t",
-											"value": 3.1,
+											"percentage": 3.1,
 											"description": "Articulated 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Rigid<=7.5 t",
-											"value": 26.0,
+											"percentage": 26.0,
 											"description": "Rigid<=7.5 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 7.5 t - 12 t",
-											"value": 12.6,
+											"percentage": 12.6,
 											"description": "Rigid 7.5 t - 12 t"
 										}
 									],
 									"name": "EURO 4",
-									"value": 19.6,
+									"percentage": 19.6,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
@@ -1151,77 +1151,77 @@
 										{
 											"available": 1,
 											"name": "Rigid 14 t - 20 t",
-											"value": 14.4,
+											"percentage": 14.4,
 											"description": "Rigid 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 34 t - 40 t",
-											"value": 3.1,
+											"percentage": 3.1,
 											"description": "Articulated 34 t - 40 t"
 										}, {
 											"available": 1,
 											"name": "Rigid>32 t",
-											"value": 1.4,
+											"percentage": 1.4,
 											"description": "Rigid>32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 50 t - 60 t",
-											"value": 1.0,
+											"percentage": 1.0,
 											"description": "Articulated 50 t - 60 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 26 t - 28 t",
-											"value": 2.0,
+											"percentage": 2.0,
 											"description": "Rigid 26 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 28 t - 34 t",
-											"value": 1.3,
+											"percentage": 1.3,
 											"description": "Articulated 28 t - 34 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 20 t - 26 t",
-											"value": 13.9,
+											"percentage": 13.9,
 											"description": "Rigid 20 t - 26 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 12 t - 14 t",
-											"value": 5.4,
+											"percentage": 5.4,
 											"description": "Rigid 12 t - 14 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 40 t - 50 t",
-											"value": 10.1,
+											"percentage": 10.1,
 											"description": "Articulated 40 t - 50 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 20 t - 28 t",
-											"value": 0.9,
+											"percentage": 0.9,
 											"description": "Articulated 20 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 28 t - 32 t",
-											"value": 3.5,
+											"percentage": 3.5,
 											"description": "Rigid 28 t - 32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 14 t - 20 t",
-											"value": 2.2,
+											"percentage": 2.2,
 											"description": "Articulated 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Rigid<=7.5 t",
-											"value": 21.2,
+											"percentage": 21.2,
 											"description": "Rigid<=7.5 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 7.5 t - 12 t",
-											"value": 19.6,
+											"percentage": 19.6,
 											"description": "Rigid 7.5 t - 12 t"
 										}
 									],
 									"name": "CONVENTIONAL",
-									"value": 10.4,
+									"percentage": 10.4,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
@@ -1229,77 +1229,77 @@
 										{
 											"available": 1,
 											"name": "Rigid 14 t - 20 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 34 t - 40 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Articulated 34 t - 40 t"
 										}, {
 											"available": 1,
 											"name": "Rigid>32 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid>32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 50 t - 60 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Articulated 50 t - 60 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 26 t - 28 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid 26 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 28 t - 34 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Articulated 28 t - 34 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 20 t - 26 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid 20 t - 26 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 12 t - 14 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid 12 t - 14 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 40 t - 50 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Articulated 40 t - 50 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 20 t - 28 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Articulated 20 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 28 t - 32 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid 28 t - 32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 14 t - 20 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Articulated 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Rigid<=7.5 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid<=7.5 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 7.5 t - 12 t",
-											"value": 0.0,
+											"percentage": 0.0,
 											"description": "Rigid 7.5 t - 12 t"
 										}
 									],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
@@ -1307,77 +1307,77 @@
 										{
 											"available": 1,
 											"name": "Rigid 14 t - 20 t",
-											"value": 13.9,
+											"percentage": 13.9,
 											"description": "Rigid 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 34 t - 40 t",
-											"value": 3.8,
+											"percentage": 3.8,
 											"description": "Articulated 34 t - 40 t"
 										}, {
 											"available": 1,
 											"name": "Rigid>32 t",
-											"value": 1.4,
+											"percentage": 1.4,
 											"description": "Rigid>32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 50 t - 60 t",
-											"value": 1.0,
+											"percentage": 1.0,
 											"description": "Articulated 50 t - 60 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 26 t - 28 t",
-											"value": 2.3,
+											"percentage": 2.3,
 											"description": "Rigid 26 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 28 t - 34 t",
-											"value": 1.1,
+											"percentage": 1.1,
 											"description": "Articulated 28 t - 34 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 20 t - 26 t",
-											"value": 11.3,
+											"percentage": 11.3,
 											"description": "Rigid 20 t - 26 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 12 t - 14 t",
-											"value": 5.2,
+											"percentage": 5.2,
 											"description": "Rigid 12 t - 14 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 40 t - 50 t",
-											"value": 13.9,
+											"percentage": 13.9,
 											"description": "Articulated 40 t - 50 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 20 t - 28 t",
-											"value": 0.8,
+											"percentage": 0.8,
 											"description": "Articulated 20 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 28 t - 32 t",
-											"value": 2.9,
+											"percentage": 2.9,
 											"description": "Rigid 28 t - 32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 14 t - 20 t",
-											"value": 3.0,
+											"percentage": 3.0,
 											"description": "Articulated 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Rigid<=7.5 t",
-											"value": 23.1,
+											"percentage": 23.1,
 											"description": "Rigid<=7.5 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 7.5 t - 12 t",
-											"value": 16.3,
+											"percentage": 16.3,
 											"description": "Rigid 7.5 t - 12 t"
 										}
 									],
 									"name": "EURO 1",
-									"value": 12.3,
+									"percentage": 12.3,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
@@ -1385,77 +1385,77 @@
 										{
 											"available": 1,
 											"name": "Rigid 14 t - 20 t",
-											"value": 11.7,
+											"percentage": 11.7,
 											"description": "Rigid 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 34 t - 40 t",
-											"value": 7.7,
+											"percentage": 7.7,
 											"description": "Articulated 34 t - 40 t"
 										}, {
 											"available": 1,
 											"name": "Rigid>32 t",
-											"value": 1.3,
+											"percentage": 1.3,
 											"description": "Rigid>32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 50 t - 60 t",
-											"value": 0.5,
+											"percentage": 0.5,
 											"description": "Articulated 50 t - 60 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 26 t - 28 t",
-											"value": 2.8,
+											"percentage": 2.8,
 											"description": "Rigid 26 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 28 t - 34 t",
-											"value": 1.1,
+											"percentage": 1.1,
 											"description": "Articulated 28 t - 34 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 20 t - 26 t",
-											"value": 9.3,
+											"percentage": 9.3,
 											"description": "Rigid 20 t - 26 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 12 t - 14 t",
-											"value": 3.6,
+											"percentage": 3.6,
 											"description": "Rigid 12 t - 14 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 40 t - 50 t",
-											"value": 16.2,
+											"percentage": 16.2,
 											"description": "Articulated 40 t - 50 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 20 t - 28 t",
-											"value": 2.1,
+											"percentage": 2.1,
 											"description": "Articulated 20 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 28 t - 32 t",
-											"value": 2.5,
+											"percentage": 2.5,
 											"description": "Rigid 28 t - 32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 14 t - 20 t",
-											"value": 3.4,
+											"percentage": 3.4,
 											"description": "Articulated 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Rigid<=7.5 t",
-											"value": 24.2,
+											"percentage": 24.2,
 											"description": "Rigid<=7.5 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 7.5 t - 12 t",
-											"value": 13.6,
+											"percentage": 13.6,
 											"description": "Rigid 7.5 t - 12 t"
 										}
 									],
 									"name": "EURO 3",
-									"value": 31.9,
+									"percentage": 31.9,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
@@ -1463,77 +1463,77 @@
 										{
 											"available": 1,
 											"name": "Rigid 14 t - 20 t",
-											"value": 13.0,
+											"percentage": 13.0,
 											"description": "Rigid 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 34 t - 40 t",
-											"value": 5.6,
+											"percentage": 5.6,
 											"description": "Articulated 34 t - 40 t"
 										}, {
 											"available": 1,
 											"name": "Rigid>32 t",
-											"value": 1.5,
+											"percentage": 1.5,
 											"description": "Rigid>32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 50 t - 60 t",
-											"value": 0.8,
+											"percentage": 0.8,
 											"description": "Articulated 50 t - 60 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 26 t - 28 t",
-											"value": 2.9,
+											"percentage": 2.9,
 											"description": "Rigid 26 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 28 t - 34 t",
-											"value": 1.2,
+											"percentage": 1.2,
 											"description": "Articulated 28 t - 34 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 20 t - 26 t",
-											"value": 9.3,
+											"percentage": 9.3,
 											"description": "Rigid 20 t - 26 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 12 t - 14 t",
-											"value": 4.4,
+											"percentage": 4.4,
 											"description": "Rigid 12 t - 14 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 40 t - 50 t",
-											"value": 14.9,
+											"percentage": 14.9,
 											"description": "Articulated 40 t - 50 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 20 t - 28 t",
-											"value": 1.2,
+											"percentage": 1.2,
 											"description": "Articulated 20 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 28 t - 32 t",
-											"value": 2.5,
+											"percentage": 2.5,
 											"description": "Rigid 28 t - 32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 14 t - 20 t",
-											"value": 3.1,
+											"percentage": 3.1,
 											"description": "Articulated 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Rigid<=7.5 t",
-											"value": 24.8,
+											"percentage": 24.8,
 											"description": "Rigid<=7.5 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 7.5 t - 12 t",
-											"value": 14.8,
+											"percentage": 14.8,
 											"description": "Rigid 7.5 t - 12 t"
 										}
 									],
 									"name": "EURO 2",
-									"value": 17.4,
+									"percentage": 17.4,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
@@ -1541,82 +1541,82 @@
 										{
 											"available": 1,
 											"name": "Rigid 14 t - 20 t",
-											"value": 12.7,
+											"percentage": 12.7,
 											"description": "Rigid 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 34 t - 40 t",
-											"value": 11.5,
+											"percentage": 11.5,
 											"description": "Articulated 34 t - 40 t"
 										}, {
 											"available": 1,
 											"name": "Rigid>32 t",
-											"value": 1.3,
+											"percentage": 1.3,
 											"description": "Rigid>32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 50 t - 60 t",
-											"value": 0.3,
+											"percentage": 0.3,
 											"description": "Articulated 50 t - 60 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 26 t - 28 t",
-											"value": 3.1,
+											"percentage": 3.1,
 											"description": "Rigid 26 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 28 t - 34 t",
-											"value": 1.6,
+											"percentage": 1.6,
 											"description": "Articulated 28 t - 34 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 20 t - 26 t",
-											"value": 9.8,
+											"percentage": 9.8,
 											"description": "Rigid 20 t - 26 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 12 t - 14 t",
-											"value": 3.1,
+											"percentage": 3.1,
 											"description": "Rigid 12 t - 14 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 40 t - 50 t",
-											"value": 12.5,
+											"percentage": 12.5,
 											"description": "Articulated 40 t - 50 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 20 t - 28 t",
-											"value": 2.5,
+											"percentage": 2.5,
 											"description": "Articulated 20 t - 28 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 28 t - 32 t",
-											"value": 2.8,
+											"percentage": 2.8,
 											"description": "Rigid 28 t - 32 t"
 										}, {
 											"available": 1,
 											"name": "Articulated 14 t - 20 t",
-											"value": 2.3,
+											"percentage": 2.3,
 											"description": "Articulated 14 t - 20 t"
 										}, {
 											"available": 1,
 											"name": "Rigid<=7.5 t",
-											"value": 24.2,
+											"percentage": 24.2,
 											"description": "Rigid<=7.5 t"
 										}, {
 											"available": 1,
 											"name": "Rigid 7.5 t - 12 t",
-											"value": 12.3,
+											"percentage": 12.3,
 											"description": "Rigid 7.5 t - 12 t"
 										}
 									],
 									"name": "EURO 5",
-									"value": 8.4,
+									"percentage": 8.4,
 									"description": "EURO 5"
 								}
 							],
 							"name": "Diesel",
-							"value": 97.4,
+							"percentage": 97.4,
 							"description": "Diesel"
 						}, {
 							"available": 0,
@@ -1625,48 +1625,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 10.2,
+									"percentage": 10.2,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 17.6,
+									"percentage": 17.6,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 20.2,
+									"percentage": 20.2,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 22.8,
+									"percentage": 22.8,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 25.5,
+									"percentage": 25.5,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 3.7,
+									"percentage": 3.7,
 									"description": "EURO 5"
 								}
 							],
 							"name": "New fuel",
-							"value": 2.6,
+							"percentage": 2.6,
 							"description": "New fuel"
 						}
 					],
@@ -1683,22 +1683,22 @@
 										{
 											"available": 1,
 											"name": "<=15 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": "<=15 t"
 										}, {
 											"available": 1,
 											"name": ">18 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": ">18 t"
 										}, {
 											"available": 1,
 											"name": "15 t - 18 t",
-											"value": 33.4,
+											"percentage": 33.4,
 											"description": "15 t - 18 t"
 										}
 									],
 									"name": "EURO 4",
-									"value": 18.7,
+									"percentage": 18.7,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
@@ -1706,22 +1706,22 @@
 										{
 											"available": 1,
 											"name": "<=15 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": "<=15 t"
 										}, {
 											"available": 1,
 											"name": ">18 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": ">18 t"
 										}, {
 											"available": 1,
 											"name": "15 t - 18 t",
-											"value": 33.4,
+											"percentage": 33.4,
 											"description": "15 t - 18 t"
 										}
 									],
 									"name": "CONVENTIONAL",
-									"value": 12.7,
+									"percentage": 12.7,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
@@ -1729,22 +1729,22 @@
 										{
 											"available": 1,
 											"name": "<=15 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": "<=15 t"
 										}, {
 											"available": 1,
 											"name": ">18 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": ">18 t"
 										}, {
 											"available": 1,
 											"name": "15 t - 18 t",
-											"value": 33.4,
+											"percentage": 33.4,
 											"description": "15 t - 18 t"
 										}
 									],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
@@ -1752,22 +1752,22 @@
 										{
 											"available": 1,
 											"name": "<=15 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": "<=15 t"
 										}, {
 											"available": 1,
 											"name": ">18 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": ">18 t"
 										}, {
 											"available": 1,
 											"name": "15 t - 18 t",
-											"value": 33.4,
+											"percentage": 33.4,
 											"description": "15 t - 18 t"
 										}
 									],
 									"name": "EURO 1",
-									"value": 12.1,
+									"percentage": 12.1,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
@@ -1775,22 +1775,22 @@
 										{
 											"available": 1,
 											"name": "<=15 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": "<=15 t"
 										}, {
 											"available": 1,
 											"name": ">18 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": ">18 t"
 										}, {
 											"available": 1,
 											"name": "15 t - 18 t",
-											"value": 33.4,
+											"percentage": 33.4,
 											"description": "15 t - 18 t"
 										}
 									],
 									"name": "EURO 3",
-									"value": 28.4,
+									"percentage": 28.4,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
@@ -1798,22 +1798,22 @@
 										{
 											"available": 1,
 											"name": "<=15 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": "<=15 t"
 										}, {
 											"available": 1,
 											"name": ">18 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": ">18 t"
 										}, {
 											"available": 1,
 											"name": "15 t - 18 t",
-											"value": 33.4,
+											"percentage": 33.4,
 											"description": "15 t - 18 t"
 										}
 									],
 									"name": "EURO 2",
-									"value": 17.7,
+									"percentage": 17.7,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
@@ -1821,27 +1821,27 @@
 										{
 											"available": 1,
 											"name": "<=15 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": "<=15 t"
 										}, {
 											"available": 1,
 											"name": ">18 t",
-											"value": 33.3,
+											"percentage": 33.3,
 											"description": ">18 t"
 										}, {
 											"available": 1,
 											"name": "15 t - 18 t",
-											"value": 33.4,
+											"percentage": 33.4,
 											"description": "15 t - 18 t"
 										}
 									],
 									"name": "EURO 5",
-									"value": 10.4,
+									"percentage": 10.4,
 									"description": "EURO 5"
 								}
 							],
 							"name": "Diesel",
-							"value": 97.3,
+							"percentage": 97.3,
 							"description": "Diesel"
 						}, {
 							"available": 0,
@@ -1850,48 +1850,48 @@
 									"available": 1,
 									"children": [],
 									"name": "EURO 4",
-									"value": 14.3,
+									"percentage": 14.3,
 									"description": "EURO 4"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "CONVENTIONAL",
-									"value": 22.7,
+									"percentage": 22.7,
 									"description": "CONVENTIONAL"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 6",
-									"value": 0.0,
+									"percentage": 0.0,
 									"description": "EURO 6"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 1",
-									"value": 14.0,
+									"percentage": 14.0,
 									"description": "EURO 1"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 3",
-									"value": 19.4,
+									"percentage": 19.4,
 									"description": "EURO 3"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 2",
-									"value": 17.9,
+									"percentage": 17.9,
 									"description": "EURO 2"
 								}, {
 									"available": 1,
 									"children": [],
 									"name": "EURO 5",
-									"value": 11.7,
+									"percentage": 11.7,
 									"description": "EURO 5"
 								}
 							],
 							"name": "New fuel",
-							"value": 2.7,
+							"percentage": 2.7,
 							"description": "New fuel"
 						}
 					],

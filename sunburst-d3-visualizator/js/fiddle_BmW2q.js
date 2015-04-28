@@ -24,16 +24,33 @@ var vis = d3.select("#chart").append("svg:svg")
 var partition = d3.layout.partition()
     .size([2 * Math.PI, 100])
     .value(function(d) {
-    	console.log("d.value");
-    	console.log(d.value);
-    	return d.value; 
+    	console.log("in value function of particion d.percentage");
+    	console.log(d.percentage);
+    	if (typeof d.percentage == "undefined") {
+    		d.percentage = 100;
+    		d.value = 100;
+    	} else { 
+    		d.value = d.percentage;
+    	}
+    	return d.percentage; 
     });
 
-var arc = d3.svg.arc()
+/*var x = d3.scale.linear()
+	.range([0, 2 * Math.PI]);
+var y = d3.scale.sqrt()
+    .range([0, radius]);
+var arc1 = d3.svg.arc()
+    .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
+    .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))); })
+    .innerRadius(function(d) { return Math.max(0, y(d.y)); })
+    .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
+*/
+var arc2 = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
     .endAngle(function(d) { return d.x + d.dx; })
     .innerRadius(function(d) { return radius * Math.sqrt(d.y) / 10; })
     .outerRadius(function(d) { return radius * Math.sqrt(d.y + d.dy) / 10; });
+
     //.innerRadius(function(d) { return radius * (d.y) / 100; })
     //.outerRadius(function(d) { return radius * (d.y + d.dy) / 100; });
 
@@ -61,7 +78,17 @@ function createVisualization(json) {
         .filter(function(d) {
             return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
         });
+    nodes.forEach(function(d) {
+    	if (typeof d.percentage == "undefined") {
+    		d.percentage = 100;
+    		d.value = 100;
+    	} else { 
+			d.sum = d.percentage;
+			d.value = d.percentage;
+    	}
+	});
     
+    console.log("nodes---------------------");
     console.log(nodes);
   
     var uniqueNames = (function(a) {
@@ -85,7 +112,7 @@ function createVisualization(json) {
        .enter()
         .append("svg:path")
         .attr("display", function(d) { return d.depth ? null : "none"; })
-        .attr("d", arc)
+        .attr("d", arc2)
         .attr("fill-rule", "evenodd")
         .style("fill", function(d) { return colors(d.name); })
         .style("opacity", 1)
@@ -110,8 +137,9 @@ function showSliders(d) {
 
 	numOfchildrens = d.children.length;
 	
-	console.log(d.name);
-	console.log(numOfchildrens);
+	// reset basic vars
+    oldValue = [];
+
 	
 	// erase previous sliders	
     d3.select('#rangebox tbody').html('');
@@ -136,12 +164,28 @@ function showSliders(d) {
         tr.append('td')
             .attr('class', 'range_value');
     }
+    
+    // set slider values depending of the clicked class
+    d3.selectAll('#rangebox .range').each(function () {
+        index = parseInt(d3.select(this).attr('data-id'));
+    	console.log(index);
+    	console.log(d.children[index].percentage);
+    	 // mult x 10 because sliders are int and not float => 10.2 = 152 on 0-1000
+        this.value = d.children[index].percentage * 10;
+        oldValue[index] = this.value;
+    });
+
+
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
 function mouseover(d) {
-
-  var percentage = (100 * d.value / totalSize).toPrecision(3);
+  
+  console.log(d.percentage);
+  
+  //var percentage = (100 * d.value / totalSize).toPrecision(3);
+  var percentage = d.percentage;
+  
   var percentageString = percentage + "%";
   if (percentage < 0.1) {
     percentageString = "< 0.1%";

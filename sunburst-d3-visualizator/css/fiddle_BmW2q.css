@@ -46,9 +46,9 @@ body {
 }
 
 #explanation {
-  position: absolute;
-  top: 260px;
-  left: 305px;
+  position: fixed;
+  top: 280px;
+  left: 170px;
   width: 140px;
   text-align: center;
   color: #666;
@@ -60,20 +60,17 @@ body {
 }
 
 #rangebox {
-	table-layout: absolute;
+	table-layout: fixed;
 	top: 235px;
 	left: 205px;
-	width: 140px;
+	width: 240px;
 	border-collapse: collapse;
-	width: 50%;
 	margin-right: 20px;
 }
 #rangebox td.edit {
 	border-collapse: collapse;
 }
-#rangebox td.edit:hover, #rangebox td.edit:focus {
-	background-color: LemonChiffon;
-}
+
 #rangebox td:nth-child(1) {
 	width: 25%;
 }
@@ -85,3 +82,8 @@ body {
 	width: 100%;
 	cursor: pointer;
 }
+/*
+#rangebox td.edit:hover, #rangebox td.edit:focus {
+	background-color: LemonChiffon;
+}
+*/
