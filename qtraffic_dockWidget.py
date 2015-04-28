@@ -30,6 +30,10 @@ from PyQt4 import QtGui, QtCore, uic
 # 
 # class QTrafficDockWidget(FORM_CLASS):
 
+import os
+import sys
+from PyQt4 import QtCore, QtGui, QtWebKit
+
 from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
 
 class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
@@ -43,3 +47,20 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
         parent.addDockWidget(QtCore.Qt.BottomDockWidgetArea, self)
+
+        # set webView setting
+        QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, True)
+        QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.DeveloperExtrasEnabled, True)
+        QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.JavascriptCanAccessClipboard, True)
+        QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.SpatialNavigationEnabled, True)
+        QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.PrintElementBackgrounds, True)
+        QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.OfflineStorageDatabaseEnabled, True)
+        QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.LocalStorageEnabled, True)
+        QtWebKit.QWebSettings.globalSettings().globalSettings().enablePersistentStorage(QtCore.QDir.tempPath())
+        
+        self.loadPage()
+        
+    def loadPage(self):
+        self.applicationPath = os.path.dirname(os.path.realpath(__file__))
+        webPage = os.path.join(self.applicationPath, "sunburst-d3-visualizator", "fiddle_BmW2q.html")
+        self.passengerCars_webView.load(QtCore.QUrl(webPage))
