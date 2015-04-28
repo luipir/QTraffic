@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Thu Apr 23 14:47:37 2015
+# Created: Fri Apr 24 10:04:35 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -277,7 +277,7 @@ class Ui_qtraffic_dockWidget(object):
 
         self.retranslateUi(qtraffic_dockWidget)
         self.tabWidget.setCurrentIndex(2)
-        self.configurations_tabs.setCurrentIndex(5)
+        self.configurations_tabs.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(qtraffic_dockWidget)
 
     def retranslateUi(self, qtraffic_dockWidget):
