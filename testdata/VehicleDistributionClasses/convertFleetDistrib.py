@@ -3,17 +3,6 @@ import json
 with open('./FleetSplit.json') as jsonFile:
 	jsonData = json.load(jsonFile)
 
-def parseDict(d):
-	if not isinstance(d, dict):
-		print "value = ", d
-		return
-	
-	for key, values in d.items():
-		print "name: ", key
-		parseDict(values)
-			
-		
-
 class1 = jsonData["fleetComposition"]
 class1Value = class1["1"]
 
@@ -42,7 +31,7 @@ for vehicleType,fuels  in class1Value["Road Type 1"].items():
 		fuelDict = {"name" : fuelName, 
 					"description": fuelName,
 					"available": classes["available"],
-					"value": classes["value"],				
+					"percentage": classes["value"],				
 					"children": [] }
 		
 		for euroClass, euroSubClasses in classes.items():
@@ -52,7 +41,7 @@ for vehicleType,fuels  in class1Value["Road Type 1"].items():
 			euroDict = {"name" : euroClass, 
 						"description": euroClass,
 						"available": euroSubClasses["available"],
-						"value": euroSubClasses["value"],			
+						"percentage": euroSubClasses["value"],			
 						"children": [] }
 			
 			for euroSubClass, value in euroSubClasses.items():
@@ -62,7 +51,7 @@ for vehicleType,fuels  in class1Value["Road Type 1"].items():
 				subClass = {"name" : euroSubClass, 
 							"description": euroSubClass,
 							"available": value["available"],
-							"value": value["value"]	}
+							"percentage": value["value"]	}
 				
 				euroDict["children"].append(subClass)
 
@@ -73,6 +62,30 @@ for vehicleType,fuels  in class1Value["Road Type 1"].items():
 	class1["children"].append(vehicleDict)
 
 roadTypes["children"].append(class1)
+
+
+# now calc value applying % to 1000 vehicles on each vehicle type
+roadClasses = roadTypes["children"]
+roadClassType1 = roadClasses[0]
+vehicleTypes = roadClassType1["children"]
+for veihicleType in vehicleTypes:
+	veihicleType["total"] = 1000
+	
+	# for each internal category calc total basing on it's % on <upper container>["total"]
+	fuelClasses = veihicleType["children"]
+	for fuelClass in fuelClasses:
+		fuelClass["total"] = veihicleType["total"] * fuelClass["percentage"] / 100.0
+		
+		# for each internal category calc total basing on it's % on <upper container>["total"]
+		euroClasses = fuelClass["children"]
+		for euroClass in euroClasses:
+			euroClass["total"] = fuelClass["total"] * euroClass["percentage"] / 100.0
+	
+			# for each internal category calc total basing on it's % on <upper container>["total"]
+			euroSubClasses = euroClass["children"]
+			for euroSubClass in euroSubClasses:
+				euroSubClass["total"] = euroClass["total"] * euroSubClass["percentage"] / 100.0
+
 
 with open('./FleetSplit-converted.json', 'w') as outfile:
     json.dump(roadTypes, outfile)
