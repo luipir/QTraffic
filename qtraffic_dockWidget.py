@@ -36,6 +36,16 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 
 from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
 
+class DebugWebPage(QtWebKit.QWebPage):
+    ''' custom webpage used to avoid interruption of messagebox by QT during debugging
+    '''
+    def __init__(self, parent):
+        super(DebugWebPage, self).__init__(parent)
+    
+    @QtCore.pyqtSlot()
+    def shouldInterruptJavaScript(self):
+        return False
+
 class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     def __init__(self, parent=None):
         """Constructor."""
@@ -59,8 +69,14 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         QtWebKit.QWebSettings.globalSettings().globalSettings().enablePersistentStorage(QtCore.QDir.tempPath())
         
         self.loadPage()
-        
+    
     def loadPage(self):
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
         webPage = os.path.join(self.applicationPath, "sunburst-d3-visualizator", "fiddle_BmW2q.html")
+        
+        # create a curstom webpage to avoid interruption by qt during debugging
+        # have to be removed in production and leaved the default QWebPage
+        debugWebPage = DebugWebPage(self.passengerCars_webView)
+        self.passengerCars_webView.setPage(debugWebPage)
+        
         self.passengerCars_webView.load(QtCore.QUrl(webPage))
