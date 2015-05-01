@@ -192,7 +192,7 @@ function pieChart() {
         .attr("transform", "translate(" + radius + "," + radius + ")");
 
     // slices
-    var arcs = svg.selectAll("path").data(pie(getData()))
+    var arcs = svg.selectAll("path").data(pie(getData()));
 
     // render the slices
     arcs.enter()
