@@ -61,28 +61,36 @@ body {
 
 #rangebox {
 	table-layout: fixed;
-	top: 235px;
+/*	top: 235px;
 	left: 205px;
-	width: 240px;
+    margin-right: 10px;
+	width: 300px;*/
 	border-collapse: collapse;
-	margin-right: 20px;
 }
 #rangebox td.edit {
 	border-collapse: collapse;
 }
-
-#rangebox td:nth-child(1) {
-	width: 25%;
-}
-#rangebox td:nth-child(3) {
-	text-align: center;
-	width: 10%;
-}
-#rangebox input {
-	width: 100%;
-	cursor: pointer;
-}
 /*
+#rangebox td.edit {
+    width: 10%;
+}
+#rangebox td.range_value {
+    text-align: center;
+    /*width: 10%;
+}
+#rangebox td.lockCheckbox {
+    width: 10%;
+}
+#rangebox td.range {
+    width: 100  %;
+}
+
+#rangebox input range {
+    width: 100%;
+    cursor: pointer;
+}
+
+
 #rangebox td.edit:hover, #rangebox td.edit:focus {
 	background-color: LemonChiffon;
 }
