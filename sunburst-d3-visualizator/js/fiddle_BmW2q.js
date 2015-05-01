@@ -12,25 +12,26 @@ var b = {
 var colors = d3.scale.category20b();
 
 var vis = d3.select("#chart").append("svg:svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("svg:g")
-    .attr("id", "container")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  .attr("width", width)
+  .attr("height", height)
+  .append("svg:g")
+  .attr("id", "container")
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 var partition = d3.layout.partition()
-    .size([2 * Math.PI, 100])
-    .value(function(d) {
-    	return d.total;
-    });
+  .sort(null)
+  .size([2 * Math.PI, 100])
+  .value(function(d) {
+  	return d.total;
+  });
 
-var arc2 = d3.svg.arc()
-    .startAngle(function(d) { return d.x; })
-    .endAngle(function(d) { return d.x + d.dx; })
-    .innerRadius(function(d) { return radius * Math.sqrt(d.y) / 10; })
-    .outerRadius(function(d) { return radius * Math.sqrt(d.y + d.dy) / 10; });
-    //.innerRadius(function(d) { return radius * (d.y) / 100; })
-    //.outerRadius(function(d) { return radius * (d.y + d.dy) / 100; });
+var arc = d3.svg.arc()
+  .startAngle(function(d) { return d.x; })
+  .endAngle(function(d) { return d.x + d.dx; })
+  .innerRadius(function(d) { return radius * Math.sqrt(d.y) / 10; })
+  .outerRadius(function(d) { return radius * Math.sqrt(d.y + d.dy) / 10; });
+  //.innerRadius(function(d) { return radius * (d.y) / 100; })
+  //.outerRadius(function(d) { return radius * (d.y + d.dy) / 100; });
 
 loadData();
 
@@ -41,7 +42,7 @@ loadData();
 
 // Main function to draw and set up the visualization, once we have the data.
 function createVisualization(json) {
-
+	
     // Basic setup of page elements.
     initializeBreadcrumbTrail();
   
@@ -50,23 +51,23 @@ function createVisualization(json) {
     // Bounding circle underneath the sunburst, to make it easier to detect
     // when the mouse leaves the parent g.
     vis.append("svg:circle")
-        .attr("r", radius)
-        .style("opacity", 0);
+      .attr("r", radius)
+      .style("opacity", 0);
 
     // For efficiency, filter nodes to keep only those large enough to see.
-    var nodes = partition.nodes(json);
+    nodes = partition.nodes(json);
         //.filter(function(d) {
         //    return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
         //});
   
     var uniqueNames = (function(a) {
-        var output = [];
-        a.forEach(function(d) {
-            if (output.indexOf(d.name) === -1) {
-                output.push(d.name);
-            }
-        });
-        return output;
+      var output = [];
+      a.forEach(function(d) {
+        if (output.indexOf(d.name) === -1) {
+          output.push(d.name);
+        }
+      });
+      return output;
     })(nodes);
     
     // set domain of colors scale based on data
@@ -77,10 +78,10 @@ function createVisualization(json) {
         
     var path = vis.data([json]).selectAll("path")
         .data(nodes)
-       .enter()
+      .enter()
         .append("svg:path")
         .attr("display", function(d) { return d.depth ? null : "none"; })
-        .attr("d", arc2)
+        .attr("d", arc)
         .attr("fill-rule", "evenodd")
         .style("fill", function(d) { return colors(d.name); })
         .style("opacity", 1)
@@ -93,50 +94,6 @@ function createVisualization(json) {
     // show lagend activating checkbox
 	d3.select("#togglelegend").property('checked', true);
 	d3.select("#togglelegend").on("click")();
-};
-
-// Show sliders to allow arc editing
-function showSliders(d) {
-	// do nothing in case of last leaf
-	if (typeof d.children == "undefined") return;
-
-	numOfchildrens = d.children.length;
-	
-	// reset basic vars
-    oldValue = [];
-
-	// erase previous sliders	
-    d3.select('#rangebox tbody').html('');
-
-    // append sliders to table
-    for (i = 0; i < numOfchildrens; i++) {
-    	label = d.children[i].name
-    
-        var tr = d3.select('#rangebox tbody').append('tr');
-        tr.append('td')
-            .attr('class', 'edit')
-            .attr('contenteditable', false)
-            .text(label);
-        tr.append('td')
-            .append('input')
-            .attr('type', 'range')
-            .attr('data-id', i)
-            .attr('class', 'range')
-            .attr('step', 1)
-            .attr('min', 0)
-            .attr('max', 100);
-        tr.append('td')
-            .attr('class', 'range_value');
-    }
-    
-    // set slider values depending of the clicked class
-    d3.selectAll('#rangebox .range').each(function () {
-        index = parseInt(d3.select(this).attr('data-id'));
-        this.value = d.children[index].percentage;
-        oldValue[index] = this.value;
-    });
-
-
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
@@ -150,24 +107,24 @@ function mouseover(d) {
   }
 
   d3.select("#percentage")
-      .text(percentageString);
+    .text(percentageString);
 
   d3.select("#explanation")
-      .style("visibility", "");
+    .style("visibility", "");
 
   var sequenceArray = getAncestors(d);
   updateBreadcrumbs(sequenceArray, percentageString);
 
   // Fade all the segments.
   d3.selectAll("path")
-      .style("opacity", 0.3);
+    .style("opacity", 0.3);
 
   // Then highlight only those that are an ancestor of the current segment.
   vis.selectAll("path")
-      .filter(function(node) {
-                return (sequenceArray.indexOf(node) >= 0);
-              })
-      .style("opacity", 1);
+    .filter(function(node) {
+      return (sequenceArray.indexOf(node) >= 0);
+    })
+    .style("opacity", 1);
 }
 
 // Restore everything to full opacity when moving off the visualization.
@@ -175,24 +132,24 @@ function mouseleave(d) {
 
   // Hide the breadcrumb trail
   d3.select("#trail")
-      .style("visibility", "hidden");
+    .style("visibility", "hidden");
 
   // Deactivate all segments during transition.
   d3.selectAll("path").on("mouseover", null);
 
   // Transition each segment to full opacity and then reactivate it.
   d3.selectAll("path")
-      .transition()
-      .duration(1000)
-      .style("opacity", 1)
-      .each("end", function() {
-              d3.select(this).on("mouseover", mouseover);
-            });
+    .transition()
+    .duration(500)
+    .style("opacity", 1)
+    .each("end", function() {
+      d3.select(this).on("mouseover", mouseover);
+    });
 
   d3.select("#explanation")
-      .transition()
-      .duration(1000)
-      .style("visibility", "hidden");
+    .transition()
+    .duration(500)
+    .style("visibility", "hidden");
 }
 
 // Given a node in a partition layout, return an array of all of its ancestor
@@ -210,9 +167,9 @@ function getAncestors(node) {
 function initializeBreadcrumbTrail() {
   // Add the svg area.
   var trail = d3.select("#sequence").append("svg:svg")
-      .attr("width", width)
-      .attr("height", 50)
-      .attr("id", "trail");
+    .attr("width", width)
+    .attr("height", 50)
+    .attr("id", "trail");
   // Add the label at the end, for the percentage.
   trail.append("svg:text")
     .attr("id", "endlabel")
@@ -238,22 +195,22 @@ function updateBreadcrumbs(nodeArray, percentageString) {
 
   // Data join; key function combines name and depth (= position in sequence).
   var g = d3.select("#trail")
-      .selectAll("g")
-      .data(nodeArray, function(d) { return d.name + d.depth; });
+    .selectAll("g")
+    .data(nodeArray, function(d) { return d.name + d.depth; });
 
   // Add breadcrumb and label for entering nodes.
   var entering = g.enter().append("svg:g");
 
   entering.append("svg:polygon")
-      .attr("points", breadcrumbPoints)
-      .style("fill", function(d) { return colors(d.name); });
+    .attr("points", breadcrumbPoints)
+    .style("fill", function(d) { return colors(d.name); });
 
   entering.append("svg:text")
-      .attr("x", (b.w + b.t) / 2)
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.name; });
+    .attr("x", (b.w + b.t) / 2)
+    .attr("y", b.h / 2)
+    .attr("dy", "0.35em")
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.name; });
 
   // Set position for entering and updating nodes.
   g.attr("transform", function(d, i) {
@@ -265,15 +222,15 @@ function updateBreadcrumbs(nodeArray, percentageString) {
 
   // Now move and update the percentage at the end.
   d3.select("#trail").select("#endlabel")
-      .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(percentageString);
+    .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
+    .attr("y", b.h / 2)
+    .attr("dy", "0.35em")
+    .attr("text-anchor", "middle")
+    .text(percentageString);
 
   // Make the breadcrumb trail visible, if it's hidden.
   d3.select("#trail")
-      .style("visibility", "");
+    .style("visibility", "");
 
 }
 
@@ -285,29 +242,29 @@ function drawLegend() {
   };
 
   var legend = d3.select("#legend").append("svg:svg")
-      .attr("width", li.w)
-      .attr("height", colors.domain().length * (li.h + li.s));
+    .attr("width", li.w)
+    .attr("height", colors.domain().length * (li.h + li.s));
 
   var g = legend.selectAll("g")
-      .data(colors.domain())
-      .enter().append("svg:g")
-      .attr("transform", function(d, i) {
-              return "translate(0," + i * (li.h + li.s) + ")";
-           });
+    .data(colors.domain())
+    .enter().append("svg:g")
+    .attr("transform", function(d, i) {
+      return "translate(0," + i * (li.h + li.s) + ")";
+    });
 
   g.append("svg:rect")
-      .attr("rx", li.r)
-      .attr("ry", li.r)
-      .attr("width", li.w)
-      .attr("height", li.h)
-      .style("fill", function(d) { return colors(d); });
+    .attr("rx", li.r)
+    .attr("ry", li.r)
+    .attr("width", li.w)
+    .attr("height", li.h)
+    .style("fill", function(d) { return colors(d); });
 
   g.append("svg:text")
-      .attr("x", li.w / 2)
-      .attr("y", li.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d; });
+    .attr("x", li.w / 2)
+    .attr("y", li.h / 2)
+    .attr("dy", "0.35em")
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d; });
 }
 
 function toggleLegend() {
@@ -320,16 +277,229 @@ function toggleLegend() {
 }
 
 function loadData() {
-	d3.json("FleetSplit-converted.json", function(error, json) {
+	d3.json("FleetSplit-converted.json", function(error, data) {
 	  if (error) return console.warn(error);
 	  
-	  json = json;
-	  
-	  // show only Passenger Cars
-	  json = json["children"][0]["children"][1];
-	  
-	  console.log(json);
+	  // show only Passenger Cars for test reason
+	  json = data["children"][0]["children"][1];
 	  
 	  createVisualization(json);
 	});
-};
+}
+
+function findInJson(currentNode, compareNode) {
+	if (currentNode.name == compareNode.name && 
+      currentNode.depth == compareNode.depth &&
+      currentNode.parent.name == compareNode.parent.name) {
+		return currentNode;
+	}
+	
+	if (typeof currentNode.children == 'undefined') {
+		return false;
+	}
+	
+	for (var i=0; i < currentNode.children.length; i++) {
+		var subNode = currentNode.children[i];
+		var foundNode = findInJson(subNode, compareNode);
+		if (foundNode) {
+			return foundNode;
+		}
+	}
+	return false;
+}
+
+function updateNodes(d) {
+	// try to modify original JSON
+	var foundNode = findInJson(json, d);
+	if (!foundNode) return;
+	
+	// modify node to be equal to values set in sliders
+	d3.selectAll('#rangebox .range').each(function () {
+	index = parseInt(d3.select(this).attr('data-id'));
+  	foundNode.children[index].percentage = this.value / 10;
+	});
+}
+
+function recomputeTotals(node) {
+  if (typeof node.parent != 'undefined') {
+    // do this only if is not the root node
+    node.total = (node.parent.total * node.percentage) / 100;
+  }
+  node.value = node.total;
+  
+  // calc total for the children if any
+  if (typeof node.children == 'undefined') return;
+  for (var i=0; i < node.children.length; i++) {
+    recomputeTotals(node.children[i]);
+  }
+}
+
+function updateVis() {
+	nodes = partition.nodes(json);
+	vis.selectAll("path")
+      .data(nodes)
+    .transition()
+      .duration(700)
+      .attr("d", arc);
+}
+
+//////////////////////////////////////////////////////////
+// Slider management
+//////////////////////////////////////////////////////////
+
+// Show sliders to allow arc editing
+function showSliders(d) {
+	// do nothing in case of last leaf
+	if (typeof d.children == "undefined") {
+	d3.select('#rangebox tbody').html('');
+		return;
+	}
+	
+	currentClickedNode = d;
+	numOfchildrens = currentClickedNode.children.length;
+	
+	// reset basic vars
+	oldValue = [];
+	moving_id = null;
+	
+	// erase previous sliders	
+	d3.select('#rangebox tbody').html('');
+
+  // append sliders to table
+  for (i = 0; i < numOfchildrens; i++) {
+  	label = d.children[i].name;
+  
+    var tr = d3.select('#rangebox tbody').append('tr');
+    tr.append('td')
+      .attr('class', 'edit')
+      .attr('contenteditable', false)
+      .text(label);
+    tr.append('td')
+      .append('input')
+      .attr('type', 'range')
+      .attr('data-id', i)
+      .attr('class', 'range')
+      .attr('step', 1)
+      .attr('min', 0)
+      .attr('max', 1000);
+    tr.append('td')
+      .attr('class', 'range_value');
+  }
+    
+  // set slider values depending of the clicked class
+  d3.selectAll('#rangebox .range').each(function () {
+    index = parseInt(d3.select(this).attr('data-id'));
+    this.value = d.children[index].percentage*10;
+    oldValue[index] = this.value;
+  });
+
+  //equalize(); // necessary only in case input data are not alrewady equilised
+  showValues();
+
+  // slider event
+  d3.selectAll('.range').on('change', function () {
+    this.value = parseInt(this.value);
+    if (this.value < 0) this.value = 0;
+    else if (this.value > 1000) this.value = 1000;
+
+    moving_id = d3.select(this).attr('data-id');
+
+    var old_value = oldValue[moving_id];
+    var new_value = this.value;
+    var delta = (new_value - old_value) / (numOfchildrens - 1);
+
+    d3.selectAll('#rangebox .range').each(function () {
+      var r_id = d3.select(this).attr('data-id');
+      var r_val = this.value;
+      if (r_id != moving_id && r_val > delta) {
+        var equalized = parseInt(r_val - delta);
+        this.value = equalized;
+        oldValue[r_id] = this.value;
+      }
+    });
+
+    oldValue[moving_id] = new_value;
+
+    equalize();
+    showValues();
+    updateNodes(currentClickedNode);
+    recomputeTotals(json);
+    updateVis();
+  });
+}
+
+// show slider value
+function showValues() {
+  d3.selectAll('#rangebox .range').each(function () {
+    var perct = (this.value / 10) + '%';
+    d3.select(this.parentNode.nextSibling).html(perct);
+  });
+}
+
+// get JSON data from sliders
+function getSliderData() {
+    var json = [];
+    d3.selectAll('#rangebox .range').each(function () {
+
+      json.push({
+        label: d3.select(this.parentNode.parentNode)
+            .select('td:first-child')
+            .text(),
+        value: this.value
+      });
+    });
+    return json;
+}
+
+// compute total percentage from sliders
+function getCurrentSliderTotal() {
+    var total = 0;
+    d3.selectAll('#rangebox .range').each(function () {
+        total = total + parseInt(this.value);
+    });
+    return total;
+}
+
+// equalize the sliders (decimal delta)
+function equalize() {
+  var remaining = 1000 - getCurrentSliderTotal();
+
+  if (remaining != 0) {
+    var to_eq = null;
+    var min = null;
+    var max = null;
+    var min_value = 9999;
+    var max_value = 0;
+
+    d3.selectAll('#rangebox .range').each(function () {
+      var id = d3.select(this).attr('data-id');
+
+      if (id != moving_id) {
+        if (parseInt(this.value) > parseInt(max_value)) {
+          max_value = this.value;
+          max = this;
+        }
+        if (parseInt(this.value) < parseInt(min_value)) {
+          min_value = this.value;
+          min = this;
+        }
+      }
+    });
+
+    if (remaining > 0) to_eq = min;
+    else to_eq = max;
+
+    if (to_eq) {
+      if (remaining > 0) {
+        to_eq.value = parseInt(to_eq.value) + 1;
+        remaining = remaining - 1;
+      } else {
+        to_eq.value = parseInt(to_eq.value) - 1;
+        remaining = remaining + 1;
+      }
+      oldValue[d3.select(to_eq).attr('data-id')] = to_eq.value;
+
+      if (remaining != 0) equalize();
+    }
+  }
+}
