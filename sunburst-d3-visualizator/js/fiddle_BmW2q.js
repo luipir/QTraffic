@@ -5,7 +5,7 @@ var radius = Math.min(width, height) / 2;
 
 // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
 var b = {
-    w: 75, h: 30, s: 3, t: 10
+    w: 100, h: 20, s: 3, t: 10
 };
 
 // make `colors` an ordinal scale
@@ -16,13 +16,13 @@ var vis = d3.select("#chart").append("svg:svg")
   .attr("height", height)
   .append("svg:g")
   .attr("id", "container")
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  .attr("transform", "translate(" + width / 2 + "," + height/ 2 + ")");
 
 var partition = d3.layout.partition()
   .sort(null)
   .size([2 * Math.PI, 100])
   .value(function(d) {
-  	return d.total;
+    return d.total;
   });
 
 var arc = d3.svg.arc()
@@ -42,7 +42,7 @@ loadData();
 
 // Main function to draw and set up the visualization, once we have the data.
 function createVisualization(json) {
-	
+    
     // Basic setup of page elements.
     initializeBreadcrumbTrail();
   
@@ -61,13 +61,16 @@ function createVisualization(json) {
         //});
   
     var uniqueNames = (function(a) {
-      var output = [];
-      a.forEach(function(d) {
-        if (output.indexOf(d.name) === -1) {
-          output.push(d.name);
-        }
-      });
-      return output;
+        var output = [];
+        a.forEach(function(d) {
+            // skip root node
+            if (typeof d.parent == 'undefined') return;
+            
+            if (output.indexOf(d.name) === -1) {
+              output.push(d.name);
+            }
+        });
+        return output;
     })(nodes);
     
     // set domain of colors scale based on data
@@ -92,8 +95,8 @@ function createVisualization(json) {
     d3.select("#container").on("mouseleave", mouseleave);
 
     // show lagend activating checkbox
-	d3.select("#togglelegend").property('checked', true);
-	d3.select("#togglelegend").on("click")();
+    d3.select("#togglelegend").property('checked', true);
+    d3.select("#togglelegend").on("click")();
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
@@ -238,7 +241,7 @@ function drawLegend() {
 
   // Dimensions of legend item: width, height, spacing, radius of rounded rect.
   var li = {
-    w: 75, h: 30, s: 3, r: 3
+    w: 100, h: 20, s: 3, r: 3
   };
 
   var legend = d3.select("#legend").append("svg:svg")
@@ -268,56 +271,56 @@ function drawLegend() {
 }
 
 function toggleLegend() {
-  var legend = d3.select("#legend");
-  if (legend.style("visibility") == "hidden") {
-    legend.style("visibility", "");
-  } else {
-    legend.style("visibility", "hidden");
-  }
+    var legend = d3.select("#legend");
+    if (legend.style("visibility") == "hidden") {
+        legend.style("visibility", "");
+    } else {
+        legend.style("visibility", "hidden");
+    }
 }
 
 function loadData() {
-	d3.json("FleetSplit-converted.json", function(error, data) {
-	  if (error) return console.warn(error);
-	  
-	  // show only Passenger Cars for test reason
-	  json = data["children"][0]["children"][1];
-	  
-	  createVisualization(json);
-	});
+    d3.json("FleetSplit-converted.json", function(error, data) {
+        if (error) return console.warn(error);
+        
+        // show only Passenger Cars for test reason
+        json = data["children"][0]["children"][1];
+        
+        createVisualization(json);
+    });
 }
 
 function findInJson(currentNode, compareNode) {
-	if (currentNode.name == compareNode.name && 
-      currentNode.depth == compareNode.depth &&
-      currentNode.parent.name == compareNode.parent.name) {
-		return currentNode;
-	}
-	
-	if (typeof currentNode.children == 'undefined') {
-		return false;
-	}
-	
-	for (var i=0; i < currentNode.children.length; i++) {
-		var subNode = currentNode.children[i];
-		var foundNode = findInJson(subNode, compareNode);
-		if (foundNode) {
-			return foundNode;
-		}
-	}
-	return false;
+    if (currentNode.name == compareNode.name && 
+        currentNode.depth == compareNode.depth &&
+        currentNode.parent.name == compareNode.parent.name) {
+        return currentNode;
+    }
+    
+    if (typeof currentNode.children == 'undefined') {
+        return false;
+    }
+    
+    for (var i=0; i < currentNode.children.length; i++) {
+        var subNode = currentNode.children[i];
+        var foundNode = findInJson(subNode, compareNode);
+        if (foundNode) {
+            return foundNode;
+        }
+    }
+    return false;
 }
 
 function updateNodes(d) {
-	// try to modify original JSON
-	var foundNode = findInJson(json, d);
-	if (!foundNode) return;
-	
-	// modify node to be equal to values set in sliders
-	d3.selectAll('#rangebox .range').each(function () {
-	index = parseInt(d3.select(this).attr('data-id'));
-  	foundNode.children[index].percentage = this.value / 10;
-	});
+    // try to modify original JSON
+    var foundNode = findInJson(json, d);
+    if (!foundNode) return;
+    
+    // modify node to be equal to values set in sliders
+    d3.selectAll('#rangebox .range').each(function () {
+    index = parseInt(d3.select(this).attr('data-id'));
+    foundNode.children[index].percentage = this.value / 10;
+    });
 }
 
 function recomputeTotals(node) {
@@ -335,8 +338,8 @@ function recomputeTotals(node) {
 }
 
 function updateVis() {
-	nodes = partition.nodes(json);
-	vis.selectAll("path")
+    nodes = partition.nodes(json);
+    vis.selectAll("path")
       .data(nodes)
     .transition()
       .duration(700)
@@ -349,83 +352,84 @@ function updateVis() {
 
 // Show sliders to allow arc editing
 function showSliders(d) {
-	// do nothing in case of last leaf
-	if (typeof d.children == "undefined") {
-	d3.select('#rangebox tbody').html('');
-		return;
-	}
-	
-	currentClickedNode = d;
-	numOfchildrens = currentClickedNode.children.length;
-	
-	// reset basic vars
-	oldValue = [];
-	moving_id = null;
-	
-	// erase previous sliders	
-	d3.select('#rangebox tbody').html('');
-
-  // append sliders to table
-  for (i = 0; i < numOfchildrens; i++) {
-  	label = d.children[i].name;
-  
-    var tr = d3.select('#rangebox tbody').append('tr');
-    tr.append('td')
-      .attr('class', 'edit')
-      .attr('contenteditable', false)
-      .text(label);
-    tr.append('td')
-      .append('input')
-      .attr('type', 'range')
-      .attr('data-id', i)
-      .attr('class', 'range')
-      .attr('step', 1)
-      .attr('min', 0)
-      .attr('max', 1000);
-    tr.append('td')
-      .attr('class', 'range_value');
-  }
+    // do nothing in case of last leaf
+    if (typeof d.children == "undefined") {
+    d3.select('#rangebox tbody').html('');
+        return;
+    }
     
-  // set slider values depending of the clicked class
-  d3.selectAll('#rangebox .range').each(function () {
-    index = parseInt(d3.select(this).attr('data-id'));
-    this.value = d.children[index].percentage*10;
-    oldValue[index] = this.value;
-  });
+    currentClickedNode = d;
+    numOfchildrens = currentClickedNode.children.length;
+    
+    // reset basic vars
+    oldValue = [];
+    moving_id = null;
+    
+    // erase previous sliders   
+    d3.select('#rangebox tbody').html('');
 
-  //equalize(); // necessary only in case input data are not alrewady equilised
-  showValues();
-
-  // slider event
-  d3.selectAll('.range').on('change', function () {
-    this.value = parseInt(this.value);
-    if (this.value < 0) this.value = 0;
-    else if (this.value > 1000) this.value = 1000;
-
-    moving_id = d3.select(this).attr('data-id');
-
-    var old_value = oldValue[moving_id];
-    var new_value = this.value;
-    var delta = (new_value - old_value) / (numOfchildrens - 1);
-
-    d3.selectAll('#rangebox .range').each(function () {
-      var r_id = d3.select(this).attr('data-id');
-      var r_val = this.value;
-      if (r_id != moving_id && r_val > delta) {
-        var equalized = parseInt(r_val - delta);
-        this.value = equalized;
-        oldValue[r_id] = this.value;
-      }
+    // append sliders to table
+    for (i = 0; i < numOfchildrens; i++) {
+        label = d.children[i].name;
+        
+        var tr = d3.select('#rangebox tbody').append('tr');
+        tr.append('td')
+            .attr('class', 'edit')
+            .attr('contenteditable', false)
+            .style("fill", function(d) { return colors(label); })
+            .text(label);
+        tr.append('td')
+            .append('input')
+            .attr('type', 'range')
+            .attr('data-id', i)
+            .attr('class', 'range')
+            .attr('step', 1)
+            .attr('min', 0)
+            .attr('max', 1000);
+        tr.append('td')
+            .attr('class', 'range_value');
+        }
+        
+        // set slider values depending of the clicked class
+        d3.selectAll('#rangebox .range').each(function () {
+            index = parseInt(d3.select(this).attr('data-id'));
+            this.value = d.children[index].percentage*10;
+            oldValue[index] = this.value;
+        });
+        
+        //equalize(); // necessary only in case input data are not alrewady equilised
+        showValues();
+        
+        // slider event
+        d3.selectAll('.range').on('change', function () {
+            this.value = parseInt(this.value);
+            if (this.value < 0) this.value = 0;
+            else if (this.value > 1000) this.value = 1000;
+            
+            moving_id = d3.select(this).attr('data-id');
+            
+            var old_value = oldValue[moving_id];
+            var new_value = this.value;
+            var delta = (new_value - old_value) / (numOfchildrens - 1);
+            
+            d3.selectAll('#rangebox .range').each(function () {
+            var r_id = d3.select(this).attr('data-id');
+            var r_val = this.value;
+            if (r_id != moving_id && r_val > delta) {
+                var equalized = parseInt(r_val - delta);
+                this.value = equalized;
+                oldValue[r_id] = this.value;
+            }
+        });
+    
+        oldValue[moving_id] = new_value;
+        
+        equalize();
+        showValues();
+        updateNodes(currentClickedNode);
+        recomputeTotals(json);
+        updateVis();
     });
-
-    oldValue[moving_id] = new_value;
-
-    equalize();
-    showValues();
-    updateNodes(currentClickedNode);
-    recomputeTotals(json);
-    updateVis();
-  });
 }
 
 // show slider value

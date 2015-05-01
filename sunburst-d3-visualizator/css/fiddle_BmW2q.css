@@ -10,12 +10,12 @@ body {
 
 #main {
   float: left;
-  width: 350px;
+  width: 420px;
 }
 
 #sidebar {
   float: right;
-  width: 100px;
+  width: 110px;
 }
 
 #sliders {
@@ -24,8 +24,8 @@ body {
 }
 
 #sequence {
-  width: 600px;
-  height: 70px;
+  width: 400px;
+  height: 30px;
 }
 
 #legend {
@@ -47,7 +47,7 @@ body {
 
 #explanation {
   position: fixed;
-  top: 280px;
+  top: 245px;
   left: 170px;
   width: 140px;
   text-align: center;
