@@ -376,9 +376,9 @@ function showSliders(d) {
         tr.append('td')
             .attr('class', 'edit')
             .attr('contenteditable', false)
-            .style("fill", function(d) { return colors(label); })
+            .style("fill", function(d) { return colors(d); })
             .text(label);
-        tr.append('td')
+       tr.append('td')
             .append('input')
             .attr('type', 'range')
             .attr('data-id', i)
