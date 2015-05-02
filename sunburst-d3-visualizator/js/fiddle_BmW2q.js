@@ -291,6 +291,7 @@ function loadData() {
 }
 
 function findInJson(currentNode, compareNode) {
+    // TODO: can be done with d3.select and filter ???
     if (currentNode.name == compareNode.name && 
         currentNode.depth == compareNode.depth &&
         currentNode.parent.name == compareNode.parent.name) {
@@ -311,30 +312,32 @@ function findInJson(currentNode, compareNode) {
     return false;
 }
 
-function updateNodes(d) {
-    // try to modify original JSON
+function updateJsonData(d) {
+    // modify the original JSON
+    // on the input node basing on node value
     var foundNode = findInJson(json, d);
     if (!foundNode) return;
     
     // modify node to be equal to values set in sliders
     d3.selectAll('#rangebox .range').each(function () {
-    index = parseInt(d3.select(this).attr('data-id'));
-    foundNode.children[index].percentage = this.value / 10;
+        index = parseInt(d3.select(this).attr('data-id'));
+        foundNode.children[index].percentage = this.value / 10;
     });
 }
 
 function recomputeTotals(node) {
-  if (typeof node.parent != 'undefined') {
-    // do this only if is not the root node
-    node.total = (node.parent.total * node.percentage) / 100;
-  }
-  node.value = node.total;
-  
-  // calc total for the children if any
-  if (typeof node.children == 'undefined') return;
-  for (var i=0; i < node.children.length; i++) {
-    recomputeTotals(node.children[i]);
-  }
+    // rematerialize all percentage
+    if (typeof node.parent != 'undefined') {
+        // do this only if is not the root node
+        node.total = (node.parent.total * node.percentage) / 100;
+    }
+    node.value = node.total;
+      
+    // calc total for the children if any
+    if (typeof node.children == 'undefined') return;
+    for (var i=0; i < node.children.length; i++) {
+        recomputeTotals(node.children[i]);
+    }
 }
 
 function updateVis() {
@@ -354,7 +357,7 @@ function updateVis() {
 function showSliders(d) {
     // do nothing in case of last leaf
     if (typeof d.children == "undefined") {
-    d3.select('#rangebox tbody').html('');
+        d3.select('#rangebox tbody').html('');
         return;
     }
     
@@ -375,7 +378,7 @@ function showSliders(d) {
         var tr = d3.select('#rangebox tbody').append('tr');
         tr.append('td')
             .attr('class', 'edit')
-            .attr('contenteditable', false)
+            .attr('contentEditable', false)
             .style("fill", function(d) { return colors(d); })
             .text(label);
        tr.append('td')
@@ -385,49 +388,127 @@ function showSliders(d) {
             .attr('class', 'range')
             .attr('step', 1)
             .attr('min', 0)
-            .attr('max', 1000);
+            .attr('max', 1000)
+            .attr('contentEditable', true);
         tr.append('td')
             .attr('class', 'range_value');
+        tr.append('td')
+            .append('input')
+            .attr('type', 'checkbox')
+            .attr('class', 'lockCheckbox')
+            .attr('data-id', i)
+            .attr('contentEditable', true);
+    }
+        
+    // set slider values depending of the clicked class
+    d3.selectAll('#rangebox .range').each(function () {
+        index = parseInt(d3.select(this).attr('data-id'));
+        this.value = d.children[index].percentage*10;
+        oldValue[index] = this.value;
+    });
+    
+    //equalize(); // necessary only in case input data are not alrewady equilised
+    showValues();
+    
+    // lock checkbox event prevent sliders to be editable
+    // TODO: can be obtained with this.disable avoing to generate events
+    d3.selectAll('.lockCheckbox').on('click', function () {
+        var id = d3.select(this).attr('data-id');
+        var locked = Boolean(this.checked);
+        
+        d3.selectAll('#rangebox .range')
+            .filter(function() {return (d3.select(this).attr('data-id') == id); })
+                .attr('contentEditable', !locked);
+    });
+    
+    // slider event
+    d3.selectAll('#rangebox .range').on('change', function () {
+        
+        moving_id = d3.select(this).attr('data-id');
+        
+        // if it's locked...don't move it
+        // TODO: can be obtained with this.disable avoing to generate events
+        if (this.contentEditable == 'false') {
+            this.value = oldValue[moving_id];
+            return;
         }
         
-        // set slider values depending of the clicked class
-        d3.selectAll('#rangebox .range').each(function () {
-            index = parseInt(d3.select(this).attr('data-id'));
-            this.value = d.children[index].percentage*10;
-            oldValue[index] = this.value;
-        });
+        // because range slider has only min/max and not dominum of validity
+        // It's necessary to check if curent value is more than 
+        // that allowed by (1000 - the sum of locked sliders)
+        // - note 1000 because slideres are set from 0 to 1000 to have 1 digit precision -
+        // this sum can be managed during checkbox clicked event
+        // but I prefer to sum everytime, because it result more readable
+        var rangeDomain = 1000;
+        d3.selectAll('#rangebox .range')
+            .filter(function() {return (d3.select(this).attr('contentEditable') == 'false'); })
+                .each(function() {
+                    rangeDomain -= parseInt(this.value); // casting to numeric with +
+                });
         
-        //equalize(); // necessary only in case input data are not alrewady equilised
-        showValues();
+        if (parseInt(this.value) > rangeDomain) {
+            this.value = oldValue[moving_id];
+            return;
+        }
         
-        // slider event
-        d3.selectAll('.range').on('change', function () {
-            this.value = parseInt(this.value);
-            if (this.value < 0) this.value = 0;
-            else if (this.value > 1000) this.value = 1000;
-            
-            moving_id = d3.select(this).attr('data-id');
-            
-            var old_value = oldValue[moving_id];
-            var new_value = this.value;
-            var delta = (new_value - old_value) / (numOfchildrens - 1);
-            
-            d3.selectAll('#rangebox .range').each(function () {
-            var r_id = d3.select(this).attr('data-id');
-            var r_val = this.value;
-            if (r_id != moving_id && r_val > delta) {
-                var equalized = parseInt(r_val - delta);
-                this.value = equalized;
-                oldValue[r_id] = this.value;
-            }
-        });
-    
+        this.value = parseInt(this.value);
+        if (this.value < 0) this.value = 0;
+        else if (this.value > 1000) this.value = 1000;
+        
+        var old_value = oldValue[moving_id];
+        var new_value = this.value;
+        
+        // check how many sliders are not blocked
+        var notLockedSliders = 0;
+        d3.selectAll('#rangebox .range')
+            .filter(function() {return (this.contentEditable == 'true'); })
+                .each(function() {
+                   notLockedSliders++; 
+                });
+        
+        // if the current slider is the only remained unlocked then set
+        // its value to the domain... that means force lock due the fact
+        // that sum have to be 10000
+        if (notLockedSliders == 1) {
+            this.value = rangeDomain;
+            oldValue[moving_id] = this.value;
+            return;
+        }
+        
+        // the moveed difference have to be distributed among
+        // the remaining not locked sliders
+        var delta = (new_value - old_value) / (notLockedSliders - 1);
+        
+        d3.selectAll('#rangebox .range')
+            .filter(function() {return (this.contentEditable == 'true'); })
+                .each(function () {
+                    var r_id = d3.select(this).attr('data-id');
+                    var r_val = this.value;
+                    if (r_id != moving_id && r_val > delta) {
+                        var equalized = parseInt(r_val - delta);
+                        this.value = equalized;
+                        oldValue[r_id] = this.value;
+                    }
+                });
+
         oldValue[moving_id] = new_value;
         
+        // after distributed delta have to equilize values to avoid 
+        // that sum would be greater the 1000
         equalize();
+        
+        // show slider value in %
         showValues();
-        updateNodes(currentClickedNode);
+        
+        // perform JSOn update and recmpute of totals to
+        // allow visualization update
+        // without recopute totals, vis is not update
+        // because sunburst is based on materialised percentage
+        // and not on relative percentage
+        updateJsonData(currentClickedNode);
         recomputeTotals(json);
+        
+        // update sunburst
         updateVis();
     });
 }
@@ -475,35 +556,37 @@ function equalize() {
     var min_value = 9999;
     var max_value = 0;
 
-    d3.selectAll('#rangebox .range').each(function () {
-      var id = d3.select(this).attr('data-id');
-
-      if (id != moving_id) {
-        if (parseInt(this.value) > parseInt(max_value)) {
-          max_value = this.value;
-          max = this;
-        }
-        if (parseInt(this.value) < parseInt(min_value)) {
-          min_value = this.value;
-          min = this;
-        }
-      }
-    });
+    d3.selectAll('#rangebox .range')
+        .filter(function() {return (this.contentEditable == 'true'); })
+            .each(function () {
+                var id = d3.select(this).attr('data-id');
+                
+                if (id != moving_id) {
+                    if (parseInt(this.value) > parseInt(max_value)) {
+                        max_value = this.value;
+                        max = this;
+                    }
+                    if (parseInt(this.value) < parseInt(min_value)) {
+                        min_value = this.value;
+                        min = this;
+                    }
+                }
+            });
 
     if (remaining > 0) to_eq = min;
     else to_eq = max;
 
     if (to_eq) {
-      if (remaining > 0) {
-        to_eq.value = parseInt(to_eq.value) + 1;
-        remaining = remaining - 1;
-      } else {
-        to_eq.value = parseInt(to_eq.value) - 1;
-        remaining = remaining + 1;
-      }
-      oldValue[d3.select(to_eq).attr('data-id')] = to_eq.value;
-
-      if (remaining != 0) equalize();
+        if (remaining > 0) {
+            to_eq.value = parseInt(to_eq.value) + 1;
+            remaining = remaining - 1;
+        } else {
+            to_eq.value = parseInt(to_eq.value) - 1;
+            remaining = remaining + 1;
+        }
+        oldValue[d3.select(to_eq).attr('data-id')] = to_eq.value;
+    
+        if (remaining != 0) equalize();
     }
   }
 }
