@@ -363,7 +363,6 @@ function showSliders(d) {
     }
     
     currentClickedNode = d;
-    numOfchildrens = currentClickedNode.children.length;
     
     // reset basic vars
     oldValue = [];
@@ -378,7 +377,7 @@ function showSliders(d) {
     d3.select('#rangebox tbody').html('');
 
     // append sliders to table
-    for (i = 0; i < numOfchildrens; i++) {
+    for (i = 0; i < currentClickedNode.children.length; i++) {
         label = d.children[i].name;
         
         var tr = d3.select('#rangebox tbody').append('tr');
