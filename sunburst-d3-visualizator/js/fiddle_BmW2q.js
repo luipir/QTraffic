@@ -357,6 +357,7 @@ function updateVis() {
 function showSliders(d) {
     // do nothing in case of last leaf
     if (typeof d.children == "undefined") {
+        d3.select('#infoBox tbody').html('');
         d3.select('#rangebox tbody').html('');
         return;
     }
@@ -367,6 +368,11 @@ function showSliders(d) {
     // reset basic vars
     oldValue = [];
     moving_id = null;
+    
+    // erase and set info box
+    d3.select('#infoBox tbody').html('');
+    var tr = d3.select('#infoBox tbody')
+        .text(d.name);
     
     // erase previous sliders   
     d3.select('#rangebox tbody').html('');
