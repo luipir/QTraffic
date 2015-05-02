@@ -354,15 +354,13 @@ function updateVis() {
 //////////////////////////////////////////////////////////
 
 // Show sliders to allow arc editing
-function showSliders(d) {
+function showSliders(clickedNode) {
     // do nothing in case of last leaf
-    if (typeof d.children == "undefined") {
+    if (typeof clickedNode.children == "undefined") {
         d3.select('#infoBox tbody').html('');
         d3.select('#rangebox tbody').html('');
         return;
     }
-    
-    currentClickedNode = d;
     
     // reset basic vars
     oldValue = [];
@@ -371,14 +369,14 @@ function showSliders(d) {
     // erase and set info box
     d3.select('#infoBox tbody').html('');
     var tr = d3.select('#infoBox tbody')
-        .text(d.name);
+        .text(clickedNode.name);
     
     // erase previous sliders   
     d3.select('#rangebox tbody').html('');
 
     // append sliders to table
-    for (i = 0; i < currentClickedNode.children.length; i++) {
-        label = d.children[i].name;
+    for (i = 0; i < clickedNode.children.length; i++) {
+        label = clickedNode.children[i].name;
         
         var tr = d3.select('#rangebox tbody').append('tr');
         tr.append('td')
@@ -408,7 +406,7 @@ function showSliders(d) {
     // set slider values depending of the clicked class
     d3.selectAll('#rangebox .range').each(function () {
         index = parseInt(d3.select(this).attr('data-id'));
-        this.value = d.children[index].percentage*10;
+        this.value = clickedNode.children[index].percentage*10;
         oldValue[index] = this.value;
     });
     
@@ -510,7 +508,7 @@ function showSliders(d) {
         // without recopute totals, vis is not update
         // because sunburst is based on materialised percentage
         // and not on relative percentage
-        updateJsonData(currentClickedNode);
+        updateJsonData(clickedNode);
         recomputeTotals(json);
         
         // update sunburst
