@@ -397,7 +397,7 @@
           </property>
           <widget class="QWidget" name="passengerCars_tab">
            <attribute name="title">
-            <string>Passenger Cars</string>
+            <string>Passenger cars</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
@@ -413,7 +413,7 @@
           </widget>
           <widget class="QWidget" name="lightDutyVehicles_tab">
            <attribute name="title">
-            <string>Light Duty Vehicles</string>
+            <string>Light duty vehicles</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
@@ -429,7 +429,7 @@
           </widget>
           <widget class="QWidget" name="heavyDutyVehicles_tab">
            <attribute name="title">
-            <string>Heavy Duty Vehicles</string>
+            <string>Heavy duty vehicles</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
@@ -443,9 +443,9 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="buses_tab">
+          <widget class="QWidget" name="urbanBuses_tab">
            <attribute name="title">
-            <string>Buses</string>
+            <string>Urban buses</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
@@ -459,9 +459,9 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="motors_tab">
+          <widget class="QWidget" name="motorcycles_tab">
            <attribute name="title">
-            <string>Motors</string>
+            <string>Motorcycles</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
@@ -475,9 +475,9 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="alternativeFuels_tab">
+          <widget class="QWidget" name="coaches_tab">
            <attribute name="title">
-            <string>Alternative Fuels</string>
+            <string>Coaches</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
