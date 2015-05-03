@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Fri Apr 24 10:04:35 2015
+# Created: Sun May  3 11:39:05 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -193,9 +193,9 @@ class Ui_qtraffic_dockWidget(object):
         self.configuration_tab.setObjectName(_fromUtf8("configuration_tab"))
         self.horizontalLayout_6 = QtGui.QHBoxLayout(self.configuration_tab)
         self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
-        self.roadTpes_listWidget = QtGui.QListWidget(self.configuration_tab)
-        self.roadTpes_listWidget.setObjectName(_fromUtf8("roadTpes_listWidget"))
-        self.horizontalLayout_6.addWidget(self.roadTpes_listWidget)
+        self.roadTypes_listWidget = QtGui.QListWidget(self.configuration_tab)
+        self.roadTypes_listWidget.setObjectName(_fromUtf8("roadTypes_listWidget"))
+        self.horizontalLayout_6.addWidget(self.roadTypes_listWidget)
         self.verticalLayout_12 = QtGui.QVBoxLayout()
         self.verticalLayout_12.setObjectName(_fromUtf8("verticalLayout_12"))
         self.newRoadType_button = QtGui.QPushButton(self.configuration_tab)
