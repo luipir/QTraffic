@@ -370,6 +370,9 @@
            </layout>
           </item>
           <item>
+           <widget class="QListWidget" name="roadTypes_listWidget"/>
+          </item>
+          <item>
            <widget class="QTabWidget" name="fleetComposition_tabs">
             <property name="currentIndex">
              <number>5</number>
@@ -471,9 +474,6 @@
              </layout>
             </widget>
            </widget>
-          </item>
-          <item>
-           <widget class="QListWidget" name="roadTypes_listWidget"/>
           </item>
          </layout>
         </item>

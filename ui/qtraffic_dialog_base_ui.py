@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Tue May  5 12:41:33 2015
+# Created: Tue May  5 13:58:14 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -212,6 +212,9 @@ class Ui_qtraffic_dockWidget(object):
         self.saveConfiguration_button.setObjectName(_fromUtf8("saveConfiguration_button"))
         self.verticalLayout_12.addWidget(self.saveConfiguration_button)
         self.horizontalLayout_14.addLayout(self.verticalLayout_12)
+        self.roadTypes_listWidget = QtGui.QListWidget(self.fleetComposition_tab)
+        self.roadTypes_listWidget.setObjectName(_fromUtf8("roadTypes_listWidget"))
+        self.horizontalLayout_14.addWidget(self.roadTypes_listWidget)
         self.fleetComposition_tabs = QtGui.QTabWidget(self.fleetComposition_tab)
         self.fleetComposition_tabs.setObjectName(_fromUtf8("fleetComposition_tabs"))
         self.passengerCars_tab = QtGui.QWidget()
@@ -269,9 +272,6 @@ class Ui_qtraffic_dockWidget(object):
         self.horizontalLayout_12.addWidget(self.coaches_webView)
         self.fleetComposition_tabs.addTab(self.coaches_tab, _fromUtf8(""))
         self.horizontalLayout_14.addWidget(self.fleetComposition_tabs)
-        self.roadTypes_listWidget = QtGui.QListWidget(self.fleetComposition_tab)
-        self.roadTypes_listWidget.setObjectName(_fromUtf8("roadTypes_listWidget"))
-        self.horizontalLayout_14.addWidget(self.roadTypes_listWidget)
         self.verticalLayout.addLayout(self.horizontalLayout_14)
         spacerItem5 = QtGui.QSpacerItem(20, 130, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem5)
