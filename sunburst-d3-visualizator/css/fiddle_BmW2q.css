@@ -61,10 +61,10 @@ body {
 
 #rangebox {
 	table-layout: fixed;
-/*	top: 235px;
+	top: 235px;
 	left: 205px;
     margin-right: 10px;
-	width: 300px;*/
+	/*width: 300px;*/
 	border-collapse: collapse;
 }
 #rangebox td.edit {
