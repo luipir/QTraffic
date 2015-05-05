@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Tue May  5 13:58:14 2015
+# Created: Tue May  5 14:53:12 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -213,6 +213,7 @@ class Ui_qtraffic_dockWidget(object):
         self.verticalLayout_12.addWidget(self.saveConfiguration_button)
         self.horizontalLayout_14.addLayout(self.verticalLayout_12)
         self.roadTypes_listWidget = QtGui.QListWidget(self.fleetComposition_tab)
+        self.roadTypes_listWidget.setResizeMode(QtGui.QListView.Adjust)
         self.roadTypes_listWidget.setObjectName(_fromUtf8("roadTypes_listWidget"))
         self.horizontalLayout_14.addWidget(self.roadTypes_listWidget)
         self.fleetComposition_tabs = QtGui.QTabWidget(self.fleetComposition_tab)
@@ -253,15 +254,6 @@ class Ui_qtraffic_dockWidget(object):
         self.buses_webView.setObjectName(_fromUtf8("buses_webView"))
         self.horizontalLayout_10.addWidget(self.buses_webView)
         self.fleetComposition_tabs.addTab(self.urbanBuses_tab, _fromUtf8(""))
-        self.motorcycles_tab = QtGui.QWidget()
-        self.motorcycles_tab.setObjectName(_fromUtf8("motorcycles_tab"))
-        self.horizontalLayout_11 = QtGui.QHBoxLayout(self.motorcycles_tab)
-        self.horizontalLayout_11.setObjectName(_fromUtf8("horizontalLayout_11"))
-        self.motors_webView = QtWebKit.QWebView(self.motorcycles_tab)
-        self.motors_webView.setUrl(QtCore.QUrl(_fromUtf8("about:blank")))
-        self.motors_webView.setObjectName(_fromUtf8("motors_webView"))
-        self.horizontalLayout_11.addWidget(self.motors_webView)
-        self.fleetComposition_tabs.addTab(self.motorcycles_tab, _fromUtf8(""))
         self.coaches_tab = QtGui.QWidget()
         self.coaches_tab.setObjectName(_fromUtf8("coaches_tab"))
         self.horizontalLayout_12 = QtGui.QHBoxLayout(self.coaches_tab)
@@ -271,9 +263,20 @@ class Ui_qtraffic_dockWidget(object):
         self.coaches_webView.setObjectName(_fromUtf8("coaches_webView"))
         self.horizontalLayout_12.addWidget(self.coaches_webView)
         self.fleetComposition_tabs.addTab(self.coaches_tab, _fromUtf8(""))
+        self.motorcycles_tab = QtGui.QWidget()
+        self.motorcycles_tab.setObjectName(_fromUtf8("motorcycles_tab"))
+        self.horizontalLayout_11 = QtGui.QHBoxLayout(self.motorcycles_tab)
+        self.horizontalLayout_11.setObjectName(_fromUtf8("horizontalLayout_11"))
+        self.motors_webView = QtWebKit.QWebView(self.motorcycles_tab)
+        self.motors_webView.setUrl(QtCore.QUrl(_fromUtf8("about:blank")))
+        self.motors_webView.setObjectName(_fromUtf8("motors_webView"))
+        self.horizontalLayout_11.addWidget(self.motors_webView)
+        self.fleetComposition_tabs.addTab(self.motorcycles_tab, _fromUtf8(""))
         self.horizontalLayout_14.addWidget(self.fleetComposition_tabs)
+        self.horizontalLayout_14.setStretch(0, 1)
+        self.horizontalLayout_14.setStretch(1, 2)
         self.verticalLayout.addLayout(self.horizontalLayout_14)
-        spacerItem5 = QtGui.QSpacerItem(20, 130, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        spacerItem5 = QtGui.QSpacerItem(20, 105, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem5)
         self.horizontalLayout_6 = QtGui.QHBoxLayout()
         self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
@@ -508,7 +511,7 @@ class Ui_qtraffic_dockWidget(object):
 
         self.retranslateUi(qtraffic_dockWidget)
         self.tabWidget.setCurrentIndex(2)
-        self.fleetComposition_tabs.setCurrentIndex(5)
+        self.fleetComposition_tabs.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(qtraffic_dockWidget)
 
     def retranslateUi(self, qtraffic_dockWidget):
@@ -535,12 +538,13 @@ class Ui_qtraffic_dockWidget(object):
         self.removeRoadType_button.setText(_translate("qtraffic_dockWidget", "Remove", None))
         self.loadConfiguration_button.setText(_translate("qtraffic_dockWidget", "Load", None))
         self.saveConfiguration_button.setText(_translate("qtraffic_dockWidget", "Save", None))
+        self.roadTypes_listWidget.setSortingEnabled(True)
         self.fleetComposition_tabs.setTabText(self.fleetComposition_tabs.indexOf(self.passengerCars_tab), _translate("qtraffic_dockWidget", "Passenger cars", None))
         self.fleetComposition_tabs.setTabText(self.fleetComposition_tabs.indexOf(self.lightDutyVehicles_tab), _translate("qtraffic_dockWidget", "Light duty vehicles", None))
         self.fleetComposition_tabs.setTabText(self.fleetComposition_tabs.indexOf(self.heavyDutyVehicles_tab), _translate("qtraffic_dockWidget", "Heavy duty vehicles", None))
         self.fleetComposition_tabs.setTabText(self.fleetComposition_tabs.indexOf(self.urbanBuses_tab), _translate("qtraffic_dockWidget", "Urban buses", None))
-        self.fleetComposition_tabs.setTabText(self.fleetComposition_tabs.indexOf(self.motorcycles_tab), _translate("qtraffic_dockWidget", "Motorcycles", None))
         self.fleetComposition_tabs.setTabText(self.fleetComposition_tabs.indexOf(self.coaches_tab), _translate("qtraffic_dockWidget", "Coaches", None))
+        self.fleetComposition_tabs.setTabText(self.fleetComposition_tabs.indexOf(self.motorcycles_tab), _translate("qtraffic_dockWidget", "Motorcycles", None))
         self.next_pushButton_4.setText(_translate("qtraffic_dockWidget", "Next ->", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.fleetComposition_tab), _translate("qtraffic_dockWidget", "Fleet Composition", None))
         self.groupBox_6.setTitle(_translate("qtraffic_dockWidget", "Gasoline properties", None))

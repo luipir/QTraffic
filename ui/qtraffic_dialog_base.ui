@@ -323,7 +323,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="1,2,0">
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_12">
             <item>
@@ -370,12 +370,19 @@
            </layout>
           </item>
           <item>
-           <widget class="QListWidget" name="roadTypes_listWidget"/>
+           <widget class="QListWidget" name="roadTypes_listWidget">
+            <property name="resizeMode">
+             <enum>QListView::Adjust</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QTabWidget" name="fleetComposition_tabs">
             <property name="currentIndex">
-             <number>5</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="passengerCars_tab">
              <attribute name="title">
@@ -441,13 +448,13 @@
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="motorcycles_tab">
+            <widget class="QWidget" name="coaches_tab">
              <attribute name="title">
-              <string>Motorcycles</string>
+              <string>Coaches</string>
              </attribute>
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
               <item>
-               <widget class="QWebView" name="motors_webView">
+               <widget class="QWebView" name="coaches_webView">
                 <property name="url">
                  <url>
                   <string>about:blank</string>
@@ -457,13 +464,13 @@
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="coaches_tab">
+            <widget class="QWidget" name="motorcycles_tab">
              <attribute name="title">
-              <string>Coaches</string>
+              <string>Motorcycles</string>
              </attribute>
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
               <item>
-               <widget class="QWebView" name="coaches_webView">
+               <widget class="QWebView" name="motors_webView">
                 <property name="url">
                  <url>
                   <string>about:blank</string>
@@ -485,7 +492,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>130</height>
+            <height>105</height>
            </size>
           </property>
          </spacer>
