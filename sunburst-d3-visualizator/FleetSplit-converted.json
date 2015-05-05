@@ -4,6 +4,8 @@
 			"children": [
 				{
 					"total": 1000,
+                    "percentage": 100.0,
+                    "available": 1,
 					"children": [
 						{
 							"available": 1,
@@ -233,6 +235,8 @@
 					"description": "Motorcycles"
 				}, {
 					"total": 1000,
+                    "percentage": 100.0,
+                    "available": 1,
 					"children": [
 						{
 							"available": 1,
@@ -836,6 +840,8 @@
 					"description": "Passenger cars"
 				}, {
 					"total": 1000,
+                    "percentage": 100.0,
+                    "available": 1,
 					"children": [
 						{
 							"available": 1,
@@ -1017,6 +1023,8 @@
 					"description": "Light duty vehicles"
 				}, {
 					"total": 1000,
+                    "percentage": 100.0,
+                    "available": 1,
 					"children": [
 						{
 							"available": 1,
@@ -1238,6 +1246,8 @@
 					"description": "Coaches"
 				}, {
 					"total": 1000,
+                    "percentage": 100.0,
+                    "available": 1,
 					"children": [
 						{
 							"available": 1,
@@ -1963,6 +1973,8 @@
 					"description": "Heavy duty vehicles"
 				}, {
 					"total": 1000,
+                    "percentage": 100.0,
+                    "available": 1,
 					"children": [
 						{
 							"available": 1,
@@ -2226,10 +2238,16 @@
 					"description": "Urban buses"
 				}
 			],
+            "total": 1000,
+            "percentage": 100.0,
+            "available": 1,
 			"name": "Road Type 1",
 			"description": "Road Type 1"
 		}
 	],
+    "total": 1000,
+    "percentage": 100.0,
+    "available": 1,
 	"name": "Road Types",
 	"description": "Road Types"
 }
