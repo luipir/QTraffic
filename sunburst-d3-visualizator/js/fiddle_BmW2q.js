@@ -1,5 +1,5 @@
 // Dimensions of sunburst.
-var width = 450;
+var width = 500;
 var height = 450;
 var radius = Math.min(width, height) / 2;
 var innerHole = 10;
@@ -37,7 +37,7 @@ var arc = d3.svg.arc()
   //.innerRadius(function(d) { return radius * (d.y) / 100; })
   //.outerRadius(function(d) { return radius * (d.y + d.dy) / 100; });
 
-loadData();
+//loadTestData();
 
 
 
@@ -49,8 +49,13 @@ function createVisualization(json) {
     
     // Basic setup of page elements.
     initializeBreadcrumbTrail();
-  
-    d3.select("#togglelegend").on("click", toggleLegend);
+    
+    // remove legend <div>
+    //d3.select("#sidebar")
+    //    .style("visibility", "hidden");
+    
+    // open legend if toggled
+    //d3.select("#togglelegend").on("click", toggleLegend);
 
     // Bounding circle underneath the sunburst, to make it easier to detect
     // when the mouse leaves the parent g.
@@ -283,7 +288,13 @@ function toggleLegend() {
     }
 }
 
-function loadData() {
+function showJson(jsonFromPython) {
+    // show only Passenger Cars for test reason
+    json = jsonFromPython;
+    createVisualization(json);
+}
+
+function loadTestData() {
     d3.json("FleetSplit-converted.json", function(error, data) {
         if (error) return console.warn(error);
         

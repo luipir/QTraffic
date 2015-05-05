@@ -15,12 +15,18 @@ body {
 
 #sidebar {
   float: right;
-  width: 110px;
+  width: 0px;
+  hidden: 1;
+}
+
+#togglelegend {
+  width: 0px;
+  hidden: 1;
 }
 
 #sliders {
   float: right;
-  width: 400px;
+  width: 450px;
 }
 
 #sequence {
@@ -30,6 +36,7 @@ body {
 
 #legend {
   padding: 10px 0 0 3px;
+  hidden: 1;
 }
 
 #sequence text, #legend text, #sliders text {
@@ -46,9 +53,9 @@ body {
 }
 
 #explanation {
-  position: fixed;
-  top: 245px;
-  left: 170px;
+  position: relative;
+  top: 240px;
+  left: 185px;
   width: 140px;
   text-align: center;
   color: #666;
