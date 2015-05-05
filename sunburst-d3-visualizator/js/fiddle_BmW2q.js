@@ -50,10 +50,6 @@ function createVisualization(json) {
     // Basic setup of page elements.
     initializeBreadcrumbTrail();
     
-    // remove legend <div>
-    //d3.select("#sidebar")
-    //    .style("visibility", "hidden");
-    
     // open legend if toggled
     //d3.select("#togglelegend").on("click", toggleLegend);
 
@@ -101,8 +97,8 @@ function createVisualization(json) {
     d3.select("#container").on("mouseleave", mouseleave);
 
     // show lagend activating checkbox
-    d3.select("#togglelegend").property('checked', true);
-    d3.select("#togglelegend").on("click")();
+    //d3.select("#togglelegend").property('checked', true);
+    //d3.select("#togglelegend").on("click")();
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
@@ -234,7 +230,7 @@ function updateBreadcrumbs(nodeArray, percentageString) {
 
   // Now move and update the percentage at the end.
   d3.select("#trail").select("#endlabel")
-    .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
+    .attr("x", (nodeArray.length+0.27) * (b.w + b.s))
     .attr("y", b.h / 2)
     .attr("dy", "0.35em")
     .attr("text-anchor", "middle")
