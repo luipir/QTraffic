@@ -137,6 +137,10 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     def showRoadClassGui(self, roadTypeItem):
         ''' Set sunbust UI for each tab category
         '''
+        # first reload all web pages to reset them
+        self.initJsInWebview()
+        
+        # then load config for each vehicle tab
         currentRoadType = roadTypeItem.text()
         
         vehicleClasses = self.getChildrensByName(self.vehicleClassesDict, currentRoadType)
