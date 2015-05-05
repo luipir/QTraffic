@@ -57,43 +57,7 @@
            <string>Table Column Select</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>Link ID</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="linkId_combo">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="2" column="1">
-            <layout class="QVBoxLayout" name="verticalLayout_11">
-             <item>
-              <widget class="QLabel" name="label_6">
-               <property name="text">
-                <string>Road Gradient</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="roadGradient_combo">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="2" column="0">
+           <item row="1" column="1">
             <layout class="QVBoxLayout" name="verticalLayout_10">
              <item>
               <widget class="QLabel" name="label_5">
@@ -111,17 +75,35 @@
              </item>
             </layout>
            </item>
-           <item row="0" column="1">
+           <item row="1" column="0">
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <widget class="QLabel" name="label_2">
                <property name="text">
-                <string>Link Type</string>
+                <string>Road type (link to fleet composition)</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QComboBox" name="linkType_combo">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="2">
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Road Gradient</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="roadGradient_combo">
                <property name="editable">
                 <bool>true</bool>
                </property>
@@ -632,57 +614,6 @@ QGroupBox::title{
             </layout>
            </widget>
           </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_8">
-            <property name="styleSheet">
-             <string notr="true">QGroupBox{
-	border:1px solid gray;
-	border-radius:5px;
-	margin-top: 1ex;
-}
-QGroupBox::title{
-	subcontrol-origin: margin;
-	subcontrol-position:top center;
-	padding:0 3px;
-}</string>
-            </property>
-            <property name="title">
-             <string>Alternative fuels properties</string>
-            </property>
-            <layout class="QFormLayout" name="formLayout_3">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_18">
-               <property name="text">
-                <string>Sulphure contents (ppm)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QSpinBox" name="spinBox_3"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_20">
-               <property name="text">
-                <string>Pb contents (g/l)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_19">
-               <property name="text">
-                <string>Volatility</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
-             </item>
-            </layout>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -809,7 +740,7 @@ QGroupBox::title{
        <attribute name="title">
         <string>Output</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <layout class="QVBoxLayout" name="verticalLayout_17">
         <item>
          <widget class="QGroupBox" name="groupBox_3">
           <property name="title">
@@ -834,62 +765,155 @@ QGroupBox::title{
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox_4">
-          <property name="title">
-           <string>Parameters to calc</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QCheckBox" name="checkBox">
-             <property name="text">
-              <string>CO</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QCheckBox" name="checkBox_2">
-             <property name="text">
-              <string>CO2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QCheckBox" name="checkBox_3">
-             <property name="text">
-              <string>NOx</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QCheckBox" name="checkBox_4">
-             <property name="text">
-              <string>Fuel Consumption</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="checkBox_5">
-             <property name="text">
-              <string>PM</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QCheckBox" name="checkBox_6">
-             <property name="text">
-              <string>SO2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QCheckBox" name="checkBox_7">
-             <property name="text">
-              <string>VOC</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_20">
+          <item>
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="styleSheet">
+             <string notr="true">QGroupBox{
+	border:1px solid gray;
+	border-radius:5px;
+	margin-top: 1ex;
+}
+QGroupBox::title{
+	subcontrol-origin: margin;
+	subcontrol-position:top center;
+	padding:0 3px;
+}</string>
+            </property>
+            <property name="title">
+             <string>Pollutants</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBox_6">
+               <property name="text">
+                <string>SO2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBox_3">
+               <property name="text">
+                <string>NOx</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBox_9">
+               <property name="text">
+                <string>CH4</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBox_7">
+               <property name="text">
+                <string>VOC</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBox_5">
+               <property name="text">
+                <string>PM 10</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="checkBox_2">
+               <property name="text">
+                <string>CO2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBox_8">
+               <property name="text">
+                <string>PM 2.5</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>CO</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="checkBox_10">
+               <property name="text">
+                <string>C6H6</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="checkBox_11">
+               <property name="text">
+                <string>N2O</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_9">
+            <property name="styleSheet">
+             <string notr="true">QGroupBox{
+	border:1px solid gray;
+	border-radius:5px;
+	margin-top: 1ex;
+}
+QGroupBox::title{
+	subcontrol-origin: margin;
+	subcontrol-position:top center;
+	padding:0 3px;
+}</string>
+            </property>
+            <property name="title">
+             <string>Fuel/Energy consumption</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBox_4">
+               <property name="text">
+                <string>Diesel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBox_12">
+               <property name="text">
+                <string>Gasoline</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBox_14">
+               <property name="text">
+                <string>Alternative fuels</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBox_13">
+               <property name="text">
+                <string>LPG</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBox_15">
+               <property name="text">
+                <string>Energy consuption</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <spacer name="verticalSpacer">
@@ -929,6 +953,11 @@ QGroupBox::title{
          </layout>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Help</string>
+       </attribute>
       </widget>
      </widget>
     </item>
