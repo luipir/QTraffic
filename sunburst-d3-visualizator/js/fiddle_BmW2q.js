@@ -2,6 +2,7 @@
 var width = 450;
 var height = 450;
 var radius = Math.min(width, height) / 2;
+var innerHole = 10;
 
 // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
 var b = {
@@ -28,7 +29,10 @@ var partition = d3.layout.partition()
 var arc = d3.svg.arc()
   .startAngle(function(d) { return d.x; })
   .endAngle(function(d) { return d.x + d.dx; })
-  .innerRadius(function(d) { return radius * Math.sqrt(d.y) / 10; })
+  .innerRadius(function(d) {
+    var innerRadius = d.y == 0 ? d.y+innerHole : d.y;
+    return radius * Math.sqrt(innerRadius) / 10; 
+  })
   .outerRadius(function(d) { return radius * Math.sqrt(d.y + d.dy) / 10; });
   //.innerRadius(function(d) { return radius * (d.y) / 100; })
   //.outerRadius(function(d) { return radius * (d.y + d.dy) / 100; });
@@ -59,13 +63,10 @@ function createVisualization(json) {
         //.filter(function(d) {
         //    return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
         //});
-  
+      
     var uniqueNames = (function(a) {
         var output = [];
         a.forEach(function(d) {
-            // skip root node
-            if (typeof d.parent == 'undefined') return;
-            
             if (output.indexOf(d.name) === -1) {
               output.push(d.name);
             }
@@ -83,7 +84,7 @@ function createVisualization(json) {
         .data(nodes)
       .enter()
         .append("svg:path")
-        .attr("display", function(d) { return d.depth ? null : "none"; })
+        //.attr("display", function(d) { return d.depth ? null : "none"; })
         .attr("d", arc)
         .attr("fill-rule", "evenodd")
         .style("fill", function(d) { return colors(d.name); })
@@ -158,13 +159,16 @@ function mouseleave(d) {
 // Given a node in a partition layout, return an array of all of its ancestor
 // nodes, highest first, but excluding the root.
 function getAncestors(node) {
-  var path = [];
-  var current = node;
-  while (current.parent) {
-    path.unshift(current);
-    current = current.parent;
-  }
-  return path;
+    var path = [];
+    var current = node;
+    while (current.parent) {
+        path.unshift(current);
+        current = current.parent;
+    }
+    if (typeof current.parent == 'undefined') {
+        path.unshift(current);
+    }
+    return path;
 }
 
 function initializeBreadcrumbTrail() {
@@ -292,12 +296,19 @@ function loadData() {
 
 function findInJson(currentNode, compareNode) {
     // TODO: can be done with d3.select and filter ???
-    if (currentNode.name == compareNode.name && 
-        currentNode.depth == compareNode.depth &&
-        currentNode.parent.name == compareNode.parent.name) {
-        return currentNode;
+    if (typeof currentNode.parent != 'undefined') {
+        if (currentNode.name == compareNode.name && 
+            currentNode.depth == compareNode.depth &&
+            currentNode.parent.name == compareNode.parent.name) {
+            return currentNode;
+        }
+    } else {
+        if (currentNode.name == compareNode.name && 
+            currentNode.depth == compareNode.depth) {
+            return currentNode;
+        }
     }
-    
+        
     if (typeof currentNode.children == 'undefined') {
         return false;
     }
@@ -368,7 +379,8 @@ function showSliders(clickedNode) {
     
     // erase and set info box
     d3.select('#infoBox tbody').html('');
-    var tr = d3.select('#infoBox tbody')
+    d3.select('#infoBox tbody')
+        .style("background-color", function() {return colors(clickedNode.name);})
         .text(clickedNode.name);
     
     // erase previous sliders   
@@ -376,13 +388,14 @@ function showSliders(clickedNode) {
 
     // append sliders to table
     for (i = 0; i < clickedNode.children.length; i++) {
-        label = clickedNode.children[i].name;
+        var label = clickedNode.children[i].name;
+        var color = colors(label);
         
         var tr = d3.select('#rangebox tbody').append('tr');
         tr.append('td')
             .attr('class', 'edit')
             .attr('contentEditable', false)
-            .style("fill", function(d) { return colors(d); })
+            .style("background-color", color)
             .text(label);
        tr.append('td')
             .append('input')
@@ -436,7 +449,7 @@ function showSliders(clickedNode) {
             return;
         }
         
-        // because range slider has only min/max and not dominum of validity
+        // because range slider has TextLabelonly min/max and not dominum of validity
         // It's necessary to check if curent value is more than 
         // that allowed by (1000 - the sum of locked sliders)
         // - note 1000 because slideres are set from 0 to 1000 to have 1 digit precision -
