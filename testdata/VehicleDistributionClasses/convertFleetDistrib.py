@@ -1,7 +1,8 @@
 import json
+import collections
 
 with open('./FleetSplit.json') as jsonFile:
-	jsonData = json.load(jsonFile)
+	jsonData = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
 
 class1 = jsonData["fleetComposition"]
 class1Value = class1["1"]
@@ -22,35 +23,38 @@ for vehicleType,fuels  in class1Value["Road Type 1"].items():
 	
 	vehicleDict = {"name" : vehicleType, 
 				   "description": vehicleType,
+				   "total" : 1000,
+				   "percentage" : 100.0,
+				   "locked" : 1,
 			 	   "children": [] }
 	
 	for fuelName, classes in fuels.items():
-		if fuelName == "available" or fuelName == "value":
+		if fuelName == "value":
 			continue
 		
 		fuelDict = {"name" : fuelName, 
 					"description": fuelName,
-					"available": classes["available"],
+					"locked": 0,
 					"percentage": classes["value"],				
 					"children": [] }
 		
 		for euroClass, euroSubClasses in classes.items():
-			if euroClass == "available" or euroClass == "value":
+			if euroClass == "value":
 				continue
 			
 			euroDict = {"name" : euroClass, 
 						"description": euroClass,
-						"available": euroSubClasses["available"],
+						"locked": 0,
 						"percentage": euroSubClasses["value"],			
 						"children": [] }
 			
 			for euroSubClass, value in euroSubClasses.items():
-				if euroSubClass == "available" or euroSubClass == "value":
+				if euroSubClass == "value":
 					continue
 				
 				subClass = {"name" : euroSubClass, 
 							"description": euroSubClass,
-							"available": value["available"],
+							"locked": 0,
 							"percentage": value["value"]	}
 				
 				euroDict["children"].append(subClass)
@@ -68,9 +72,8 @@ roadTypes["children"].append(class1)
 roadClasses = roadTypes["children"]
 roadClassType1 = roadClasses[0]
 vehicleTypes = roadClassType1["children"]
-for veihicleType in vehicleTypes:
-	veihicleType["total"] = 1000
-	
+
+for veihicleType in vehicleTypes:	
 	# for each internal category calc total basing on it's % on <upper container>["total"]
 	fuelClasses = veihicleType["children"]
 	for fuelClass in fuelClasses:
