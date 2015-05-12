@@ -59,6 +59,9 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.setupUi(self)
         parent.addDockWidget(QtCore.Qt.BottomDockWidgetArea, self)
         
+        # load configuration buttons
+        self.loadDefaultConfiguration_button.clicked.connect(self.loadDefaultConfiguration)
+        
         # set event selecting roadClasses
         self.roadTypes_listWidget.itemClicked.connect(self.showRoadClassGui)
         
@@ -104,6 +107,15 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             
             traceback.print_exc()
             raise ex
+    
+    def loadDefaultConfiguration(self):
+        ''' set the curret configuration aqs the default one get from plugin confg data
+        '''
+        defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
+        settings = QtCore.QSettings()
+        vehicleClassesJson = settings.setValue('/QTraffic/vehicleClasses', defaultVehicleClasses)
+        
+        self.loadConfiguration()
     
     def setConfigGui(self):
         ''' set configuration GUI basing on loaded configration

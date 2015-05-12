@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Tue May  5 17:24:45 2015
+# Created: Tue May 12 11:53:57 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -195,6 +195,9 @@ class Ui_qtraffic_dockWidget(object):
         self.verticalLayout_12.addWidget(self.removeRoadType_button)
         spacerItem4 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_12.addItem(spacerItem4)
+        self.loadDefaultConfiguration_button = QtGui.QPushButton(self.fleetComposition_tab)
+        self.loadDefaultConfiguration_button.setObjectName(_fromUtf8("loadDefaultConfiguration_button"))
+        self.verticalLayout_12.addWidget(self.loadDefaultConfiguration_button)
         self.loadConfiguration_button = QtGui.QPushButton(self.fleetComposition_tab)
         self.loadConfiguration_button.setObjectName(_fromUtf8("loadConfiguration_button"))
         self.verticalLayout_12.addWidget(self.loadConfiguration_button)
@@ -547,6 +550,7 @@ class Ui_qtraffic_dockWidget(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.vehicle_tab), _translate("qtraffic_dockWidget", "Vechicle Count/Speed", None))
         self.newRoadType_button.setText(_translate("qtraffic_dockWidget", "Add", None))
         self.removeRoadType_button.setText(_translate("qtraffic_dockWidget", "Remove", None))
+        self.loadDefaultConfiguration_button.setText(_translate("qtraffic_dockWidget", "Load Defaults", None))
         self.loadConfiguration_button.setText(_translate("qtraffic_dockWidget", "Load", None))
         self.saveConfiguration_button.setText(_translate("qtraffic_dockWidget", "Save", None))
         self.roadTypes_listWidget.setSortingEnabled(True)

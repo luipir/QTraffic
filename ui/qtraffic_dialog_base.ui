@@ -336,6 +336,13 @@
              </spacer>
             </item>
             <item>
+             <widget class="QPushButton" name="loadDefaultConfiguration_button">
+              <property name="text">
+               <string>Load Defaults</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="loadConfiguration_button">
               <property name="text">
                <string>Load</string>
