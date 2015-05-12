@@ -26,6 +26,7 @@ import sys
 import traceback
 import json
 import collections
+import time
 from PyQt4 import QtCore, QtGui, QtWebKit, uic
 from qgis.core import QgsLogger
 
@@ -48,6 +49,11 @@ class DebugWebPage(QtWebKit.QWebPage):
         return False
 
 class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
+    
+    # events to coordinate interface
+    configurationLoaded = QtCore.pyqtSignal()
+    jsInitialised = QtCore.pyqtSignal()
+    
     def __init__(self, parent=None):
         """Constructor."""
         super(QTrafficDockWidget, self).__init__(parent)
@@ -61,8 +67,15 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # load configuration buttons
         self.loadDefaultConfiguration_button.clicked.connect(self.loadDefaultConfiguration)
+        self.loadConfiguration_button.clicked.connect(self.loadNewConfiguration)
+        
+        # load configuration event listeners
+        self.vehicleClassesDict = None
+        self.configurationLoaded.connect(self.setConfigGui_step1)
+        self.jsInitialised.connect(self.setConfigGui_step2)
         
         # set event selecting roadClasses
+        self.currentRoadType = None
         self.roadTypes_listWidget.itemClicked.connect(self.showRoadClassGui)
         
         # init some globals
@@ -79,14 +92,12 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.LocalStorageEnabled, False)
         #QtWebKit.QWebSettings.globalSettings().globalSettings().enablePersistentStorage(QtCore.QDir.tempPath())
         
-        # load JS conde foreach webview to avoid syncronise with load signal
-        self.initJsInWebview()
-        
         # load last saved conf pointed in settings
+        # emit configurationLoaded if successfully loaded
         self.loadConfiguration()
         
-        # set conf gui basing on settings
-        self.setConfigGui()
+        # because configuration has been loaded and not modfied, then set save button to Unavailable
+        self.saveConfiguration_button.setEnabled(False)
     
     def loadConfiguration(self):
         ''' Function to load last conf get from settings
@@ -102,6 +113,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
                 # contained in the json file. This will be reflected in the order
                 # shown in the sunburst visualization/editor
                 self.vehicleClassesDict = json.load(confFile, object_pairs_hook=collections.OrderedDict)
+                self.configurationLoaded.emit()
         except Exception as ex:
             self.vehicleClassesDict = None
             
@@ -109,19 +121,52 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             raise ex
     
     def loadDefaultConfiguration(self):
-        ''' set the curret configuration aqs the default one get from plugin confg data
+        ''' set the curret configuration as the default one get from plugin confg data
         '''
         defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
         settings = QtCore.QSettings()
-        vehicleClassesJson = settings.setValue('/QTraffic/vehicleClasses', defaultVehicleClasses)
+        settings.setValue('/QTraffic/vehicleClasses', defaultVehicleClasses)
         
         self.loadConfiguration()
     
-    def setConfigGui(self):
-        ''' set configuration GUI basing on loaded configration
+    def loadNewConfiguration(self):
+        ''' load a new configuration asking it's reference to the user
+        '''
+        # get last conf to start from its path
+        defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
+        settings = QtCore.QSettings()
+        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', defaultVehicleClasses)
+        
+        startPath = os.path.abspath( vehicleClassesJson )
+        
+        # ask for the new conf file
+        newConfFile = QtGui.QFileDialog.getOpenFileName(self, "Select a JSON conf file", startPath, 
+                                                        tr("Json (*.json);;All (*)"), 0, QtGui.QFileDialog.ReadOnly)
+        if not newConfFile:
+            return
+        
+        # set new conf file as default
+        vehicleClassesJson = settings.setValue('/QTraffic/vehicleClasses', newConfFile)
+        
+        self.loadConfiguration()
+    
+    def setConfigGui_step1(self):
+        ''' first step to set configuration GUI basing on loaded configration
+            this procedure start resetting the webpages
         '''
         if not self.vehicleClassesDict:
             return
+        
+        # reset all JS webpages to load new configuration
+        self.initJsInWebview()
+    
+    def setConfigGui_step2(self):
+        ''' second step to set configuration GUI basing on loaded configration
+            this terminate loading road types
+        '''
+        # clean previous roadTypes to load the new ones
+        self.roadTypes_listWidget.clear()
+        self.currentRoadType = None
         
         roadTypes = self.vehicleClassesDict['children']
         for roadType in roadTypes:
@@ -132,8 +177,9 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         ''' Load sunburst JS code for each webview. JSOn file will be loaded
             separately
         '''
+        self.loadCounter = 0
         webPage = os.path.join(self.applicationPath, "sunburst-d3-visualizator", "fiddle_BmW2q.html")
-
+        
         for tabIndex in range(self.fleetComposition_tabs.count()):
             # get tab name
             tabWidget = self.fleetComposition_tabs.widget(tabIndex)
@@ -144,20 +190,47 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             debugWebPage = DebugWebPage(webView)
             webView.setPage(debugWebPage)
             
+            webView.loadFinished.connect( self.loadFinishedCounter )
             webView.load(QtCore.QUrl(webPage))
         
+        self.waitJSLoading()
+    
+    def loadFinishedCounter(self):
+        ''' a countwer function to count how many webpages are loaded '''
+        self.loadCounter += 1
+    
+    def waitJSLoading(self):
+        ''' a tiem executed function that wait asynchronously the end of wep page loading
+            At the end emit jsInitialised signal
+        '''  
+        if (self.loadCounter < self.fleetComposition_tabs.count()):
+            timer = QtCore.QTimer.singleShot(100, self.waitJSLoading)
+        else:
+            # disconnect events for the load counter
+            for tabIndex in range(self.fleetComposition_tabs.count()):
+                # get tab name
+                tabWidget = self.fleetComposition_tabs.widget(tabIndex)
+                webView = tabWidget.findChildren(QtWebKit.QWebView)[0] # assume only a webview is present in the tab
+                
+                webView.loadFinished.disconnect( self.loadFinishedCounter )
+            
+            # notify that webpages are correctly initialised
+            self.jsInitialised.emit()        
+    
     def showRoadClassGui(self, roadTypeItem):
         ''' Set sunbust UI for each tab category
         '''
-        # first reload all web pages to reset them
-        # self.initJsInWebview()
-        
         # then load config for each vehicle tab
         currentRoadType = roadTypeItem.text()
+        if currentRoadType == self.currentRoadType:
+            return
         
+        self.currentRoadType = currentRoadType
+        
+        # get classes
         vehicleClasses = self.getChildrensByName(self.vehicleClassesDict, currentRoadType)
         
-        # for each tab get it's specific configuration toload in the webview tab
+        # for each tab get it's specific configuration to load in the webview tab
         for tabIndex in range(self.fleetComposition_tabs.count()):
             # get tab name
             tabWidget = self.fleetComposition_tabs.widget(tabIndex)
