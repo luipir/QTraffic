@@ -178,7 +178,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             separately
         '''
         self.loadCounter = 0
-        webPage = os.path.join(self.applicationPath, "sunburst-d3-visualizator", "fiddle_BmW2q.html")
+        webPage = os.path.join(self.applicationPath, "sunburst-d3-editor", "sunburstEditor.html")
         
         for tabIndex in range(self.fleetComposition_tabs.count()):
             # get tab name
