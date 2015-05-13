@@ -76,7 +76,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # set event selecting roadClasses
         self.currentRoadType = None
-        self.roadTypes_listWidget.itemClicked.connect(self.showRoadClassGui)
+        self.roadTypes_listWidget.itemClicked.connect(self.showRoadClassDistribution)
         
         # init some globals
         self.vehicleClassesDict = None # it will be a dict
@@ -217,7 +217,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             # notify that webpages are correctly initialised
             self.jsInitialised.emit()        
     
-    def showRoadClassGui(self, roadTypeItem):
+    def showRoadClassDistribution(self, roadTypeItem):
         ''' Set sunbust UI for each tab category
         '''
         # then load config for each vehicle tab
