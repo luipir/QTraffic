@@ -379,6 +379,9 @@ function showSliders(clickedNode) {
         d3.select('#rangebox tbody').html('');
         return;
     }
+
+    // remember the node currently shown
+    currentSliderNode = clickedNode;
     
     // reset basic vars
     oldValue = [];
@@ -421,6 +424,10 @@ function showSliders(clickedNode) {
             .attr('class', 'lockCheckbox')
             .attr('data-id', i)
             .attr('contentEditable', true);
+
+        // memorize chidlren node of the current tr
+        tr.attr('data-id', i);
+        tr.on("mouseover", hilightAnchestors);
     }
         
     // set slider values depending of the clicked class
@@ -612,4 +619,28 @@ function equalize() {
         if (remaining != 0) equalize();
     }
   }
+}
+
+// hilight anchestor nodes of the current selected node
+function hilightAnchestors() {
+    if (!currentSliderNode){
+        return;
+    }
+
+    // get current node index
+    var i = d3.select(this).attr('data-id');
+
+    // hilight current node anchestors
+    var sequenceArray = getAncestors(currentSliderNode.children[i]);
+
+    // Fade all the segments.
+    d3.selectAll("path")
+        .style("opacity", 0.25);
+
+    // Then highlight only those that are an ancestor of the current segment.
+    vis.selectAll("path")
+        .filter(function(node) {
+            return (sequenceArray.indexOf(node) >= 0);
+        })
+        .style("opacity", 1);
 }
