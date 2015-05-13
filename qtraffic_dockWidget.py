@@ -28,13 +28,13 @@ import time
 from PyQt4 import QtCore, QtGui, QtWebKit, uic
 from qgis.core import QgsLogger
 
+from sunburst_d3_editor.sunburst_editor_bridge import SunburstEditorBridge 
+
 # FORM_CLASS, _ = uic.loadUiType(os.path.join(
 #     os.path.dirname(__file__), 'ui', 'qtraffic_dialog_base.ui'))
 # 
 # class QTrafficDockWidget(FORM_CLASS):
-
 from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
-from PyQt4.pyqtconfig import QtWebKitModuleMakefile
 
 class DebugWebPage(QtWebKit.QWebPage):
     ''' custom webpage used to avoid interruption of messagebox by QT during debugging
@@ -176,7 +176,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             separately
         '''
         self.loadCounter = 0
-        webPage = os.path.join(self.applicationPath, "sunburst-d3-editor", "sunburstEditor.html")
+        webPage = os.path.join(self.applicationPath, "sunburst_d3_editor", "sunburstEditor.html")
         
         for tabIndex in range(self.fleetComposition_tabs.count()):
             # get tab name
