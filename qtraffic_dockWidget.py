@@ -71,6 +71,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.vehicleClassesDict = None
         self.configurationLoaded.connect(self.setConfigGui_step1)
         self.jsInitialised.connect(self.setConfigGui_step2)
+        self.jsInitialised.connect(self.injectBridge)
         
         # set event selecting roadClasses
         self.currentRoadType = None
@@ -79,6 +80,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # init some globals
         self.vehicleClassesDict = None # it will be a dict
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
+        self.sunburstEditorBridge = None
 
         # set webView setting
         QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, True)
@@ -171,6 +173,24 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             # add class in the list of classes
             self.roadTypes_listWidget.addItem(roadType['name'])
     
+    def injectBridge(self):
+        ''' Iniect the class/object in JS used to receive json modification of the 
+            statistic on a specific vehicle class
+        '''
+        # create bridge aqnd link event listener
+        if self.sunburstEditorBridge:
+            self.sunburstEditorBridge.deleteLater()
+            
+        self.sunburstEditorBridge = SunburstEditorBridge()
+        self.sunburstEditorBridge.modified.connect(self.updateVehicleClassDistribution)
+        
+        for tabIndex in range(self.fleetComposition_tabs.count()):
+            # get tab name
+            tabWidget = self.fleetComposition_tabs.widget(tabIndex)
+            webView = tabWidget.findChildren(QtWebKit.QWebView)[0] # assume only a webview is present in the tab
+
+            webView.page().mainFrame().addToJavaScriptWindowObject("sunburstEditorBridge", self.sunburstEditorBridge)
+    
     def initJsInWebview(self):
         ''' Load sunburst JS code for each webview. JSOn file will be loaded
             separately
@@ -214,6 +234,15 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             
             # notify that webpages are correctly initialised
             self.jsInitialised.emit()        
+    
+    def updateVehicleClassDistribution(self, vehicleDistribution):
+        ''' Function to update the road configuration json basing on values
+            set in the sunburst editor
+        '''
+        # update self.vehicleClassesDict basig on new distribution
+        vechicleClassName = vehicleDistribution['name']
+        vehicleClassConf = self.getChildrensByName(self.vehicleClassesDict, vechicleClassName)
+        vehicleClassConf['children'] = vehicleDistribution['children']
     
     def showRoadClassDistribution(self, roadTypeItem):
         ''' Set sunbust UI for each tab category

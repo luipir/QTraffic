@@ -81,7 +81,7 @@ function createVisualization(json) {
         //.filter(function(d) {
         //    return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
         //});
-      
+        
     var uniqueNames = (function(a) {
         var output = [];
         a.forEach(function(d) {
@@ -377,6 +377,7 @@ function recomputeTotals(node) {
 
 function updateVis() {
     nodes = partition.nodes(json);
+    
     vis.selectAll("path")
       .data(nodes)
     .transition()
@@ -554,9 +555,13 @@ function showSliders(clickedNode) {
         // and not on relative percentage
         updateJsonData(clickedNode);
         recomputeTotals(json);
-        
+
         // update sunburst
         updateVis();
+        
+        // notify json modification to the python side
+        var d3PurgedJson = JSON.stringify(json, d3PartitionCensor)
+        sunburstEditorBridge.modifiedStatistic(d3PurgedJson);
     });
 }
 
@@ -570,17 +575,17 @@ function showValues() {
 
 // get JSON data from sliders
 function getSliderData() {
-    var json = [];
+    var sliderData = [];
     d3.selectAll('#rangebox .range').each(function () {
 
-      json.push({
+      sliderData.push({
         label: d3.select(this.parentNode.parentNode)
             .select('td:first-child')
             .text(),
         value: this.value
       });
     });
-    return json;
+    return sliderData;
 }
 
 // compute total percentage from sliders
@@ -660,4 +665,22 @@ function hilightAnchestors() {
             return (sequenceArray.indexOf(node) >= 0);
         })
         .style("opacity", 1);
+}
+
+//////////////////////////////////////////////////////////
+// utilities functions
+//////////////////////////////////////////////////////////
+
+// function to purge d3 added values to JSON. This function will be the censo in the JSON.stringify
+function d3PartitionCensor(key, value) {
+    if (key == 'parent' ||
+        key == 'value' ||
+        key == 'depth' ||
+        key == 'x' ||
+        key == 'y' ||
+        key == 'dx' ||
+        key == 'dy') {
+        return undefined;
+    }
+    return value;   
 }
