@@ -247,7 +247,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
                 print webView.objectName()
 
                 JsCommand = "showJson(%s)" % jsonString
-                QgsLogger.debug(self.tr("Load config with with JS command: %s" % JsCommand))
+                QgsLogger.debug(self.tr("Load config with with JS command: %s" % JsCommand), 3)
                 
                 webView.page().mainFrame().evaluateJavaScript(JsCommand)
     
