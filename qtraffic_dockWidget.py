@@ -254,7 +254,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     def getChildrensByName(self, input, name):
         ''' Traverse a dict to get children
             related to a specified name field value
-            The algorith assume there is univoqe name to find =>
+            The algorithm assume there is univoque name to find =>
             if there are more, only the first will be get.
             For this reason it's imporant to pass a correct dict already
             purged of duplicated in the upper nodes
