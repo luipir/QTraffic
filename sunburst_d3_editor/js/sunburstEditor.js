@@ -560,7 +560,9 @@ function showSliders(clickedNode) {
         updateVis();
         
         // notify json modification to the python side
-        var d3PurgedJson = JSON.stringify(json, d3PartitionCensor)
+        // the d3PartitionCensor is used to remove d3 layout parameters added to json
+        // that create a cyclic JSON and that add not original data
+        var d3PurgedJson = JSON.stringify(json, d3PartitionCensor);
         sunburstEditorBridge.modifiedStatistic(d3PurgedJson);
     });
 }
