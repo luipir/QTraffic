@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- QTrafficDockWidget
-                                 A QGIS plugin
- Road contamination modelling for EMSURE Project
-                             -------------------
+    A QGIS plugin for Road contamination modelling for EMSURE Project
+                              -------------------
         begin                : 2015-04-20
         git sha              : $Format:%H$
         copyright            : (C) 2015 by Luigi Pirelli (for EMSURE project)º
