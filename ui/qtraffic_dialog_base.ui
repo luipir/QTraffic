@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>930</width>
-    <height>462</height>
+    <width>846</width>
+    <height>509</height>
    </rect>
   </property>
   <property name="floating">
@@ -303,9 +303,9 @@
        <attribute name="title">
         <string>Fleet Composition</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="1,2,0">
+         <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="0,1">
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_12">
             <item>
@@ -323,17 +323,14 @@
              </widget>
             </item>
             <item>
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+             <widget class="QListWidget" name="roadTypes_listWidget">
+              <property name="resizeMode">
+               <enum>QListView::Adjust</enum>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
+              <property name="sortingEnabled">
+               <bool>true</bool>
               </property>
-             </spacer>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="loadDefaultConfiguration_button">
@@ -357,16 +354,6 @@
              </widget>
             </item>
            </layout>
-          </item>
-          <item>
-           <widget class="QListWidget" name="roadTypes_listWidget">
-            <property name="resizeMode">
-             <enum>QListView::Adjust</enum>
-            </property>
-            <property name="sortingEnabled">
-             <bool>true</bool>
-            </property>
-           </widget>
           </item>
           <item>
            <widget class="QTabWidget" name="fleetComposition_tabs">
