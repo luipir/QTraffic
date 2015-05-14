@@ -59,7 +59,7 @@ class QTraffic:
                 QCoreApplication.installTranslator(self.translator)
 
         # Create the dialog (after translation) and keep reference
-        self.dlg = QTrafficDockWidget(self.iface.mainWindow())
+        self.dlg = QTrafficDockWidget(self.iface.mainWindow(), self)
 
         # Declare instance attributes
         self.actions = []

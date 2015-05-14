@@ -35,6 +35,7 @@ from sunburst_d3_editor.sunburst_editor_bridge import SunburstEditorBridge
 # 
 # class QTrafficDockWidget(FORM_CLASS):
 from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
+from Crypto import SelfTest
 
 class DebugWebPage(QtWebKit.QWebPage):
     ''' custom webpage used to avoid interruption of messagebox by QT during debugging
@@ -52,9 +53,11 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     configurationLoaded = QtCore.pyqtSignal()
     jsInitialised = QtCore.pyqtSignal()
     
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, pluginInstance=None):
         """Constructor."""
         super(QTrafficDockWidget, self).__init__(parent)
+        self.parent = pluginInstance
+        
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see
@@ -141,7 +144,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # ask for the new conf file
         newConfFile = QtGui.QFileDialog.getOpenFileName(self, "Select a JSON conf file", startPath, 
-                                                        tr("Json (*.json);;All (*)"), 0, QtGui.QFileDialog.ReadOnly)
+                                                        self.parent.tr("Json (*.json);;All (*)"), 0, QtGui.QFileDialog.ReadOnly)
         if not newConfFile:
             return
         
@@ -170,8 +173,18 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         roadTypes = self.vehicleClassesDict['children']
         for roadType in roadTypes:
+            # create editable Item
+            item = QtGui.QListWidgetItem(roadType['name'])
+            
+            # memorize roadType statistic in the UserRole of the item
+            # to mantain the memory of modification
+            item.setData(QtCore.Qt.UserRole, roadType)
+
+            # set editable
+            item.setFlags(QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsUserCheckable)
+            
             # add class in the list of classes
-            self.roadTypes_listWidget.addItem(roadType['name'])
+            self.roadTypes_listWidget.addItem(item)
     
     def injectBridge(self):
         ''' Iniect the class/object in JS used to receive json modification of the 
@@ -274,7 +287,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
                 print webView.objectName()
 
                 JsCommand = "showJson(%s)" % jsonString
-                QgsLogger.debug(self.tr("Load config with with JS command: %s" % JsCommand), 3)
+                QgsLogger.debug(self.parent.tr("Load config with with JS command: %s" % JsCommand), 3)
                 
                 webView.page().mainFrame().evaluateJavaScript(JsCommand)
     
