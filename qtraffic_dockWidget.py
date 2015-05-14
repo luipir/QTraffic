@@ -144,7 +144,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # ask for the new conf file
         newConfFile = QtGui.QFileDialog.getOpenFileName(self, "Select a JSON conf file", startPath, 
-                                                        self.parent.tr("Json (*.json);;All (*)"), "Json (*.json)", QtGui.QFileDialog.ReadOnly)
+                                                        self.parent.tr("Json (*.json);;All (*)"))
         if not newConfFile:
             return
         
