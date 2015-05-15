@@ -100,9 +100,6 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # emit configurationLoaded if successfully loaded
         self.loadConfiguration()
         
-        # because configuration has been loaded and not modfied, then set save button to Unavailable
-        self.saveConfiguration_button.setEnabled(False)
-    
     def loadConfiguration(self):
         ''' Function to load last conf get from settings
         '''
@@ -195,6 +192,9 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
 
         # reconnect listener of item changes
         self.roadTypes_listWidget.itemChanged.connect(self.manageItemChanged)
+        
+        # set save button status
+        self.saveConfiguration_button.setEnabled(False)
     
     def manageItemChanged(self, item):
         ''' manage action to do when a item in roadTypes_listWidget is changed
