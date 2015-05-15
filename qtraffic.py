@@ -44,6 +44,10 @@ class QTraffic:
         self.iface = iface
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
+        
+        # save PluginName to be used in the QgsMessageLog as tag
+        self.pluginTag = 'QTraffic'
+        
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
@@ -67,7 +71,7 @@ class QTraffic:
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'QTraffic')
         self.toolbar.setObjectName(u'QTraffic')
-
+        
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
