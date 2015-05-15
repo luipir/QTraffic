@@ -26,7 +26,9 @@ import json
 import collections
 import time
 from PyQt4 import QtCore, QtGui, QtWebKit, uic
-from qgis.core import QgsLogger
+from qgis.core import (QgsLogger,
+                       QgsMessageLog)
+from qgis.gui import (QgsMessageBar)
 
 from sunburst_d3_editor.sunburst_editor_bridge import SunburstEditorBridge 
 
@@ -68,12 +70,18 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.setupUi(self)
         parent.addDockWidget(QtCore.Qt.BottomDockWidgetArea, self)
         
+        # init some globals
+        self.applicationPath = os.path.dirname(os.path.realpath(__file__))
+        self.defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
+        self.currentConfFile = None
+        self.vehicleClassesDict = None # it will be a dict
+        self.sunburstEditorBridge = None
+
         # load configuration buttons
         self.loadDefaultConfiguration_button.clicked.connect(self.loadDefaultConfiguration)
         self.loadConfiguration_button.clicked.connect(self.loadNewConfiguration)
         
         # load configuration event listeners
-        self.vehicleClassesDict = None
         self.configurationLoaded.connect(self.setConfigGui_step1)
         self.jsInitialised.connect(self.setConfigGui_step2)
         self.jsInitialised.connect(self.injectBridge)
@@ -81,11 +89,6 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # set event selecting roadClasses
         self.roadTypes_listWidget.currentItemChanged.connect(self.showRoadClassDistribution)
         
-        # init some globals
-        self.vehicleClassesDict = None # it will be a dict
-        self.applicationPath = os.path.dirname(os.path.realpath(__file__))
-        self.sunburstEditorBridge = None
-
         # set webView setting
         QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, True)
         QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.DeveloperExtrasEnabled, True)
@@ -100,12 +103,67 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # emit configurationLoaded if successfully loaded
         self.loadConfiguration()
         
+        # add listener to save actual configuration
+        self.saveConfiguration_button.clicked.connect(self.saveConfiguration)
+    
+    def saveConfiguration(self):
+        ''' Method to save configuration contained in teh QWidgetList
+            QWidgetList contain a list of RoadTypes and every Item belong in it's UserRole data
+            a dictionary of statistic of the lreated roadType
+        '''
+        settings = QtCore.QSettings()
+        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
+        startPath = os.path.abspath( vehicleClassesJson )
+        
+        # ask for the new conf file
+        newConfFile = QtGui.QFileDialog.getSaveFileName(self, "Save as JSON file", startPath, self.parent.tr("Json (*.json);;All (*)"))
+        if not newConfFile:
+            return
+        
+        # now iterate on all roadTypes to create the dictionary to save
+        newVehicleClassesDict = collections.OrderedDict( self.vehicleClassesDict )
+        newVehicleClassesDict['children'] = []
+        
+        allItems = self.roadTypes_listWidget.findItems('*', QtCore.Qt.MatchWrap | QtCore.Qt.MatchWildcard)
+        for item in allItems:
+            roadTypeDistribution = item.data(QtCore.Qt.UserRole)
+            
+            newVehicleClassesDict['children'].append(roadTypeDistribution)
+        
+        # now save newVehicleClassesDict in the selected file
+        try:
+            message = self.parent.tr('Saving conf on file %s' % newConfFile)
+            QgsMessageLog.logMessage(message, self.parent.pluginTag, QgsMessageLog.INFO)
+            
+            with open(newConfFile, 'w') as outFile:
+                json.dump(newVehicleClassesDict, 
+                          outFile, 
+                          ensure_ascii=False, 
+                          check_circular=True, 
+                          allow_nan=True, 
+                          cls=None, 
+                          indent=2, # allow pretty formatting of the json
+                          separators=None, 
+                          encoding="utf-8", 
+                          default=None, 
+                          sort_keys=False) # to mantaine the oreding of the OrdererdDict
+                
+        except Exception as ex:
+            QgsMessageLog.logMessage(traceback.format_exc(), self.parent.pluginTag, QgsMessageLog.CRITICAL)
+            self.parent.iface.messageBar().pushMessage(self.parent.tr("Error saving Conf JSON file. PLease check the log"), QgsMessageBar.CRITICAL)
+            return
+        
+        # set new conf file as default
+        settings.setValue('/QTraffic/vehicleClasses', newConfFile)
+        
+        # set save button status
+        self.saveConfiguration_button.setEnabled(False)
+    
     def loadConfiguration(self):
         ''' Function to load last conf get from settings
         '''
-        defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
         settings = QtCore.QSettings()
-        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', defaultVehicleClasses)
+        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
         
         # load json conf
         try:
@@ -114,19 +172,24 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
                 # contained in the json file. This will be reflected in the order
                 # shown in the sunburst visualization/editor
                 self.vehicleClassesDict = json.load(confFile, object_pairs_hook=collections.OrderedDict)
+                
+                # remember current conf file
+                self.currentConfFile = vehicleClassesJson
+                settings.setValue('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
+                
                 self.configurationLoaded.emit()
         except Exception as ex:
             self.vehicleClassesDict = None
             
-            traceback.print_exc()
-            raise ex
-    
+            QgsMessageLog.logMessage(traceback.format_exc(), self.parent.pluginTag, QgsMessageLog.CRITICAL)
+            self.parent.iface.messageBar().pushMessage(self.parent.tr("Error loading Conf JSON file. PLease check the log"), QgsMessageBar.CRITICAL)
+            return
+        
     def loadDefaultConfiguration(self):
         ''' set the curret configuration as the default one get from plugin confg data
         '''
-        defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
         settings = QtCore.QSettings()
-        settings.setValue('/QTraffic/vehicleClasses', defaultVehicleClasses)
+        settings.setValue('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
         
         self.loadConfiguration()
     
@@ -134,9 +197,8 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         ''' load a new configuration asking it's reference to the user
         '''
         # get last conf to start from its path
-        defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
         settings = QtCore.QSettings()
-        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', defaultVehicleClasses)
+        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
         
         startPath = os.path.abspath( vehicleClassesJson )
         
@@ -147,7 +209,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             return
         
         # set new conf file as default
-        vehicleClassesJson = settings.setValue('/QTraffic/vehicleClasses', newConfFile)
+        settings.setValue('/QTraffic/vehicleClasses', newConfFile)
         
         self.loadConfiguration()
     
@@ -204,8 +266,16 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             C) road type statistic update
             
             Actions are:
-            A) enable Save button
+            A) manage if current Item has bee renamed
+            B) enable Save button
         '''
+        # udate roadType name in case evend is due to renaming class
+        # TODO: check that road type name is not duplicated
+        vehicleClasses = item.data(QtCore.Qt.UserRole)
+        vehicleClasses['name'] = item.text()
+        vehicleClasses['description'] = item.text() # TODO: for the moment name and description are equal
+        item.setData(QtCore.Qt.UserRole, vehicleClasses)
+        
         self.saveConfiguration_button.setEnabled(True)
     
     def injectBridge(self):
@@ -276,19 +346,23 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         '''
         # get curret roadType distribution
         currentItem = self.roadTypes_listWidget.currentItem()
-        vehicleClasses = currentItem.data(QtCore.Qt.UserRole)
+        roadTypeDistribution = currentItem.data(QtCore.Qt.UserRole)
         
         # update self.vehicleClassesDict basig on new distribution
         vechicleClassName = vehicleDistribution['name']
-        vehicleClassConf = self.getChildrensByName(vehicleClasses, vechicleClassName)
+        vehicleClassConf = self.getChildrensByName(roadTypeDistribution, vechicleClassName)
         vehicleClassConf['children'] = vehicleDistribution['children']
         
         # then memorize new vehicleClasses in the item data (UserRole)
-        currentItem.setData(QtCore.Qt.UserRole, vehicleClasses)
+        currentItem.setData(QtCore.Qt.UserRole, roadTypeDistribution)
     
     def showRoadClassDistribution(self, currentRoadTypeItem, previousRoadTypeItem):
         ''' Set sunbust UI for each tab category
         '''
+        # manage event in case of list clear
+        if not currentRoadTypeItem:
+            return
+        
         # get classes from itemData (UserRole)
         vehicleClasses = currentRoadTypeItem.data(QtCore.Qt.UserRole)
         
