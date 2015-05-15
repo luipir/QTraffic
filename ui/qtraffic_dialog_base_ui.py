@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Thu May 14 19:08:09 2015
+# Created: Fri May 15 11:19:43 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -545,8 +545,8 @@ class Ui_qtraffic_dockWidget(object):
         self.label_8.setText(_translate("qtraffic_dockWidget", "Average vehicle speed (km/h)", None))
         self.next_pushButton_2.setText(_translate("qtraffic_dockWidget", "Next ->", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.vehicle_tab), _translate("qtraffic_dockWidget", "Vechicle Count/Speed", None))
-        self.newRoadType_button.setText(_translate("qtraffic_dockWidget", "Add", None))
-        self.removeRoadType_button.setText(_translate("qtraffic_dockWidget", "Remove", None))
+        self.newRoadType_button.setText(_translate("qtraffic_dockWidget", "Add road type", None))
+        self.removeRoadType_button.setText(_translate("qtraffic_dockWidget", "Remove road type", None))
         self.roadTypes_listWidget.setSortingEnabled(True)
         self.loadDefaultConfiguration_button.setText(_translate("qtraffic_dockWidget", "Load Defaults", None))
         self.loadConfiguration_button.setText(_translate("qtraffic_dockWidget", "Load", None))

@@ -311,14 +311,14 @@
             <item>
              <widget class="QPushButton" name="newRoadType_button">
               <property name="text">
-               <string>Add</string>
+               <string>Add road type</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="removeRoadType_button">
               <property name="text">
-               <string>Remove</string>
+               <string>Remove road type</string>
               </property>
              </widget>
             </item>
