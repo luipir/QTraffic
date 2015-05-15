@@ -58,6 +58,8 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         super(QTrafficDockWidget, self).__init__(parent)
         self.parent = pluginInstance
         
+        # TODO: need reorganization to hide each tab management in specified class
+        
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see
