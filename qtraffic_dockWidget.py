@@ -79,8 +79,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.jsInitialised.connect(self.injectBridge)
         
         # set event selecting roadClasses
-        self.currentRoadType = None
-        self.roadTypes_listWidget.itemClicked.connect(self.showRoadClassDistribution)
+        self.roadTypes_listWidget.currentItemChanged.connect(self.showRoadClassDistribution)
         
         # init some globals
         self.vehicleClassesDict = None # it will be a dict
@@ -169,9 +168,14 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         ''' second step to set configuration GUI basing on loaded configration
             this terminate loading road types
         '''
+        # remove itemChanged event to avoid triggering during population
+        try:
+            self.roadTypes_listWidget.itemChanged.disconnect(self.manageItemChanged)
+        except:
+            pass
+        
         # clean previous roadTypes to load the new ones
         self.roadTypes_listWidget.clear()
-        self.currentRoadType = None
         
         roadTypes = self.vehicleClassesDict['children']
         for roadType in roadTypes:
@@ -180,6 +184,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             
             # memorize roadType statistic in the UserRole of the item
             # to mantain the memory of modification
+            # from this moment only the itemData is used and not self.vehicleClassesDict
             item.setData(QtCore.Qt.UserRole, roadType)
 
             # set editable
@@ -187,6 +192,21 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             
             # add class in the list of classes
             self.roadTypes_listWidget.addItem(item)
+
+        # reconnect listener of item changes
+        self.roadTypes_listWidget.itemChanged.connect(self.manageItemChanged)
+    
+    def manageItemChanged(self, item):
+        ''' manage action to do when a item in roadTypes_listWidget is changed
+            changes can be related to:
+            A) road type rename
+            B) road type insertion or deletion
+            C) road type statistic update
+            
+            Actions are:
+            A) enable Save button
+        '''
+        self.saveConfiguration_button.setEnabled(True)
     
     def injectBridge(self):
         ''' Iniect the class/object in JS used to receive json modification of the 
@@ -254,24 +274,25 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         ''' Function to update the road configuration json basing on values
             set in the sunburst editor
         '''
+        # get curret roadType distribution
+        currentItem = self.roadTypes_listWidget.currentItem()
+        vehicleClasses = currentItem.data(QtCore.Qt.UserRole)
+        
         # update self.vehicleClassesDict basig on new distribution
         vechicleClassName = vehicleDistribution['name']
-        vehicleClassConf = self.getChildrensByName(self.vehicleClassesDict, vechicleClassName)
+        vehicleClassConf = self.getChildrensByName(vehicleClasses, vechicleClassName)
         vehicleClassConf['children'] = vehicleDistribution['children']
+        
+        # then memorize new vehicleClasses in the item data (UserRole)
+        currentItem.setData(QtCore.Qt.UserRole, vehicleClasses)
     
-    def showRoadClassDistribution(self, roadTypeItem):
+    def showRoadClassDistribution(self, currentRoadTypeItem, previousRoadTypeItem):
         ''' Set sunbust UI for each tab category
         '''
+        # get classes from itemData (UserRole)
+        vehicleClasses = currentRoadTypeItem.data(QtCore.Qt.UserRole)
+        
         # then load config for each vehicle tab
-        currentRoadType = roadTypeItem.text()
-        if currentRoadType == self.currentRoadType:
-            return
-        
-        self.currentRoadType = currentRoadType
-        
-        # get classes
-        vehicleClasses = self.getChildrensByName(self.vehicleClassesDict, currentRoadType)
-        
         # for each tab get it's specific configuration to load in the webview tab
         for tabIndex in range(self.fleetComposition_tabs.count()):
             # get tab name
