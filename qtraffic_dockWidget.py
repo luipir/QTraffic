@@ -426,7 +426,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             webView.setPage(debugWebPage)
             
             webView.loadFinished.connect( self.loadFinishedCounter )
-            webView.load(QtCore.QUrl(webPage))
+            webView.load(QtCore.QUrl.fromLocalFile(webPage))
         
         self.waitJSLoading()
     
