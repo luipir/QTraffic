@@ -166,6 +166,15 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             self.parent.iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
             return
         
+        # check if current Fleet distribution has been modified to 
+        # avoid to remove modifications
+        if self.isModified():
+            title = self.parent.tr("Warning")
+            message = self.parent.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
+            ret = QtGui.QMessageBox.question(None, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
+            if ret == QtGui.QMessageBox.No:
+                return
+        
         # get the name of selected row type
         selectedItem = self.roadTypes_listWidget.currentItem()
         selectedRoadTypeName = selectedItem.text()
@@ -180,7 +189,13 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
                 # i do it inside the for loop to avoid reset interface if the element is not found
                 self.setConfigGui_step1()
                 break
-        
+    
+    def isModified(self):
+        ''' Return true if the curret fleet distribution is marked as modified
+            The modified status is based on the status of Save button
+        '''
+        return self.saveConfiguration_button.isEnabled()
+                
     def saveConfiguration(self):
         ''' Method to save configuration contained in teh QWidgetList
             QWidgetList contain a list of RoadTypes and every Item belong in it's UserRole data
@@ -263,6 +278,15 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     def loadDefaultConfiguration(self):
         ''' set the curret configuration as the default one get from plugin confg data
         '''
+        # check if current Fleet distribution has been modified to 
+        # avoid to remove modifications
+        if self.isModified():
+            title = self.parent.tr("Warning")
+            message = self.parent.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
+            ret = QtGui.QMessageBox.question(None, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
+            if ret == QtGui.QMessageBox.No:
+                return
+        
         settings = QtCore.QSettings()
         settings.setValue('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
         
@@ -271,6 +295,15 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     def loadNewConfiguration(self):
         ''' load a new configuration asking it's reference to the user
         '''
+        # check if current Fleet distribution has been modified to 
+        # avoid to remove modifications
+        if self.isModified():
+            title = self.parent.tr("Warning")
+            message = self.parent.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
+            ret = QtGui.QMessageBox.question(None, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
+            if ret == QtGui.QMessageBox.No:
+                return
+        
         # get last conf to start from its path
         settings = QtCore.QSettings()
         vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
