@@ -29,13 +29,14 @@ var b = {
 // make `colors` an ordinal scale
 var colors = d3.scale.category20b();
 
+/*
 var vis = d3.select("#chart").append("svg:svg")
   .attr("width", width)
   .attr("height", height)
   .append("svg:g")
   .attr("id", "container")
   .attr("transform", "translate(" + width / 2 + "," + height/ 2 + ")");
-
+*/
 var partition = d3.layout.partition()
   .sort(null)
   .size([2 * Math.PI, 100])
@@ -66,6 +67,8 @@ function createVisualization(json) {
     
     // Basic setup of page elements.
     initializeBreadcrumbTrail();
+    initializeSunburst();
+    initializeSliders();
     
     // open legend if toggled
     //d3.select("#togglelegend").on("click", toggleLegend);
@@ -190,15 +193,41 @@ function getAncestors(node) {
 }
 
 function initializeBreadcrumbTrail() {
-  // Add the svg area.
-  var trail = d3.select("#sequence").append("svg:svg")
-    .attr("width", width)
-    .attr("height", 50)
-    .attr("id", "trail");
-  // Add the label at the end, for the percentage.
-  trail.append("svg:text")
-    .attr("id", "endlabel")
-    .style("fill", "#000");
+    // erase and set info box
+    d3.select('#chart').html('');
+    
+    // Add the svg area.
+    var trail = d3.select("#sequence").append("svg:svg")
+        .attr("width", width)
+        .attr("height", 50)
+        .attr("id", "trail");
+    // Add the label at the end, for the percentage.
+    trail.append("svg:text")
+        .attr("id", "endlabel")
+        .style("fill", "#000");
+}
+
+// reset current sunburst and reinitialize to allow
+// clean redraw
+function initializeSunburst() {
+    // erase and set info box
+    // would be better to avoid add explanation here but leave in the html only and erase
+    // only svg... but I've to focus on other part of the code
+    d3.select('#chart').html('<div id="explanation" style="visibility: hidden;"><span id="percentage"></span></div>');
+    
+    vis = d3.select("#chart").append("svg:svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("svg:g")
+      .attr("id", "container")
+      .attr("transform", "translate(" + width / 2 + "," + height/ 2 + ")");
+}
+
+// inizialize sliders to allow a clean redraw
+function initializeSliders() {
+    // erase and set info box
+    d3.select('#infoBox tbody').html('');
+    d3.select('#rangebox tbody').html('');
 }
 
 // Generate a string that describes the points of a breadcrumb polygon.
