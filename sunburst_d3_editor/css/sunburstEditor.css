@@ -53,7 +53,7 @@ body {
 }
 
 #explanation {
-  position: relative;
+  position: fixed;
   top: 240px;
   left: 185px;
   width: 140px;
