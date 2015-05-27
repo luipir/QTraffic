@@ -412,6 +412,8 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         ''' Load sunburst JS code for each webview. JSOn file will be loaded
             separately
         '''
+        QtWebKit.QWebSettings.clearMemoryCaches()
+        
         self.loadCounter = 0
         webPage = os.path.join(self.applicationPath, "sunburst_d3_editor", "sunburstEditor.html")
         
