@@ -37,7 +37,6 @@ from sunburst_d3_editor.sunburst_editor_bridge import SunburstEditorBridge
 # 
 # class QTrafficDockWidget(FORM_CLASS):
 from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
-from Crypto import SelfTest
 
 class DebugWebPage(QtWebKit.QWebPage):
     ''' custom webpage used to avoid interruption of messagebox by QT during debugging
