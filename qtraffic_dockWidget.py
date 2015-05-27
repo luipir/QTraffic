@@ -52,7 +52,7 @@ class DebugWebPage(QtWebKit.QWebPage):
 class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     
     # events to coordinate interface
-    configurationLoaded = QtCore.pyqtSignal()
+    configurationLoaded = QtCore.pyqtSignal(bool)
     jsInitialised = QtCore.pyqtSignal()
     
     def __init__(self, parent=None, pluginInstance=None):
@@ -76,6 +76,12 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.currentConfFile = None
         self.vehicleClassesDict = None # it will be a dict
         self.sunburstEditorBridge = None
+        
+        # create or remove new RoadTypes
+        self.newRoadType_button.setEnabled(False)
+        self.removeRoadType_button.setEnabled(False)
+        self.newRoadType_button.clicked.connect(self.createNewRoadType)
+        self.removeRoadType_button.clicked.connect(self.removeRoadType)
 
         # load configuration buttons
         self.loadDefaultConfiguration_button.clicked.connect(self.loadDefaultConfiguration)
@@ -83,8 +89,8 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # load configuration event listeners
         self.configurationLoaded.connect(self.setConfigGui_step1)
-        self.jsInitialised.connect(self.setConfigGui_step2)
         self.jsInitialised.connect(self.injectBridge)
+        self.jsInitialised.connect(self.setConfigGui_step2)
         
         # set event selecting roadClasses
         self.roadTypes_listWidget.currentItemChanged.connect(self.showRoadClassDistribution)
@@ -100,12 +106,81 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         #QtWebKit.QWebSettings.globalSettings().globalSettings().enablePersistentStorage(QtCore.QDir.tempPath())
         
         # load last saved conf pointed in settings
-        # emit configurationLoaded if successfully loaded
+        # emit configurationLoaded with the status of loading
         self.loadConfiguration()
         
         # add listener to save actual configuration
         self.saveConfiguration_button.clicked.connect(self.saveConfiguration)
     
+    def createNewRoadType(self):
+        ''' Method to add a new road type starting from the default road tyep configuration
+        '''
+        if not self.vehicleClassesDict:
+            return
+        
+        # load default json conf
+        defaultVehicleClassesDict = None
+        try:
+            with open(self.defaultVehicleClasses) as confFile:
+                # loaded in and OrderedDict to allow maintaining the order of classes
+                # contained in the json file. This will be reflected in the order
+                # shown in the sunburst visualization/editor
+                defaultVehicleClassesDict = json.load(confFile, object_pairs_hook=collections.OrderedDict)
+        except Exception as ex:
+            message = self.parent.tr("Error loading Default conf JSON file %s") % self.defaultVehicleClasses
+            self.parent.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return
+        
+        # assume that the default roadType class is the fist one of the loaded configuration
+        if not defaultVehicleClassesDict or len(defaultVehicleClassesDict['children']) == 0:
+            message = self.parent.tr("No road types set in the default configuration file: %s") % self.defaultVehicleClasses
+            self.parent.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return 
+            
+        defaultRoadType = defaultVehicleClassesDict['children'][0]
+        
+        # clone roadType dict and rename it's roadTpe name witha a default name
+        newRoadType = collections.OrderedDict(defaultRoadType)
+        newRoadType['name'] = defaultRoadType['name'] + "_%d" % len(self.vehicleClassesDict['children'])
+        newRoadType['description'] = newRoadType['name']
+        
+        # add the new roadType to the actual self.vehicleClassesDict
+        self.vehicleClassesDict['children'].append(newRoadType)
+        
+        # because current config has modifed => set save button enabled
+        self.saveConfiguration_button.setEnabled(True)
+    
+        # reset GUI basing on new roadType
+        self.setConfigGui_step1()
+    
+    def removeRoadType(self):
+        ''' Remove a road type doing some check.
+            A) At least a road type would be present
+        '''
+        if not self.vehicleClassesDict:
+            return
+        
+        # check if there are at least two road type
+        if len(self.vehicleClassesDict['children']) < 2:
+            message = self.parent.tr("At least a road type would be present")
+            self.parent.iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
+            return
+        
+        # get the name of selected row type
+        selectedItem = self.roadTypes_listWidget.currentItem()
+        selectedRoadTypeName = selectedItem.text()
+        
+        # remove the selected Roat Type from self.vehicleClassesDict
+        for index, roadType in enumerate( self.vehicleClassesDict['children'] ):
+            if roadType['name'] == selectedRoadTypeName:
+                # remove
+                self.vehicleClassesDict['children'].pop(index)
+                
+                # reset GUI basing on new roadType
+                # i do it inside the for loop to avoid reset interface if the element is not found
+                self.setConfigGui_step1()
+                break
+        
     def saveConfiguration(self):
         ''' Method to save configuration contained in teh QWidgetList
             QWidgetList contain a list of RoadTypes and every Item belong in it's UserRole data
@@ -150,7 +225,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
                 
         except Exception as ex:
             QgsMessageLog.logMessage(traceback.format_exc(), self.parent.pluginTag, QgsMessageLog.CRITICAL)
-            self.parent.iface.messageBar().pushMessage(self.parent.tr("Error saving Conf JSON file. PLease check the log"), QgsMessageBar.CRITICAL)
+            self.parent.iface.messageBar().pushMessage(self.parent.tr("Error saving Conf JSON file. Please check the log"), QgsMessageBar.CRITICAL)
             return
         
         # set new conf file as default
@@ -177,14 +252,14 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
                 self.currentConfFile = vehicleClassesJson
                 settings.setValue('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
                 
-                self.configurationLoaded.emit()
+                self.configurationLoaded.emit(True)
         except Exception as ex:
             self.vehicleClassesDict = None
             
             QgsMessageLog.logMessage(traceback.format_exc(), self.parent.pluginTag, QgsMessageLog.CRITICAL)
-            self.parent.iface.messageBar().pushMessage(self.parent.tr("Error loading Conf JSON file. PLease check the log"), QgsMessageBar.CRITICAL)
+            self.parent.iface.messageBar().pushMessage(self.parent.tr("Error loading Conf JSON file. Please check the log"), QgsMessageBar.CRITICAL)
             return
-        
+    
     def loadDefaultConfiguration(self):
         ''' set the curret configuration as the default one get from plugin confg data
         '''
@@ -213,12 +288,19 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         self.loadConfiguration()
     
-    def setConfigGui_step1(self):
+    def setConfigGui_step1(self, configurationLoaded=False):
         ''' first step to set configuration GUI basing on loaded configration
             this procedure start resetting the webpages
         '''
         if not self.vehicleClassesDict:
             return
+        
+        # because loaded configuration we can add and remove road type classes
+        self.newRoadType_button.setEnabled(True)
+        self.removeRoadType_button.setEnabled(True)
+        
+        # if new config is loaded, then save button is disabled
+        self.saveConfiguration_button.setEnabled(not configurationLoaded)
         
         # reset all JS webpages to load new configuration
         self.initJsInWebview()
@@ -254,10 +336,8 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
 
         # reconnect listener of item changes
         self.roadTypes_listWidget.itemChanged.connect(self.manageItemChanged)
-        
-        # set save button status
-        self.saveConfiguration_button.setEnabled(False)
     
+
     def manageItemChanged(self, item):
         ''' manage action to do when a item in roadTypes_listWidget is changed
             changes can be related to:
