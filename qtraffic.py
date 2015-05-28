@@ -20,7 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
 from PyQt4.QtGui import QAction, QIcon
 # Initialize Qt resources from file resources.py
 import resources_rc
@@ -186,11 +186,6 @@ class QTraffic:
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
-        self.dlg.show()
-        # Run the dialog event loop
-#         result = self.dlg.exec_()
-#         # See if OK was pressed
-#         if result:
-#             # Do something useful here - delete the line containing pass and
-#             # substitute with your code.
-#             pass
+        if not self.dlg.isVisible():
+            self.iface.mainWindow().addDockWidget(Qt.BottomDockWidgetArea, self.dlg)
+            self.dlg.show()
