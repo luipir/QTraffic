@@ -1,97 +1,160 @@
 import json
 import collections
 
+# init map conversion
+convertionDict = {
+	"fleetComposition": "",
+	"Fleet Type": "F_Type_",
+	"Passenger cars": "Passenger cars",
+	"Light duty vehicles": "Light duty vehicles",
+	"Heavy duty vehicles": "Heavy duty vehicles",
+	"Urban buses": "Urban buses",
+	"Coaches": "Coaches",
+	"Motorcycles": "Motorcycles",
+	"Gasoline": "Gasoline",
+	"Diesel": "Diesel",
+	"LPG": "LPG",
+	"Hybrids": "Hybrids",
+	"New fuel": "New",
+	"PRE EURO": "Euro0",
+	"EURO 1": "Euro1",
+	"EURO 2": "Euro2",
+	"EURO 3": "Euro3",
+	"EURO 4": "Euro4",
+	"EURO 5": "Euro5",
+	"EURO 6": "Euro6",
+	"CONVENTIONAL": "Euro0"
+}
+leafCounter = {
+	"Fleet Type": 1,
+	"Passenger cars": 1,
+	"Heavy duty vehicles": 200,
+	"Urban buses": 300,
+	"Coaches": 400,
+	"Motorcycles": 500
+}
+
+# open and read the json file
 with open('./FleetSplit.json') as jsonFile:
 	jsonData = json.load(jsonFile, object_pairs_hook=collections.OrderedDict)
 
-class1 = jsonData["fleetComposition"]
-class1Value = class1["1"]
-
-roadTypes = {
-	"name": "Road Types",
-	"description": "Road Types",
+# start to create 
+fleetCompositionValue = jsonData["fleetComposition"]
+fleetCompostionDict = collections.OrderedDict({
+	"name": "fleetComposition",
+	"converted": "",
 	"children": []
-}
+})
 
-class1 = {
-	"name": "Road Type 1",
-	"description": "Road Type 1",
-	"children": []
-}
+for fleatType, vehicleTypes in fleetCompositionValue.items():
+	
+	fleetTypeDict = collections.OrderedDict(
+						{"name": fleatType,
+						"converted": convertionDict["Fleet Type"] + str(leafCounter["Fleet Type"]),
+						"children": []	}
+					)
+	leafCounter["Fleet Type"] += 1
 
-for vehicleType,fuels  in class1Value["Road Type 1"].items():
-	
-	vehicleDict = {"name" : vehicleType, 
-				   "description": vehicleType,
-				   "total" : 1000,
-				   "percentage" : 100.0,
-				   "locked" : 1,
-			 	   "children": [] }
-	
-	for fuelName, classes in fuels.items():
-		if fuelName == "value":
-			continue
+	for vehicleType,fuels in vehicleTypes.items():
 		
-		fuelDict = {"name" : fuelName, 
-					"description": fuelName,
-					"locked": 0,
-					"percentage": classes["value"],				
-					"children": [] }
+		vehicleDict = collections.OrderedDict(
+						{"name" : vehicleType,
+						"converted":  convertionDict[vehicleType],
+						"total" : 1000,
+						"percentage" : 100.0,
+						"locked" : 1,
+					 	"children": [] }
+					)
 		
-		for euroClass, euroSubClasses in classes.items():
-			if euroClass == "value":
+		for fuelName, classes in fuels.items():
+			if fuelName == "value":
 				continue
 			
-			euroDict = {"name" : euroClass, 
-						"description": euroClass,
+			fuelDict = collections.OrderedDict(
+						{"name" : fuelName, 
+						"converted": convertionDict[fuelName],
 						"locked": 0,
-						"percentage": euroSubClasses["value"],			
+						"percentage": classes["value"],				
 						"children": [] }
+					)
 			
-			for euroSubClass, value in euroSubClasses.items():
-				if euroSubClass == "value":
+			for euroClass, euroSubClasses in classes.items():
+				if euroClass == "value":
 					continue
 				
-				subClass = {"name" : euroSubClass, 
-							"description": euroSubClass,
-							"locked": 0,
-							"percentage": value["value"]	}
+				# check if Motorcycle because the JSOn does not have fuel subclasses but directly subclasses
+				if vehicleType == "Motorcycles":
+					converted = "k{:0>3d}".format( leafCounter[vehicleType] ) # e.g k055 = k + three 0 padding right justified
+					leafCounter[vehicleType] += 1
+				else:
+					converted = convertionDict[euroClass]
 				
-				euroDict["children"].append(subClass)
-
-			fuelDict["children"].append(euroDict)
-			
-		vehicleDict["children"].append(fuelDict)
-
-	class1["children"].append(vehicleDict)
-
-roadTypes["children"].append(class1)
+				euroDict = collections.OrderedDict(
+							{"name" : euroClass, 
+							"converted": converted,
+							"locked": 0,
+							"percentage": euroSubClasses["value"],			
+							"children": [] }
+						)
+				
+				for euroSubClass, value in euroSubClasses.items():
+					if euroSubClass == "value":
+						continue
+					
+					subClass = collections.OrderedDict(
+								{"name" : euroSubClass, 
+								"converted": "k{:0>3d}".format( leafCounter[vehicleType] ), # e.g k055 = k + three 0 padding right justified
+								"locked": 0,
+								"percentage": value["value"]}
+							)
+					leafCounter[vehicleType] += 1
+					
+					euroDict["children"].append(subClass)
+	
+				fuelDict["children"].append(euroDict)
+				
+			vehicleDict["children"].append(fuelDict)
+	
+		fleetTypeDict["children"].append(vehicleDict)
+	
+	fleetCompostionDict["children"].append(fleetTypeDict)
 
 
 # now calc value applying % to 1000 vehicles on each vehicle type
-roadClasses = roadTypes["children"]
-roadClassType1 = roadClasses[0]
-vehicleTypes = roadClassType1["children"]
-
-for veihicleType in vehicleTypes:	
-	# for each internal category calc total basing on it's % on <upper container>["total"]
-	fuelClasses = veihicleType["children"]
-	for fuelClass in fuelClasses:
-		fuelClass["total"] = veihicleType["total"] * fuelClass["percentage"] / 100.0
-		
+# do it for each fleetType
+fleetTypes = fleetCompostionDict["children"]
+for fleetType in fleetTypes:
+	# for each vehicle type
+	vehicleTypes = fleetType["children"]
+	for veihicleType in vehicleTypes:	
 		# for each internal category calc total basing on it's % on <upper container>["total"]
-		euroClasses = fuelClass["children"]
-		for euroClass in euroClasses:
-			euroClass["total"] = fuelClass["total"] * euroClass["percentage"] / 100.0
-	
+		fuelClasses = veihicleType["children"]
+		for fuelClass in fuelClasses:
+			fuelClass["total"] = veihicleType["total"] * fuelClass["percentage"] / 100.0
+			
 			# for each internal category calc total basing on it's % on <upper container>["total"]
-			euroSubClasses = euroClass["children"]
-			for euroSubClass in euroSubClasses:
-				euroSubClass["total"] = euroClass["total"] * euroSubClass["percentage"] / 100.0
+			euroClasses = fuelClass["children"]
+			for euroClass in euroClasses:
+				euroClass["total"] = fuelClass["total"] * euroClass["percentage"] / 100.0
+		
+				# for each internal category calc total basing on it's % on <upper container>["total"]
+				euroSubClasses = euroClass["children"]
+				for euroSubClass in euroSubClasses:
+					euroSubClass["total"] = euroClass["total"] * euroSubClass["percentage"] / 100.0
 
 
 with open('./FleetSplit-converted.json', 'w') as outfile:
-    json.dump(roadTypes, outfile)
+	json.dump(fleetCompostionDict, 
+			  outfile, 
+			  ensure_ascii=False, 
+			  check_circular=True, 
+			  allow_nan=True, 
+			  cls=None, 
+			  indent=2, # allow pretty formatting of the json
+			  separators=None, 
+			  encoding="utf-8", 
+			  default=None, 
+			  sort_keys=False) # to mantaine the oreding of the OrdererdDict
 
 
 

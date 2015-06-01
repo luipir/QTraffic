@@ -1,24 +1,23 @@
 {
     "fleetComposition": {
-        "1": {
-            "Road Type 1": {
+        "Fleet Type 1": {            
                 "Passenger cars": {
                     "Gasoline": {
-                        "value": 61.1,
+                        "value": 61.4,
                         "PRE EURO": {
-                            "value": 9.6,
+                            "value": 11.3,
                             "CC<1.4 l": {
-                                "value": 83.9
+                                "value": 83.5
                             },
                             "1.4 1<CC<2.0 l": {
-                                "value": 7
+                                "value": 6.9
                             },
                             "CC>2.0 l": {
-                                "value": 9.1
+                                "value": 9.6
                             }
                         },
                         "EURO 1": {
-                            "value": 15.2,
+                            "value": 14.9,
                             "CC<1.4 l": {
                                 "value": 82.9
                             },
@@ -30,7 +29,7 @@
                             }
                         },
                         "EURO 2": {
-                            "value": 23.8,
+                            "value": 23.3,
                             "CC<1.4 l": {
                                 "value": 82.9
                             },
@@ -42,7 +41,7 @@
                             }
                         },
                         "EURO 3": {
-                            "value": 27.2,
+                            "value": 26.7,
                             "CC<1.4 l": {
                                 "value": 81.8
                             },
@@ -54,7 +53,7 @@
                             }
                         },
                         "EURO 4": {
-                            "value": 19.9,
+                            "value": 19.5,
                             "CC<0.8 l": {
                                 "value": 44.8
                             },
@@ -92,7 +91,7 @@
                                 "value": 0
                             },
                             "1.4 1<CC<2.0 l": {
-                                "value": 0
+                                "value": 100.0
                             },
                             "CC>2.0 l": {
                                 "value": 0
@@ -100,9 +99,9 @@
                         }
                     },
                     "Diesel": {
-                        "value": 36.2,
+                        "value": 35.8,
                         "CONVENTIONAL": {
-                            "value": 3.8,
+                            "value": 4.5,
                             "CC<2.0 l": {
                                 "value": 65.6
                             },
@@ -111,7 +110,7 @@
                             }
                         },
                         "EURO 1": {
-                            "value": 7.7,
+                            "value": 7.6,
                             "CC<2.0 l": {
                                 "value": 71.9
                             },
@@ -120,7 +119,7 @@
                             }
                         },
                         "EURO 2": {
-                            "value": 16.3,
+                            "value": 16.2,
                             "CC<2.0 l": {
                                 "value": 72.7
                             },
@@ -129,7 +128,7 @@
                             }
                         },
                         "EURO 3": {
-                            "value": 32.7,
+                            "value": 32.4,
                             "CC<2.0 l": {
                                 "value": 77.1
                             },
@@ -138,7 +137,7 @@
                             }
                         },
                         "EURO 4": {
-                            "value": 31.7,
+                            "value": 31.5,
                             "CC<1.4 l": {
                                 "value": 72.3
                             },
@@ -167,7 +166,7 @@
                                 "value": 0
                             },
                             "1.4 1<CC<2.0 l": {
-                                "value": 0
+                                "value": 100.0
                             },
                             "CC>2.0 l": {
                                 "value": 0
@@ -175,31 +174,31 @@
                         }
                     },
                     "LPG": {
-                        "value": 2.4,
+                        "value": 2.5,
                         "CONVENTIONAL": {
-                            "value": 14.5
+                            "value": 19.5
                         },
                         "EURO 1": {
-                            "value": 22.6
+                            "value": 21.3
                         },
                         "EURO 2": {
-                            "value": 22.1
+                            "value": 20.8
                         },
                         "EURO 3": {
-                            "value": 19.1
+                            "value": 18.0
                         },
                         "EURO 4": {
-                            "value": 15.4
+                            "value": 14.5
                         },
                         "EURO 5": {
-                            "value": 6.3
+                            "value": 5.9
                         },
                         "EURO 6": {
                             "value": 0.0
                         }
                     },
                     "Hybrids": {
-                        "value": 0.1,
+                        "value": 0.0,
                         "EURO 4": {
                             "value": 75.8,
                             "CC<1.4 l": {
@@ -230,7 +229,7 @@
                                 "value": 0.0
                             },
                             "1.4 1<CC<2.0 l": {
-                                "value": 0.0
+                                "value": 100.0
                             },
                             "CC>2.0 l": {
                                 "value": 0.0
@@ -238,74 +237,149 @@
                         }
                     },
                     "New fuel": {
-                        "value": 0.2,
-                        "CONVENTIONAL": {
-                            "value": 7.9
+                        "value": 0.3,
+                        "PRE EURO": {
+                            "value": 7.9,
+                            "CC<1.4 l": {
+                                "value": 63.8
+                            },
+                            "1.4 1<CC<2.0 l": {
+                                "value": 18.3
+                            },
+                            "CC>2.0 l": {
+                                "value": 17.9
+                            }
                         },
                         "EURO 1": {
-                            "value": 21.4
+                            "value": 21.4,
+                            "CC<1.4 l": {
+                                "value": 63.7
+                            },
+                            "1.4 1<CC<2.0 l": {
+                                "value": 18.4
+                            },
+                            "CC>2.0 l": {
+                                "value": 17.9
+                            }
                         },
                         "EURO 2": {
-                            "value": 12.9
+                            "value": 12.9,
+                            "CC<1.4 l": {
+                                "value": 64.2
+                            },
+                            "1.4 1<CC<2.0 l": {
+                                "value": 18.2
+                            },
+                            "CC>2.0 l": {
+                                "value": 17.6
+                            }
                         },
                         "EURO 3": {
-                            "value": 11.9
+                            "value": 11.9,
+                            "CC<1.4 l": {
+                                "value": 65.3
+                            },
+                            "1.4 1<CC<2.0 l": {
+                                "value": 17.7
+                            },
+                            "CC>2.0 l": {
+                                "value": 17.0
+                            }
                         },
                         "EURO 4": {
-                            "value": 36.5
+                            "value": 36.5,
+                            "CC<0.8 l": {
+                                "value": 46.5
+                            },
+                            "0.8 1<CC<1.4 l": {
+                                "value": 29.2
+                            },
+                            "1.4 1<CC<2.0 l": {
+                                "value": 13.8
+                            },
+                            "CC>2.0 l": {
+                                "value": 10.5
+                            }
+
                         },
                         "EURO 5": {
-                            "value": 9.4
+                            "value": 9.4,
+                            "CC<0.8 l": {
+                                "value": 77.9
+                            },
+                            "0.8 1<CC<1.4 l": {
+                                "value": 7.5
+                            },
+                            "1.4 1<CC<2.0 l": {
+                                "value": 12.6
+                            },
+                            "CC>2.0 l": {
+                                "value": 2.0
+                            }
+
                         },
                         "EURO 6": {
-                            "value": 0
+                            "value": 0.0,
+                            "CC<0.8 l": {
+                                "value": 0.0
+                            },
+                            "0.8 1<CC<1.4 l": {
+                                "value": 0.0
+                            },
+                            "1.4 1<CC<2.0 l": {
+                                "value": 100.0
+                            },
+                            "CC>2.0 l": {
+                                "value": 0.0
+                            }
+
                         }
                     }
                 },
                 "Light duty vehicles": {
                     "Gasoline": {
-                        "value": 10.5,
+                        "value": 11.0,
                         "CONVENTIONAL": {
-                            "value": 24.2
+                            "value": 29.7
                         },
                         "EURO 1": {
-                            "value": 20.2
+                            "value": 18.8
                         },
                         "EURO 2": {
-                            "value": 10.4
+                            "value": 9.6
                         },
                         "EURO 3": {
-                            "value": 24.8
+                            "value": 23.0
                         },
                         "EURO 4": {
-                            "value": 17.2
+                            "value": 16.0
                         },
                         "EURO 5": {
-                            "value": 3.2
+                            "value": 2.9
                         },
                         "EURO 6": {
                             "value": 0.0
                         }
                     },
                     "Diesel": {
-                        "value": 89.4,
+                        "value": 88.9,
                         "CONVENTIONAL": {
-                            "value": 11.6
+                            "value": 13.9
                         },
                         "EURO 1": {
-                            "value": 13.2
+                            "value": 12.8
                         },
                         "EURO 2": {
-                            "value": 9.4
+                            "value": 9.2
                         },
                         "EURO 3": {
-                            "value": 33.5
+                            "value": 32.7
                         },
                         "EURO 4": {
-                            "value": 26.8
+                            "value": 26.1
                         },
                         "EURO 5": {
-                            "value": 5.5
+                            "value": 5.3
                         },
                         "EURO 6": {
                             "value": 0.0
@@ -314,22 +388,22 @@
                     "New fuel": {
                         "value": 0.1,
                         "CONVENTIONAL": {
-                            "value": 13.5
+                            "value": 14.6
                         },
                         "EURO 1": {
-                            "value": 23.7
+                            "value": 23.4
                         },
                         "EURO 2": {
-                            "value": 8.2
+                            "value": 8.0
                         },
                         "EURO 3": {
-                            "value": 12.4
+                            "value": 12.3
                         },
                         "EURO 4": {
-                            "value": 32.3
+                            "value": 31.9
                         },
                         "EURO 5": {
-                            "value": 9.9
+                            "value": 9.8
                         },
                         "EURO 6": {
                             "value": 0.0
@@ -338,54 +412,54 @@
                 },
                 "Heavy duty vehicles": {
                     "Diesel": {
-                        "value": 97.4,
+                        "value": 97.3,
                         "CONVENTIONAL": {
-                            "value": 10.4,
+                            "value": 13.0,
                             "Rigid<=7.5 t": {
-                                "value": 21.2
+                                "value": 20.3
                             },
                             "Rigid 7.5 t - 12 t": {
                                 "value": 19.6
                             },
                             "Rigid 12 t - 14 t": {
-                                "value": 5.4
+                                "value": 5.5
                             },
                             "Rigid 14 t - 20 t": {
-                                "value": 14.4
+                                "value": 14.2
                             },
                             "Rigid 20 t - 26 t": {
                                 "value": 13.9
                             },
                             "Rigid 26 t - 28 t": {
-                                "value": 2.0
+                                "value": 2.1
                             },
                             "Rigid 28 t - 32 t": {
-                                "value": 3.5
+                                "value": 3.7
                             },
                             "Rigid>32 t": {
                                 "value": 1.4
                             },
                             "Articulated 14 t - 20 t": {
-                                "value": 2.2
+                                "value": 2.4
                             },
                             "Articulated 20 t - 28 t": {
-                                "value": 0.9
+                                "value": 1.1
                             },
                             "Articulated 28 t - 34 t": {
-                                "value": 1.3
+                                "value": 1.6
                             },
                             "Articulated 34 t - 40 t": {
-                                "value": 3.1
+                                "value": 3.2
                             },
                             "Articulated 40 t - 50 t": {
-                                "value": 10.1
+                                "value": 9.9
                             },
                             "Articulated 50 t - 60 t": {
-                                "value": 1.0
+                                "value": 1.1
                             }
                         },
                         "EURO 1": {
-                            "value": 12.3,
+                            "value": 12.0,
                             "Rigid<=7.5 t": {
                                 "value": 23.1
                             },
@@ -430,7 +504,7 @@
                             }
                         },
                         "EURO 2": {
-                            "value": 17.4,
+                            "value": 16.9,
                             "Rigid<=7.5 t": {
                                 "value": 24.8
                             },
@@ -475,7 +549,7 @@
                             }
                         },
                         "EURO 3": {
-                            "value": 31.9,
+                            "value": 30.9,
                             "Rigid<=7.5 t": {
                                 "value": 24.2
                             },
@@ -520,7 +594,7 @@
                             }
                         },
                         "EURO 4": {
-                            "value": 19.6,
+                            "value": 19.0,
                             "Rigid<=7.5 t": {
                                 "value": 26.0
                             },
@@ -565,7 +639,7 @@
                             }
                         },
                         "EURO 5": {
-                            "value": 8.4,
+                            "value": 8.2,
                             "Rigid<=7.5 t": {
                                 "value": 24.2
                             },
@@ -621,7 +695,7 @@
                                 "value": 0.0
                             },
                             "Rigid 14 t - 20 t": {
-                                "value": 0.0
+                                "value": 100.0
                             },
                             "Rigid 20 t - 26 t": {
                                 "value": 0.0
@@ -656,24 +730,24 @@
                         }
                     },
                     "New fuel": {
-                        "value": 2.6,
+                        "value": 2.7,
                         "CONVENTIONAL": {
-                            "value": 17.6
+                            "value": 22.7
                         },
                         "EURO 1": {
-                            "value": 20.2
+                            "value": 19.0
                         },
                         "EURO 2": {
-                            "value": 25.5
+                            "value": 23.9
                         },
                         "EURO 3": {
-                            "value": 22.8
+                            "value": 21.4
                         },
                         "EURO 4": {
-                            "value": 10.2
+                            "value": 9.6
                         },
                         "EURO 5": {
-                            "value": 3.7
+                            "value": 3.4
                         },
                         "EURO 6": {
                             "value": 0.0
@@ -684,30 +758,6 @@
                     "Diesel": {
                         "value": 97.3,
                         "CONVENTIONAL": {
-                            "value": 12.7,
-                            "<=15 t": {
-                                "value": 33.3
-                            },
-                            "15 t - 18 t": {
-                                "value": 33.4
-                            },
-                            ">18 t": {
-                                "value": 33.3
-                            }
-                        },
-                        "EURO 1": {
-                            "value": 12.1,
-                            "<=15 t": {
-                                "value": 33.3
-                            },
-                            "15 t - 18 t": {
-                                "value": 33.4
-                            },
-                            ">18 t": {
-                                "value": 33.3
-                            }
-                        },
-                        "EURO 2": {
                             "value": 17.7,
                             "<=15 t": {
                                 "value": 33.3
@@ -719,8 +769,32 @@
                                 "value": 33.3
                             }
                         },
+                        "EURO 1": {
+                            "value": 11.4,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
+                        },
+                        "EURO 2": {
+                            "value": 16.7,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
+                        },
                         "EURO 3": {
-                            "value": 28.4,
+                            "value": 26.8,
                             "<=15 t": {
                                 "value": 33.3
                             },
@@ -732,7 +806,7 @@
                             }
                         },
                         "EURO 4": {
-                            "value": 18.7,
+                            "value": 17.6,
                             "<=15 t": {
                                 "value": 33.3
                             },
@@ -744,7 +818,7 @@
                             }
                         },
                         "EURO 5": {
-                            "value": 10.4,
+                            "value": 9.8,
                             "<=15 t": {
                                 "value": 33.3
                             },
@@ -771,25 +845,88 @@
                     "New fuel": {
                         "value": 2.7,
                         "CONVENTIONAL": {
-                            "value": 22.7
+                            "value": 9.0,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
                         },
                         "EURO 1": {
-                            "value": 14.0
+                            "value": 14.7,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
                         },
                         "EURO 2": {
-                            "value": 17.9
+                            "value": 14.8,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
                         },
                         "EURO 3": {
-                            "value": 19.4
+                            "value": 34.8,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
                         },
                         "EURO 4": {
-                            "value": 14.3
+                            "value": 17.5,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
                         },
                         "EURO 5": {
-                            "value": 11.7
+                            "value": 9.2,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
                         },
                         "EURO 6": {
-                            "value": 0.0
+                            "value": 0.0,
+                            "<=15 t": {
+                                "value": 33.3
+                            },
+                            "15 t - 18 t": {
+                                "value": 33.4
+                            },
+                            ">18 t": {
+                                "value": 33.3
+                            }
                         }
                     }
                 },
@@ -797,7 +934,7 @@
                     "Diesel": {
                         "value": 99.1,
                         "CONVENTIONAL": {
-                            "value": 10.8,
+                            "value": 15.6,
                             "Standard<=18 t": {
                                 "value": 50.0
                             },
@@ -806,7 +943,7 @@
                             }
                         },
                         "EURO 1": {
-                            "value": 11.2,
+                            "value": 10.6,
                             "Standard<=18 t": {
                                 "value": 50.0
                             },
@@ -815,7 +952,7 @@
                             }
                         },
                         "EURO 2": {
-                            "value": 17.2,
+                            "value": 16.3,
                             "Standard<=18 t": {
                                 "value": 50.0
                             },
@@ -824,7 +961,7 @@
                             }
                         },
                         "EURO 3": {
-                            "value": 30.0,
+                            "value": 28.4,
                             "Standard<=18 t": {
                                 "value": 50.0
                             },
@@ -833,7 +970,7 @@
                             }
                         },
                         "EURO 4": {
-                            "value": 19.7,
+                            "value": 18.6,
                             "Standard<=18 t": {
                                 "value": 50.0
                             },
@@ -842,7 +979,7 @@
                             }
                         },
                         "EURO 5": {
-                            "value": 11.1,
+                            "value": 10.5,
                             "Standard<=18 t": {
                                 "value": 50.0
                             },
@@ -863,32 +1000,75 @@
                     "New fuel": {
                         "value": 0.9,
                         "CONVENTIONAL": {
-                            "value": 7.5
+                            "value": 0.8,
+                            "Standard<=18 t": {
+                                "value": 50.0
+                            },
+                            "Articulated>18 t": {
+                                "value": 50.0
+                            }
                         },
                         "EURO 1": {
-                            "value": 19.5
+                            "value": 2.4,
+                            "Standard<=18 t": {
+                                "value": 50.0
+                            },
+                            "Articulated>18 t": {
+                                "value": 50.0
+                            }
                         },
                         "EURO 2": {
-                            "value": 11.5
+                            "value": 19.6,
+                            "Standard<=18 t": {
+                                "value": 50.0
+                            },
+                            "Articulated>18 t": {
+                                "value": 50.0
+                            }
                         },
                         "EURO 3": {
-                            "value": 33.0
+                            "value": 38.3,
+                            "Standard<=18 t": {
+                                "value": 50.0
+                            },
+                            "Articulated>18 t": {
+                                "value": 50.0
+                            }
                         },
                         "EURO 4": {
-                            "value": 16.7
+                            "value": 21.1,
+                            "Standard<=18 t": {
+                                "value": 50.0
+                            },
+                            "Articulated>18 t": {
+                                "value": 50.0
+                            }
                         },
                         "EURO 5": {
-                            "value": 11.8
+                            "value": 17.8,
+                            "Standard<=18 t": {
+                                "value": 50.0
+                            },
+                            "Articulated>18 t": {
+                                "value": 50.0
+                            }
                         },
                         "EURO 6": {
-                            "value": 0.0
+                            "value": 0.0,
+                            "Standard<=18 t": {
+                                "value": 50.0
+                            },
+                            "Articulated>18 t": {
+                                "value": 50.0
+                            }
+
                         }
                     }
                 },
                 "Motorcycles": {
                     "value": 100.0,
                     "CONVENTIONAL": {
-                        "value": 28.9,
+                        "value": 34.1,
                         "2-stroke, >50 cm3": {
                             "value": 25.0
                         },
@@ -903,7 +1083,7 @@
                         }
                     },
                     "EURO 1": {
-                        "value": 28.0,
+                        "value": 25.9,
                         "2-stroke, >50 cm3": {
                             "value": 25.0
                         },
@@ -918,7 +1098,7 @@
                         }
                     },
                     "EURO 2": {
-                        "value": 15.6,
+                        "value": 14.5,
                         "2-stroke, >50 cm3": {
                             "value": 25.0
                         },
@@ -933,7 +1113,7 @@
                         }
                     },
                     "EURO 3": {
-                        "value": 27.5,
+                        "value": 25.5,
                         "2-stroke, >50 cm3": {
                             "value": 25.0
                         },
@@ -979,6 +1159,5 @@
                     }
                 }
             }
-        }
     }
 }
