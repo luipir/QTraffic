@@ -19,6 +19,24 @@
  *                                                                         *
  ***************************************************************************/
 """
+
+#############################################################################
+'''
+NOTES FOR THE READER: This code has been created to convert a JSON hirarchical
+file. in the format of FleetDistribution-converted.json in the Sequencial and
+positional file format as in v_fleet_distribution-original-txt.
+Because of format exception has been difficult to create modular code and this
+created a really low quality code with a high probability to be modified every
+time organization of the v_fleet_distribution change of a different kind of
+original fleet distribution json change because change the the domain of the
+problem.
+I tried to convince to use more robust format about v_fleet_distribution but
+I wasn't able, so this is the result of the adaptation. 
+So reader, please don't shame me about the quality of this code!
+'''
+#############################################################################
+
+
 # 2To3 python compatibility
 from __future__ import print_function
 from __future__ import unicode_literals
