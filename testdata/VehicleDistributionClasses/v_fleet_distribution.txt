@@ -1,0 +1,565 @@
+***Fleet composition (%)***
+F_Type	1	2
+****************************
+*LEVEL1 - FUEL distribution*
+****************************
+*Passenger cars
+Gasoline	61.4	61.4
+Diesel	35.8	35.8
+LPG	2.5	2.5
+Hybrids	0.0	0.0
+New	0.3	0.3
+Total	100.00%	100.00%
+*Light duty vehicles
+Gasoline	11.0	11.0
+Diesel	88.9	88.9
+New	0.1	0.1
+Total	100.00%	100.00%
+*Heavy duty vehicles
+Diesel	97.3	97.3
+New	2.7	2.7
+Total	100.00%	100.00%
+*Urban buses
+Diesel	97.3	97.3
+New	2.7	2.7
+Total	100.00%	100.00%
+*Coaches
+Diesel	99.1	99.1
+New	0.9	0.9
+Total	100.00%	100.00%
+*Motorcycles
+Gasoline	100	100
+Total	100.00%	100.00%
+****************************
+*LEVEL2 - EURO classes******
+****************************
+*Passenger cars -Gasoline
+Euro0	11.3	11.3
+Euro1	14.9	14.9
+Euro2	23.3	23.3
+Euro3	26.7	26.7
+Euro4	19.5	19.5
+Euro5	4.3	4.3
+Euro6	0	0
+Total	100.00%	100.00%
+*Passenger cars -Diesel
+Euro0	4.5	4.5
+Euro1	7.6	7.6
+Euro2	16.2	16.2
+Euro3	32.4	32.4
+Euro4	31.5	31.5
+Euro5	7.8	7.8
+Euro6	0	0
+Total	100.00%	100.00%
+*Passenger cars -LPG
+Euro0	19.5	19.5
+Euro1	21.3	21.3
+Euro2	20.8	20.8
+Euro3	18.0	18.0
+Euro4	14.5	14.5
+Euro5	5.9	5.9
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Passenger cars -Hybrids
+Euro4	75.8	75.8
+Euro5	24.2	24.2
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Passenger cars -New
+Euro0	7.9	7.9
+Euro1	21.4	21.4
+Euro2	12.9	12.9
+Euro3	11.9	11.9
+Euro4	36.5	36.5
+Euro5	9.4	9.4
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Light duty vehicles -Gasoline
+Euro0	29.7	29.7
+Euro1	18.8	18.8
+Euro2	9.6	9.6
+Euro3	23.0	23.0
+Euro4	16.0	16.0
+Euro5	2.9	2.9
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Light duty vehicles -Diesel
+Euro0	13.9	13.9
+Euro1	12.8	12.8
+Euro2	9.2	9.2
+Euro3	32.7	32.7
+Euro4	26.1	26.1
+Euro5	5.3	5.3
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Light duty vehicles -New
+Euro0	14.6	14.6
+Euro1	23.4	23.4
+Euro2	8.0	8.0
+Euro3	12.3	12.3
+Euro4	31.9	31.9
+Euro5	9.8	9.8
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel
+Euro0	13.0	13.0
+Euro1	12.0	12.0
+Euro2	16.9	16.9
+Euro3	30.9	30.9
+Euro4	19.0	19.0
+Euro5	8.2	8.2
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Heavy duty vehicles -New
+Euro0	22.7	22.7
+Euro1	19.0	19.0
+Euro2	23.9	23.9
+Euro3	21.4	21.4
+Euro4	9.6	9.6
+Euro5	3.4	3.4
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Urban buses -Diesel
+Euro0	17.7	17.7
+Euro1	11.4	11.4
+Euro2	16.7	16.7
+Euro3	26.8	26.8
+Euro4	17.6	17.6
+Euro5	9.8	9.8
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Urban buses -New
+Euro0	9.0	9.0
+Euro1	14.7	14.7
+Euro2	14.8	14.8
+Euro3	34.8	34.8
+Euro4	17.5	17.5
+Euro5	9.2	9.2
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Coaches -Diesel
+Euro0	15.6	15.6
+Euro1	10.6	10.6
+Euro2	16.3	16.3
+Euro3	28.4	28.4
+Euro4	18.6	18.6
+Euro5	10.5	10.5
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Coaches -New
+Euro0	0.8	0.8
+Euro1	2.4	2.4
+Euro2	19.6	19.6
+Euro3	38.3	38.3
+Euro4	21.1	21.1
+Euro5	17.8	17.8
+Euro6	0.0	0.0
+Total	100.00%	100.00%
+*Motorcycles
+Euro0	34.1	34.1
+Euro1	25.9	25.9
+Euro2	14.5	14.5
+Euro3	25.5	25.5
+Euro4	0.0	0.0
+Euro5	0.0	0.0
+Total	100.00%	100.00%
+****************************
+*LEVEL3 - CAPACITY classes**
+****************************
+*Passenger cars -Gasoline -Euro0
+k001	83.5	83.5
+k002	6.9	6.9
+k003	9.6	9.6
+Total	100.00%	100.00%
+*Passenger cars -Gasoline -Euro1
+k004	82.9	82.9
+k005	9.1	9.1
+k006	8.0	8.0
+Total	100.00%	100.00%
+*Passenger cars -Gasoline -Euro2
+k007	82.9	82.9
+k008	10.6	10.6
+k009	6.5	6.5
+Total	100.00%	100.00%
+*Passenger cars -Gasoline -Euro3
+k010	81.8	81.8
+k011	11.1	11.1
+k012	7.1	7.1
+Total	100.00%	100.00%
+*Passenger cars -Gasoline -Euro4
+k013	44.8	44.8
+k014	29.5	29.5
+k015	15.0	15.0
+k016	10.7	10.7
+Total	100.00%	100.00%
+*Passenger cars -Gasoline -Euro5
+k017	46.9	46.9
+k018	27.9	27.9
+k019	14.6	14.6
+k020	10.6	10.6
+Total	100.00%	100.00%
+*Passenger cars -Gasoline -Euro6
+k021	0	0
+k022	0	0
+k023	100.0	100.0
+k024	0	0
+Total	100.00%	100.00%
+*Passenger cars -Diesel -Euro0
+k025	65.6	65.6
+k026	34.4	34.4
+Total	100.00%	100.00%
+*Passenger cars -Diesel -Euro1
+k027	71.9	71.9
+k028	28.1	28.1
+Total	100.00%	100.00%
+*Passenger cars -Diesel -Euro2
+k029	72.7	72.7
+k030	27.3	27.3
+Total	100.00%	100.00%
+*Passenger cars -Diesel -Euro3
+k031	77.1	77.1
+k032	22.9	22.9
+Total	100.00%	100.00%
+*Passenger cars -Diesel -Euro4
+k033	72.3	72.3
+k034	14.8	14.8
+k035	12.9	12.9
+Total	100.00%	100.00%
+*Passenger cars -Diesel -Euro5
+k036	70.9	70.9
+k037	17.7	17.7
+k038	11.4	11.4
+Total	100.00%	100.00%
+*Passenger cars -Diesel -Euro6
+k039	0	0
+k040	100.0	100.0
+k041	0	0
+Total	100.00%	100.00%
+*Passenger cars -Hybrids -Euro4
+k042	63.7	63.7
+k043	29.5	29.5
+k044	6.8	6.8
+Total	100.00%	100.00%
+*Passenger cars -Hybrids -Euro5
+k045	59.8	59.8
+k046	34.7	34.7
+k047	5.5	5.5
+Total	100.00%	100.00%
+*Passenger cars -Hybrids -Euro6
+k048	0.0	0.0
+k049	100.0	100.0
+k050	0.0	0.0
+Total	100.00%	100.00%
+*Passenger cars -New -Euro0
+k051	63.8	63.8
+k052	18.3	18.3
+k053	17.9	17.9
+Total	100.00%	100.00%
+*Passenger cars -New -Euro1
+k054	63.7	63.7
+k055	18.4	18.4
+k056	17.9	17.9
+Total	100.00%	100.00%
+*Passenger cars -New -Euro2
+k057	64.2	64.2
+k058	18.2	18.2
+k059	17.6	17.6
+Total	100.00%	100.00%
+*Passenger cars -New -Euro3
+k060	65.3	65.3
+k061	17.7	17.7
+k062	17.0	17.0
+Total	100.00%	100.00%
+*Passenger cars -New -Euro4
+k063	46.5	46.5
+k064	29.2	29.2
+k065	13.8	13.8
+k066	10.5	10.5
+Total	100.00%	100.00%
+*Passenger cars -New -Euro5
+k067	77.9	77.9
+k068	7.5	7.5
+k069	12.6	12.6
+k070	2.0	2.0
+Total	100.00%	100.00%
+*Passenger cars -New -Euro6
+k071	0.0	0.0
+k072	0.0	0.0
+k073	100.0	100.0
+k074	0.0	0.0
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel -Euro0
+k200	20.3	20.3
+k201	19.6	19.6
+k202	5.5	5.5
+k203	14.2	14.2
+k204	13.9	13.9
+k205	2.1	2.1
+k206	3.7	3.7
+k207	1.4	1.4
+k208	2.4	2.4
+k209	1.1	1.1
+k210	1.6	1.6
+k211	3.2	3.2
+k212	9.9	9.9
+k213	1.1	1.1
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel -Euro1
+k214	23.1	23.1
+k215	16.3	16.3
+k216	5.2	5.2
+k217	13.9	13.9
+k218	11.3	11.3
+k219	2.3	2.3
+k220	2.9	2.9
+k221	1.4	1.4
+k222	3.0	3.0
+k223	0.8	0.8
+k224	1.1	1.1
+k225	3.8	3.8
+k226	13.9	13.9
+k227	1.0	1.0
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel -Euro2
+k228	24.8	24.8
+k229	14.8	14.8
+k230	4.4	4.4
+k231	13.0	13.0
+k232	9.3	9.3
+k233	2.9	2.9
+k234	2.5	2.5
+k235	1.5	1.5
+k236	3.1	3.1
+k237	1.2	1.2
+k238	1.2	1.2
+k239	5.6	5.6
+k240	14.9	14.9
+k241	0.8	0.8
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel -Euro3
+k242	24.2	24.2
+k243	13.6	13.6
+k244	3.6	3.6
+k245	11.7	11.7
+k246	9.3	9.3
+k247	2.8	2.8
+k248	2.5	2.5
+k249	1.3	1.3
+k250	3.4	3.4
+k251	2.1	2.1
+k252	1.1	1.1
+k253	7.7	7.7
+k254	16.2	16.2
+k255	0.5	0.5
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel -Euro4
+k256	26.0	26.0
+k257	12.6	12.6
+k258	3.2	3.2
+k259	12.1	12.1
+k260	8.9	8.9
+k261	2.9	2.9
+k262	2.7	2.7
+k263	1.2	1.2
+k264	3.1	3.1
+k265	2.7	2.7
+k266	1.3	1.3
+k267	9.3	9.3
+k268	13.7	13.7
+k269	0.3	0.3
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel -Euro5
+k270	24.2	24.2
+k271	12.3	12.3
+k272	3.1	3.1
+k273	12.7	12.7
+k274	9.8	9.8
+k275	3.1	3.1
+k276	2.8	2.8
+k277	1.3	1.3
+k278	2.3	2.3
+k279	2.5	2.5
+k280	1.6	1.6
+k281	11.5	11.5
+k282	12.5	12.5
+k283	0.3	0.3
+Total	100.00%	100.00%
+*Heavy duty vehicles -Diesel -Euro6
+k284	0.0	0.0
+k285	0.0	0.0
+k286	0.0	0.0
+k287	100.0	100.0
+k288	0.0	0.0
+k289	0.0	0.0
+k290	0.0	0.0
+k291	0.0	0.0
+k292	0.0	0.0
+k293	0.0	0.0
+k294	0.0	0.0
+k295	0.0	0.0
+k296	0.0	0.0
+k297	0.0	0.0
+Total	100.00%	100.00%
+*Urban buses -Diesel -Euro0
+k300	33.3	33.3
+k301	33.4	33.4
+k302	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -Diesel -Euro1
+k303	33.3	33.3
+k304	33.4	33.4
+k305	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -Diesel -Euro2
+k306	33.3	33.3
+k307	33.4	33.4
+k308	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -Diesel -Euro3
+k309	33.3	33.3
+k310	33.4	33.4
+k311	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -Diesel -Euro4
+k312	33.3	33.3
+k313	33.4	33.4
+k314	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -Diesel -Euro5
+k315	33.3	33.3
+k316	33.4	33.4
+k317	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -Diesel -Euro6
+k318	33.3	33.3
+k319	33.4	33.4
+k320	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -New -Euro0
+k321	33.3	33.3
+k322	33.4	33.4
+k323	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -New -Euro1
+k324	33.3	33.3
+k325	33.4	33.4
+k326	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -New -Euro2
+k327	33.3	33.3
+k328	33.4	33.4
+k329	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -New -Euro3
+k330	33.3	33.3
+k331	33.4	33.4
+k332	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -New -Euro4
+k333	33.3	33.3
+k334	33.4	33.4
+k335	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -New -Euro5
+k336	33.3	33.3
+k337	33.4	33.4
+k338	33.3	33.3
+Total	100.00%	100.00%
+*Urban buses -New -Euro6
+k339	33.3	33.3
+k340	33.4	33.4
+k341	33.3	33.3
+Total	100.00%	100.00%
+*Coaches -Diesel -Euro0
+k400	50.0	50.0
+k401	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -Diesel -Euro1
+k402	50.0	50.0
+k403	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -Diesel -Euro2
+k404	50.0	50.0
+k405	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -Diesel -Euro3
+k406	50.0	50.0
+k407	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -Diesel -Euro4
+k408	50.0	50.0
+k409	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -Diesel -Euro5
+k410	50.0	50.0
+k411	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -Diesel -Euro6
+k412	50.0	50.0
+k413	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -New -Euro0
+k414	50.0	50.0
+k415	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -New -Euro1
+k416	50.0	50.0
+k417	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -New -Euro2
+k418	50.0	50.0
+k419	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -New -Euro3
+k420	50.0	50.0
+k421	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -New -Euro4
+k422	50.0	50.0
+k423	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -New -Euro5
+k424	50.0	50.0
+k425	50.0	50.0
+Total	100.00%	100.00%
+*Coaches -New -Euro6
+k426	50.0	50.0
+k427	50.0	50.0
+Total	100.00%	100.00%
+*Motorcycles -Euro0
+k500	25.0	25.0
+k501	25.0	25.0
+k502	25.0	25.0
+k503	25.0	25.0
+Total	100.00%	100.00%
+*Motorcycles -Euro1
+k504	25.0	25.0
+k505	25.0	25.0
+k506	25.0	25.0
+k507	25.0	25.0
+Total	100.00%	100.00%
+*Motorcycles -Euro2
+k508	25.0	25.0
+k509	25.0	25.0
+k510	25.0	25.0
+k511	25.0	25.0
+Total	100.00%	100.00%
+*Motorcycles -Euro3
+k512	25.0	25.0
+k513	25.0	25.0
+k514	25.0	25.0
+k515	25.0	25.0
+Total	100.00%	100.00%
+*Motorcycles -Euro4
+k516	25.0	25.0
+k517	25.0	25.0
+k518	25.0	25.0
+k519	25.0	25.0
+Total	100.00%	100.00%
+*Motorcycles -Euro5
+k520	25.0	25.0
+k521	25.0	25.0
+k522	25.0	25.0
+k523	25.0	25.0
+Total	100.00%	100.00%
+****************************
