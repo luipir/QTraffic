@@ -21,7 +21,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="project_tab">
        <attribute name="title">
@@ -163,7 +163,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="roadLenght_combo">
+              <widget class="QComboBox" name="roadLenght_CBox">
                <property name="editable">
                 <bool>true</bool>
                </property>
@@ -181,7 +181,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="roadType_combo">
+              <widget class="QComboBox" name="roadType_CBox">
                <property name="editable">
                 <bool>true</bool>
                </property>
@@ -199,7 +199,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="roadGradient_combo">
+              <widget class="QComboBox" name="roadGradient_CBox">
                <property name="editable">
                 <bool>true</bool>
                </property>
