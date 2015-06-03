@@ -21,8 +21,104 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
+      <widget class="QWidget" name="project_tab">
+       <attribute name="title">
+        <string>Project</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_21">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Current Project</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="projectName_lineEdit"/>
+          </item>
+          <item>
+           <widget class="QToolButton" name="selectProject_TButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveAsProject_button">
+            <property name="text">
+             <string>Save As</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveProject_button">
+            <property name="text">
+             <string>Save</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_22">
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="project_next_PButton">
+            <property name="text">
+             <string>Next -&gt;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="input_tab">
        <attribute name="title">
         <string>Input Network</string>
@@ -37,10 +133,10 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QLineEdit" name="lineEdit"/>
+              <widget class="QLineEdit" name="inputLayer_lineEdit"/>
              </item>
              <item>
-              <widget class="QToolButton" name="toolButton">
+              <widget class="QToolButton" name="selectLayer_TButton">
                <property name="text">
                 <string>...</string>
                </property>
@@ -85,7 +181,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="linkType_combo">
+              <widget class="QComboBox" name="roadType_combo">
                <property name="editable">
                 <bool>true</bool>
                </property>
@@ -143,7 +239,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="next_pushButton">
+           <widget class="QPushButton" name="inputNetwork_next_PButton">
             <property name="text">
              <string>Next -&gt;</string>
             </property>
@@ -170,7 +266,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_8"/>
+             <widget class="QComboBox" name="urbanBusesCount_CBox"/>
             </item>
            </layout>
           </item>
@@ -184,7 +280,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_2"/>
+             <widget class="QComboBox" name="passengerCarsCount_CBox"/>
             </item>
            </layout>
           </item>
@@ -198,7 +294,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_6"/>
+             <widget class="QComboBox" name="heavyDutyVehicleCount_CBox"/>
             </item>
            </layout>
           </item>
@@ -212,7 +308,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_4"/>
+             <widget class="QComboBox" name="lightDutyVehicleCount_CBox"/>
             </item>
            </layout>
           </item>
@@ -226,7 +322,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_10"/>
+             <widget class="QComboBox" name="coachesCount_CBox"/>
             </item>
            </layout>
           </item>
@@ -240,7 +336,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_12"/>
+             <widget class="QComboBox" name="motorcycleCount_CBox"/>
             </item>
            </layout>
           </item>
@@ -256,7 +352,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_3"/>
+           <widget class="QComboBox" name="averageVehicleSpeed_Cbox"/>
           </item>
          </layout>
         </item>
@@ -289,7 +385,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="next_pushButton_2">
+           <widget class="QPushButton" name="vehicle_next_PButton">
             <property name="text">
              <string>Next -&gt;</string>
             </property>
@@ -489,7 +585,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="next_pushButton_4">
+           <widget class="QPushButton" name="fleetComposition_next_PButton">
             <property name="text">
              <string>Next -&gt;</string>
             </property>
@@ -532,7 +628,7 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QSpinBox" name="spinBox"/>
+              <widget class="QSpinBox" name="gasolineSulphureContent_SBox"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_4">
@@ -549,10 +645,10 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+              <widget class="QDoubleSpinBox" name="gasolinePbContents_SBox"/>
              </item>
              <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+              <widget class="QDoubleSpinBox" name="gasolineVolatility_SBox"/>
              </item>
             </layout>
            </widget>
@@ -583,7 +679,7 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QSpinBox" name="spinBox_2"/>
+              <widget class="QSpinBox" name="dieselSulphureContent_SBox"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_16">
@@ -593,7 +689,7 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
+              <widget class="QDoubleSpinBox" name="dieselPbContents_SBox"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_14">
@@ -603,7 +699,7 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+              <widget class="QDoubleSpinBox" name="dieselVolatility_SBox"/>
              </item>
             </layout>
            </widget>
@@ -650,7 +746,7 @@ QGroupBox::title{
               </widget>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_7"/>
+              <widget class="QDoubleSpinBox" name="temperatureMin_SBox"/>
              </item>
             </layout>
            </item>
@@ -667,7 +763,7 @@ QGroupBox::title{
               </widget>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_8"/>
+              <widget class="QDoubleSpinBox" name="temperatureAvg_SBox"/>
              </item>
             </layout>
            </item>
@@ -684,7 +780,7 @@ QGroupBox::title{
               </widget>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="doubleSpinBox_9"/>
+              <widget class="QDoubleSpinBox" name="temperatureMax_SBox"/>
              </item>
             </layout>
            </item>
@@ -720,7 +816,7 @@ QGroupBox::title{
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="next_pushButton_3">
+           <widget class="QPushButton" name="parameters_next_PButton">
             <property name="text">
              <string>Next -&gt;</string>
             </property>
@@ -744,10 +840,10 @@ QGroupBox::title{
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
-              <widget class="QLineEdit" name="lineEdit_2"/>
+              <widget class="QLineEdit" name="outFile_LEdit"/>
              </item>
              <item>
-              <widget class="QToolButton" name="toolButton_2">
+              <widget class="QToolButton" name="selectOutfile_TButton">
                <property name="text">
                 <string>...</string>
                </property>
@@ -779,70 +875,70 @@ QGroupBox::title{
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
              <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBox_6">
+              <widget class="QCheckBox" name="pollutantsSO2_CBox">
                <property name="text">
                 <string>SO2</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QCheckBox" name="checkBox_3">
+              <widget class="QCheckBox" name="pollutantsNOx_CBox">
                <property name="text">
                 <string>NOx</string>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QCheckBox" name="checkBox_9">
+              <widget class="QCheckBox" name="pollutantsCH4_CBox">
                <property name="text">
                 <string>CH4</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBox_7">
+              <widget class="QCheckBox" name="pollutantsVOC_CBox">
                <property name="text">
                 <string>VOC</string>
                </property>
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QCheckBox" name="checkBox_5">
+              <widget class="QCheckBox" name="pollutantsPM10_CBox">
                <property name="text">
                 <string>PM 10</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QCheckBox" name="checkBox_2">
+              <widget class="QCheckBox" name="pollutantsCO2_CBox">
                <property name="text">
                 <string>CO2</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBox_8">
+              <widget class="QCheckBox" name="pollutantsPM25_CBox">
                <property name="text">
                 <string>PM 2.5</string>
                </property>
               </widget>
              </item>
              <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBox">
+              <widget class="QCheckBox" name="pollutantsCO_CBox">
                <property name="text">
                 <string>CO</string>
                </property>
               </widget>
              </item>
              <item row="3" column="2">
-              <widget class="QCheckBox" name="checkBox_10">
+              <widget class="QCheckBox" name="pollutantsC6H6_CBox">
                <property name="text">
                 <string>C6H6</string>
                </property>
               </widget>
              </item>
              <item row="0" column="2">
-              <widget class="QCheckBox" name="checkBox_11">
+              <widget class="QCheckBox" name="pollutantsN2O_CBox">
                <property name="text">
                 <string>N2O</string>
                </property>
@@ -870,35 +966,35 @@ QGroupBox::title{
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
              <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBox_4">
+              <widget class="QCheckBox" name="fuelEnergyConsumptionDiesel_CBox">
                <property name="text">
                 <string>Diesel</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBox_12">
+              <widget class="QCheckBox" name="fuelEnergyConsumptionGAsoline_CBox">
                <property name="text">
                 <string>Gasoline</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBox_14">
+              <widget class="QCheckBox" name="fuelEnergyConsumptionAlternative_CBox">
                <property name="text">
                 <string>Alternative fuels</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBox_13">
+              <widget class="QCheckBox" name="fuelEnergyConsumptionLPG_CBox">
                <property name="text">
                 <string>LPG</string>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QCheckBox" name="checkBox_15">
+              <widget class="QCheckBox" name="energyConsumption_CBox">
                <property name="text">
                 <string>Energy consuption</string>
                </property>
@@ -938,7 +1034,7 @@ QGroupBox::title{
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="calculate_pushButton">
+           <widget class="QPushButton" name="calculate_PButton">
             <property name="text">
              <string>Calculate</string>
             </property>
