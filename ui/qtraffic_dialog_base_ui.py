@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Thu Jun  4 11:04:28 2015
+# Created: Thu Jun  4 11:29:39 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -100,7 +100,6 @@ class Ui_qtraffic_dockWidget(object):
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.verticalLayout_10.addWidget(self.label_5)
         self.roadLenght_CBox = QtGui.QComboBox(self.groupBox_2)
-        self.roadLenght_CBox.setEditable(True)
         self.roadLenght_CBox.setObjectName(_fromUtf8("roadLenght_CBox"))
         self.verticalLayout_10.addWidget(self.roadLenght_CBox)
         self.gridLayout_3.addLayout(self.verticalLayout_10, 1, 1, 1, 1)
@@ -110,7 +109,6 @@ class Ui_qtraffic_dockWidget(object):
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.verticalLayout_7.addWidget(self.label_2)
         self.roadType_CBox = QtGui.QComboBox(self.groupBox_2)
-        self.roadType_CBox.setEditable(True)
         self.roadType_CBox.setObjectName(_fromUtf8("roadType_CBox"))
         self.verticalLayout_7.addWidget(self.roadType_CBox)
         self.gridLayout_3.addLayout(self.verticalLayout_7, 1, 0, 1, 1)
@@ -120,7 +118,6 @@ class Ui_qtraffic_dockWidget(object):
         self.label_6.setObjectName(_fromUtf8("label_6"))
         self.verticalLayout_11.addWidget(self.label_6)
         self.roadGradient_CBox = QtGui.QComboBox(self.groupBox_2)
-        self.roadGradient_CBox.setEditable(True)
         self.roadGradient_CBox.setObjectName(_fromUtf8("roadGradient_CBox"))
         self.verticalLayout_11.addWidget(self.roadGradient_CBox)
         self.gridLayout_3.addLayout(self.verticalLayout_11, 1, 2, 1, 1)
@@ -560,7 +557,7 @@ class Ui_qtraffic_dockWidget(object):
         qtraffic_dockWidget.setWidget(self.qtraffic_widget)
 
         self.retranslateUi(qtraffic_dockWidget)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         self.fleetComposition_tabs.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(qtraffic_dockWidget)
 
