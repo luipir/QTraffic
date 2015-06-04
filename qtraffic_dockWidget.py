@@ -22,6 +22,7 @@
 import os
 from PyQt4 import QtCore, QtGui, uic
 
+from project_tab_manager import ProjectTabManager
 from fleet_composition_tab_manager import FleetCompositionTabManager
 
 # FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -48,5 +49,9 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # I decided to avoid strict class derivation and use aggregation 
         # to facilitate maintenance to other peaple not practical in OOP
         
+        # init project tab manager
+        self.projectTabManager = ProjectTabManager(self)        
+        
         # init Fleet Composition tab Manager
         self.fleetCompostionTabManager = FleetCompositionTabManager(self)
+        
