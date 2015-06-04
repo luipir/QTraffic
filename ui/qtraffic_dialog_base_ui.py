@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Wed Jun  3 20:02:43 2015
+# Created: Thu Jun  4 11:04:28 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -56,12 +56,12 @@ class Ui_qtraffic_dockWidget(object):
         self.horizontalLayout_23.setObjectName(_fromUtf8("horizontalLayout_23"))
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_23.addItem(spacerItem1)
-        self.saveAsProject_button = QtGui.QPushButton(self.project_tab)
-        self.saveAsProject_button.setObjectName(_fromUtf8("saveAsProject_button"))
-        self.horizontalLayout_23.addWidget(self.saveAsProject_button)
-        self.saveProject_button = QtGui.QPushButton(self.project_tab)
-        self.saveProject_button.setObjectName(_fromUtf8("saveProject_button"))
-        self.horizontalLayout_23.addWidget(self.saveProject_button)
+        self.saveAsProject_PButton = QtGui.QPushButton(self.project_tab)
+        self.saveAsProject_PButton.setObjectName(_fromUtf8("saveAsProject_PButton"))
+        self.horizontalLayout_23.addWidget(self.saveAsProject_PButton)
+        self.saveProject_PButton = QtGui.QPushButton(self.project_tab)
+        self.saveProject_PButton.setObjectName(_fromUtf8("saveProject_PButton"))
+        self.horizontalLayout_23.addWidget(self.saveProject_PButton)
         self.gridLayout_5.addLayout(self.horizontalLayout_23, 1, 0, 1, 1)
         self.horizontalLayout_22 = QtGui.QHBoxLayout()
         self.horizontalLayout_22.setObjectName(_fromUtf8("horizontalLayout_22"))
@@ -560,7 +560,7 @@ class Ui_qtraffic_dockWidget(object):
         qtraffic_dockWidget.setWidget(self.qtraffic_widget)
 
         self.retranslateUi(qtraffic_dockWidget)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.fleetComposition_tabs.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(qtraffic_dockWidget)
 
@@ -568,8 +568,8 @@ class Ui_qtraffic_dockWidget(object):
         qtraffic_dockWidget.setWindowTitle(_translate("qtraffic_dockWidget", "QTraffic", None))
         self.label.setText(_translate("qtraffic_dockWidget", "Current Project", None))
         self.selectProject_TButton.setText(_translate("qtraffic_dockWidget", "...", None))
-        self.saveAsProject_button.setText(_translate("qtraffic_dockWidget", "Save As", None))
-        self.saveProject_button.setText(_translate("qtraffic_dockWidget", "Save", None))
+        self.saveAsProject_PButton.setText(_translate("qtraffic_dockWidget", "Save As", None))
+        self.saveProject_PButton.setText(_translate("qtraffic_dockWidget", "Save", None))
         self.project_next_PButton.setText(_translate("qtraffic_dockWidget", "Next ->", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.project_tab), _translate("qtraffic_dockWidget", "Project", None))
         self.groupBox.setTitle(_translate("qtraffic_dockWidget", "Input Layer", None))
