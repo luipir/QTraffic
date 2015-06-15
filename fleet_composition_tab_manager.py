@@ -48,6 +48,7 @@ class FleetCompositionTabManager(QtCore.QObject):
     # events to coordinate interface
     configurationLoaded = QtCore.pyqtSignal(bool)
     jsInitialised = QtCore.pyqtSignal()
+    projectModified = QtCore.pyqtSignal()
     
     def __init__(self, parent=None):
         '''constructor'''
@@ -60,9 +61,13 @@ class FleetCompositionTabManager(QtCore.QObject):
         # init some globals
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
         self.defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
-        self.currentConfFile = None
         self.vehicleClassesDict = None # it will be a dict
         self.sunburstEditorBridge = None
+        self.project = None
+        self.tabIndex = None
+        
+        # retrieve the current tab index
+        self.initTabTabIndex()
         
         # create or remove new RoadTypes
         self.gui.newRoadType_button.setEnabled(False)
@@ -92,12 +97,34 @@ class FleetCompositionTabManager(QtCore.QObject):
         QtWebKit.QWebSettings.globalSettings().setAttribute(QtWebKit.QWebSettings.LocalStorageEnabled, False)
         #QtWebKit.QWebSettings.globalSettings().globalSettings().enablePersistentStorage(QtCore.QDir.tempPath())
         
-        # load last saved conf pointed in settings
-        # emit configurationLoaded with the status of loading
-        self.loadConfiguration()
-        
         # add listener to save actual configuration
         self.gui.saveConfiguration_button.clicked.connect(self.saveConfiguration)
+        
+        # disable current tab because no project has been loaded yet
+        self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
+    
+    def initTabTabIndex(self):
+        ''' Retrieve what tab index refer the current tab manager
+        '''
+        for tabIndex in range(self.gui.tabWidget.count()):
+            if self.gui.tabWidget.tabText(tabIndex) == "Fleet Composition":
+                self.tabIndex = tabIndex
+
+    
+    def setProject(self, project=None):
+        ''' setting the new project on which the tab is based
+        '''
+        self.project = project
+        if self.project != None:
+            # emit configurationLoaded with the status of loading
+            self.loadConfiguration()
+            
+            # enable current tab because project has been loaded
+            self.gui.tabWidget.setTabEnabled(self.tabIndex, True)
+        
+        else:
+            # enable current tab because no project has been loaded yet
+            self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
     
     def createNewRoadType(self):
         ''' Method to add a new road type starting from the default road tyep configuration
@@ -188,9 +215,8 @@ class FleetCompositionTabManager(QtCore.QObject):
             QWidgetList contain a list of RoadTypes and every Item belong in it's UserRole data
             a dictionary of statistic of the lreated roadType
         '''
-        settings = QtCore.QSettings()
-        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
-        startPath = os.path.abspath( vehicleClassesJson )
+        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
+        startPath = os.path.abspath( currentVehicleClassesJson )
         
         # ask for the new conf file
         newConfFile = QtGui.QFileDialog.getSaveFileName(self.gui, "Save as JSON file", startPath, self.plugin.tr("Json (*.json);;All (*)"))
@@ -231,7 +257,9 @@ class FleetCompositionTabManager(QtCore.QObject):
             return
         
         # set new conf file as default
-        settings.setValue('/QTraffic/vehicleClasses', newConfFile)
+        if currentVehicleClassesJson != newConfFile:
+            settings.setValue('/FleetComposition/fleetComposition', newConfFile)
+            self.projectModified.emit()
         
         # set save button status
         self.gui.saveConfiguration_button.setEnabled(False)
@@ -239,22 +267,22 @@ class FleetCompositionTabManager(QtCore.QObject):
     def loadConfiguration(self):
         ''' Function to load last conf get from settings
         '''
-        settings = QtCore.QSettings()
-        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
+        if not self.project:
+            return
+        
+        # from th eproject, get JSON filename to load
+        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
         
         # load json conf
         try:
-            with open(vehicleClassesJson) as confFile:
+            with open(currentVehicleClassesJson) as confFile:
                 # loaded in and OrderedDict to allow maintaining the order of classes
                 # contained in the json file. This will be reflected in the order
                 # shown in the sunburst visualization/editor
                 self.vehicleClassesDict = json.load(confFile, object_pairs_hook=collections.OrderedDict)
                 
-                # remember current conf file
-                self.currentConfFile = vehicleClassesJson
-                settings.setValue('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
-                
                 self.configurationLoaded.emit(True)
+                
         except Exception as ex:
             self.vehicleClassesDict = None
             
@@ -274,8 +302,10 @@ class FleetCompositionTabManager(QtCore.QObject):
             if ret == QtGui.QMessageBox.No:
                 return
         
-        settings = QtCore.QSettings()
-        settings.setValue('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
+        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', '')
+        if currentVehicleClassesJson != self.defaultVehicleClasses:
+            self.project.setValue('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
+            self.projectModified.emit()
         
         self.loadConfiguration()
     
@@ -292,10 +322,9 @@ class FleetCompositionTabManager(QtCore.QObject):
                 return
         
         # get last conf to start from its path
-        settings = QtCore.QSettings()
-        vehicleClassesJson = settings.value('/QTraffic/vehicleClasses', self.defaultVehicleClasses)
+        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
         
-        startPath = os.path.abspath( vehicleClassesJson )
+        startPath = os.path.abspath( currentVehicleClassesJson )
         
         # ask for the new conf file
         newConfFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a JSON conf file", startPath, 
@@ -304,7 +333,9 @@ class FleetCompositionTabManager(QtCore.QObject):
             return
         
         # set new conf file as default
-        settings.setValue('/QTraffic/vehicleClasses', newConfFile)
+        if currentVehicleClassesJson != newConfFile:
+            self.project.setValue('/FleetComposition/fleetComposition', newConfFile)
+            self.projectModified.emit()
         
         self.loadConfiguration()
     
