@@ -99,9 +99,32 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # add listener to save actual configuration
         self.gui.saveConfiguration_button.clicked.connect(self.saveConfiguration)
+        self.gui.saveConfiguration_button.setEnabled(False)
         
         # disable current tab because no project has been loaded yet
         self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
+    
+    def setFleetCompostionModified(self, status=True):
+        ''' Set fleet composition tab interface basing if fleet statistic has modified or not
+            tab gui will have:
+            1) Save button enabled
+            2) tab name with a * tail
+        '''
+        # do nothing if the current status is the same
+        if status == self.gui.saveConfiguration_button.isEnabled():
+            return
+        
+        self.gui.saveConfiguration_button.setEnabled(status)
+        
+        # set tab text
+        text = self.gui.tabWidget.tabText(self.tabIndex)
+        if status:
+            # set tab text = tab text + '*' to show that project has been modified
+            self.gui.tabWidget.setTabText(self.tabIndex, text + '*')
+        else:
+            # set tab text = tab text - last '*' to show that project is not modifed
+            self.gui.tabWidget.setTabText(self.tabIndex, text[0:-1])
+            
     
     def initTabTabIndex(self):
         ''' Retrieve what tab index refer the current tab manager
@@ -162,7 +185,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         self.vehicleClassesDict['children'].append(newRoadType)
         
         # because current config has modifed => set save button enabled
-        self.gui.saveConfiguration_button.setEnabled(True)
+        self.setFleetCompostionModified()
     
         # reset GUI basing on new roadType
         self.setConfigGui_step1()
@@ -262,7 +285,7 @@ class FleetCompositionTabManager(QtCore.QObject):
             self.projectModified.emit()
         
         # set save button status
-        self.gui.saveConfiguration_button.setEnabled(False)
+        self.setFleetCompostionModified(False)
     
     def loadConfiguration(self):
         ''' Function to load last conf get from settings
@@ -351,7 +374,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         self.gui.removeRoadType_button.setEnabled(True)
         
         # if new config is loaded, then save button is disabled
-        self.gui.saveConfiguration_button.setEnabled(not configurationLoaded)
+        self.setFleetCompostionModified(not configurationLoaded)
         
         # reset all JS webpages to load new configuration
         self.initJsInWebview()
@@ -407,7 +430,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         vehicleClasses['description'] = item.text() # TODO: for the moment name and description are equal
         item.setData(QtCore.Qt.UserRole, vehicleClasses)
         
-        self.gui.saveConfiguration_button.setEnabled(True)
+        self.setFleetCompostionModified()
     
     def injectBridge(self):
         ''' Iniect the class/object in JS used to receive json modification of the 
