@@ -158,7 +158,7 @@
              <item>
               <widget class="QLabel" name="label_5">
                <property name="text">
-                <string>Road Lenght</string>
+                <string>Road Lenght (meters)</string>
                </property>
               </widget>
              </item>
