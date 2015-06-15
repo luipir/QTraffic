@@ -104,7 +104,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         # disable current tab because no project has been loaded yet
         self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
     
-    def setFleetCompostionModified(self, status=True):
+    def setFleetGUIModified(self, status=True):
         ''' Set fleet composition tab interface basing if fleet statistic has modified or not
             tab gui will have:
             1) Save button enabled
@@ -185,7 +185,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         self.vehicleClassesDict['children'].append(newRoadType)
         
         # because current config has modifed => set save button enabled
-        self.setFleetCompostionModified()
+        self.setFleetGUIModified()
     
         # reset GUI basing on new roadType
         self.setConfigGui_step1()
@@ -285,7 +285,7 @@ class FleetCompositionTabManager(QtCore.QObject):
             self.projectModified.emit()
         
         # set save button status
-        self.setFleetCompostionModified(False)
+        self.setFleetGUIModified(False)
     
     def loadConfiguration(self):
         ''' Function to load last conf get from settings
@@ -374,7 +374,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         self.gui.removeRoadType_button.setEnabled(True)
         
         # if new config is loaded, then save button is disabled
-        self.setFleetCompostionModified(not configurationLoaded)
+        self.setFleetGUIModified(not configurationLoaded)
         
         # reset all JS webpages to load new configuration
         self.initJsInWebview()
@@ -430,7 +430,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         vehicleClasses['description'] = item.text() # TODO: for the moment name and description are equal
         item.setData(QtCore.Qt.UserRole, vehicleClasses)
         
-        self.setFleetCompostionModified()
+        self.setFleetGUIModified()
     
     def injectBridge(self):
         ''' Iniect the class/object in JS used to receive json modification of the 
