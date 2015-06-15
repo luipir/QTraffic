@@ -30,6 +30,7 @@ from fleet_composition_tab_manager import FleetCompositionTabManager
 # 
 # class QTrafficDockWidget(FORM_CLASS):
 from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
+from bzrlib.doc_generate.conf import project
 
 class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     
@@ -50,8 +51,19 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # to facilitate maintenance to other peaple not practical in OOP
         
         # init project tab manager
-        self.projectTabManager = ProjectTabManager(self)        
+        self.projectTabManager = ProjectTabManager(self)
+        self.projectTabManager.projectLoaded.connect(self.setTabsOnCurrentProject)
         
         # init Fleet Composition tab Manager
         self.fleetCompostionTabManager = FleetCompositionTabManager(self)
+        self.fleetCompostionTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
+        
+    def setTabsOnCurrentProject(self):
+        ''' A new project has loaded => set all tabs basing on that project
+        '''
+        # get project
+        project = self.projectTabManager.getProject()
+        
+        # set status for all tabls
+        self.fleetCompostionTabManager.setProject(project)
         
