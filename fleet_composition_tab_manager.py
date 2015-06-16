@@ -138,7 +138,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         ''' setting the new project on which the tab is based
         '''
         self.project = project
-        if self.project != None:
+        if self.project:
             # emit configurationLoaded with the status of loading
             self.loadConfiguration()
             
@@ -146,7 +146,7 @@ class FleetCompositionTabManager(QtCore.QObject):
             self.gui.tabWidget.setTabEnabled(self.tabIndex, True)
         
         else:
-            # enable current tab because no project has been loaded yet
+            # disable current tab because no project has been loaded yet
             self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
     
     def createNewRoadType(self):
