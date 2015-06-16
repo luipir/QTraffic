@@ -21,7 +21,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="project_tab">
        <attribute name="title">
@@ -1671,6 +1671,111 @@
                 </item>
                </layout>
               </widget>
+              <widget class="QWidget" name="tab_68">
+               <attribute name="title">
+                <string>Fuel consumption</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="verticalLayout_90">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_450">
+                  <item>
+                   <widget class="QLabel" name="label_447">
+                    <property name="text">
+                     <string>PRE EURO</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_356"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_449">
+                  <item>
+                   <widget class="QLabel" name="label_446">
+                    <property name="text">
+                     <string>EURO 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_355"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_445">
+                  <item>
+                   <widget class="QLabel" name="label_442">
+                    <property name="text">
+                     <string>EURO 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_281"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_447">
+                  <item>
+                   <widget class="QLabel" name="label_444">
+                    <property name="text">
+                     <string>EURO 3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_353"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_448">
+                  <item>
+                   <widget class="QLabel" name="label_445">
+                    <property name="text">
+                     <string>EURO 4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_354"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_451">
+                  <item>
+                   <widget class="QLabel" name="label_448">
+                    <property name="text">
+                     <string>EURO 5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_357"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_446">
+                  <item>
+                   <widget class="QLabel" name="label_443">
+                    <property name="text">
+                     <string>EURO 6</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_282"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
            </layout>
@@ -1679,7 +1784,7 @@
            <attribute name="title">
             <string>Light duty vehicles</string>
            </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_45">
+           <layout class="QVBoxLayout" name="verticalLayout_75">
             <item>
              <widget class="QTabWidget" name="tabWidget_4">
               <property name="currentIndex">
@@ -2735,6 +2840,111 @@
                 </item>
                </layout>
               </widget>
+              <widget class="QWidget" name="tab_69">
+               <attribute name="title">
+                <string>Fuel consumption</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="verticalLayout_91">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_452">
+                  <item>
+                   <widget class="QLabel" name="label_449">
+                    <property name="text">
+                     <string>PRE EURO</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_358"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_453">
+                  <item>
+                   <widget class="QLabel" name="label_450">
+                    <property name="text">
+                     <string>EURO 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_359"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_454">
+                  <item>
+                   <widget class="QLabel" name="label_451">
+                    <property name="text">
+                     <string>EURO 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_283"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_455">
+                  <item>
+                   <widget class="QLabel" name="label_452">
+                    <property name="text">
+                     <string>EURO 3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_360"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_456">
+                  <item>
+                   <widget class="QLabel" name="label_453">
+                    <property name="text">
+                     <string>EURO 4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_361"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_457">
+                  <item>
+                   <widget class="QLabel" name="label_454">
+                    <property name="text">
+                     <string>EURO 5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_362"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_458">
+                  <item>
+                   <widget class="QLabel" name="label_455">
+                    <property name="text">
+                     <string>EURO 6</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_284"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
            </layout>
@@ -2743,7 +2953,7 @@
            <attribute name="title">
             <string>Heavy duty vehicles</string>
            </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_56">
+           <layout class="QVBoxLayout" name="verticalLayout_76">
             <item>
              <widget class="QTabWidget" name="tabWidget_5">
               <property name="currentIndex">
@@ -2753,7 +2963,7 @@
                <attribute name="title">
                 <string>CO</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_46">
+               <layout class="QVBoxLayout" name="verticalLayout_45">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_165">
                   <item>
@@ -2858,7 +3068,7 @@
                <attribute name="title">
                 <string>NOX</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_47">
+               <layout class="QVBoxLayout" name="verticalLayout_46">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_172">
                   <item>
@@ -2963,7 +3173,7 @@
                <attribute name="title">
                 <string>NMVOCs</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_48">
+               <layout class="QVBoxLayout" name="verticalLayout_47">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_179">
                   <item>
@@ -3068,7 +3278,7 @@
                <attribute name="title">
                 <string>CO2</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_49">
+               <layout class="QVBoxLayout" name="verticalLayout_48">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_186">
                   <item>
@@ -3173,7 +3383,7 @@
                <attribute name="title">
                 <string>CH4</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_50">
+               <layout class="QVBoxLayout" name="verticalLayout_49">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_193">
                   <item>
@@ -3278,7 +3488,7 @@
                <attribute name="title">
                 <string>N2O</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_51">
+               <layout class="QVBoxLayout" name="verticalLayout_50">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_200">
                   <item>
@@ -3383,7 +3593,7 @@
                <attribute name="title">
                 <string>NH3</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_52">
+               <layout class="QVBoxLayout" name="verticalLayout_51">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_207">
                   <item>
@@ -3488,7 +3698,7 @@
                <attribute name="title">
                 <string>SO2</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_53">
+               <layout class="QVBoxLayout" name="verticalLayout_52">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_214">
                   <item>
@@ -3593,7 +3803,7 @@
                <attribute name="title">
                 <string>PM 2.5</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_54">
+               <layout class="QVBoxLayout" name="verticalLayout_53">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_221">
                   <item>
@@ -3698,7 +3908,7 @@
                <attribute name="title">
                 <string>C6H6</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_55">
+               <layout class="QVBoxLayout" name="verticalLayout_54">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_228">
                   <item>
@@ -3799,6 +4009,111 @@
                 </item>
                </layout>
               </widget>
+              <widget class="QWidget" name="tab_70">
+               <attribute name="title">
+                <string>Fuel consumption</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="verticalLayout_92">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_459">
+                  <item>
+                   <widget class="QLabel" name="label_456">
+                    <property name="text">
+                     <string>PRE EURO</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_363"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_460">
+                  <item>
+                   <widget class="QLabel" name="label_457">
+                    <property name="text">
+                     <string>EURO 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_364"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_461">
+                  <item>
+                   <widget class="QLabel" name="label_458">
+                    <property name="text">
+                     <string>EURO 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_285"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_462">
+                  <item>
+                   <widget class="QLabel" name="label_459">
+                    <property name="text">
+                     <string>EURO 3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_365"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_463">
+                  <item>
+                   <widget class="QLabel" name="label_460">
+                    <property name="text">
+                     <string>EURO 4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_366"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_464">
+                  <item>
+                   <widget class="QLabel" name="label_461">
+                    <property name="text">
+                     <string>EURO 5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_367"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_465">
+                  <item>
+                   <widget class="QLabel" name="label_462">
+                    <property name="text">
+                     <string>EURO 6</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_286"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
            </layout>
@@ -3807,17 +4122,17 @@
            <attribute name="title">
             <string>Urban buses</string>
            </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_67">
+           <layout class="QVBoxLayout" name="verticalLayout_77">
             <item>
              <widget class="QTabWidget" name="tabWidget_6">
               <property name="currentIndex">
-               <number>9</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="tab_37">
                <attribute name="title">
                 <string>CO</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_57">
+               <layout class="QVBoxLayout" name="verticalLayout_55">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_235">
                   <item>
@@ -3828,7 +4143,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO_PreEuro_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_287"/>
                   </item>
                  </layout>
                 </item>
@@ -3842,7 +4157,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_288"/>
                   </item>
                  </layout>
                 </item>
@@ -3856,7 +4171,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_289"/>
                   </item>
                  </layout>
                 </item>
@@ -3870,7 +4185,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_290"/>
                   </item>
                  </layout>
                 </item>
@@ -3884,7 +4199,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_291"/>
                   </item>
                  </layout>
                 </item>
@@ -3898,7 +4213,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_292"/>
                   </item>
                  </layout>
                 </item>
@@ -3912,7 +4227,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_293"/>
                   </item>
                  </layout>
                 </item>
@@ -3922,7 +4237,7 @@
                <attribute name="title">
                 <string>NOX</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_58">
+               <layout class="QVBoxLayout" name="verticalLayout_56">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_242">
                   <item>
@@ -3933,7 +4248,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NOX_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_294"/>
                   </item>
                  </layout>
                 </item>
@@ -3947,7 +4262,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NOX_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_295"/>
                   </item>
                  </layout>
                 </item>
@@ -3961,7 +4276,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NOX_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_296"/>
                   </item>
                  </layout>
                 </item>
@@ -3975,7 +4290,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NOX_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_297"/>
                   </item>
                  </layout>
                 </item>
@@ -3989,7 +4304,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NOX_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_298"/>
                   </item>
                  </layout>
                 </item>
@@ -4003,7 +4318,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NOX_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_299"/>
                   </item>
                  </layout>
                 </item>
@@ -4017,7 +4332,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NOX_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_300"/>
                   </item>
                  </layout>
                 </item>
@@ -4027,7 +4342,7 @@
                <attribute name="title">
                 <string>NMVOCs</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_59">
+               <layout class="QVBoxLayout" name="verticalLayout_57">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_249">
                   <item>
@@ -4038,7 +4353,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NMVOC_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_301"/>
                   </item>
                  </layout>
                 </item>
@@ -4052,7 +4367,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NMVOC_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_302"/>
                   </item>
                  </layout>
                 </item>
@@ -4066,7 +4381,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NMVOC_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_303"/>
                   </item>
                  </layout>
                 </item>
@@ -4080,7 +4395,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NMVOC_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_304"/>
                   </item>
                  </layout>
                 </item>
@@ -4094,7 +4409,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NMVOC_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_305"/>
                   </item>
                  </layout>
                 </item>
@@ -4108,7 +4423,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NMVOC_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_306"/>
                   </item>
                  </layout>
                 </item>
@@ -4122,7 +4437,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NMVOC_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_307"/>
                   </item>
                  </layout>
                 </item>
@@ -4132,7 +4447,7 @@
                <attribute name="title">
                 <string>CO2</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_60">
+               <layout class="QVBoxLayout" name="verticalLayout_58">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_256">
                   <item>
@@ -4143,7 +4458,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO2_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_308"/>
                   </item>
                  </layout>
                 </item>
@@ -4157,7 +4472,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO2_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_309"/>
                   </item>
                  </layout>
                 </item>
@@ -4171,7 +4486,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO2_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_310"/>
                   </item>
                  </layout>
                 </item>
@@ -4185,7 +4500,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO2_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_311"/>
                   </item>
                  </layout>
                 </item>
@@ -4199,7 +4514,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO2_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_312"/>
                   </item>
                  </layout>
                 </item>
@@ -4213,7 +4528,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO2_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_313"/>
                   </item>
                  </layout>
                 </item>
@@ -4227,7 +4542,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CO2_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_314"/>
                   </item>
                  </layout>
                 </item>
@@ -4237,7 +4552,7 @@
                <attribute name="title">
                 <string>CH4</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_61">
+               <layout class="QVBoxLayout" name="verticalLayout_59">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_263">
                   <item>
@@ -4248,7 +4563,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CH4_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_315"/>
                   </item>
                  </layout>
                 </item>
@@ -4262,7 +4577,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CH4_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_316"/>
                   </item>
                  </layout>
                 </item>
@@ -4276,7 +4591,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CH4_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_317"/>
                   </item>
                  </layout>
                 </item>
@@ -4290,7 +4605,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CH4_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_318"/>
                   </item>
                  </layout>
                 </item>
@@ -4304,7 +4619,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CH4_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_319"/>
                   </item>
                  </layout>
                 </item>
@@ -4318,7 +4633,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CH4_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_320"/>
                   </item>
                  </layout>
                 </item>
@@ -4332,7 +4647,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="CH4_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_321"/>
                   </item>
                  </layout>
                 </item>
@@ -4342,7 +4657,7 @@
                <attribute name="title">
                 <string>N2O</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_62">
+               <layout class="QVBoxLayout" name="verticalLayout_60">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_270">
                   <item>
@@ -4353,7 +4668,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="N2O_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_322"/>
                   </item>
                  </layout>
                 </item>
@@ -4367,7 +4682,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="N2O_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_323"/>
                   </item>
                  </layout>
                 </item>
@@ -4381,7 +4696,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="N2O_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_324"/>
                   </item>
                  </layout>
                 </item>
@@ -4395,7 +4710,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="N2O_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_325"/>
                   </item>
                  </layout>
                 </item>
@@ -4409,7 +4724,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="N2O_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_326"/>
                   </item>
                  </layout>
                 </item>
@@ -4423,7 +4738,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="N2O_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_327"/>
                   </item>
                  </layout>
                 </item>
@@ -4437,7 +4752,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="N2O_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_328"/>
                   </item>
                  </layout>
                 </item>
@@ -4447,7 +4762,7 @@
                <attribute name="title">
                 <string>NH3</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_63">
+               <layout class="QVBoxLayout" name="verticalLayout_61">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_277">
                   <item>
@@ -4458,7 +4773,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NH3_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_329"/>
                   </item>
                  </layout>
                 </item>
@@ -4472,7 +4787,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NH3_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_330"/>
                   </item>
                  </layout>
                 </item>
@@ -4486,7 +4801,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NH3_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_331"/>
                   </item>
                  </layout>
                 </item>
@@ -4500,7 +4815,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NH3_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_332"/>
                   </item>
                  </layout>
                 </item>
@@ -4514,7 +4829,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NH3_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_333"/>
                   </item>
                  </layout>
                 </item>
@@ -4528,7 +4843,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NH3_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_334"/>
                   </item>
                  </layout>
                 </item>
@@ -4542,7 +4857,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="NH3_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_335"/>
                   </item>
                  </layout>
                 </item>
@@ -4552,7 +4867,7 @@
                <attribute name="title">
                 <string>SO2</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_64">
+               <layout class="QVBoxLayout" name="verticalLayout_62">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_284">
                   <item>
@@ -4563,7 +4878,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="SO2_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_336"/>
                   </item>
                  </layout>
                 </item>
@@ -4577,7 +4892,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="SO2_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_337"/>
                   </item>
                  </layout>
                 </item>
@@ -4591,7 +4906,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="SO2_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_338"/>
                   </item>
                  </layout>
                 </item>
@@ -4605,7 +4920,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="SO2_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_339"/>
                   </item>
                  </layout>
                 </item>
@@ -4619,7 +4934,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="SO2_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_340"/>
                   </item>
                  </layout>
                 </item>
@@ -4633,7 +4948,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="SO2_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_341"/>
                   </item>
                  </layout>
                 </item>
@@ -4647,7 +4962,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="SO2_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_342"/>
                   </item>
                  </layout>
                 </item>
@@ -4657,7 +4972,7 @@
                <attribute name="title">
                 <string>PM 2.5</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_65">
+               <layout class="QVBoxLayout" name="verticalLayout_63">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_291">
                   <item>
@@ -4668,7 +4983,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="PM25_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_343"/>
                   </item>
                  </layout>
                 </item>
@@ -4682,7 +4997,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="PM25_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_344"/>
                   </item>
                  </layout>
                 </item>
@@ -4696,7 +5011,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="PM25_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_345"/>
                   </item>
                  </layout>
                 </item>
@@ -4710,7 +5025,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="PM25_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_346"/>
                   </item>
                  </layout>
                 </item>
@@ -4724,7 +5039,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="PM25_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_347"/>
                   </item>
                  </layout>
                 </item>
@@ -4738,7 +5053,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="PM25_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_348"/>
                   </item>
                  </layout>
                 </item>
@@ -4752,7 +5067,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="PM25_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_349"/>
                   </item>
                  </layout>
                 </item>
@@ -4762,7 +5077,7 @@
                <attribute name="title">
                 <string>C6H6</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_66">
+               <layout class="QVBoxLayout" name="verticalLayout_64">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_298">
                   <item>
@@ -4773,7 +5088,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="C6H6_PREEURO_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_350"/>
                   </item>
                  </layout>
                 </item>
@@ -4787,7 +5102,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="C6H6_EURO1_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_351"/>
                   </item>
                  </layout>
                 </item>
@@ -4801,7 +5116,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="C6H6_EURO2_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_352"/>
                   </item>
                  </layout>
                 </item>
@@ -4815,7 +5130,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="C6H6_EURO3_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_368"/>
                   </item>
                  </layout>
                 </item>
@@ -4829,7 +5144,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="C6H6_EURO4_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_369"/>
                   </item>
                  </layout>
                 </item>
@@ -4843,7 +5158,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="C6H6_EURO5_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_370"/>
                   </item>
                  </layout>
                 </item>
@@ -4857,7 +5172,112 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="C6H6_EURO6_LineEdit"/>
+                   <widget class="QLineEdit" name="lineEdit_371"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tab_71">
+               <attribute name="title">
+                <string>Fuel consumption</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="verticalLayout_93">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_466">
+                  <item>
+                   <widget class="QLabel" name="label_463">
+                    <property name="text">
+                     <string>PRE EURO</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_372"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_467">
+                  <item>
+                   <widget class="QLabel" name="label_464">
+                    <property name="text">
+                     <string>EURO 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_373"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_468">
+                  <item>
+                   <widget class="QLabel" name="label_465">
+                    <property name="text">
+                     <string>EURO 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_374"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_469">
+                  <item>
+                   <widget class="QLabel" name="label_466">
+                    <property name="text">
+                     <string>EURO 3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_375"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_470">
+                  <item>
+                   <widget class="QLabel" name="label_467">
+                    <property name="text">
+                     <string>EURO 4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_376"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_471">
+                  <item>
+                   <widget class="QLabel" name="label_468">
+                    <property name="text">
+                     <string>EURO 5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_377"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_472">
+                  <item>
+                   <widget class="QLabel" name="label_469">
+                    <property name="text">
+                     <string>EURO 6</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_378"/>
                   </item>
                  </layout>
                 </item>
@@ -4881,7 +5301,7 @@
                <attribute name="title">
                 <string>CO</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_68">
+               <layout class="QVBoxLayout" name="verticalLayout_65">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_305">
                   <item>
@@ -4892,7 +5312,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_283"/>
+                   <widget class="QLineEdit" name="lineEdit_379"/>
                   </item>
                  </layout>
                 </item>
@@ -4906,7 +5326,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_284"/>
+                   <widget class="QLineEdit" name="lineEdit_380"/>
                   </item>
                  </layout>
                 </item>
@@ -4920,7 +5340,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_285"/>
+                   <widget class="QLineEdit" name="lineEdit_381"/>
                   </item>
                  </layout>
                 </item>
@@ -4934,7 +5354,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_286"/>
+                   <widget class="QLineEdit" name="lineEdit_382"/>
                   </item>
                  </layout>
                 </item>
@@ -4948,7 +5368,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_287"/>
+                   <widget class="QLineEdit" name="lineEdit_383"/>
                   </item>
                  </layout>
                 </item>
@@ -4962,7 +5382,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_288"/>
+                   <widget class="QLineEdit" name="lineEdit_384"/>
                   </item>
                  </layout>
                 </item>
@@ -4976,7 +5396,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_289"/>
+                   <widget class="QLineEdit" name="lineEdit_385"/>
                   </item>
                  </layout>
                 </item>
@@ -4986,7 +5406,7 @@
                <attribute name="title">
                 <string>NOX</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_69">
+               <layout class="QVBoxLayout" name="verticalLayout_66">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_312">
                   <item>
@@ -4997,7 +5417,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_290"/>
+                   <widget class="QLineEdit" name="lineEdit_386"/>
                   </item>
                  </layout>
                 </item>
@@ -5011,7 +5431,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_291"/>
+                   <widget class="QLineEdit" name="lineEdit_387"/>
                   </item>
                  </layout>
                 </item>
@@ -5025,7 +5445,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_292"/>
+                   <widget class="QLineEdit" name="lineEdit_388"/>
                   </item>
                  </layout>
                 </item>
@@ -5039,7 +5459,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_293"/>
+                   <widget class="QLineEdit" name="lineEdit_389"/>
                   </item>
                  </layout>
                 </item>
@@ -5053,7 +5473,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_294"/>
+                   <widget class="QLineEdit" name="lineEdit_390"/>
                   </item>
                  </layout>
                 </item>
@@ -5067,7 +5487,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_295"/>
+                   <widget class="QLineEdit" name="lineEdit_391"/>
                   </item>
                  </layout>
                 </item>
@@ -5081,7 +5501,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_296"/>
+                   <widget class="QLineEdit" name="lineEdit_392"/>
                   </item>
                  </layout>
                 </item>
@@ -5091,7 +5511,7 @@
                <attribute name="title">
                 <string>NMVOCs</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_70">
+               <layout class="QVBoxLayout" name="verticalLayout_67">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_319">
                   <item>
@@ -5102,7 +5522,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_297"/>
+                   <widget class="QLineEdit" name="lineEdit_393"/>
                   </item>
                  </layout>
                 </item>
@@ -5116,7 +5536,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_298"/>
+                   <widget class="QLineEdit" name="lineEdit_394"/>
                   </item>
                  </layout>
                 </item>
@@ -5130,7 +5550,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_299"/>
+                   <widget class="QLineEdit" name="lineEdit_395"/>
                   </item>
                  </layout>
                 </item>
@@ -5144,7 +5564,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_300"/>
+                   <widget class="QLineEdit" name="lineEdit_396"/>
                   </item>
                  </layout>
                 </item>
@@ -5158,7 +5578,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_301"/>
+                   <widget class="QLineEdit" name="lineEdit_397"/>
                   </item>
                  </layout>
                 </item>
@@ -5172,7 +5592,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_302"/>
+                   <widget class="QLineEdit" name="lineEdit_398"/>
                   </item>
                  </layout>
                 </item>
@@ -5186,7 +5606,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_303"/>
+                   <widget class="QLineEdit" name="lineEdit_399"/>
                   </item>
                  </layout>
                 </item>
@@ -5196,7 +5616,7 @@
                <attribute name="title">
                 <string>CO2</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_71">
+               <layout class="QVBoxLayout" name="verticalLayout_68">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_326">
                   <item>
@@ -5207,7 +5627,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_304"/>
+                   <widget class="QLineEdit" name="lineEdit_400"/>
                   </item>
                  </layout>
                 </item>
@@ -5221,7 +5641,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_305"/>
+                   <widget class="QLineEdit" name="lineEdit_401"/>
                   </item>
                  </layout>
                 </item>
@@ -5235,7 +5655,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_306"/>
+                   <widget class="QLineEdit" name="lineEdit_402"/>
                   </item>
                  </layout>
                 </item>
@@ -5249,7 +5669,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_307"/>
+                   <widget class="QLineEdit" name="lineEdit_403"/>
                   </item>
                  </layout>
                 </item>
@@ -5263,7 +5683,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_308"/>
+                   <widget class="QLineEdit" name="lineEdit_404"/>
                   </item>
                  </layout>
                 </item>
@@ -5277,7 +5697,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_309"/>
+                   <widget class="QLineEdit" name="lineEdit_405"/>
                   </item>
                  </layout>
                 </item>
@@ -5291,7 +5711,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_310"/>
+                   <widget class="QLineEdit" name="lineEdit_406"/>
                   </item>
                  </layout>
                 </item>
@@ -5301,7 +5721,7 @@
                <attribute name="title">
                 <string>CH4</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_72">
+               <layout class="QVBoxLayout" name="verticalLayout_69">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_333">
                   <item>
@@ -5312,7 +5732,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_311"/>
+                   <widget class="QLineEdit" name="lineEdit_407"/>
                   </item>
                  </layout>
                 </item>
@@ -5326,7 +5746,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_312"/>
+                   <widget class="QLineEdit" name="lineEdit_408"/>
                   </item>
                  </layout>
                 </item>
@@ -5340,7 +5760,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_313"/>
+                   <widget class="QLineEdit" name="lineEdit_409"/>
                   </item>
                  </layout>
                 </item>
@@ -5354,7 +5774,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_314"/>
+                   <widget class="QLineEdit" name="lineEdit_410"/>
                   </item>
                  </layout>
                 </item>
@@ -5368,7 +5788,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_315"/>
+                   <widget class="QLineEdit" name="lineEdit_411"/>
                   </item>
                  </layout>
                 </item>
@@ -5382,7 +5802,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_316"/>
+                   <widget class="QLineEdit" name="lineEdit_412"/>
                   </item>
                  </layout>
                 </item>
@@ -5396,7 +5816,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_317"/>
+                   <widget class="QLineEdit" name="lineEdit_413"/>
                   </item>
                  </layout>
                 </item>
@@ -5406,7 +5826,7 @@
                <attribute name="title">
                 <string>N2O</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_73">
+               <layout class="QVBoxLayout" name="verticalLayout_70">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_340">
                   <item>
@@ -5417,7 +5837,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_318"/>
+                   <widget class="QLineEdit" name="lineEdit_414"/>
                   </item>
                  </layout>
                 </item>
@@ -5431,7 +5851,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_319"/>
+                   <widget class="QLineEdit" name="lineEdit_415"/>
                   </item>
                  </layout>
                 </item>
@@ -5445,7 +5865,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_320"/>
+                   <widget class="QLineEdit" name="lineEdit_416"/>
                   </item>
                  </layout>
                 </item>
@@ -5459,7 +5879,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_321"/>
+                   <widget class="QLineEdit" name="lineEdit_417"/>
                   </item>
                  </layout>
                 </item>
@@ -5473,7 +5893,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_322"/>
+                   <widget class="QLineEdit" name="lineEdit_418"/>
                   </item>
                  </layout>
                 </item>
@@ -5487,7 +5907,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_323"/>
+                   <widget class="QLineEdit" name="lineEdit_419"/>
                   </item>
                  </layout>
                 </item>
@@ -5501,7 +5921,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_324"/>
+                   <widget class="QLineEdit" name="lineEdit_420"/>
                   </item>
                  </layout>
                 </item>
@@ -5511,7 +5931,7 @@
                <attribute name="title">
                 <string>NH3</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_74">
+               <layout class="QVBoxLayout" name="verticalLayout_71">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_347">
                   <item>
@@ -5522,7 +5942,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_325"/>
+                   <widget class="QLineEdit" name="lineEdit_421"/>
                   </item>
                  </layout>
                 </item>
@@ -5536,7 +5956,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_326"/>
+                   <widget class="QLineEdit" name="lineEdit_422"/>
                   </item>
                  </layout>
                 </item>
@@ -5550,7 +5970,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_327"/>
+                   <widget class="QLineEdit" name="lineEdit_423"/>
                   </item>
                  </layout>
                 </item>
@@ -5564,7 +5984,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_328"/>
+                   <widget class="QLineEdit" name="lineEdit_424"/>
                   </item>
                  </layout>
                 </item>
@@ -5578,7 +5998,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_329"/>
+                   <widget class="QLineEdit" name="lineEdit_425"/>
                   </item>
                  </layout>
                 </item>
@@ -5592,7 +6012,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_330"/>
+                   <widget class="QLineEdit" name="lineEdit_426"/>
                   </item>
                  </layout>
                 </item>
@@ -5606,7 +6026,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_331"/>
+                   <widget class="QLineEdit" name="lineEdit_427"/>
                   </item>
                  </layout>
                 </item>
@@ -5616,7 +6036,7 @@
                <attribute name="title">
                 <string>SO2</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_75">
+               <layout class="QVBoxLayout" name="verticalLayout_72">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_354">
                   <item>
@@ -5627,7 +6047,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_332"/>
+                   <widget class="QLineEdit" name="lineEdit_428"/>
                   </item>
                  </layout>
                 </item>
@@ -5641,7 +6061,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_333"/>
+                   <widget class="QLineEdit" name="lineEdit_429"/>
                   </item>
                  </layout>
                 </item>
@@ -5655,7 +6075,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_334"/>
+                   <widget class="QLineEdit" name="lineEdit_430"/>
                   </item>
                  </layout>
                 </item>
@@ -5669,7 +6089,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_335"/>
+                   <widget class="QLineEdit" name="lineEdit_431"/>
                   </item>
                  </layout>
                 </item>
@@ -5683,7 +6103,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_336"/>
+                   <widget class="QLineEdit" name="lineEdit_432"/>
                   </item>
                  </layout>
                 </item>
@@ -5697,7 +6117,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_337"/>
+                   <widget class="QLineEdit" name="lineEdit_433"/>
                   </item>
                  </layout>
                 </item>
@@ -5711,7 +6131,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_338"/>
+                   <widget class="QLineEdit" name="lineEdit_434"/>
                   </item>
                  </layout>
                 </item>
@@ -5721,7 +6141,7 @@
                <attribute name="title">
                 <string>PM 2.5</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_76">
+               <layout class="QVBoxLayout" name="verticalLayout_73">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_361">
                   <item>
@@ -5732,7 +6152,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_339"/>
+                   <widget class="QLineEdit" name="lineEdit_435"/>
                   </item>
                  </layout>
                 </item>
@@ -5746,7 +6166,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_340"/>
+                   <widget class="QLineEdit" name="lineEdit_436"/>
                   </item>
                  </layout>
                 </item>
@@ -5760,7 +6180,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_341"/>
+                   <widget class="QLineEdit" name="lineEdit_437"/>
                   </item>
                  </layout>
                 </item>
@@ -5774,7 +6194,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_342"/>
+                   <widget class="QLineEdit" name="lineEdit_438"/>
                   </item>
                  </layout>
                 </item>
@@ -5788,7 +6208,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_343"/>
+                   <widget class="QLineEdit" name="lineEdit_439"/>
                   </item>
                  </layout>
                 </item>
@@ -5802,7 +6222,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_344"/>
+                   <widget class="QLineEdit" name="lineEdit_440"/>
                   </item>
                  </layout>
                 </item>
@@ -5816,7 +6236,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_345"/>
+                   <widget class="QLineEdit" name="lineEdit_441"/>
                   </item>
                  </layout>
                 </item>
@@ -5826,7 +6246,7 @@
                <attribute name="title">
                 <string>C6H6</string>
                </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_77">
+               <layout class="QVBoxLayout" name="verticalLayout_74">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_368">
                   <item>
@@ -5837,7 +6257,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_346"/>
+                   <widget class="QLineEdit" name="lineEdit_442"/>
                   </item>
                  </layout>
                 </item>
@@ -5851,7 +6271,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_347"/>
+                   <widget class="QLineEdit" name="lineEdit_443"/>
                   </item>
                  </layout>
                 </item>
@@ -5865,7 +6285,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_348"/>
+                   <widget class="QLineEdit" name="lineEdit_444"/>
                   </item>
                  </layout>
                 </item>
@@ -5879,7 +6299,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_349"/>
+                   <widget class="QLineEdit" name="lineEdit_445"/>
                   </item>
                  </layout>
                 </item>
@@ -5893,7 +6313,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_350"/>
+                   <widget class="QLineEdit" name="lineEdit_446"/>
                   </item>
                  </layout>
                 </item>
@@ -5907,7 +6327,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_351"/>
+                   <widget class="QLineEdit" name="lineEdit_447"/>
                   </item>
                  </layout>
                 </item>
@@ -5921,7 +6341,112 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_352"/>
+                   <widget class="QLineEdit" name="lineEdit_448"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tab_72">
+               <attribute name="title">
+                <string>Fuel consumption</string>
+               </attribute>
+               <layout class="QVBoxLayout" name="verticalLayout_94">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_473">
+                  <item>
+                   <widget class="QLabel" name="label_470">
+                    <property name="text">
+                     <string>PRE EURO</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_449"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_474">
+                  <item>
+                   <widget class="QLabel" name="label_471">
+                    <property name="text">
+                     <string>EURO 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_450"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_475">
+                  <item>
+                   <widget class="QLabel" name="label_472">
+                    <property name="text">
+                     <string>EURO 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_451"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_476">
+                  <item>
+                   <widget class="QLabel" name="label_473">
+                    <property name="text">
+                     <string>EURO 3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_452"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_477">
+                  <item>
+                   <widget class="QLabel" name="label_474">
+                    <property name="text">
+                     <string>EURO 4</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_453"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_478">
+                  <item>
+                   <widget class="QLabel" name="label_475">
+                    <property name="text">
+                     <string>EURO 5</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_454"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_479">
+                  <item>
+                   <widget class="QLabel" name="label_476">
+                    <property name="text">
+                     <string>EURO 6</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_455"/>
                   </item>
                  </layout>
                 </item>
@@ -6288,10 +6813,6 @@ QGroupBox::title{
                  </widget>
                 </item>
                </layout>
-               <zorder>pollutantsCO_CBox</zorder>
-               <zorder>pollutantsCO_CBox</zorder>
-               <zorder>pollutantsNOx_CBox</zorder>
-               <zorder>pollutantsPM10_CBox</zorder>
               </widget>
              </item>
              <item row="0" column="2">
