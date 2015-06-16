@@ -108,19 +108,23 @@ class InputNetworkTabManager(QtCore.QObject):
         fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
         unknownIndex = -1
         
+        self.gui.roadType_CBox.clear()
+        self.gui.roadLenght_CBox.clear()
+        self.gui.roadGradient_CBox.clear()
+        
         self.gui.roadType_CBox.addItems(fieldNames)
         self.gui.roadLenght_CBox.addItems(fieldNames)
         self.gui.roadGradient_CBox.addItems(fieldNames)
         
-        # select the combobox item as in the project file... if not available then "Please select"
+       # select the combobox item as in the project file... if not available then "Please select"
         index = self.gui.roadType_CBox.findText(columnRoadType)
-        self.gui.roadType_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.roadType_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.roadLenght_CBox.findText(columnRoadLenght)
-        self.gui.roadLenght_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.roadLenght_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.roadGradient_CBox.findText(columnRoadSlope)
-        self.gui.roadGradient_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.roadGradient_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         # add all modification events to notify project modification
         try:

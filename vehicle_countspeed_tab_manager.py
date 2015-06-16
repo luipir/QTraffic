@@ -90,6 +90,9 @@ class VechicleCountSpeedTabManager(QtCore.QObject):
         columnLightDutyVehicle = self.project.value('VehicleCountSpeed/columnLightDutyVehicle', '')
         columnHeavyDutyVechicle = self.project.value('VehicleCountSpeed/columnHeavyDutyVechicle', '')
         columnUrbanBuses = self.project.value('VehicleCountSpeed/columnUrbanBuses', '')
+        
+        print("---",columnUrbanBuses,"---")
+        
         columnMotorcycle = self.project.value('VehicleCountSpeed/columnMotorcycle', '')
         columnCouch = self.project.value('VehicleCountSpeed/columnCouch', '')
         columnAverageSpeed = self.project.value('VehicleCountSpeed/columnAverageSpeed', '')
@@ -97,6 +100,14 @@ class VechicleCountSpeedTabManager(QtCore.QObject):
         # now populare combo boxes with layer colums
         fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
         unknownIndex = -1
+        
+        self.gui.passengerCarsCount_CBox.clear()
+        self.gui.lightDutyVehicleCount_CBox.clear()
+        self.gui.heavyDutyVehicleCount_CBox.clear()
+        self.gui.urbanBusesCount_CBox.clear()
+        self.gui.coachesCount_CBox.clear()
+        self.gui.motorcycleCount_CBox.clear()
+        self.gui.averageVehicleSpeed_Cbox.clear()
         
         self.gui.passengerCarsCount_CBox.addItems(fieldNames)
         self.gui.lightDutyVehicleCount_CBox.addItems(fieldNames)
@@ -108,25 +119,27 @@ class VechicleCountSpeedTabManager(QtCore.QObject):
         
         # select the combobox item as in the project file... if not available then "Please select"
         index = self.gui.passengerCarsCount_CBox.findText(columnPassengerCars)
-        self.gui.passengerCarsCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.passengerCarsCount_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.lightDutyVehicleCount_CBox.findText(columnLightDutyVehicle)
-        self.gui.lightDutyVehicleCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.lightDutyVehicleCount_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.heavyDutyVehicleCount_CBox.findText(columnHeavyDutyVechicle)
-        self.gui.heavyDutyVehicleCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.heavyDutyVehicleCount_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.urbanBusesCount_CBox.findText(columnUrbanBuses)
-        self.gui.urbanBusesCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        
+        print(index)
+        self.gui.urbanBusesCount_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.coachesCount_CBox.findText(columnCouch)
-        self.gui.coachesCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.coachesCount_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.motorcycleCount_CBox.findText(columnMotorcycle)
-        self.gui.motorcycleCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.motorcycleCount_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         index = self.gui.averageVehicleSpeed_Cbox.findText(columnAverageSpeed)
-        self.gui.averageVehicleSpeed_Cbox.setCurrentIndex( index if index > 0 else unknownIndex )
+        self.gui.averageVehicleSpeed_Cbox.setCurrentIndex( index if index >= 0 else unknownIndex )
     
         # add all modification events to notify project modification
         try:
@@ -157,6 +170,9 @@ class VechicleCountSpeedTabManager(QtCore.QObject):
         columnLightDutyVehicle = self.gui.lightDutyVehicleCount_CBox.currentText()
         columnHeavyDutyVechicle = self.gui.heavyDutyVehicleCount_CBox.currentText()
         columnUrbanBuses = self.gui.urbanBusesCount_CBox.currentText()
+        
+        print("modified", columnUrbanBuses)
+        
         columnCouch = self.gui.coachesCount_CBox.currentText()
         columnMotorcycle = self.gui.motorcycleCount_CBox.currentText()
         columnAverageSpeed = self.gui.averageVehicleSpeed_Cbox.currentText()
