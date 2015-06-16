@@ -34,7 +34,7 @@ from qgis.gui import (QgsMessageBar)
 class ProjectTabManager(QtCore.QObject):
     ''' Class to hide managing of project load and save
     '''
-    tabModified = QtCore.pyqtSignal()
+    projectLoaded = QtCore.pyqtSignal()
     
     def __init__(self, parent=None):
         '''constructor'''
@@ -46,7 +46,8 @@ class ProjectTabManager(QtCore.QObject):
         
         # init some globals
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
-        self.defaultProject = os.path.join(self.applicationPath, 'config','defaultProject.cfg')
+        self.defaultProjectFileName = os.path.join(self.applicationPath, 'config','defaultProject.cfg')
+        self.project = None
         self.roadLayer = None
 
         # create listeners to load, save and saveas
@@ -60,18 +61,21 @@ class ProjectTabManager(QtCore.QObject):
         # if it has been modified or not... no Project class has been created
         # to reduce code overhead du the fact that project is a .ini container
         self.gui.saveProject_PButton.setEnabled(False)
-        self.tabModified.connect(self.setProjectModified)
     
     @QtCore.pyqtSlot()
     def setProjectModified(self):
         ''' Set status of project GUI because the project has been modified
             His method is a slot called everytime a gui element has been modified
         '''
+        # do nothing if the project already marked as modified
+        if self.isModified():
+            return
+        
         # enable Save button
         self.gui.saveProject_PButton.setEnabled(True)
         
         # set tab text = tab text + '*' to show that project has been modified
-        self.gui.tabWidget.setTabText(0, self.gui.tabWidget.tabText(0) + '*')        
+        self.gui.tabWidget.setTabText(0, self.gui.tabWidget.tabText(0) + '*')
     
     def loadCreateProject(self):
         ''' Load or create a new project if the selected project does not exist
@@ -87,7 +91,7 @@ class ProjectTabManager(QtCore.QObject):
         
         # get last conf to start from its path
         settings = QtCore.QSettings()
-        lastProjectIni = settings.value('/QTraffic/lastProject', self.defaultProject)
+        lastProjectIni = settings.value('/QTraffic/lastProject', self.defaultProjectFileName)
         
         startPath = os.path.abspath( lastProjectIni )
         
@@ -99,7 +103,7 @@ class ProjectTabManager(QtCore.QObject):
         
         # if projectFile does not exist copy template from the default project file
         if not os.path.exists(projectFile):
-            shutil.copyfile(self.defaultProject, projectFile)
+            shutil.copyfile(self.defaultProjectFileName, projectFile)
         
         # set new conf file as default
         settings.setValue('/QTraffic/lastProject', projectFile)
@@ -110,153 +114,13 @@ class ProjectTabManager(QtCore.QObject):
         # set text of loaded layer
         self.gui.projectName_lineEdit.setText(self.project.fileName())
         
-        # set GUI basing on project        
-        self.setGuiFromProject()
-    
-    def setGuiFromProject(self):
-        ''' Basing on project configuration set the plugin interface
+        # notify project loaded
+        self.projectLoaded.emit()
+        
+    def getProject(self):
+        ''' Return the current project if any
         '''
-        # set gui for each tab
-        try:
-            # manage input network
-            self.manageInputNetwork()
-            
-            # manage vehicle count/speed
-            self.manageVehicleCountSpeed()
-            
-            # manage fleet composition
-            self.manageFleetComposition()
-            
-            # manage parameters
-            
-            # output
-            
-            # manage help
-        except (Exception) as ex:
-            QgsMessageLog.logMessage(str(ex), self.plugin.pluginTag, QgsMessageLog.CRITICAL)
-            self.plugin.iface.messageBar().pushMessage(str(ex), QgsMessageBar.CRITICAL)
-            return
-    
-    def manageInputNetwork(self):
-        '''Set tab basing on project conf 
-        '''
-        # get conf parameters
-        inputLayerFile = self.project.value('InputNetwork/inputLayer', '')
-        columnRoadType = self.project.value('InputNetwork/columnRoadType', '')
-        columnRoadLenght = self.project.value('InputNetwork/columnRoadLenght', '')
-        columnRoadSlope = self.project.value('InputNetwork/columnRoadSlope', '')
-        
-        # if layer exist load it
-        if not os.path.exists(inputLayerFile):
-            msg = self.plugin.tr('Layer file %s does not exist' % inputLayerFile)
-            raise Exception(msg) 
-        
-        self.roadLayer = QgsVectorLayer(inputLayerFile, 'roadLayer', 'ogr')
-        if not self.roadLayer.isValid():
-            raise Exception( self.roadLayer.error().message(QgsErrorMessage.Text) )
-        
-        # set text of loaded layer
-        self.gui.inputLayer_lineEdit.setText(self.roadLayer.publicSource())
-        
-        # now populare combo boxes with layer colums
-        fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
-        unknownIndex = -1
-        
-        self.gui.roadType_CBox.addItems(fieldNames)
-        self.gui.roadLenght_CBox.addItems(fieldNames)
-        self.gui.roadGradient_CBox.addItems(fieldNames)
-        
-        # select the combobox item as in the project file... if not available then "Please select"
-        index = self.gui.roadType_CBox.findText(columnRoadType)
-        self.gui.roadType_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.roadLenght_CBox.findText(columnRoadLenght)
-        self.gui.roadLenght_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.roadGradient_CBox.findText(columnRoadSlope)
-        self.gui.roadGradient_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        # add all modification events to notify project modification
-        try:
-            # to avoid add multiple listener, remove previous listener
-            self.gui.inputLayer_lineEdit.editingFinished.disconnect(self.setProjectModified)
-            self.gui.roadType_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.roadLenght_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.roadGradient_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-        except (Exception) as ex:
-            pass
-        
-        self.gui.inputLayer_lineEdit.editingFinished.connect(self.setProjectModified)
-        self.gui.roadType_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.roadLenght_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.roadGradient_CBox.currentIndexChanged.connect(self.setProjectModified)
-    
-    def manageVehicleCountSpeed(self):
-        '''Set tab basing on project conf 
-        '''
-        # get parameters fron project
-        columnPassengerCars = self.project.value('VehicleCountSpeed/columnPassengerCars', '')
-        columnLightDutyVehicle = self.project.value('VehicleCountSpeed/columnLightDutyVehicle', '')
-        columnHeavyDutyVechicle = self.project.value('VehicleCountSpeed/columnHeavyDutyVechicle', '')
-        columnUrbanBuses = self.project.value('VehicleCountSpeed/columnUrbanBuses', '')
-        columnMotorcycle = self.project.value('VehicleCountSpeed/columnMotorcycle', '')
-        columnCouch = self.project.value('VehicleCountSpeed/columnCouch', '')
-        columnAverageSpeed = self.project.value('VehicleCountSpeed/columnAverageSpeed', '')
-        
-        # now populare combo boxes with layer colums
-        fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
-        unknownIndex = -1
-        
-        self.gui.passengerCarsCount_CBox.addItems(fieldNames)
-        self.gui.lightDutyVehicleCount_CBox.addItems(fieldNames)
-        self.gui.heavyDutyVehicleCount_CBox.addItems(fieldNames)
-        self.gui.urbanBusesCount_CBox.addItems(fieldNames)
-        self.gui.coachesCount_CBox.addItems(fieldNames)
-        self.gui.motorcycleCount_CBox.addItems(fieldNames)
-        self.gui.averageVehicleSpeed_Cbox.addItems(fieldNames)
-        
-        # select the combobox item as in the project file... if not available then "Please select"
-        index = self.gui.passengerCarsCount_CBox.findText(columnPassengerCars)
-        self.gui.passengerCarsCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.lightDutyVehicleCount_CBox.findText(columnLightDutyVehicle)
-        self.gui.lightDutyVehicleCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.heavyDutyVehicleCount_CBox.findText(columnHeavyDutyVechicle)
-        self.gui.heavyDutyVehicleCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.urbanBusesCount_CBox.findText(columnUrbanBuses)
-        self.gui.urbanBusesCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.coachesCount_CBox.findText(columnCouch)
-        self.gui.coachesCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.motorcycleCount_CBox.findText(columnMotorcycle)
-        self.gui.motorcycleCount_CBox.setCurrentIndex( index if index > 0 else unknownIndex )
-        
-        index = self.gui.averageVehicleSpeed_Cbox.findText(columnAverageSpeed)
-        self.gui.averageVehicleSpeed_Cbox.setCurrentIndex( index if index > 0 else unknownIndex )
-    
-        # add all modification events to notify project modification
-        try:
-            # to avoid add multiple listener, remove previous listener
-            self.gui.passengerCarsCount_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.lightDutyVehicleCount_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.heavyDutyVehicleCount_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.urbanBusesCount_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.coachesCount_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.motorcycleCount_CBox.currentIndexChanged.disconnect(self.setProjectModified)
-            self.gui.averageVehicleSpeed_Cbox.currentIndexChanged.disconnect(self.setProjectModified)
-        except (Exception) as ex:
-            pass
-        
-        self.gui.passengerCarsCount_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.lightDutyVehicleCount_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.heavyDutyVehicleCount_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.urbanBusesCount_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.coachesCount_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.motorcycleCount_CBox.currentIndexChanged.connect(self.setProjectModified)
-        self.gui.averageVehicleSpeed_Cbox.currentIndexChanged.connect(self.setProjectModified)
+        return self.project
     
     def isModified(self):
         ''' Return true if the curret project is marked as modified
