@@ -24,6 +24,7 @@ from PyQt4 import QtCore, QtGui, uic
 
 from project_tab_manager import ProjectTabManager
 from fleet_composition_tab_manager import FleetCompositionTabManager
+from input_network_tab_manager import InputNetworkTabManager
 
 # FORM_CLASS, _ = uic.loadUiType(os.path.join(
 #     os.path.dirname(__file__), 'ui', 'qtraffic_dialog_base.ui'))
@@ -54,6 +55,10 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.projectTabManager = ProjectTabManager(self)
         self.projectTabManager.projectLoaded.connect(self.setTabsOnCurrentProject)
         
+        # init Input Network tab manager
+        self.inputNetworkTabManager = InputNetworkTabManager(self)
+        self.inputNetworkTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
+        
         # init Fleet Composition tab Manager
         self.fleetCompostionTabManager = FleetCompositionTabManager(self)
         self.fleetCompostionTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
@@ -65,5 +70,6 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         project = self.projectTabManager.getProject()
         
         # set status for all tabls
+        self.inputNetworkTabManager.setProject(project)
         self.fleetCompostionTabManager.setProject(project)
         
