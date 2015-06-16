@@ -32,7 +32,7 @@ from qgis.core import (QgsMessageLog,
 from qgis.gui import (QgsMessageBar)
 
 class InputNetworkTabManager(QtCore.QObject):
-    ''' Class to hide managing of project load and save
+    ''' Class to hide managing of relative tab
     '''
     projectModified = QtCore.pyqtSignal()
         
