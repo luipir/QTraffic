@@ -41,6 +41,12 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         super(QTrafficDockWidget, self).__init__(parent)
         self.parent = pluginInstance
         
+        # init some globals
+        self.applicationPath = os.path.dirname(os.path.realpath(__file__))
+        self.defaultProjectFileName = os.path.join(self.applicationPath, 'config','defaultProject.cfg')
+        self.defaultVehicleClassesFileName = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
+        self.defaultNewFuelFormulaFileName = os.path.join(self.applicationPath, 'config', 'NewFuelFormulas.json')
+        
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see
@@ -60,10 +66,6 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.inputNetworkTabManager = InputNetworkTabManager(self)
         self.inputNetworkTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
         
-        # init Vechicle Count/Speed
-        self.vechicleCountSpeedTabManager = VechicleCountSpeedTabManager(self)
-        self.vechicleCountSpeedTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
-        
         # init Fleet Composition tab Manager
         self.fleetCompostionTabManager = FleetCompositionTabManager(self)
         self.fleetCompostionTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
@@ -76,8 +78,4 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # set status for all tabls
         self.inputNetworkTabManager.setProject(project)
-        roadLayer = self.inputNetworkTabManager.getRoadLayer()
-
-        self.vechicleCountSpeedTabManager.setProject(project, roadLayer)
-        self.fleetCompostionTabManager.setProject(project)
-        
+        self.fleetCompostionTabManager.setProject(project)    
