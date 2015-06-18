@@ -59,8 +59,6 @@ class FleetCompositionTabManager(QtCore.QObject):
         self.plugin = parent.parent
 
         # init some globals
-        self.applicationPath = os.path.dirname(os.path.realpath(__file__))
-        self.defaultVehicleClasses = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
         self.vehicleClassesDict = None # it will be a dict
         self.sunburstEditorBridge = None
         self.project = None
@@ -158,19 +156,19 @@ class FleetCompositionTabManager(QtCore.QObject):
         # load default json conf
         defaultVehicleClassesDict = None
         try:
-            with open(self.defaultVehicleClasses) as confFile:
+            with open(self.gui.defaultVehicleClassesFileName) as confFile:
                 # loaded in and OrderedDict to allow maintaining the order of classes
                 # contained in the json file. This will be reflected in the order
                 # shown in the sunburst visualization/editor
                 defaultVehicleClassesDict = json.load(confFile, object_pairs_hook=collections.OrderedDict)
         except Exception as ex:
-            message = self.plugin.tr("Error loading Default conf JSON file %s") % self.defaultVehicleClasses
+            message = self.plugin.tr("Error loading Default conf JSON file %s") % self.gui.defaultVehicleClassesFileName
             self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
             return
         
         # assume that the default roadType class is the fist one of the loaded configuration
         if not defaultVehicleClassesDict or len(defaultVehicleClassesDict['children']) == 0:
-            message = self.plugin.tr("No road types set in the default configuration file: %s") % self.defaultVehicleClasses
+            message = self.plugin.tr("No road types set in the default configuration file: %s") % self.gui.defaultVehicleClassesFileName
             self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
             return 
             
@@ -238,7 +236,7 @@ class FleetCompositionTabManager(QtCore.QObject):
             QWidgetList contain a list of RoadTypes and every Item belong in it's UserRole data
             a dictionary of statistic of the lreated roadType
         '''
-        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
+        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
         startPath = os.path.abspath( currentVehicleClassesJson )
         
         # ask for the new conf file
@@ -294,7 +292,7 @@ class FleetCompositionTabManager(QtCore.QObject):
             return
         
         # from th eproject, get JSON filename to load
-        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
+        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
         
         # load json conf
         try:
@@ -326,8 +324,8 @@ class FleetCompositionTabManager(QtCore.QObject):
                 return
         
         currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', '')
-        if currentVehicleClassesJson != self.defaultVehicleClasses:
-            self.project.setValue('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
+        if currentVehicleClassesJson != self.gui.defaultVehicleClassesFileName:
+            self.project.setValue('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
             self.projectModified.emit()
         
         self.loadConfiguration()
@@ -345,7 +343,7 @@ class FleetCompositionTabManager(QtCore.QObject):
                 return
         
         # get last conf to start from its path
-        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.defaultVehicleClasses)
+        currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
         
         startPath = os.path.abspath( currentVehicleClassesJson )
         
@@ -457,7 +455,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         QtWebKit.QWebSettings.clearMemoryCaches()
         
         self.loadCounter = 0
-        webPage = os.path.join(self.applicationPath, "sunburst_d3_editor", "sunburstEditor.html")
+        webPage = os.path.join(self.gui.applicationPath, "sunburst_d3_editor", "sunburstEditor.html")
         
         for tabIndex in range(self.gui.fleetComposition_tabs.count()):
             # get tab name
