@@ -53,7 +53,7 @@ class ProjectTabManager(QtCore.QObject):
         self.roadLayer = None
 
         # create listeners to load, save and saveas
-        self.gui.projectName_lineEdit.editingFinished.connect(self.loadProject)
+        self.gui.projectName_lineEdit.returnPressed.connect(self.loadProject)
         self.gui.selectProject_TButton.clicked.connect(self.loadProject)
         self.gui.newProject_PButton.clicked.connect(self.createNewProject)
         self.gui.saveAsProject_PButton.clicked.connect(self.saveAsProject)
