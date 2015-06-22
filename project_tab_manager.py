@@ -68,6 +68,7 @@ class ProjectTabManager(QtCore.QObject):
         
         # set gui when project is loaded
         self.projectLoaded.connect(self.setGuiProjectLoaded)
+        self.projectLoaded.connect(self.setProjectSaved)
     
     @QtCore.pyqtSlot()
     def setProjectModified(self):
