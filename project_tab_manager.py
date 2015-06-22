@@ -285,7 +285,7 @@ class ProjectTabManager(QtCore.QObject):
         newProjectName = os.path.basename(projectDir)
         
         # check if projectDir is empty (e.g. created by getExistingDirectory) or not
-        dirpath, dirnames, files in os.walk(projectDir)
+        files = os.listdir(projectDir)
         if files:
             title = self.plugin.tr("Warning")
             message = self.plugin.tr("Project folder is not empty, if you continue it will be overwrite. Continue?")
