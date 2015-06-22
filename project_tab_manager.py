@@ -216,7 +216,7 @@ class ProjectTabManager(QtCore.QObject):
         settings = QtCore.QSettings()
         lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
         
-        startPath = os.path.abspath( lastProjectIni )
+        startPath = os.path.dirname( lastProjectIni )
         
         # ask for the new conf file
         projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
@@ -272,7 +272,7 @@ class ProjectTabManager(QtCore.QObject):
         settings = QtCore.QSettings()
         lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
         
-        startPath = os.path.abspath( lastProjectIni )
+        startPath = os.path.dirname( lastProjectIni )
         
         # ask for the new project name = directory name
         # if dir does not exist it will be created automatically by getExistingDirectory
@@ -300,10 +300,14 @@ class ProjectTabManager(QtCore.QObject):
         shutil.copytree(startPath, projectDir)
         
         # rename project files with the project name
-        os.rename(oldProjectFile, newProjectFilename)
         for filename in os.listdir(projectDir):
-            if filename.startswith(oldPprojectName):
-                os.rename(filename, filename.replace(oldPprojectName, newProjectName))
+            if oldProjectName in filename:
+                newName = filename.replace(oldProjectName, newProjectName)
+                
+                oldFileName = os.path.join(projectDir, filename)
+                newFileName = os.path.join(projectDir, newName)
+                
+                os.rename(oldFileName, newFileName)
         
         # then change current project to the new one
         projectFile = os.path.join(projectDir, newProjectName + '.cfg')
