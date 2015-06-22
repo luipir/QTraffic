@@ -241,7 +241,7 @@ class ProjectTabManager(QtCore.QObject):
     def saveProject(self):
         ''' Save the current project (e.g copy the temp ini in the original one)
         '''
-        if not isModified():
+        if not self.isModified():
             return
         
         # get last conf to start from its path
