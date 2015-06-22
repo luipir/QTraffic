@@ -25,6 +25,7 @@ import traceback
 import json
 import collections
 import time
+import shutil
 from PyQt4 import QtCore, QtGui, QtWebKit, uic
 from qgis.core import (QgsLogger,
                        QgsMessageLog)
@@ -62,6 +63,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         self.vehicleClassesDict = None # it will be a dict
         self.sunburstEditorBridge = None
         self.project = None
+        self.projectPath = None
         self.tabIndex = None
         
         # retrieve the current tab index
@@ -137,6 +139,10 @@ class FleetCompositionTabManager(QtCore.QObject):
         '''
         self.project = project
         if self.project:
+            # set some globals
+            confFileName = self.project.fileName()
+            self.projectPath = os.path.dirname(confFileName)
+
             # emit configurationLoaded with the status of loading
             self.loadConfiguration()
             
@@ -237,12 +243,10 @@ class FleetCompositionTabManager(QtCore.QObject):
             a dictionary of statistic of the lreated roadType
         '''
         currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
-        startPath = os.path.abspath( currentVehicleClassesJson )
-        
-        # ask for the new conf file
-        newConfFile = QtGui.QFileDialog.getSaveFileName(self.gui, "Save as JSON file", startPath, self.plugin.tr("Json (*.json);;All (*)"))
-        if not newConfFile:
-            return
+
+        # check if json is relative path or absolute
+        if not os.path.isabs(currentVehicleClassesJson):
+            currentVehicleClassesJson = os.path.join(self.projectPath, currentVehicleClassesJson)
         
         # now iterate on all roadTypes to create the dictionary to save
         newVehicleClassesDict = collections.OrderedDict( self.vehicleClassesDict )
@@ -256,10 +260,10 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # now save newVehicleClassesDict in the selected file
         try:
-            message = self.plugin.tr('Saving conf on file %s' % newConfFile)
+            message = self.plugin.tr('Saving conf on file %s' % currentVehicleClassesJson)
             QgsMessageLog.logMessage(message, self.plugin.pluginTag, QgsMessageLog.INFO)
             
-            with open(newConfFile, 'w') as outFile:
+            with open(currentVehicleClassesJson, 'w') as outFile:
                 json.dump(newVehicleClassesDict, 
                           outFile, 
                           ensure_ascii=False, 
@@ -277,11 +281,6 @@ class FleetCompositionTabManager(QtCore.QObject):
             self.plugin.iface.messageBar().pushMessage(self.plugin.tr("Error saving Conf JSON file. Please check the log"), QgsMessageBar.CRITICAL)
             return
         
-        # set new conf file as default
-        if currentVehicleClassesJson != newConfFile:
-            settings.setValue('/FleetComposition/fleetComposition', newConfFile)
-            self.projectModified.emit()
-        
         # set save button status
         self.setFleetGUIModified(False)
     
@@ -293,6 +292,10 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # from th eproject, get JSON filename to load
         currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
+        
+        # check if json is relative path or absolute
+        if not os.path.isabs(currentVehicleClassesJson):
+            currentVehicleClassesJson = os.path.join(self.projectPath, currentVehicleClassesJson)
         
         # load json conf
         try:
@@ -324,9 +327,13 @@ class FleetCompositionTabManager(QtCore.QObject):
                 return
         
         currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', '')
-        if currentVehicleClassesJson != self.gui.defaultVehicleClassesFileName:
-            self.project.setValue('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
-            self.projectModified.emit()
+        
+        # check if json is relative path or absolute
+        if not os.path.isabs(currentVehicleClassesJson):
+            currentVehicleClassesJson = os.path.join(self.projectPath, currentVehicleClassesJson)
+        
+        # copy default json file as current json file
+        shutil.copyfile(self.gui.defaultVehicleClassesFileName, currentVehicleClassesJson)
         
         self.loadConfiguration()
     
@@ -344,6 +351,8 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # get last conf to start from its path
         currentVehicleClassesJson = self.project.value('/FleetComposition/fleetComposition', self.gui.defaultVehicleClassesFileName)
+        if not os.path.isabs(currentVehicleClassesJson):
+            currentVehicleClassesJson = os.path.join(self.projectPath, currentVehicleClassesJson)
         
         startPath = os.path.abspath( currentVehicleClassesJson )
         
@@ -353,10 +362,8 @@ class FleetCompositionTabManager(QtCore.QObject):
         if not newConfFile:
             return
         
-        # set new conf file as default
-        if currentVehicleClassesJson != newConfFile:
-            self.project.setValue('/FleetComposition/fleetComposition', newConfFile)
-            self.projectModified.emit()
+        # copy the new one on the current one
+        shutil.copyfile(newConfFile, currentVehicleClassesJson)
         
         self.loadConfiguration()
     
