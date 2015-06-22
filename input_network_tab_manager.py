@@ -47,6 +47,7 @@ class InputNetworkTabManager(QtCore.QObject):
         # init some globals
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
         self.project = None
+        self.projectPath = None
         self.roadLayer = None
         
         # retrieve the current tab index
@@ -54,6 +55,10 @@ class InputNetworkTabManager(QtCore.QObject):
         
         # disable tab at the beginning
         self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
+        
+        # set basic events
+        self.gui.inputLayer_lineEdit.returnPressed.connect(self.loadLayer)
+        self.gui.selectLayer_TButton.clicked.connect(self.askLayer)
 
     def initTabTabIndex(self):
         ''' Retrieve what tab index refer the current tab manager
@@ -67,6 +72,10 @@ class InputNetworkTabManager(QtCore.QObject):
         '''
         self.project = project
         if self.project:
+            # set some globals
+            confFileName = self.project.fileName()
+            self.projectPath = os.path.dirname(confFileName)
+            
             # emit configurationLoaded with the status of loading
             self.setTabGUIBasingOnProject()
             
@@ -89,14 +98,15 @@ class InputNetworkTabManager(QtCore.QObject):
         columnRoadLenght = self.project.value('InputNetwork/columnRoadLenght', '')
         columnRoadSlope = self.project.value('InputNetwork/columnRoadSlope', '')
         
-        # if layer exist load it
+        # if layer exist load it otherwise do nothing
         if not os.path.exists(inputLayerFile):
-            msg = self.plugin.tr('Layer file %s does not exist' % inputLayerFile)
-            raise Exception(msg) 
+            return
         
         self.roadLayer = QgsVectorLayer(inputLayerFile, 'roadLayer', 'ogr')
         if not self.roadLayer.isValid():
-            raise Exception( self.roadLayer.error().message(QgsErrorMessage.Text) )
+            message = self.plugin.tr("Error loading layer: %s" % self.roadLayer.error().message(QgsErrorMessage.Text))
+            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return
         
         # show layer in the canvas
         QgsMapLayerRegistry.instance().addMapLayer(self.roadLayer)
@@ -259,7 +269,51 @@ class InputNetworkTabManager(QtCore.QObject):
         
         # notify project modification
         self.projectModified.emit()
+    
+    def askLayer(self):
+        ''' Ask for tghe layer to load
+        '''
+        if not self.project:
+            return
         
+        # if a layer is present in the project start from the path of that layer
+        oldLayer = self.project.value('InputNetwork/inputLayer', '')
+        if oldLayer:
+            startPath = os.path.dirname(oldLayer)
+        else:
+            startPath = self.projectPath
+        
+        # get porject path
+        layerFileName = QtGui.QFileDialog.getOpenFileName(self.gui, "Select road layer", startPath, 
+                                                          self.plugin.tr("Shp (*.shp);;All (*)"))
+        if not layerFileName:
+            return
+        
+        # set gui with the new layer name
+        self.gui.inputLayer_lineEdit.setText(layerFileName)
+        
+        # then load layer
+        self.loadLayer()
+    
+    def loadLayer(self):
+        ''' Load a shape layer 
+        '''
+        # get layer filename
+        layerFileName = self.gui.inputLayer_lineEdit.text()
+        if not layerFileName:
+            return
+        if not os.path.exists(layerFileName):
+            title = self.plugin.tr("Warning")
+            message = self.plugin.tr("Layer does not exist")
+            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
+            return
+        
+        self.project.setValue('InputNetwork/inputLayer', layerFileName)
+        self.setTabGUIBasingOnProject()
+        
+        # notify project modification
+        self.projectModified.emit()
+    
     def getRoadLayer(self):
         return self.roadLayer
     
