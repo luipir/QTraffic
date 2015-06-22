@@ -104,6 +104,16 @@ class InputNetworkTabManager(QtCore.QObject):
         # set text of loaded layer
         self.gui.inputLayer_lineEdit.setText(self.roadLayer.publicSource())
         
+        # avoid emitting signal in case of reset of indexes
+        try:
+            # to avoid add multiple listener, remove previous listener
+            self.gui.inputLayer_lineEdit.editingFinished.disconnect(self.saveTabOnProject)
+            self.gui.roadType_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.roadLenght_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.roadGradient_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+        except (Exception) as ex:
+            pass
+        
         # now populare combo boxes with layer colums
         fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
         unknownIndex = -1
@@ -127,15 +137,6 @@ class InputNetworkTabManager(QtCore.QObject):
         self.gui.roadGradient_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         # add all modification events to notify project modification
-        try:
-            # to avoid add multiple listener, remove previous listener
-            self.gui.inputLayer_lineEdit.editingFinished.disconnect(self.saveTabOnProject)
-            self.gui.roadType_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.roadLenght_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.roadGradient_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-        except (Exception) as ex:
-            pass
-        
         self.gui.inputLayer_lineEdit.editingFinished.connect(self.saveTabOnProject)
         self.gui.roadType_CBox.currentIndexChanged.connect(self.saveTabOnProject)
         self.gui.roadLenght_CBox.currentIndexChanged.connect(self.saveTabOnProject)
@@ -154,6 +155,19 @@ class InputNetworkTabManager(QtCore.QObject):
         columnMotorcycle = self.project.value('VehicleCountSpeed/columnMotorcycle', '')
         columnCouch = self.project.value('VehicleCountSpeed/columnCouch', '')
         columnAverageSpeed = self.project.value('VehicleCountSpeed/columnAverageSpeed', '')
+        
+        # avoid emitting signal in case of reset of indexes
+        try:
+            # to avoid add multiple listener, remove previous listener
+            self.gui.passengerCarsCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.lightDutyVehicleCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.heavyDutyVehicleCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.urbanBusesCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.coachesCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.motorcycleCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
+            self.gui.averageVehicleSpeed_Cbox.currentIndexChanged.disconnect(self.saveTabOnProject)
+        except (Exception) as ex:
+            pass
         
         # now populare combo boxes with layer colums
         fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
@@ -198,18 +212,6 @@ class InputNetworkTabManager(QtCore.QObject):
         self.gui.averageVehicleSpeed_Cbox.setCurrentIndex( index if index >= 0 else unknownIndex )
     
         # add all modification events to notify project modification
-        try:
-            # to avoid add multiple listener, remove previous listener
-            self.gui.passengerCarsCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.lightDutyVehicleCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.heavyDutyVehicleCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.urbanBusesCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.coachesCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.motorcycleCount_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
-            self.gui.averageVehicleSpeed_Cbox.currentIndexChanged.disconnect(self.saveTabOnProject)
-        except (Exception) as ex:
-            pass
-        
         self.gui.passengerCarsCount_CBox.currentIndexChanged.connect(self.saveTabOnProject)
         self.gui.lightDutyVehicleCount_CBox.currentIndexChanged.connect(self.saveTabOnProject)
         self.gui.heavyDutyVehicleCount_CBox.currentIndexChanged.connect(self.saveTabOnProject)
