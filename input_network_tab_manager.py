@@ -107,7 +107,7 @@ class InputNetworkTabManager(QtCore.QObject):
         # avoid emitting signal in case of reset of indexes
         try:
             # to avoid add multiple listener, remove previous listener
-            self.gui.inputLayer_lineEdit.editingFinished.disconnect(self.saveTabOnProject)
+            self.gui.inputLayer_lineEdit.returnPressed.disconnect(self.saveTabOnProject)
             self.gui.roadType_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
             self.gui.roadLenght_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
             self.gui.roadGradient_CBox.currentIndexChanged.disconnect(self.saveTabOnProject)
@@ -137,7 +137,7 @@ class InputNetworkTabManager(QtCore.QObject):
         self.gui.roadGradient_CBox.setCurrentIndex( index if index >= 0 else unknownIndex )
         
         # add all modification events to notify project modification
-        self.gui.inputLayer_lineEdit.editingFinished.connect(self.saveTabOnProject)
+        self.gui.inputLayer_lineEdit.returnPressed.connect(self.saveTabOnProject)
         self.gui.roadType_CBox.currentIndexChanged.connect(self.saveTabOnProject)
         self.gui.roadLenght_CBox.currentIndexChanged.connect(self.saveTabOnProject)
         self.gui.roadGradient_CBox.currentIndexChanged.connect(self.saveTabOnProject)
