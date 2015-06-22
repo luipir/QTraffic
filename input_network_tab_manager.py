@@ -98,22 +98,27 @@ class InputNetworkTabManager(QtCore.QObject):
         columnRoadLenght = self.project.value('InputNetwork/columnRoadLenght', '')
         columnRoadSlope = self.project.value('InputNetwork/columnRoadSlope', '')
         
-        # if layer exist load it otherwise do nothing
-        if not os.path.exists(inputLayerFile):
-            return
+        # if layer exist load it otherwise only reset comboboxes
+        if os.path.exists(inputLayerFile):
+            # load layer
+            self.roadLayer = QgsVectorLayer(inputLayerFile, 'roadLayer', 'ogr')
+            if not self.roadLayer.isValid():
+                message = self.plugin.tr("Error loading layer: %s" % self.roadLayer.error().message(QgsErrorMessage.Text))
+                self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+                return
+            
+            # show layer in the canvas
+            QgsMapLayerRegistry.instance().addMapLayer(self.roadLayer)
         
-        self.roadLayer = QgsVectorLayer(inputLayerFile, 'roadLayer', 'ogr')
-        if not self.roadLayer.isValid():
-            message = self.plugin.tr("Error loading layer: %s" % self.roadLayer.error().message(QgsErrorMessage.Text))
-            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
-            return
-        
-        # show layer in the canvas
-        QgsMapLayerRegistry.instance().addMapLayer(self.roadLayer)
+        else:
+            self.roadLayer = None
         
         # set text of loaded layer
-        self.gui.inputLayer_lineEdit.setText(self.roadLayer.publicSource())
-        
+        if self.roadLayer:
+            self.gui.inputLayer_lineEdit.setText(self.roadLayer.publicSource())
+        else:
+            self.gui.inputLayer_lineEdit.setText('')
+            
         # avoid emitting signal in case of reset of indexes
         try:
             # to avoid add multiple listener, remove previous listener
@@ -125,7 +130,10 @@ class InputNetworkTabManager(QtCore.QObject):
             pass
         
         # now populare combo boxes with layer colums
-        fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
+        if self.roadLayer:
+            fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
+        else:
+            fieldNames = []
         unknownIndex = -1
         
         self.gui.roadType_CBox.clear()
@@ -180,9 +188,6 @@ class InputNetworkTabManager(QtCore.QObject):
             pass
         
         # now populare combo boxes with layer colums
-        fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
-        unknownIndex = -1
-        
         self.gui.passengerCarsCount_CBox.clear()
         self.gui.lightDutyVehicleCount_CBox.clear()
         self.gui.heavyDutyVehicleCount_CBox.clear()
@@ -229,7 +234,7 @@ class InputNetworkTabManager(QtCore.QObject):
         self.gui.coachesCount_CBox.currentIndexChanged.connect(self.saveTabOnProject)
         self.gui.motorcycleCount_CBox.currentIndexChanged.connect(self.saveTabOnProject)
         self.gui.averageVehicleSpeed_Cbox.currentIndexChanged.connect(self.saveTabOnProject)
-        
+    
     def saveTabOnProject(self):
         ''' Save tab configuration in the project basing on GUI values
         '''
