@@ -32,7 +32,6 @@ from vehicle_countspeed_tab_manager import VechicleCountSpeedTabManager
 # 
 # class QTrafficDockWidget(FORM_CLASS):
 from ui.qtraffic_dialog_base_ui import Ui_qtraffic_dockWidget
-from bzrlib.doc_generate.conf import project
 
 class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     
