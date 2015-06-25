@@ -112,6 +112,7 @@ class ProjectTabManager(QtCore.QObject):
         '''
         # get last conf to start from its path
         settings = QtCore.QSettings()
+        settings.setIniCodec("UTF-8")
         lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
         
         # set some globals related with the project
@@ -127,6 +128,7 @@ class ProjectTabManager(QtCore.QObject):
 
         # load the project ini from the saved copy instead from the original one
         self.project = QtCore.QSettings(completeTempProjectFileName, QtCore.QSettings.IniFormat)
+        self.project.setIniCodec("UTF-8")
         
         # set text of loaded project (setting the original one and not the temp copy)
         self.gui.projectName_lineEdit.setText(lastProjectIni)
@@ -150,6 +152,7 @@ class ProjectTabManager(QtCore.QObject):
         
         # get last conf to start from its path
         settings = QtCore.QSettings()
+        settings.setIniCodec("UTF-8")
         lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
         
         startPath = os.path.abspath( lastProjectIni )
@@ -194,7 +197,8 @@ class ProjectTabManager(QtCore.QObject):
         
         # load project Ini
         self.project = QtCore.QSettings(completeProjectFileName, QtCore.QSettings.IniFormat)
-        
+        self.project.setIniCodec("UTF-8")
+
         # set new conf file as default
         settings.setValue('/QTraffic/lastProject', self.project.fileName())
         
@@ -215,6 +219,7 @@ class ProjectTabManager(QtCore.QObject):
         
         # get last conf to start from its path
         settings = QtCore.QSettings()
+        settings.setIniCodec("UTF-8")
         lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
         
         startPath = os.path.dirname( lastProjectIni )
@@ -246,6 +251,7 @@ class ProjectTabManager(QtCore.QObject):
         
         # get last conf to start from its path
         settings = QtCore.QSettings()
+        settings.setIniCodec("UTF-8")
         lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
         
         # copy the current temp ini on the original one
@@ -271,6 +277,7 @@ class ProjectTabManager(QtCore.QObject):
         
         # get last conf to start from its path
         settings = QtCore.QSettings()
+        settings.setIniCodec("UTF-8")
         lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
         
         startPath = os.path.dirname( lastProjectIni )
