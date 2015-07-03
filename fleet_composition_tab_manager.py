@@ -31,7 +31,8 @@ from qgis.core import (QgsLogger,
                        QgsMessageLog)
 from qgis.gui import (QgsMessageBar)
 
-from sunburst_d3_editor.sunburst_editor_bridge import SunburstEditorBridge 
+from sunburst_d3_editor.sunburst_editor_bridge import SunburstEditorBridge
+from custom_widgets.spinbox_delegate import SpinBoxDelegate
 
 class DebugWebPage(QtWebKit.QWebPage):
     ''' custom webpage used to avoid interruption of messagebox by QT during debugging
@@ -74,6 +75,10 @@ class FleetCompositionTabManager(QtCore.QObject):
         self.gui.removeRoadType_button.setEnabled(False)
         self.gui.newRoadType_button.clicked.connect(self.createNewRoadType)
         self.gui.removeRoadType_button.clicked.connect(self.removeRoadType)
+
+        # set item editable witha spinbox
+        spinBoxDelegate = SpinBoxDelegate()
+        self.gui.roadTypes_listWidget.setItemDelegate(spinBoxDelegate)
 
         # load configuration buttons
         self.gui.loadDefaultConfiguration_button.clicked.connect(self.loadDefaultConfiguration)
@@ -180,10 +185,16 @@ class FleetCompositionTabManager(QtCore.QObject):
             
         defaultRoadType = defaultVehicleClassesDict['children'][0]
         
+        # get the maximum road type name to set the new name as max+1
+        # specifications says that roadType have to be integer and not free string
+        roadTypeNames = [ int(x['name']) for x in self.vehicleClassesDict['children'] ]
+        newRoadTypeName = str( max(roadTypeNames) + 1 )
+
         # clone roadType dict and rename it's roadTpe name witha a default name
         newRoadType = collections.OrderedDict(defaultRoadType)
-        newRoadType['name'] = defaultRoadType['name'] + "_%d" % len(self.vehicleClassesDict['children'])
-        newRoadType['description'] = newRoadType['name']
+        newRoadType['name'] = newRoadTypeName
+        newRoadType['converted'] = 'F_Type_' + newRoadType['name']
+        #newRoadType['name'] = defaultRoadType['name'] + "_%d" % len(self.vehicleClassesDict['children'])
         
         # add the new roadType to the actual self.vehicleClassesDict
         self.vehicleClassesDict['children'].append(newRoadType)
@@ -432,7 +443,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         # TODO: check that road type name is not duplicated
         vehicleClasses = item.data(QtCore.Qt.UserRole)
         vehicleClasses['name'] = item.text()
-        vehicleClasses['description'] = item.text() # TODO: for the moment name and description are equal
+        vehicleClasses['converted'] = 'F_Type_' + item.text()
         item.setData(QtCore.Qt.UserRole, vehicleClasses)
         
         self.setFleetGUIModified()
