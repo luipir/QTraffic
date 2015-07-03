@@ -26,6 +26,7 @@ from project_tab_manager import ProjectTabManager
 from fleet_composition_tab_manager import FleetCompositionTabManager
 from input_network_tab_manager import InputNetworkTabManager
 from vehicle_countspeed_tab_manager import VechicleCountSpeedTabManager
+from fuel_properties_tab_manager import FuelPropertiesTabManager
 
 # FORM_CLASS, _ = uic.loadUiType(os.path.join(
 #     os.path.dirname(__file__), 'ui', 'qtraffic_dialog_base.ui'))
@@ -69,6 +70,10 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.fleetCompostionTabManager = FleetCompositionTabManager(self)
         self.fleetCompostionTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
         
+        # fuel properties tab manager
+        self.fuelPropertiesTabManager = FuelPropertiesTabManager(self)
+        self.fuelPropertiesTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
+        
     def setTabsOnCurrentProject(self):
         ''' A new project has loaded => set all tabs basing on that project
         '''
@@ -77,4 +82,5 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # set status for all tabls
         self.inputNetworkTabManager.setProject(project)
-        self.fleetCompostionTabManager.setProject(project)    
+        self.fleetCompostionTabManager.setProject(project)
+        self.fuelPropertiesTabManager.setProject(project)
