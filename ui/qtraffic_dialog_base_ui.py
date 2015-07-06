@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Mon Jul  6 13:28:09 2015
+# Created: Mon Jul  6 15:55:10 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -317,6 +317,7 @@ class Ui_qtraffic_dockWidget(object):
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label_3)
         self.gasolineSulphureContent_SBox = QtGui.QSpinBox(self.groupBox_6)
+        self.gasolineSulphureContent_SBox.setMaximum(999999999)
         self.gasolineSulphureContent_SBox.setObjectName(_fromUtf8("gasolineSulphureContent_SBox"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.gasolineSulphureContent_SBox)
         self.label_4 = QtGui.QLabel(self.groupBox_6)
@@ -328,9 +329,13 @@ class Ui_qtraffic_dockWidget(object):
         self.label_10.setObjectName(_fromUtf8("label_10"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_10)
         self.gasolinePbContents_SBox = QtGui.QDoubleSpinBox(self.groupBox_6)
+        self.gasolinePbContents_SBox.setMaximum(999999999.99)
+        self.gasolinePbContents_SBox.setSingleStep(0.01)
         self.gasolinePbContents_SBox.setObjectName(_fromUtf8("gasolinePbContents_SBox"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.gasolinePbContents_SBox)
         self.gasolineVolatility_SBox = QtGui.QDoubleSpinBox(self.groupBox_6)
+        self.gasolineVolatility_SBox.setMaximum(999999999.99)
+        self.gasolineVolatility_SBox.setSingleStep(0.01)
         self.gasolineVolatility_SBox.setObjectName(_fromUtf8("gasolineVolatility_SBox"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.gasolineVolatility_SBox)
         self.horizontalLayout_15.addWidget(self.groupBox_6)
@@ -353,6 +358,7 @@ class Ui_qtraffic_dockWidget(object):
         self.label_12.setObjectName(_fromUtf8("label_12"))
         self.formLayout_2.setWidget(0, QtGui.QFormLayout.LabelRole, self.label_12)
         self.dieselSulphureContent_SBox = QtGui.QSpinBox(self.groupBox_7)
+        self.dieselSulphureContent_SBox.setMaximum(999999999)
         self.dieselSulphureContent_SBox.setObjectName(_fromUtf8("dieselSulphureContent_SBox"))
         self.formLayout_2.setWidget(0, QtGui.QFormLayout.FieldRole, self.dieselSulphureContent_SBox)
         self.label_16 = QtGui.QLabel(self.groupBox_7)
@@ -360,6 +366,8 @@ class Ui_qtraffic_dockWidget(object):
         self.label_16.setObjectName(_fromUtf8("label_16"))
         self.formLayout_2.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_16)
         self.dieselPbContents_SBox = QtGui.QDoubleSpinBox(self.groupBox_7)
+        self.dieselPbContents_SBox.setMaximum(999999999.99)
+        self.dieselPbContents_SBox.setSingleStep(0.01)
         self.dieselPbContents_SBox.setObjectName(_fromUtf8("dieselPbContents_SBox"))
         self.formLayout_2.setWidget(1, QtGui.QFormLayout.FieldRole, self.dieselPbContents_SBox)
         self.label_14 = QtGui.QLabel(self.groupBox_7)
@@ -367,6 +375,8 @@ class Ui_qtraffic_dockWidget(object):
         self.label_14.setObjectName(_fromUtf8("label_14"))
         self.formLayout_2.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_14)
         self.dieselVolatility_SBox = QtGui.QDoubleSpinBox(self.groupBox_7)
+        self.dieselVolatility_SBox.setMaximum(999999999.99)
+        self.dieselVolatility_SBox.setSingleStep(0.01)
         self.dieselVolatility_SBox.setObjectName(_fromUtf8("dieselVolatility_SBox"))
         self.formLayout_2.setWidget(2, QtGui.QFormLayout.FieldRole, self.dieselVolatility_SBox)
         self.horizontalLayout_15.addWidget(self.groupBox_7)

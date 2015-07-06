@@ -563,7 +563,11 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QSpinBox" name="gasolineSulphureContent_SBox"/>
+              <widget class="QSpinBox" name="gasolineSulphureContent_SBox">
+               <property name="maximum">
+                <number>999999999</number>
+               </property>
+              </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_4">
@@ -586,10 +590,24 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="gasolinePbContents_SBox"/>
+              <widget class="QDoubleSpinBox" name="gasolinePbContents_SBox">
+               <property name="maximum">
+                <double>999999999.990000009536743</double>
+               </property>
+               <property name="singleStep">
+                <double>0.010000000000000</double>
+               </property>
+              </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="gasolineVolatility_SBox"/>
+              <widget class="QDoubleSpinBox" name="gasolineVolatility_SBox">
+               <property name="maximum">
+                <double>999999999.990000009536743</double>
+               </property>
+               <property name="singleStep">
+                <double>0.010000000000000</double>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -623,7 +641,11 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QSpinBox" name="dieselSulphureContent_SBox"/>
+              <widget class="QSpinBox" name="dieselSulphureContent_SBox">
+               <property name="maximum">
+                <number>999999999</number>
+               </property>
+              </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_16">
@@ -636,7 +658,14 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="dieselPbContents_SBox"/>
+              <widget class="QDoubleSpinBox" name="dieselPbContents_SBox">
+               <property name="maximum">
+                <double>999999999.990000009536743</double>
+               </property>
+               <property name="singleStep">
+                <double>0.010000000000000</double>
+               </property>
+              </widget>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_14">
@@ -649,7 +678,14 @@ QGroupBox::title{
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="dieselVolatility_SBox"/>
+              <widget class="QDoubleSpinBox" name="dieselVolatility_SBox">
+               <property name="maximum">
+                <double>999999999.990000009536743</double>
+               </property>
+               <property name="singleStep">
+                <double>0.010000000000000</double>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
