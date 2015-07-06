@@ -83,25 +83,25 @@ class FuelPropertiesTabManager(QtCore.QObject):
         '''Set tab basing on project conf
         e.g 
         [Processing.Parameters.FuelProperties.Gasoline]
-        Sulphur_contents=165 # in ppm
-        Pb_contents=0.005\t # in g/l
+        Sulphur_contents=165 ; in ppm
+        Pb_contents=0.005    ; in g/l
         Volatility=0.1
         
         [Processing.Parameters.FuelProperties.Diesel]
-        Sulphur_contents=400    # in ppm
-        Pb_contents=0.005 # in g/l
+        Sulphur_contents=400    ; in ppm
+        Pb_contents=0.005       ; in g/l
         Volatility=0.2
         '''
         if not self.project:
             return
         
         # get conf parameters
-        gasoline_sulphur_contents = int(self.project.value('Processing/Parameters/FuelProperties/Gasoline/Sulphur_contents', 0))
-        gasoline_pb_contents = float(self.project.value('Processing/Parameters/FuelProperties/Gasoline/Pb_contents', 0.0))
-        gasoline_volatility = float(self.project.value('Processing/Parameters/FuelProperties/Gasoline/Volatility', 0.0))
-        diesel_sulphur_contents = int(self.project.value('Processing/Parameters/FuelProperties/Diesel/Sulphur_contents', 0))
-        diesel_pb_contents = float(self.project.value('Processing/Parameters/FuelProperties/Diesel/Pb_contents', 0.0))
-        diesel_volatility = float(self.project.value('Processing/Parameters/FuelProperties/Diesel/Volatility', 0.0))
+        gasoline_sulphur_contents = int(self.project.value('Processing.Parameters.FuelProperties.Gasoline/Sulphur_contents', 0))
+        gasoline_pb_contents = float(self.project.value('Processing.Parameters.FuelProperties.Gasoline/Pb_contents', 0.0))
+        gasoline_volatility = float(self.project.value('Processing.Parameters.FuelProperties.Gasoline/Volatility', 0.0))
+        diesel_sulphur_contents = int(self.project.value('Processing.Parameters.FuelProperties.Diesel/Sulphur_contents', 0))
+        diesel_pb_contents = float(self.project.value('Processing.Parameters.FuelProperties.Diesel/Pb_contents', 0.0))
+        diesel_volatility = float(self.project.value('Processing.Parameters.FuelProperties.Diesel/Volatility', 0.0))
         
         # avoid emitting signal in case of reset of indexes
         try:
@@ -143,12 +143,12 @@ class FuelPropertiesTabManager(QtCore.QObject):
         diesel_volatility = float(self.gui.dieselVolatility_SBox.value())
         
         # set conf parameters
-        self.project.setValue('Processing/Parameters/FuelProperties/Gasoline/Sulphur_contents', gasoline_sulphur_contents)
-        self.project.setValue('Processing/Parameters/FuelProperties/Gasoline/Pb_contents', gasoline_pb_contents)
-        self.project.setValue('Processing/Parameters/FuelProperties/Gasoline/Volatility', gasoline_volatility)
-        self.project.setValue('Processing/Parameters/FuelProperties/Diesel/Sulphur_contents', diesel_sulphur_contents)
-        self.project.setValue('Processing/Parameters/FuelProperties/Diesel/Pb_contents', diesel_pb_contents)
-        self.project.setValue('Processing/Parameters/FuelProperties/Diesel/Volatility', diesel_volatility)
+        self.project.setValue('Processing.Parameters.FuelProperties.Gasoline/Sulphur_contents', gasoline_sulphur_contents)
+        self.project.setValue('Processing.Parameters.FuelProperties.Gasoline/Pb_contents', gasoline_pb_contents)
+        self.project.setValue('Processing.Parameters.FuelProperties.Gasoline/Volatility', gasoline_volatility)
+        self.project.setValue('Processing.Parameters.FuelProperties.Diesel/Sulphur_contents', diesel_sulphur_contents)
+        self.project.setValue('Processing.Parameters.FuelProperties.Diesel/Pb_contents', diesel_pb_contents)
+        self.project.setValue('Processing.Parameters.FuelProperties.Diesel/Volatility', diesel_volatility)
             
         # notify project modification
         self.projectModified.emit()
