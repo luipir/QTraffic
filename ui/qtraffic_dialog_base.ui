@@ -48,6 +48,9 @@
             <property name="text">
              <string>Current Project</string>
             </property>
+            <property name="textInteractionFlags">
+             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+            </property>
            </widget>
           </item>
           <item>
@@ -143,6 +146,9 @@
                <property name="text">
                 <string>Heavy duty vehicles count</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -156,6 +162,9 @@
               <widget class="QLabel" name="label_15">
                <property name="text">
                 <string>Coaches count</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
@@ -171,6 +180,9 @@
                <property name="text">
                 <string>Road Lenght (meters)</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -184,6 +196,9 @@
               <widget class="QLabel" name="label_2">
                <property name="text">
                 <string>Road type (link to fleet composition)</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
@@ -199,6 +214,9 @@
                <property name="text">
                 <string>Road Gradient</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -212,6 +230,9 @@
               <widget class="QLabel" name="label_9">
                <property name="text">
                 <string>Light duty vehicles count</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
@@ -227,6 +248,9 @@
                <property name="text">
                 <string>Urban buses count</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -240,6 +264,9 @@
               <widget class="QLabel" name="label_17">
                <property name="text">
                 <string>Motorcycles count</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
@@ -255,6 +282,9 @@
                <property name="text">
                 <string>Passenger cars count</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -268,6 +298,9 @@
               <widget class="QLabel" name="label_8">
                <property name="text">
                 <string>Average vehicle speed (km/h)</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
@@ -377,7 +410,7 @@
           <item>
            <widget class="QTabWidget" name="fleetComposition_tabs">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="passengerCars_tab">
              <attribute name="title">
@@ -524,6 +557,9 @@ QGroupBox::title{
                <property name="text">
                 <string>Sulphure contents (ppm)</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -534,12 +570,18 @@ QGroupBox::title{
                <property name="text">
                 <string>Pb contents (g/l)</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_10">
                <property name="text">
                 <string>Volatility</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
@@ -575,6 +617,9 @@ QGroupBox::title{
                <property name="text">
                 <string>Sulphure contents (ppm)</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -585,6 +630,9 @@ QGroupBox::title{
                <property name="text">
                 <string>Pb contents (g/l)</string>
                </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
               </widget>
              </item>
              <item row="1" column="1">
@@ -594,6 +642,9 @@ QGroupBox::title{
               <widget class="QLabel" name="label_14">
                <property name="text">
                 <string>Volatility</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                </property>
               </widget>
              </item>
