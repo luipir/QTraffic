@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Mon Jul  6 15:55:10 2015
+# Created: Mon Jul  6 17:27:21 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -381,9 +381,9 @@ class Ui_qtraffic_dockWidget(object):
         self.formLayout_2.setWidget(2, QtGui.QFormLayout.FieldRole, self.dieselVolatility_SBox)
         self.horizontalLayout_15.addWidget(self.groupBox_7)
         self.verticalLayout_9.addLayout(self.horizontalLayout_15)
-        self.pushButton = QtGui.QPushButton(self.parameters_tab)
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.verticalLayout_9.addWidget(self.pushButton)
+        self.openFunctionEditor_PButton = QtGui.QPushButton(self.parameters_tab)
+        self.openFunctionEditor_PButton.setObjectName(_fromUtf8("openFunctionEditor_PButton"))
+        self.verticalLayout_9.addWidget(self.openFunctionEditor_PButton)
         spacerItem5 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_9.addItem(spacerItem5)
         self.horizontalLayout_13 = QtGui.QHBoxLayout()
@@ -638,7 +638,7 @@ class Ui_qtraffic_dockWidget(object):
         self.label_12.setText(_translate("qtraffic_dockWidget", "Sulphure contents (ppm)", None))
         self.label_16.setText(_translate("qtraffic_dockWidget", "Pb contents (g/l)", None))
         self.label_14.setText(_translate("qtraffic_dockWidget", "Volatility", None))
-        self.pushButton.setText(_translate("qtraffic_dockWidget", "Define emession factors for new fuel", None))
+        self.openFunctionEditor_PButton.setText(_translate("qtraffic_dockWidget", "Define emession factors for new fuel", None))
         self.parameters_loadDefault_PButton.setText(_translate("qtraffic_dockWidget", "Load default", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.parameters_tab), _translate("qtraffic_dockWidget", "Fuel properties", None))
         self.groupBox_3.setTitle(_translate("qtraffic_dockWidget", "Output File", None))

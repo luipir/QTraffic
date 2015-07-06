@@ -693,7 +693,7 @@ QGroupBox::title{
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="openFunctionEditor_PButton">
           <property name="text">
            <string>Define emession factors for new fuel</string>
           </property>
