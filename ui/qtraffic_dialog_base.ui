@@ -718,6 +718,9 @@ QGroupBox::title{
              <property name="text">
               <string>Create new layer</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">outFileLayer_BGroup</string>
+             </attribute>
             </widget>
            </item>
            <item row="0" column="0">
@@ -725,6 +728,9 @@ QGroupBox::title{
              <property name="text">
               <string>Add to the original layer</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">outFileLayer_BGroup</string>
+             </attribute>
             </widget>
            </item>
            <item row="2" column="1">
@@ -754,7 +760,7 @@ QGroupBox::title{
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
-            <widget class="QCheckBox" name="fuelEnergyConsumptionGAsoline_CBox">
+            <widget class="QCheckBox" name="fuelEnergyConsumptionGasoline_CBox">
              <property name="text">
               <string>Gasoline</string>
              </property>
@@ -768,7 +774,7 @@ QGroupBox::title{
             </widget>
            </item>
            <item row="0" column="2">
-            <widget class="QCheckBox" name="energyConsumption_CBox">
+            <widget class="QCheckBox" name="totalFuelConsumption_CBox">
              <property name="text">
               <string>Total Fuel consumption</string>
              </property>
@@ -782,14 +788,14 @@ QGroupBox::title{
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QCheckBox" name="fuelEnergyConsumptionAlternative_CBox">
+            <widget class="QCheckBox" name="fuelEnergyConsumptionNewFuels_CBox">
              <property name="text">
               <string>New fuels</string>
              </property>
             </widget>
            </item>
            <item row="1" column="2">
-            <widget class="QCheckBox" name="energyConsumption_CBox_2">
+            <widget class="QCheckBox" name="energyConsumption_CBox">
              <property name="text">
               <string>Energy</string>
              </property>
@@ -909,7 +915,7 @@ QGroupBox::title{
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="pollutantsPM10_CBox">
+                 <widget class="QCheckBox" name="pollutantsNMVOCs_CBox">
                   <property name="text">
                    <string>NMVOCs</string>
                   </property>
@@ -937,7 +943,7 @@ QGroupBox::title{
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_22">
                 <item>
-                 <widget class="QCheckBox" name="pollutantsVOC_CBox">
+                 <widget class="QCheckBox" name="pollutantsNH3_CBox">
                   <property name="text">
                    <string>NH3</string>
                   </property>
@@ -1066,4 +1072,7 @@ QGroupBox::title{
  </customwidgets>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="outFileLayer_BGroup"/>
+ </buttongroups>
 </ui>
