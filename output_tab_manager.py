@@ -56,6 +56,7 @@ class OutputTabManager(QtCore.QObject):
         # add some gui events
         self.gui.createNewLayer_RButton.toggled.connect(self.setInputLayer)
         self.gui.selectOutfile_TButton.clicked.connect(self.selectNewOutFile)
+        self.gui.calculate_PButton.clicked.connect(self.calculate)
         
     def initTabTabIndex(self):
         ''' Retrieve what tab index refer the current tab manager
@@ -265,3 +266,15 @@ class OutputTabManager(QtCore.QObject):
             
         # notify project modification
         self.projectModified.emit()
+    
+    def calculate(self):
+        ''' Prepare environment to run the alg and run it. After run, merge produced 
+        data basing on plugin configuration
+        '''
+        # prepare environment
+        
+        # run the alg
+        
+        # check result
+        
+        # prepare result
