@@ -695,7 +695,7 @@ QGroupBox::title{
         <item>
          <widget class="QPushButton" name="openFunctionEditor_PButton">
           <property name="text">
-           <string>Define emession factors for new fuel</string>
+           <string>Define emission factors for new fuel</string>
           </property>
          </widget>
         </item>

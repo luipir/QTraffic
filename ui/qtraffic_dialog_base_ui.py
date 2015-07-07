@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Tue Jul  7 12:50:12 2015
+# Created: Tue Jul  7 19:41:05 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -638,7 +638,7 @@ class Ui_qtraffic_dockWidget(object):
         self.label_12.setText(_translate("qtraffic_dockWidget", "Sulphure contents (ppm)", None))
         self.label_16.setText(_translate("qtraffic_dockWidget", "Pb contents (g/l)", None))
         self.label_14.setText(_translate("qtraffic_dockWidget", "Volatility", None))
-        self.openFunctionEditor_PButton.setText(_translate("qtraffic_dockWidget", "Define emession factors for new fuel", None))
+        self.openFunctionEditor_PButton.setText(_translate("qtraffic_dockWidget", "Define emission factors for new fuel", None))
         self.parameters_loadDefault_PButton.setText(_translate("qtraffic_dockWidget", "Load default", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.parameters_tab), _translate("qtraffic_dockWidget", "Fuel properties", None))
         self.groupBox_3.setTitle(_translate("qtraffic_dockWidget", "Output File", None))
