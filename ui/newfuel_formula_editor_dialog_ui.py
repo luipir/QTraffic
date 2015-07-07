@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/newfuel_formula_editor_dialog.ui'
 #
-# Created: Mon Jul  6 18:11:40 2015
+# Created: Tue Jul  7 17:59:10 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
