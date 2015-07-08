@@ -128,7 +128,7 @@ class OutputTabManager(QtCore.QObject):
 
         Gasoline_Consumption = self.project.value('Processing.Parameters/Gasoline_Consumption', False, bool)
         Diesel_Consumption = self.project.value('Processing.Parameters/Diesel_Consumption', False, bool)
-        LPG_Consumption = self.project.value('Processing.ParameLPG_Consumptionn_LPG', False, bool)
+        LPG_Consumption = self.project.value('Processing.Parameters/LPG_Consumption', False, bool)
         NewFuel_Consumption = self.project.value('Processing.Parameters/NewFuel_Consumption', False, bool)
         Fuel_Consumption_Total = self.project.value('Processing.Parameters/Fuel_Consumption_Total', False, bool)
         Energy_Consumption = self.project.value('Processing.Parameters/Energy_Consumption', False, bool)
