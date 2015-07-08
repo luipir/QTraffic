@@ -135,13 +135,13 @@ class OutputTabManager(QtCore.QObject):
         
         CO = self.project.value('Processing.Parameters/CO', False, bool)
         NOx = self.project.value('Processing.Parameters/NOx', False, bool)
-        NMVOCs = self.project.value('Processing.Parameters/NMVOCs', False, bool)
+        NMVOC = self.project.value('Processing.Parameters/NMVOC', False, bool)
         CO2 = self.project.value('Processing.Parameters/CO2', False, bool)
         CH4 = self.project.value('Processing.Parameters/CH4', False, bool)
         N2O = self.project.value('Processing.Parameters/N2O', False, bool)
         NH3 = self.project.value('Processing.Parameters/NH3', False, bool)
         SO2 = self.project.value('Processing.Parameters/SO2', False, bool)
-        PM25 = self.project.value('Processing.Parameters/PM2.5', False, bool)
+        PM25 = self.project.value('Processing.Parameters/PM', False, bool)
         C6H6 = self.project.value('Processing.Parameters/C6H6', False, bool)
         
         # avoid emitting signal in case of reset of indexes
@@ -185,7 +185,7 @@ class OutputTabManager(QtCore.QObject):
 
         self.gui.pollutantsCO_CBox.setChecked( CO )
         self.gui.pollutantsNOx_CBox.setChecked( NOx )
-        self.gui.pollutantsNMVOCs_CBox.setChecked( NMVOCs )
+        self.gui.pollutantsNMVOCs_CBox.setChecked( NMVOC )
         self.gui.pollutantsCO2_CBox.setChecked( CO2 )
         self.gui.pollutantsCH4_CBox.setChecked( CH4 )
         self.gui.pollutantsN2O_CBox.setChecked( N2O )
@@ -233,7 +233,7 @@ class OutputTabManager(QtCore.QObject):
         
         CO = self.gui.pollutantsCO_CBox.isChecked()
         NOx = self.gui.pollutantsNOx_CBox.isChecked()
-        NMVOCs = self.gui.pollutantsNMVOCs_CBox.isChecked()
+        NMVOC = self.gui.pollutantsNMVOCs_CBox.isChecked()
         CO2 = self.gui.pollutantsCO2_CBox.isChecked()
         CH4 = self.gui.pollutantsCH4_CBox.isChecked()
         N2O = self.gui.pollutantsN2O_CBox.isChecked()
@@ -255,13 +255,13 @@ class OutputTabManager(QtCore.QObject):
         
         self.project.setValue('Processing.Parameters/CO', CO)
         self.project.setValue('Processing.Parameters/NOx', NOx)
-        self.project.setValue('Processing.Parameters/NMVOCs', NMVOCs)
+        self.project.setValue('Processing.Parameters/NMVOC', NMVOC)
         self.project.setValue('Processing.Parameters/CO2', CO2)
         self.project.setValue('Processing.Parameters/CH4', CH4)
         self.project.setValue('Processing.Parameters/N2O', N2O)
         self.project.setValue('Processing.Parameters/NH3', NH3)
         self.project.setValue('Processing.Parameters/SO2', SO2)
-        self.project.setValue('Processing.Parameters/PM2.5', PM25)
+        self.project.setValue('Processing.Parameters/PM', PM25)
         self.project.setValue('Processing.Parameters/C6H6', C6H6)
             
         # notify project modification
