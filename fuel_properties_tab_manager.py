@@ -82,73 +82,45 @@ class FuelPropertiesTabManager(QtCore.QObject):
     def setTabGUIBasingOnProject(self):
         '''Set tab basing on project conf
         e.g 
-        [Processing.Parameters.FuelProperties.Gasoline]
-        Sulphur_contents=165 ; in ppm
-        Pb_contents=0.005    ; in g/l
-        Volatility=0.1
+        [FuelProperties.Gasoline]
+        Sulphur_contents_in_gasoline = 165 # in ppm
         
-        [Processing.Parameters.FuelProperties.Diesel]
-        Sulphur_contents=400    ; in ppm
-        Pb_contents=0.005       ; in g/l
-        Volatility=0.2
+        [FuelProperties.Diesel]
+        Sulphur_contents_in_diesel = 400    # in ppm
         '''
         if not self.project:
             return
         
         # get conf parameters
-        gasoline_sulphur_contents = int(self.project.value('Processing.Parameters.FuelProperties.Gasoline/Sulphur_contents', 0))
-        gasoline_pb_contents = float(self.project.value('Processing.Parameters.FuelProperties.Gasoline/Pb_contents', 0.0))
-        gasoline_volatility = float(self.project.value('Processing.Parameters.FuelProperties.Gasoline/Volatility', 0.0))
-        diesel_sulphur_contents = int(self.project.value('Processing.Parameters.FuelProperties.Diesel/Sulphur_contents', 0))
-        diesel_pb_contents = float(self.project.value('Processing.Parameters.FuelProperties.Diesel/Pb_contents', 0.0))
-        diesel_volatility = float(self.project.value('Processing.Parameters.FuelProperties.Diesel/Volatility', 0.0))
+        gasoline_sulphur_contents = int(self.project.value('FuelProperties.Gasoline/Sulphur_contents_in_gasoline', 0))
+        diesel_sulphur_contents = int(self.project.value('FuelProperties.Diesel/Sulphur_contents', 0))
         
         # avoid emitting signal in case of reset of indexes
         try:
             # to avoid add multiple listener, remove previous listener
             self.gui.gasolineSulphureContent_SBox.valueChanged.disconnect(self.saveTabOnProject)
-            self.gui.gasolinePbContents_SBox.valueChanged.disconnect(self.saveTabOnProject)
-            self.gui.gasolineVolatility_SBox.valueChanged.disconnect(self.saveTabOnProject)
             self.gui.dieselSulphureContent_SBox.valueChanged.disconnect(self.saveTabOnProject)
-            self.gui.dieselPbContents_SBox.valueChanged.disconnect(self.saveTabOnProject)
-            self.gui.dieselVolatility_SBox.valueChanged.disconnect(self.saveTabOnProject)
         except (Exception) as ex:
             pass
         
         # now populare spin boxes
         self.gui.gasolineSulphureContent_SBox.setValue( gasoline_sulphur_contents )
-        self.gui.gasolinePbContents_SBox.setValue( gasoline_pb_contents )
-        self.gui.gasolineVolatility_SBox.setValue( gasoline_volatility )
         self.gui.dieselSulphureContent_SBox.setValue( diesel_sulphur_contents )
-        self.gui.dieselPbContents_SBox.setValue( diesel_pb_contents )
-        self.gui.dieselVolatility_SBox.setValue( diesel_volatility )
         
         # add all modification events to notify project modification
         self.gui.gasolineSulphureContent_SBox.valueChanged.connect(self.saveTabOnProject)
-        self.gui.gasolinePbContents_SBox.valueChanged.connect(self.saveTabOnProject)
-        self.gui.gasolineVolatility_SBox.valueChanged.connect(self.saveTabOnProject)
         self.gui.dieselSulphureContent_SBox.valueChanged.connect(self.saveTabOnProject)
-        self.gui.dieselPbContents_SBox.valueChanged.connect(self.saveTabOnProject)
-        self.gui.dieselVolatility_SBox.valueChanged.connect(self.saveTabOnProject)
     
     def saveTabOnProject(self):
         ''' Save tab configuration in the project basing on GUI values
         '''
         # get values from the GUI
         gasoline_sulphur_contents = int(self.gui.gasolineSulphureContent_SBox.value())
-        gasoline_pb_contents = float(self.gui.gasolinePbContents_SBox.value())
-        gasoline_volatility = float(self.gui.gasolineVolatility_SBox.value())
         diesel_sulphur_contents = int(self.gui.dieselSulphureContent_SBox.value())
-        diesel_pb_contents = float(self.gui.dieselPbContents_SBox.value())
-        diesel_volatility = float(self.gui.dieselVolatility_SBox.value())
         
         # set conf parameters
-        self.project.setValue('Processing.Parameters.FuelProperties.Gasoline/Sulphur_contents', gasoline_sulphur_contents)
-        self.project.setValue('Processing.Parameters.FuelProperties.Gasoline/Pb_contents', gasoline_pb_contents)
-        self.project.setValue('Processing.Parameters.FuelProperties.Gasoline/Volatility', gasoline_volatility)
-        self.project.setValue('Processing.Parameters.FuelProperties.Diesel/Sulphur_contents', diesel_sulphur_contents)
-        self.project.setValue('Processing.Parameters.FuelProperties.Diesel/Pb_contents', diesel_pb_contents)
-        self.project.setValue('Processing.Parameters.FuelProperties.Diesel/Volatility', diesel_volatility)
+        self.project.setValue('FuelProperties.Gasoline/Sulphur_contents_in_gasoline', gasoline_sulphur_contents)
+        self.project.setValue('FuelProperties.Diesel/Sulphur_contents', diesel_sulphur_contents)
             
         # notify project modification
         self.projectModified.emit()
