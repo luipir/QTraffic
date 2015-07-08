@@ -93,7 +93,7 @@ class FuelPropertiesTabManager(QtCore.QObject):
         
         # get conf parameters
         gasoline_sulphur_contents = int(self.project.value('FuelProperties.Gasoline/Sulphur_contents_in_gasoline', 0))
-        diesel_sulphur_contents = int(self.project.value('FuelProperties.Diesel/Sulphur_contents', 0))
+        diesel_sulphur_contents = int(self.project.value('FuelProperties.Diesel/Sulphur_contents_in_diesel', 0))
         
         # avoid emitting signal in case of reset of indexes
         try:
@@ -120,7 +120,7 @@ class FuelPropertiesTabManager(QtCore.QObject):
         
         # set conf parameters
         self.project.setValue('FuelProperties.Gasoline/Sulphur_contents_in_gasoline', gasoline_sulphur_contents)
-        self.project.setValue('FuelProperties.Diesel/Sulphur_contents', diesel_sulphur_contents)
+        self.project.setValue('FuelProperties.Diesel/Sulphur_contents_in_diesel', diesel_sulphur_contents)
             
         # notify project modification
         self.projectModified.emit()
