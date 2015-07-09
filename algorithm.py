@@ -135,19 +135,19 @@ class Algorithm():
 
         # check configuration
         if not self.executable:
-            rais Exception("No QTraffic executable specified")
+            raise Exception("No QTraffic executable specified")
         if not self.layer:
-            rais Exception("No layer specified")
+            raise Exception("No layer specified")
         if not self.project:
-            rais Exception("No project specified")
+            raise Exception("No project specified")
         if not self.fleetDistributionJsonFileName:
-            rais Exception("No fleet disitrbution configruration file specified")
+            raise Exception("No fleet disitrbution configruration file specified")
         if not self.algFleetDistributionFileName:
-            rais Exception("No fleet distribution filename specified for algorithm input")
+            raise Exception("No fleet distribution filename specified for algorithm input")
         if not self.newFuelFormulaJsonFile:
-            rais Exception("No formula configuration json file name specified")
+            raise Exception("No formula configuration json file name specified")
         if not self.algNewFuelFormulasFileName:
-            rais Exception("No formula configuration file name specified for algorithm input")
+            raise Exception("No formula configuration file name specified for algorithm input")
 
     def prepareRun(self):
         ''' prepare running context starting from project
