@@ -25,22 +25,25 @@ from __future__ import unicode_literals
 import subprocess
 import time
 import traceback
+import platform
+import os
+
+from PyQt4 import QtCore, QtGui
 
 from qgis.utils import iface
-from qgis.core import (QgsMessageLog,
-                       QgsErrorMessage)
+from qgis.core import (QgsMessageLog)
+from qgis.gui import (QgsMessageBar)
 
 import newfuel_functions_utils
 import fleet_distribution_utils
 import traffic_volume_utils
 
-class Algorithm():
+class Algorithm:
     ''' Class that hide:
     A) algorithm runner
     B) running context prepare
     C) result preparation
     '''
-    
     def __init__(self):
         ''' constructor '''
         self.layer = None
@@ -50,26 +53,26 @@ class Algorithm():
         self.algFleetDistributionFileName = None
         self.newFuelFormulaJsonFile = None
         self.algNewFuelFormulasFileName = None
-        
+ 
     def run(self):
         ''' QTraffic executable runner '''
-#         # get actual work dir
-#         oldCwd = os.getcwd()
-#         
-#         # set work dir 
-#         os.chdir(self.projectPath)
-        
         # create message bar to show progress
-        iface.messageBar().createMessage(self.tr('Executing {}'.format(self.executable)))
-        self.progress = QProgressBar()
-        self.progress.setMaximum(10)
-        self.progress.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
-        self.progressMessageBar.layout().addWidget(self.progress)
-        iface.messageBar().pushWidget(self.progressMessageBar,
-                                      iface.messageBar().INFO)
+        progressMessageBar = iface.messageBar().createMessage(self.tr('Executing {}'.format(self.executable)))
+        progress = QtGui.QProgressBar()
+        progress.setMaximum(10)
+        progress.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        progressMessageBar.layout().addWidget(progress)
+        iface.messageBar().pushWidget(progressMessageBar, QgsMessageBar.INFO)
         
+        success = False
         try:
-            command = [self.executable]
+            if platform.system() == 'Linux':
+                command = ['wine', self.executable]
+            if platform.system() == 'Windows':
+                command = [self.executable]
+            
+            print(command)
+            
             proc = subprocess.Popen(command,
                                     stdout=subprocess.PIPE,
                                     stdin=subprocess.PIPE,
@@ -79,17 +82,26 @@ class Algorithm():
             for line in iter(proc.stdout.readline, ''):
                 QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
                 print(line)
-                progress.setPercentage(counter)
+                progress.setValue(counter)
                 counter += 1
+                
+                # check the end of processing controlling the final keyword... seems
+                # that subprocess.popen.returncode return always None when run with Wine
+                if "END OF CALCULATION" in line:
+                    success = True
+            
         except Exception as ex:
             traceback.print_exc()
             QgsMessageLog.logMessage(str(ex), 'QTraffic', QgsMessageLog.CRITICAL)
             iface.messageBar().pushCritical('QTraffic', "Error executing algorithm")
-        finally:
-#             os.chdir(oldCwd)
+        else:
             iface.messageBar().popWidget()
-            iface.messageBar().pushSuccess('QTraffic', 'Alg terminated successfully')            
-    
+            if success:
+                iface.messageBar().pushSuccess('QTraffic', 'Alg terminated successfully', 10)            
+            else:
+                QgsMessageLog.logMessage('Failed execution', 'QTraffic', QgsMessageLog.CRITICAL)
+                iface.messageBar().pushCritical('QTraffic', "Error executing algorithm")
+                
     def setProject(self, project=None):
         ''' setting the project on which the algorithm would be run
         '''
@@ -98,9 +110,6 @@ class Algorithm():
             # set some globals
             confFileName = self.project.fileName()
             self.projectPath = os.path.dirname(confFileName)
-            
-            # emit configurationLoaded with the status of loading
-            self.init()
     
     def setLayer(self, layer):
         ''' set the layer from wich extract traffic count data
@@ -121,7 +130,7 @@ class Algorithm():
             self.algFleetDistributionFileName = os.path.join(self.projectPath, self.algFleetDistributionFileName)
             
         # get origin NewFuel formula json filename
-        self.newFuelFormulaJsonFile = self.project.value('FuelProperties/Formulas', 'NewFuelFormulas.json')
+        self.newFuelFormulaJsonFile = self.project.value('FuelProperties/FormulasConfig', 'NewFuelFormulas.json')
         if not os.path.isabs(self.newFuelFormulaJsonFile):
             self.newFuelFormulaJsonFile = os.path.join(self.projectPath, self.newFuelFormulaJsonFile)
         
@@ -131,7 +140,9 @@ class Algorithm():
             self.algNewFuelFormulasFileName = os.path.join(self.projectPath, self.algNewFuelFormulasFileName)
         
         # get algorithm executable
-        self.executable = self.project.value('Processing/Executable', 'QTraffic.exe')
+        srcpath = os.path.dirname(os.path.realpath(__file__))        
+        defaultExecutableLocation = os.path.join(srcpath, 'algorithm', 'QTraffic.exe')
+        self.executable = self.project.value('Processing/Executable', defaultExecutableLocation)
 
         # check configuration
         if not self.executable:
@@ -169,6 +180,6 @@ class Algorithm():
     def tr(self, string, context=''):
         if not context:
             context = 'QTraffic'
-        return QCoreApplication.translate(context, string)
+        return QtCore.QCoreApplication.translate(context, string)
 
     
