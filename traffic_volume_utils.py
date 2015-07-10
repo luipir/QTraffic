@@ -23,6 +23,8 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import os
+
 from qgis.core import (QgsFeatureRequest,
                        QgsVectorLayer)
 from PyQt4 import QtCore
@@ -97,7 +99,6 @@ def layerToVolumeTxt(layer, project):
             print(template.format(*values), file=outFile)
     
 if __name__ == '__main__':
-    import os
     import sys
     import json
     from qgis.core import (QgsApplication)
