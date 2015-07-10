@@ -27,11 +27,13 @@ import time
 import traceback
 import platform
 import os
+import shutil
 
 from PyQt4 import QtCore, QtGui
 
 from qgis.utils import iface
-from qgis.core import (QgsMessageLog)
+from qgis.core import (QgsMessageLog,
+                       QgsField)
 from qgis.gui import (QgsMessageBar)
 
 import newfuel_functions_utils
@@ -47,19 +49,22 @@ class Algorithm:
     def __init__(self):
         ''' constructor '''
         self.layer = None
+        self.outLayer = None
         self.project = None
         self.projectPath = None
         self.fleetDistributionJsonFileName = None
         self.algFleetDistributionFileName = None
         self.newFuelFormulaJsonFile = None
         self.algNewFuelFormulasFileName = None
+        self.algOutputFileName = None
  
     def run(self):
         ''' QTraffic executable runner '''
         # create message bar to show progress
         progressMessageBar = iface.messageBar().createMessage(self.tr('Executing {}'.format(self.executable)))
         progress = QtGui.QProgressBar()
-        progress.setMaximum(10)
+        progress.setMaximum(0)
+        progress.setMinimum(0)
         progress.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         progressMessageBar.layout().addWidget(progress)
         iface.messageBar().pushWidget(progressMessageBar, QgsMessageBar.INFO)
@@ -71,19 +76,18 @@ class Algorithm:
             if platform.system() == 'Windows':
                 command = [self.executable]
             
-            print(command)
+            strCommand = ' '.join(command)
+            message = self.tr('Executing command {}'.format(strCommand))
+            QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.INFO)
             
             proc = subprocess.Popen(command,
                                     stdout=subprocess.PIPE,
                                     stdin=subprocess.PIPE,
                                     stderr=subprocess.PIPE,
                                     cwd=self.projectPath)
-            counter = 0
+            progress.setValue(-1)
             for line in iter(proc.stdout.readline, ''):
                 QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
-                print(line)
-                progress.setValue(counter)
-                counter += 1
                 
                 # check the end of processing controlling the final keyword... seems
                 # that subprocess.popen.returncode return always None when run with Wine
@@ -93,14 +97,17 @@ class Algorithm:
         except Exception as ex:
             traceback.print_exc()
             QgsMessageLog.logMessage(str(ex), 'QTraffic', QgsMessageLog.CRITICAL)
-            iface.messageBar().pushCritical('QTraffic', "Error executing algorithm")
+            iface.messageBar().pushCritical('QTraffic', self.tr("Error executing algorithm"))
         else:
             iface.messageBar().popWidget()
             if success:
-                iface.messageBar().pushSuccess('QTraffic', 'Alg terminated successfully', 10)            
+                iface.messageBar().pushSuccess('QTraffic', self.tr('Alg terminated successfully'))
             else:
                 QgsMessageLog.logMessage('Failed execution', 'QTraffic', QgsMessageLog.CRITICAL)
-                iface.messageBar().pushCritical('QTraffic', "Error executing algorithm")
+                iface.messageBar().pushCritical('QTraffic', self.tr("Error executing algorithm"))
+        
+        # resturn true or false
+        return success
                 
     def setProject(self, project=None):
         ''' setting the project on which the algorithm would be run
@@ -143,22 +150,29 @@ class Algorithm:
         srcpath = os.path.dirname(os.path.realpath(__file__))        
         defaultExecutableLocation = os.path.join(srcpath, 'algorithm', 'QTraffic.exe')
         self.executable = self.project.value('Processing/Executable', defaultExecutableLocation)
-
+        
+        # get outptu fiel of the algorith
+        self.algOutputFileName = self.project.value('Processing.OutputFileDefinition/Emissions', 'output.txt')
+        if not os.path.isabs(self.algOutputFileName):
+            self.algOutputFileName = os.path.join(self.projectPath, self.algOutputFileName)
+        
         # check configuration
         if not self.executable:
-            raise Exception("No QTraffic executable specified")
+            raise Exception(self.tr("No QTraffic executable specified"))
         if not self.layer:
-            raise Exception("No layer specified")
+            raise Exception(self.tr("No layer specified"))
         if not self.project:
-            raise Exception("No project specified")
+            raise Exception(self.tr("No project specified"))
         if not self.fleetDistributionJsonFileName:
-            raise Exception("No fleet disitrbution configruration file specified")
+            raise Exception(self.tr("No fleet disitrbution configruration file specified"))
         if not self.algFleetDistributionFileName:
-            raise Exception("No fleet distribution filename specified for algorithm input")
+            raise Exception(self.tr("No fleet distribution filename specified for algorithm input"))
         if not self.newFuelFormulaJsonFile:
-            raise Exception("No formula configuration json file name specified")
+            raise Exception(self.tr("No formula configuration json file name specified"))
         if not self.algNewFuelFormulasFileName:
-            raise Exception("No formula configuration file name specified for algorithm input")
+            raise Exception(self.tr("No formula configuration file name specified for algorithm input"))
+        if not self.algOutputFileName:
+            raise Exception(self.tr("No alg output file name specified"))
 
     def prepareRun(self):
         ''' prepare running context starting from project
@@ -170,12 +184,90 @@ class Algorithm:
         newfuel_functions_utils.jsonToTxt(self.newFuelFormulaJsonFile, self.algNewFuelFormulasFileName, self.fleetDistributionJsonFileName)
         
         # generate v_fleet_distribution.txt
-        fleet_distribution_utils.jsonToTxt(self.fleetDistributionJsonFileName, self.algFleetDistributionFileName)        
+        fleet_distribution_utils.jsonToTxt(self.fleetDistributionJsonFileName, self.algFleetDistributionFileName)
+        
+        # copy project to the fixed control file fopr the algorithm
+        currentProjectFile =  self.project.fileName() 
+        algProjectFileName =  os.path.join( self.projectPath, 'InputControl.cfg' )
+        try:
+            os.remove( algProjectFileName )
+        except:
+            pass
+        shutil.copyfile(currentProjectFile, algProjectFileName)
     
-    def prepareResult(self):
+    def addResultToLayer(self, newOutputLayer):
         ''' prepare results to be integrated in gis context
         '''
-        pass
+        try:
+            # start editing
+            newOutputLayer.startEditing()
+            
+            # read the out file and for each line update relative record in the result
+            with open(self.algOutputFileName, 'r') as algOutputFile:
+                
+                # read all lines
+                managedHeader = False
+                fieldNameIndexMap = {}
+                fieldNames = None
+                for line in algOutputFile:
+                    line = line.strip()
+                    
+                    # manage header
+                    if not managedHeader:
+                        managedHeader = True
+                        
+                        # add columns to the output layer
+                        fieldNames = line.split('\t')
+                        fieldNames = [x.split('(')[0] for x in fieldNames]
+                        for fieldName in fieldNames:
+                            # check if field is already available
+                            if newOutputLayer.fieldNameIndex(fieldName) >= 0:
+                                continue
+                            
+                            # add the new field
+                            newField = QgsField(fieldName, QtCore.QVariant.Double)
+                            newField.setLength(7)
+                            newField.setPrecision(5)
+                            added = newOutputLayer.addAttribute(newField)
+                            if not added:
+                               raise Exception(self.tr('Can not add fieldname {} to the output vector'.format(fieldName))) 
+                            
+                        newOutputLayer.updateFields()
+                        
+                        # add the fieldName in fieldNames
+                        for fieldName in fieldNames:
+                            fieldNameIndexMap[ fieldName ] = newOutputLayer.fieldNameIndex(fieldName)
+                        
+                        # jump to the next line = values
+                        continue
+                        
+                    # map values with fieldnames
+                    values = line.split('\t')
+                    fieldValueMap = zip(fieldNames, values)
+                    
+                    # update record
+                    id = None
+                    for columnIndex, (fieldName, fieldValue) in enumerate(fieldValueMap):
+                        
+                        if columnIndex == 0:
+                            id = int(fieldValue)
+                            continue
+                        
+                        fieldValue = float(fieldValue)
+                        newOutputLayer.changeAttributeValue(id-1, fieldNameIndexMap[fieldName], fieldValue)
+            
+        except Exception as ex:
+            # rollback
+            newOutputLayer.rollBack()
+            
+            traceback.print_exc()
+            QgsMessageLog.logMessage(str(ex), 'QTraffic', QgsMessageLog.CRITICAL)
+            iface.messageBar().pushCritical('QTraffic', self.tr("Error formatting alg result in the output layer"))
+        
+        else:
+            if not newOutputLayer.commitChanges():
+                raise Exception(self.tr('Error committing changes in the result layer'))
+        
     
     def tr(self, string, context=''):
         if not context:
