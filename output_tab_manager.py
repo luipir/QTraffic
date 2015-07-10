@@ -29,6 +29,8 @@ from qgis.core import (QgsMessageLog,
                        QgsErrorMessage)
 from qgis.gui import (QgsMessageBar)
 
+from algorithm import Algorithm
+
 class OutputTabManager(QtCore.QObject):
     ''' Class to hide managing of relative tab
     '''
@@ -271,9 +273,16 @@ class OutputTabManager(QtCore.QObject):
         ''' Prepare environment to run the alg and run it. After run, merge produced 
         data basing on plugin configuration
         '''
+        alg = Algorithm()
+        
         # prepare environment
+        alg.setProject(self.project)
+        alg.setLayer( self.gui.getRoadLayer() )
+        alg.init()
+        alg.prepareRun()
         
         # run the alg
+        alg.run()
         
         # check result
         
