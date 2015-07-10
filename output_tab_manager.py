@@ -26,8 +26,12 @@ import os
 import traceback
 from PyQt4 import QtCore, QtGui
 from qgis.core import (QgsMessageLog,
-                       QgsErrorMessage)
+                       QgsErrorMessage,
+                       QgsVectorFileWriter,
+                       QgsVectorLayer,
+                       QgsMapLayerRegistry)
 from qgis.gui import (QgsMessageBar)
+from qgis.utils import iface
 
 from algorithm import Algorithm
 
@@ -105,6 +109,14 @@ class OutputTabManager(QtCore.QObject):
         
         if oldOutputLayer == newOutputLayer:
             return
+        
+        # add shp extension
+        components = os.path.splitext(newOutputLayer)
+        if len(components) == 1:
+            newOutputLayer = newOutputLayer + '.shp'
+        else:
+            if components[1] != '.shp':
+                newOutputLayer = components[0] + '.shp'
         
         # update gui
         self.gui.outFile_LEdit.setText(newOutputLayer)
@@ -274,16 +286,68 @@ class OutputTabManager(QtCore.QObject):
         data basing on plugin configuration
         '''
         alg = Algorithm()
+        roadLayer = self.gui.getRoadLayer()
+        
+        # prepare layer where to add result
+        addToInputLayer = self.gui.addToOriginaLayer_RButton.isChecked()
+        newOutputLayer = self.gui.outFile_LEdit.text()
+
+        self.outLayer = roadLayer
+        if not addToInputLayer:
+            if not newOutputLayer:
+                message = self.tr('No output vector specified')
+                QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.CRITICAL)
+                iface.messageBar().pushCritical('QTraffic', message)
+                return
+            
+            # copy input layer to the new one
+            writeError = QgsVectorFileWriter.writeAsVectorFormat(roadLayer, newOutputLayer, 'utf-8',  roadLayer.crs())
+            if writeError != QgsVectorFileWriter.NoError:
+                message = self.tr('Error writing vector file {}'.format(newOutputLayer))
+                QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.CRITICAL)
+                iface.messageBar().pushCritical('QTraffic', message)
+                return
+            
+            # load the layer
+            newLayerName =os.path.splitext(os.path.basename(  newOutputLayer ))[0]
+            self.outLayer = QgsVectorLayer(newOutputLayer, newLayerName, 'ogr')
+            if not self.outLayer.isValid():
+                message = self.tr('Error loading vector file {}'.format(newOutputLayer))
+                QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.CRITICAL)
+                iface.messageBar().pushCritical('QTraffic', message)
+                return
         
         # prepare environment
-        alg.setProject(self.project)
-        alg.setLayer( self.gui.getRoadLayer() )
-        alg.init()
-        alg.prepareRun()
+        try:
+            alg.setProject(self.project)
+            alg.setLayer( roadLayer )
+            alg.init()
+            alg.prepareRun()
+        except:
+            traceback.print_exc()
+            message = self.tr('Error preparing context for the algoritm')
+            QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.CRITICAL)
+            iface.messageBar().pushCritical('QTraffic', message)
+            return
         
         # run the alg
-        alg.run()
-        
-        # check result
+        success = alg.run()
+        if not success:
+            return
         
         # prepare result
+        try:
+            alg.addResultToLayer(self.outLayer)
+        except:
+            return
+        
+        # add or refresh rsult vector layer
+        if not addToInputLayer:
+            QgsMapLayerRegistry.instance().addMapLayer(self.outLayer)
+        iface.mapCanvas().refresh()
+        
+    def tr(self, string, context=''):
+        if not context:
+            context = 'QTraffic'
+        return QtCore.QCoreApplication.translate(context, string)
+
