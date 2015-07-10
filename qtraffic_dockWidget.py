@@ -90,3 +90,8 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.fleetCompostionTabManager.setProject(project)
         self.fuelPropertiesTabManager.setProject(project)
         self.outputTabManager.setProject(project)
+    
+    def getRoadLayer(self):
+        ''' Bridge method to get the current road layer
+        '''
+        return self.inputNetworkTabManager.getRoadLayer()
