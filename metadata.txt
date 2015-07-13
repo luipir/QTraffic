@@ -10,7 +10,7 @@
 name=QTraffic
 qgisMinimumVersion=2.0
 description=Road contamination modelling for EMSURE Project
-version=0.2
+version=0.3
 author=Luigi Pirelli (for EMSURE project)º
 email=luipir@gmail.lcom
 
@@ -19,7 +19,7 @@ email=luipir@gmail.lcom
 # Recommended items:
 
 # Uncomment the following line and add your changelog:
-# changelog=
+changelog=0.3 - First draft with running algorithm
 
 # Tags are comma separated with spaces allowed
 tags=traffic, road, modelling, energy, simulation, transport, urban, analysis, calculator, ecology, html, network analysis, processing, routing, statistics
