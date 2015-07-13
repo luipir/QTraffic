@@ -22,24 +22,31 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import os
+import sys
 import json
-from PyQt4 import QtGui
-from ui.newfuel_formula_editor_dialog import Ui_newFuelFormula_dialog
+import traceback
+import collections
+from qgis.core import (QgsApplication,
+                       QgsMessageLog)
+from qgis.utils import iface
+from PyQt4 import QtGui, QtCore
+from ui.newfuel_formula_editor_dialog_ui import Ui_newFuelFormula_dialog
 
 class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
     
     def __init__(self, parent=None, project=None):
         """Constructor."""
-        super(SearchPlusDockWidget, self).__init__(parent)
+        super(NewFuelFormulaEditor, self).__init__(parent)
         
         # parent is the dock widget with all graphical elements
-        self.plugin = parent.parent
+#         self.plugin = parent.parent
 
         # init some globals
-        self.project = project
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
-        self.project = None
-        self.projectPath = os.path.dirname(  self.project.fileName() )
+        self.project = project
+        
+        self.projectPath = os.path.dirname( self.project.fileName() )
         self.formulaDict = None
 
         # Set up the user interface from Designer.
@@ -51,6 +58,7 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
             return
         
         # set up interface basing on formula config file
+        self.setUpGuiBasingOnConf()
     
     def readFormulaConf(self):
         ''' Read the JSON configuration file where are set all emission functions for New Fuels
@@ -59,7 +67,7 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
             return
         
         # get the conf filename
-        key = 'General.InputFileDefinition.gui/Formulas'
+        key = 'FuelProperties/FormulasConfig'
         confFileName = self.project.value(key, './NewFuelFormulas.json')
         if not confFileName:
             message = self.plugin.tr("No formula file specified in the project for the key %s" % key)
@@ -78,8 +86,9 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
                 self.formulaDict = json.load(confFile, object_pairs_hook=collections.OrderedDict)
                 
         except Exception as ex:
-            QgsMessageLog.logMessage(traceback.format_exc(), self.plugin.pluginTag, QgsMessageLog.CRITICAL)
-            self.plugin.iface.messageBar().pushMessage(self.plugin.tr("Error loading formula conf file. Error: %s" % str(ex)), QgsMessageBar.CRITICAL)
+#             QgsMessageLog.logMessage(traceback.format_exc(), self.plugin.pluginTag, QgsMessageLog.CRITICAL)
+            QgsMessageLog.logMessage(traceback.format_exc(), 'QTraffic', QgsMessageLog.CRITICAL)
+#             self.plugin.iface.messageBar().pushMessage(self.plugin.tr("Error loading formula conf file. Error: %s" % str(ex)), QgsMessageBar.CRITICAL)
             return
     
     def setUpGuiBasingOnConf(self):
@@ -88,20 +97,87 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
         if not self.formulaDict:
             return
         
+        # add tabs only if vehicles are available
+        if len(self.formulaDict) == 0:
+            return
+        
+        # set function validator to allow only math functions and restricted variables
+        simpleFormulaValidator = QtGui.QRegExpValidator( QtCore.QRegExp('^(\(|\)|-|\+|/|\*|\.|,|\d|V|\^|E)+$') )
+        
+        # get where to add tabs
+        vehicleTab = QtGui.QTabWidget()
+                
         # create fist level of tab related to VehicleType
-        print(self.formulaDict)
+        for vehicleType, vechicleData in self.formulaDict.items():
+            vehicleTabWidgetLayout = QtGui.QVBoxLayout()
+            
+            vehicleTabWidget = QtGui.QWidget()
+            vehicleTabWidget.setLayout(vehicleTabWidgetLayout)            
+            
+            # create subTab
+            euroClassTab = QtGui.QTabWidget()
+            
+            # add sub tabs for EURO classes
+            euroClasses = vechicleData['New fuel']
+            for euroClass, polluntantFunctions in euroClasses.items():
+                euroClassTabWidgetLayout = QtGui.QVBoxLayout()
+                euroClassTabWidgetLayout.setSpacing(0)
+                
+                euroClassTabWidget = QtGui.QWidget()
+                euroClassTabWidget.setLayout(euroClassTabWidgetLayout)
+                
+                # add QLineEdit for each pollutant
+                for pollutantName, pollutantfunction in polluntantFunctions.items():
+                    hLayout = QtGui.QHBoxLayout()
+                    hLayout.setContentsMargins(0, 0, 0, 0)
+                    
+                    editWidget = QtGui.QWidget()
+                    editWidget.setLayout(hLayout)
+                    
+                    label = QtGui.QLabel( '{} ='.format(pollutantName) )
+                    lineEdit = QtGui.QLineEdit()
+                    lineEdit.setObjectName( '{}_{}_{}_{}'.format(vehicleType, 'New fuel', euroClass, pollutantName) )
+                    lineEdit.setValidator( simpleFormulaValidator )
+                    lineEdit.setText( pollutantfunction )
+                    
+                    hLayout.addWidget(label, 0)
+                    hLayout.addWidget(lineEdit, 1)
 
-# if __name__ == '__main__':
-#     # for command-line arguments
-#     import sys
-# 
-#     # Create the GUI application
-#     app = QtGui.QApplication(sys.argv)
-#     
-#     # load project
-#     
-#     
-# 
-#     # start the Qt main loop execution, exiting from this script
-#     # with the same return code of Qt application
-#     sys.exit(app.exec_())
+                    euroClassTabWidgetLayout.addWidget(editWidget)
+                
+                # add tab
+                euroClassTab.addTab(euroClassTabWidget, euroClass)
+            
+            # add sub tab in the widget
+            vehicleTabWidgetLayout.addWidget(euroClassTab)           
+            
+            # add tab
+            vehicleTab.addTab(vehicleTabWidget, vehicleType)
+        
+        self.layoutContainer.addWidget(vehicleTab)
+    
+
+if __name__ == '__main__':
+    # add current running path in the searching path
+    srcpath = os.path.dirname(os.path.realpath(sys.argv[0]))
+    sys.path.append(srcpath)
+    
+    try:
+        # init qgis env and application
+        app = QgsApplication(sys.argv, True)    
+        QgsApplication.setPrefixPath(os.environ['QGIS_PREFIX'], True)
+        QgsApplication.initQgis()
+    
+        # load project
+        projectFile = os.path.join( os.path.dirname(os.path.realpath(__file__)), 'config', 'defaultProject.cfg')
+        project = QtCore.QSettings(projectFile, QtCore.QSettings.IniFormat)
+        project.setIniCodec("UTF-8")
+        
+        # run gui
+        gui = NewFuelFormulaEditor(iface, project)
+        gui.show()
+    
+        app.exec_()
+     
+    finally:
+        QgsApplication.exitQgis()
