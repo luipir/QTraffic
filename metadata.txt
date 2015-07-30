@@ -10,13 +10,12 @@
 name=QTraffic
 description=Traffic Emission and Energy Consumption Model for open-source QGIS
 about=QTraffic model is able to quantify traffic emission and energy consumption on the urban level.
-    It has been developed based on the updated European methodology for emission factors and a novel
-    technology for producing dynamic interactive data visualization. 
-    The emission and energy consumption model is implemented as a plugin for open-source QGIS and
-    integrates D3.js library with the Python programming.
-category=Plugins
+    It has been developed based on the updated European methodology for emission factors and a novel technology for producing dynamic interactive data visualization. 
+    The emission and energy consumption model is implemented as a plugin for open-source QGIS and integrates D3.js library with the Python programming.
+
 version=0.3
 qgisMinimumVersion=2.0
+
 author=University of Coimbra (http://www.uc.pt/) – Luigi Pirelli, Oxana Tchepel, Daniela Dias
 email=luipir@gmail.lcom
 
