@@ -157,16 +157,25 @@ class ProjectTabManager(QtCore.QObject):
         
         startPath = os.path.abspath( lastProjectIni )
         
+        # ask for the project name
+        newProjectName, ok = QtGui.QInputDialog.getText(self.gui, self.plugin.tr('New project name'), self.plugin.tr('Introduce the project name. \nNext step will be the base directory where to create the project') )
+        if not ok or not newProjectName:
+            return
+        
         # ask for the new project name = directory name
         # if dir does not exist it will be createed automatically by getExistingDirectory
-        projectDir = QtGui.QFileDialog.getExistingDirectory(self.gui, "Select the Project directory", startPath)
+        projectDir = QtGui.QFileDialog.getExistingDirectory(self.gui, self.plugin.tr('Select the Project directory'), startPath)
         if not projectDir:
             return
         
-        self.projectDir = projectDir
+        self.projectDir = os.path.join(projectDir, newProjectName)
         
-        # get project name as the name of the directory
-        self.projectName = os.path.basename(self.projectDir)
+        # if dowes not exist create dir
+        if not os.path.exists(self.projectDir):
+            os.makedirs(self.projectDir)
+        
+        # set project name
+        self.projectName = newProjectName
         
         # set project config file 
         self.projectFileName = self.projectName + ".cfg"
