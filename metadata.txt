@@ -8,10 +8,16 @@
 
 [general]
 name=QTraffic
-qgisMinimumVersion=2.0
-description=Road contamination modelling for EMSURE Project
+description=Traffic Emission and Energy Consumption Model for open-source QGIS
+about=QTraffic model is able to quantify traffic emission and energy consumption on the urban level.
+    It has been developed based on the updated European methodology for emission factors and a novel
+    technology for producing dynamic interactive data visualization. 
+    The emission and energy consumption model is implemented as a plugin for open-source QGIS and
+    integrates D3.js library with the Python programming.
+category=Plugins
 version=0.3
-author=Luigi Pirelli (for EMSURE project)º
+qgisMinimumVersion=2.0
+author=University of Coimbra (http://www.uc.pt/) – Luigi Pirelli, Oxana Tchepel, Daniela Dias
 email=luipir@gmail.lcom
 
 # End of mandatory metadata
@@ -22,7 +28,7 @@ email=luipir@gmail.lcom
 changelog=0.3 - First draft with running algorithm
 
 # Tags are comma separated with spaces allowed
-tags=traffic, road, modelling, energy, simulation, transport, urban, analysis, calculator, ecology, html, network analysis, processing, routing, statistics
+tags=traffic, emission, road, modelling, energy, transport, urban, network analysis, routing
 
 homepage=http://www.uc.pt/en/efs/research/emsure/about
 tracker=https://github.com/luipir/QTraffic/issues
