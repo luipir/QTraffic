@@ -135,61 +135,22 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox_2">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+	border:1px solid gray;
+	border-radius:5px;
+	margin-top: 1ex;
+}
+QGroupBox::title{
+	subcontrol-origin: margin;
+	subcontrol-position:top center;
+	padding:0 3px;
+}</string>
+          </property>
           <property name="title">
            <string>Table Column Select</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="2" column="2">
-            <layout class="QVBoxLayout" name="verticalLayout_18">
-             <item>
-              <widget class="QLabel" name="label_11">
-               <property name="text">
-                <string>Heavy duty vehicles count</string>
-               </property>
-               <property name="textInteractionFlags">
-                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="heavyDutyVehicleCount_CBox"/>
-             </item>
-            </layout>
-           </item>
-           <item row="3" column="1">
-            <layout class="QVBoxLayout" name="verticalLayout_20">
-             <item>
-              <widget class="QLabel" name="label_15">
-               <property name="text">
-                <string>Coaches count</string>
-               </property>
-               <property name="textInteractionFlags">
-                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="coachesCount_CBox"/>
-             </item>
-            </layout>
-           </item>
-           <item row="1" column="1">
-            <layout class="QVBoxLayout" name="verticalLayout_10">
-             <item>
-              <widget class="QLabel" name="label_5">
-               <property name="text">
-                <string>Road Lenght (meters)</string>
-               </property>
-               <property name="textInteractionFlags">
-                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="roadLenght_CBox"/>
-             </item>
-            </layout>
-           </item>
            <item row="1" column="0">
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
@@ -207,7 +168,75 @@
              </item>
             </layout>
            </item>
+           <item row="4" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Average vehicle speed (km/h)</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="averageVehicleSpeed_Cbox"/>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="1">
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item>
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Passenger cars count</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="passengerCarsCount_CBox"/>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Road Lenght (meters)</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="roadLenght_CBox"/>
+             </item>
+            </layout>
+           </item>
            <item row="1" column="2">
+            <layout class="QVBoxLayout" name="verticalLayout_19">
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Urban buses count</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="urbanBusesCount_CBox"/>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0">
             <layout class="QVBoxLayout" name="verticalLayout_11">
              <item>
               <widget class="QLabel" name="label_6">
@@ -241,12 +270,12 @@
              </item>
             </layout>
            </item>
-           <item row="3" column="0">
-            <layout class="QVBoxLayout" name="verticalLayout_19">
+           <item row="3" column="1">
+            <layout class="QVBoxLayout" name="verticalLayout_18">
              <item>
-              <widget class="QLabel" name="label_13">
+              <widget class="QLabel" name="label_11">
                <property name="text">
-                <string>Urban buses count</string>
+                <string>Heavy duty vehicles count</string>
                </property>
                <property name="textInteractionFlags">
                 <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
@@ -254,7 +283,24 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="urbanBusesCount_CBox"/>
+              <widget class="QComboBox" name="heavyDutyVehicleCount_CBox"/>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="2">
+            <layout class="QVBoxLayout" name="verticalLayout_20">
+             <item>
+              <widget class="QLabel" name="label_15">
+               <property name="text">
+                <string>Coaches count</string>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="coachesCount_CBox"/>
              </item>
             </layout>
            </item>
@@ -272,40 +318,6 @@
              </item>
              <item>
               <widget class="QComboBox" name="motorcycleCount_CBox"/>
-             </item>
-            </layout>
-           </item>
-           <item row="2" column="0">
-            <layout class="QVBoxLayout" name="verticalLayout_13">
-             <item>
-              <widget class="QLabel" name="label_7">
-               <property name="text">
-                <string>Passenger cars count</string>
-               </property>
-               <property name="textInteractionFlags">
-                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="passengerCarsCount_CBox"/>
-             </item>
-            </layout>
-           </item>
-           <item row="4" column="0">
-            <layout class="QVBoxLayout" name="verticalLayout_14">
-             <item>
-              <widget class="QLabel" name="label_8">
-               <property name="text">
-                <string>Average vehicle speed (km/h)</string>
-               </property>
-               <property name="textInteractionFlags">
-                <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="averageVehicleSpeed_Cbox"/>
              </item>
             </layout>
            </item>
@@ -410,7 +422,7 @@
           <item>
            <widget class="QTabWidget" name="fleetComposition_tabs">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="passengerCars_tab">
              <attribute name="title">
