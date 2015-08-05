@@ -321,6 +321,10 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
         completeFormulaFileName = os.path.join(self.projectPath, formulaBasename)
         shutil.copyfile(self.gui.defaultNewFuelFormulaFileName, completeFormulaFileName)
                 
+        # create temporary formulaFileName useful to manage save and reset
+        self.temporaryFormulaFileName = os.path.join(self.projectPath, '.'+formulaBasename)
+        shutil.copy(completeFormulaFileName, self.temporaryFormulaFileName)
+           
         # load conf
         self.reloadFormulaConf()
         
