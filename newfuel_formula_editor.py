@@ -318,7 +318,7 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
         
         # get default formula file
         formulaBasename = os.path.basename(self.gui.defaultNewFuelFormulaFileName)
-        completeFormulaFileName = os.path.join(self.projectDir, formulaBasename)
+        completeFormulaFileName = os.path.join(self.projectPath, formulaBasename)
         shutil.copyfile(self.gui.defaultNewFuelFormulaFileName, completeFormulaFileName)
                 
         # load conf
