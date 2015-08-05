@@ -134,5 +134,7 @@ class FuelPropertiesTabManager(QtCore.QObject):
         ''' create the GUI for the fomrula edior
         '''
         self.formulaEditor = NewFuelFormulaEditor(self.gui, self.project)
+        self.formulaEditor.projectModified.connect(self.projectModified.emit)
         self.formulaEditor.show()
+        self.formulaEditor.exec_()
            
