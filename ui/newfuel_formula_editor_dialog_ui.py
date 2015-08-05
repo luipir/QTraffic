@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/newfuel_formula_editor_dialog.ui'
 #
-# Created: Tue Jul  7 17:59:10 2015
+# Created: Wed Aug  5 16:07:52 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,6 +26,7 @@ except AttributeError:
 class Ui_newFuelFormula_dialog(object):
     def setupUi(self, newFuelFormula_dialog):
         newFuelFormula_dialog.setObjectName(_fromUtf8("newFuelFormula_dialog"))
+        newFuelFormula_dialog.setWindowModality(QtCore.Qt.WindowModal)
         newFuelFormula_dialog.resize(780, 464)
         self.verticalLayout = QtGui.QVBoxLayout(newFuelFormula_dialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -45,9 +46,9 @@ class Ui_newFuelFormula_dialog(object):
         self.horizontalLayout_31.setObjectName(_fromUtf8("horizontalLayout_31"))
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_31.addItem(spacerItem)
-        self.newFormulaFile_PButton = QtGui.QPushButton(newFuelFormula_dialog)
-        self.newFormulaFile_PButton.setObjectName(_fromUtf8("newFormulaFile_PButton"))
-        self.horizontalLayout_31.addWidget(self.newFormulaFile_PButton)
+        self.loadDefaultFormulaFile_PButton = QtGui.QPushButton(newFuelFormula_dialog)
+        self.loadDefaultFormulaFile_PButton.setObjectName(_fromUtf8("loadDefaultFormulaFile_PButton"))
+        self.horizontalLayout_31.addWidget(self.loadDefaultFormulaFile_PButton)
         self.saveAsFormulaFile_PButton = QtGui.QPushButton(newFuelFormula_dialog)
         self.saveAsFormulaFile_PButton.setObjectName(_fromUtf8("saveAsFormulaFile_PButton"))
         self.horizontalLayout_31.addWidget(self.saveAsFormulaFile_PButton)
@@ -71,10 +72,10 @@ class Ui_newFuelFormula_dialog(object):
         QtCore.QMetaObject.connectSlotsByName(newFuelFormula_dialog)
 
     def retranslateUi(self, newFuelFormula_dialog):
-        newFuelFormula_dialog.setWindowTitle(_translate("newFuelFormula_dialog", "Dialog", None))
+        newFuelFormula_dialog.setWindowTitle(_translate("newFuelFormula_dialog", "New fuel formula editor", None))
         self.label_28.setText(_translate("newFuelFormula_dialog", "FIle", None))
         self.selectFunctionFile_TButton.setText(_translate("newFuelFormula_dialog", "...", None))
-        self.newFormulaFile_PButton.setText(_translate("newFuelFormula_dialog", "New", None))
+        self.loadDefaultFormulaFile_PButton.setText(_translate("newFuelFormula_dialog", "Load default", None))
         self.saveAsFormulaFile_PButton.setText(_translate("newFuelFormula_dialog", "Save As", None))
         self.saveFormulaFile_PButton.setText(_translate("newFuelFormula_dialog", "Save", None))
 

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>newFuelFormula_dialog</class>
  <widget class="QDialog" name="newFuelFormula_dialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>New fuel formula editor</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0">
    <item>
@@ -51,9 +54,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="newFormulaFile_PButton">
+      <widget class="QPushButton" name="loadDefaultFormulaFile_PButton">
        <property name="text">
-        <string>New</string>
+        <string>Load default</string>
        </property>
       </widget>
      </item>
