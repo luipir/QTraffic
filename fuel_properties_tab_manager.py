@@ -29,6 +29,8 @@ from qgis.core import (QgsMessageLog,
                        QgsErrorMessage)
 from qgis.gui import (QgsMessageBar)
 
+from newfuel_formula_editor import NewFuelFormulaEditor
+
 class FuelPropertiesTabManager(QtCore.QObject):
     ''' Class to hide managing of relative tab
     '''
@@ -52,6 +54,9 @@ class FuelPropertiesTabManager(QtCore.QObject):
         
         # disable tab at the beginning
         self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
+        
+        # listener to open fomrula editor
+        self.gui.openFunctionEditor_PButton.clicked.connect(self.openFormulaEditor)
         
     def initTabTabIndex(self):
         ''' Retrieve what tab index refer the current tab manager
@@ -124,3 +129,10 @@ class FuelPropertiesTabManager(QtCore.QObject):
             
         # notify project modification
         self.projectModified.emit()
+    
+    def openFormulaEditor(self):
+        ''' create the GUI for the fomrula edior
+        '''
+        self.formulaEditor = NewFuelFormulaEditor(self.gui, self.project)
+        self.formulaEditor.show()
+           
