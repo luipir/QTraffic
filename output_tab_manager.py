@@ -283,8 +283,13 @@ class OutputTabManager(QtCore.QObject):
     
     def calculate(self):
         ''' Prepare environment to run the alg and run it. After run, merge produced 
-        data basing on plugin configuration
+        data basing on plugin configuration.
+        Before calculation a parametere validation will be executed
         '''
+        # perform validation
+        if not self.gui.validate():
+            return
+        
         alg = Algorithm()
         roadLayer = self.gui.getRoadLayer()
         
@@ -294,12 +299,6 @@ class OutputTabManager(QtCore.QObject):
 
         self.outLayer = roadLayer
         if not addToInputLayer:
-            if not newOutputLayer:
-                message = self.tr('No output vector specified')
-                QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.CRITICAL)
-                iface.messageBar().pushCritical('QTraffic', message)
-                return
-            
             # copy input layer to the new one
             writeError = QgsVectorFileWriter.writeAsVectorFormat(roadLayer, newOutputLayer, 'utf-8',  roadLayer.crs())
             if writeError != QgsVectorFileWriter.NoError:
@@ -316,7 +315,7 @@ class OutputTabManager(QtCore.QObject):
                 QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.CRITICAL)
                 iface.messageBar().pushCritical('QTraffic', message)
                 return
-        
+    
         # prepare environment
         try:
             alg.setProject(self.project)
@@ -345,9 +344,62 @@ class OutputTabManager(QtCore.QObject):
         if not addToInputLayer:
             QgsMapLayerRegistry.instance().addMapLayer(self.outLayer)
         iface.mapCanvas().refresh()
+    
+    def validate(self):
+        ''' pre calcluation validation related only to this tab
+        Mandatory:
+            At least an output parameters have to be set
+            if "create new layer" a new layer name have to be set
+        '''
+        addToInputLayer = self.gui.addToOriginaLayer_RButton.isChecked()
+        newOutputLayer = self.gui.outFile_LEdit.text()
+        if (not addToInputLayer and
+            not newOutputLayer):
+            message = self.tr('No output vector specified')
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        Gasoline_Consumption = self.gui.fuelEnergyConsumptionGasoline_CBox.isChecked()
+        Diesel_Consumption = self.gui.fuelEnergyConsumptionDiesel_CBox.isChecked()
+        LPG_Consumption = self.gui.fuelEnergyConsumptionLPG_CBox.isChecked()
+        NewFuel_Consumption = self.gui.fuelEnergyConsumptionNewFuels_CBox.isChecked()
+        Fuel_Consumption_Total = self.gui.totalFuelConsumption_CBox.isChecked()
+        Energy_Consumption = self.gui.energyConsumption_CBox.isChecked()
+        
+        CO = self.gui.pollutantsCO_CBox.isChecked()
+        NOx = self.gui.pollutantsNOx_CBox.isChecked()
+        NMVOC = self.gui.pollutantsNMVOCs_CBox.isChecked()
+        CO2 = self.gui.pollutantsCO2_CBox.isChecked()
+        CH4 = self.gui.pollutantsCH4_CBox.isChecked()
+        N2O = self.gui.pollutantsN2O_CBox.isChecked()
+        NH3 = self.gui.pollutantsNH3_CBox.isChecked()
+        SO2 = self.gui.pollutantsSO2_CBox.isChecked()
+        PM25 = self.gui.pollutantsPM25_CBox.isChecked()
+        C6H6 = self.gui.pollutantsC6H6_CBox.isChecked()
+
+        if (not Gasoline_Consumption and
+            not Diesel_Consumption and
+            not LPG_Consumption and
+            not NewFuel_Consumption and
+            not Fuel_Consumption_Total and
+            not Energy_Consumption and
+            not CO and
+            not NOx and
+            not NMVOC and
+            not CO2 and
+            not CH4 and
+            not N2O and
+            not NH3 and
+            not SO2 and
+            not PM25 and
+            not C6H6 ):
+            message = self.tr("Validation error: At least an output parameter have to be selected")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        return True
         
     def tr(self, string, context=''):
         if not context:
             context = 'QTraffic'
         return QtCore.QCoreApplication.translate(context, string)
-

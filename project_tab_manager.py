@@ -30,6 +30,7 @@ from qgis.core import (QgsVectorLayer,
                        QgsMessageLog,
                        QgsErrorMessage)
 from qgis.gui import (QgsMessageBar)
+from qgis.utils import iface
 
 class ProjectTabManager(QtCore.QObject):
     ''' Class to hide managing of project load and save
@@ -42,7 +43,6 @@ class ProjectTabManager(QtCore.QObject):
 
         # parent is the dock widget with all graphical elements
         self.gui = parent
-        self.plugin = parent.parent
         
         # init some globals
         self.projectDir = None
@@ -144,8 +144,8 @@ class ProjectTabManager(QtCore.QObject):
         # check if current project has been modified to 
         # avoid to override modifications
         if self.isModified():
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Project is modified, if you continue you can overwrite modifications. Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Project is modified, if you continue you can overwrite modifications. Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -158,13 +158,13 @@ class ProjectTabManager(QtCore.QObject):
         startPath = os.path.abspath( lastProjectIni )
         
         # ask for the project name
-        newProjectName, ok = QtGui.QInputDialog.getText(self.gui, self.plugin.tr('New project name'), self.plugin.tr('Introduce the project name. \nNext step will be the base directory where to create the project') )
+        newProjectName, ok = QtGui.QInputDialog.getText(self.gui, self.tr('New project name'), self.tr('Introduce the project name. \nNext step will be the base directory where to create the project') )
         if not ok or not newProjectName:
             return
         
         # ask for the new project name = directory name
         # if dir does not exist it will be createed automatically by getExistingDirectory
-        projectDir = QtGui.QFileDialog.getExistingDirectory(self.gui, self.plugin.tr('Select the Project directory'), startPath)
+        projectDir = QtGui.QFileDialog.getExistingDirectory(self.gui, self.tr('Select the Project directory'), startPath)
         if not projectDir:
             return
         
@@ -184,8 +184,8 @@ class ProjectTabManager(QtCore.QObject):
         # ask to the user if he/she want to overwrite the project
         completeProjectFileName = os.path.join(self.projectDir, self.projectFileName)
         if os.path.exists(completeProjectFileName):
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Project config file already exist, continuing it will be overwrite! Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Project config file already exist, continuing it will be overwrite! Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -220,8 +220,8 @@ class ProjectTabManager(QtCore.QObject):
         # check if current project has been modified to 
         # avoid to override modifications
         if self.isModified():
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Project is modified, if you continue you can overwrite modifications. Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Project is modified, if you continue you can overwrite modifications. Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -235,15 +235,15 @@ class ProjectTabManager(QtCore.QObject):
         
         # ask for the new conf file
         projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
-                                                        self.plugin.tr("Ini (*.cfg);;All (*)"))
+                                                        self.tr("Ini (*.cfg);;All (*)"))
         if not projectFile:
             return
         
         # if projectFile does not exist copy template from the default project file
         if not os.path.exists(projectFile):
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Project does not exist")
-            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
+            title = self.tr("Warning")
+            message = self.tr("Project does not exist")
+            iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
             return            
         
         # set new conf file as default
@@ -278,8 +278,8 @@ class ProjectTabManager(QtCore.QObject):
         # check if current project has been modified to 
         # avoid to save an outdated project
         if self.isModified():
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Project is modified, if you continue you duplicate an outdated version. Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Project is modified, if you continue you duplicate an outdated version. Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -304,8 +304,8 @@ class ProjectTabManager(QtCore.QObject):
         # check if projectDir is empty (e.g. created by getExistingDirectory) or not
         files = os.listdir(projectDir)
         if files:
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Project folder is not empty, if you continue it will be overwrite. Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Project folder is not empty, if you continue it will be overwrite. Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -345,3 +345,31 @@ class ProjectTabManager(QtCore.QObject):
             The modified status is based on the status of Save button
         '''
         return self.gui.saveProject_PButton.isEnabled()
+    
+    def validate(self):
+        ''' tab validation
+        Mandatory:
+            project have to be saved
+        '''
+        if self.isModified():
+            message = self.tr("Validation error: Project have to be saved")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        return True
+
+    # noinspection PyMethodMayBeStatic
+    def tr(self, message):
+        """Get the translation for a string using Qt translation API.
+
+        We implement this ourselves since we do not inherit QObject.
+
+        :param message: String for translation.
+        :type message: str, QString
+
+        :returns: Translated version of message.
+        :rtype: QString
+        """
+        # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
+        return QtCore.QCoreApplication.translate('QTraffic', message)
+    

@@ -30,6 +30,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, uic
 from qgis.core import (QgsLogger,
                        QgsMessageLog)
 from qgis.gui import (QgsMessageBar)
+from qgis.utils import iface
 
 from sunburst_d3_editor.sunburst_editor_bridge import SunburstEditorBridge
 from custom_widgets.spinbox_delegate import SpinBoxDelegate
@@ -58,8 +59,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # parent is the dock widget with all graphical elements
         self.gui = parent
-        self.plugin = parent.parent
-
+        
         # init some globals
         self.vehicleClassesDict = None # it will be a dict
         self.sunburstEditorBridge = None
@@ -173,14 +173,14 @@ class FleetCompositionTabManager(QtCore.QObject):
                 # shown in the sunburst visualization/editor
                 defaultVehicleClassesDict = json.load(confFile, object_pairs_hook=collections.OrderedDict)
         except Exception as ex:
-            message = self.plugin.tr("Error loading Default conf JSON file %s") % self.gui.defaultVehicleClassesFileName
-            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            message = self.tr("Error loading Default conf JSON file %s") % self.gui.defaultVehicleClassesFileName
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
             return
         
         # assume that the default roadType class is the fist one of the loaded configuration
         if not defaultVehicleClassesDict or len(defaultVehicleClassesDict['children']) == 0:
-            message = self.plugin.tr("No road types set in the default configuration file: %s") % self.gui.defaultVehicleClassesFileName
-            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            message = self.tr("No road types set in the default configuration file: %s") % self.gui.defaultVehicleClassesFileName
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
             return 
             
         defaultRoadType = defaultVehicleClassesDict['children'][0]
@@ -214,15 +214,15 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # check if there are at least two road type
         if len(self.vehicleClassesDict['children']) < 2:
-            message = self.plugin.tr("At least a road type would be present")
-            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
+            message = self.tr("At least a road type would be present")
+            iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
             return
         
         # check if current Fleet distribution has been modified to 
         # avoid to remove modifications
         if self.isModified():
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -271,8 +271,8 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # now save newVehicleClassesDict in the selected file
         try:
-            message = self.plugin.tr('Saving conf on file %s' % currentVehicleClassesJson)
-            QgsMessageLog.logMessage(message, self.plugin.pluginTag, QgsMessageLog.INFO)
+            message = self.tr('Saving conf on file %s' % currentVehicleClassesJson)
+            QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.INFO)
             
             with open(currentVehicleClassesJson, 'w') as outFile:
                 json.dump(newVehicleClassesDict, 
@@ -288,8 +288,8 @@ class FleetCompositionTabManager(QtCore.QObject):
                           sort_keys=False) # to mantaine the oreding of the OrdererdDict
                 
         except Exception as ex:
-            QgsMessageLog.logMessage(traceback.format_exc(), self.plugin.pluginTag, QgsMessageLog.CRITICAL)
-            self.plugin.iface.messageBar().pushMessage(self.plugin.tr("Error saving Conf JSON file. Please check the log"), QgsMessageBar.CRITICAL)
+            QgsMessageLog.logMessage(traceback.format_exc(), 'QTraffic', QgsMessageLog.CRITICAL)
+            iface.messageBar().pushMessage(self.tr("Error saving Conf JSON file. Please check the log"), QgsMessageBar.CRITICAL)
             return
         
         # set save button status
@@ -321,8 +321,8 @@ class FleetCompositionTabManager(QtCore.QObject):
         except Exception as ex:
             self.vehicleClassesDict = None
             
-            QgsMessageLog.logMessage(traceback.format_exc(), self.plugin.pluginTag, QgsMessageLog.CRITICAL)
-            self.plugin.iface.messageBar().pushMessage(self.plugin.tr("Error loading Conf JSON file. Please check the log"), QgsMessageBar.CRITICAL)
+            QgsMessageLog.logMessage(traceback.format_exc(), 'QTraffic', QgsMessageLog.CRITICAL)
+            iface.messageBar().pushMessage(self.tr("Error loading Conf JSON file. Please check the log"), QgsMessageBar.CRITICAL)
             return
     
     def loadDefaultConfiguration(self):
@@ -331,8 +331,8 @@ class FleetCompositionTabManager(QtCore.QObject):
         # check if current Fleet distribution has been modified to 
         # avoid to remove modifications
         if self.isModified():
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -354,8 +354,8 @@ class FleetCompositionTabManager(QtCore.QObject):
         # check if current Fleet distribution has been modified to 
         # avoid to remove modifications
         if self.isModified():
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
+            title = self.tr("Warning")
+            message = self.tr("Fleet distribution modified, if you continue you can overwrite modifications. Continue?")
             ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
             if ret == QtGui.QMessageBox.No:
                 return
@@ -369,7 +369,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # ask for the new conf file
         newConfFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a JSON conf file", startPath, 
-                                                        self.plugin.tr("Json (*.json);;All (*)"))
+                                                        self.tr("Json (*.json);;All (*)"))
         if not newConfFile:
             return
         
@@ -529,7 +529,7 @@ class FleetCompositionTabManager(QtCore.QObject):
         currentItem.setData(QtCore.Qt.UserRole, roadTypeDistribution)
     
     def showRoadClassDistribution(self, currentRoadTypeItem, previousRoadTypeItem):
-        ''' Set sunbust UI for each tab category
+        ''' Set sunburst UI for each tab category
         '''
         # manage event in case of list clear
         if not currentRoadTypeItem:
@@ -556,7 +556,7 @@ class FleetCompositionTabManager(QtCore.QObject):
                 print webView.objectName()
 
                 JsCommand = "showJson(%s)" % jsonString
-                QgsLogger.debug(self.plugin.tr("Load config with with JS command: %s" % JsCommand), 3)
+                QgsLogger.debug(self.tr("Load config with with JS command: %s" % JsCommand), 3)
                 
                 webView.page().mainFrame().evaluateJavaScript(JsCommand)
     
@@ -590,3 +590,39 @@ class FleetCompositionTabManager(QtCore.QObject):
                 if found:
                     return found
             return found
+    
+    def currentRoadTypes(self):
+        ''' Return the current list of roadType in the fleet distribution
+            Beaware that this list comes from current memory status and could not
+            reflect the json file if the fleet distribtion has been edited and not saved
+        '''
+        roadTypes = [ roadType['name'] for roadType in self.vehicleClassesDict['children'] ]
+        return roadTypes
+
+    def validate(self):
+        ''' tab validation
+        Mandatory:
+            project have to be saved
+        '''
+        if self.isModified():
+            message = self.tr("Validation error: Fleet distribution have to be saved")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        return True
+
+    # noinspection PyMethodMayBeStatic
+    def tr(self, message):
+        """Get the translation for a string using Qt translation API.
+
+        We implement this ourselves since we do not inherit QObject.
+
+        :param message: String for translation.
+        :type message: str, QString
+
+        :returns: Translated version of message.
+        :rtype: QString
+        """
+        # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
+        return QtCore.QCoreApplication.translate('QTraffic', message)
+    

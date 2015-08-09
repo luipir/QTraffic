@@ -30,19 +30,19 @@ from qgis.core import (QgsMessageLog,
                        QgsMapLayerRegistry,
                        QgsVectorLayer)
 from qgis.gui import (QgsMessageBar)
+from qgis.utils import iface
 
 class InputNetworkTabManager(QtCore.QObject):
     ''' Class to hide managing of relative tab
     '''
     projectModified = QtCore.pyqtSignal()
-        
+
     def __init__(self, parent=None):
         '''constructor'''
         super(InputNetworkTabManager, self).__init__(parent)
 
         # parent is the dock widget with all graphical elements
         self.gui = parent
-        self.plugin = parent.parent
         
         # init some globals
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
@@ -59,6 +59,7 @@ class InputNetworkTabManager(QtCore.QObject):
         # set basic events
         self.gui.inputLayer_lineEdit.returnPressed.connect(self.loadLayer)
         self.gui.selectLayer_TButton.clicked.connect(self.askLayer)
+        self.gui.inputNetwork_validate_PButton.clicked.connect(self.validate)
 
     def initTabTabIndex(self):
         ''' Retrieve what tab index refer the current tab manager
@@ -103,8 +104,8 @@ class InputNetworkTabManager(QtCore.QObject):
             # load layer
             self.roadLayer = QgsVectorLayer(inputLayerFile, 'roadLayer', 'ogr')
             if not self.roadLayer.isValid():
-                message = self.plugin.tr("Error loading layer: %s" % self.roadLayer.error().message(QgsErrorMessage.Text))
-                self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+                message = self.tr("Error loading layer: %s" % self.roadLayer.error().message(QgsErrorMessage.Text))
+                iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
                 return
             
             # show layer in the canvas
@@ -290,7 +291,7 @@ class InputNetworkTabManager(QtCore.QObject):
         
         # get porject path
         layerFileName = QtGui.QFileDialog.getOpenFileName(self.gui, "Select road layer", startPath, 
-                                                          self.plugin.tr("Shp (*.shp);;All (*)"))
+                                                          self.tr("Shp (*.shp);;All (*)"))
         if not layerFileName:
             return
         
@@ -308,9 +309,9 @@ class InputNetworkTabManager(QtCore.QObject):
         if not layerFileName:
             return
         if not os.path.exists(layerFileName):
-            title = self.plugin.tr("Warning")
-            message = self.plugin.tr("Layer does not exist")
-            self.plugin.iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
+            title = self.tr("Warning")
+            message = self.tr("Layer does not exist")
+            iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
             return
         
         self.project.setValue('InputNetwork/inputLayer', layerFileName)
@@ -328,3 +329,136 @@ class InputNetworkTabManager(QtCore.QObject):
         if self.roadLayer and self.roadLayer.isValid():
             # do nothing if layer already removed by user
             QgsMapLayerRegistry.instance().removeMapLayer(self.roadLayer.id())
+    
+    def validate(self):
+        ''' Validate parameters inserted in the Input Network tab:
+            Validation performed is:
+            Mandatory parameters:
+                Input layer
+                Road Type
+                Road lenght
+                Road Gradient
+                Average vehicle speed
+                At least one of vehicle count
+            Value validation:
+                Road Type have to be integer
+                Road lenght, lenght, Gradient have to be float
+                Average vehicle speed have to be lfoat
+                Count column have to be float or integer
+            Inter tab validation
+                Road type column values have to be present as categories in Fleet Distribution classes
+            This method notify the error in case of validation failure
+            This method notify success in case of correct validation
+            @return: True is validated or False if not 
+        '''
+        if not self.project:
+            return False
+        
+        inputLayerFile = self.gui.inputLayer_lineEdit.text()
+        columnRoadType = self.gui.roadType_CBox.currentText()
+        columnRoadLenght = self.gui.roadLenght_CBox.currentText()
+        columnRoadSlope = self.gui.roadGradient_CBox.currentText()
+        columnAverageSpeed = self.gui.averageVehicleSpeed_Cbox.currentText()
+
+        columnPassengerCars = self.gui.passengerCarsCount_CBox.currentText()
+        columnLightDutyVehicle = self.gui.lightDutyVehicleCount_CBox.currentText()
+        columnHeavyDutyVechicle = self.gui.heavyDutyVehicleCount_CBox.currentText()
+        columnUrbanBuses = self.gui.urbanBusesCount_CBox.currentText()
+        columnCouch = self.gui.coachesCount_CBox.currentText()
+        columnMotorcycle = self.gui.motorcycleCount_CBox.currentText()
+        
+        # mandatory fields
+        if not inputLayerFile:
+            message = self.tr("Validation error: Input shape have to be choosed")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        if not columnRoadType:
+            message = self.tr("Validation error: Road type column have to be selected from input layer")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        if not columnRoadLenght:
+            message = self.tr("Validation error: Road lenght column have to be selected from input layer")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        if not columnRoadLenght:
+            message = self.tr("Validation error: Road slope column have to be selected from input layer")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        if not columnAverageSpeed:
+            message = self.tr("Validation error: Average vechicle speed column have to be selected from input layer")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        # at least one column count have to be selected
+        if (not columnPassengerCars and
+            not columnLightDutyVehicle and
+            not columnHeavyDutyVechicle and
+            not columnUrbanBuses and
+            not columnCouch and
+            not columnMotorcycle):
+            message = self.tr("Validation error: At least a vehicle count column have to be selected from input layer")
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        # value validations
+        fields = self.roadLayer.pendingFields()
+        checkDict = {
+            columnRoadType: [QtCore.QVariant.Int, QtCore.QVariant.LongLong],
+            columnRoadLenght: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnRoadSlope: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnAverageSpeed: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnPassengerCars: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnLightDutyVehicle: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnHeavyDutyVechicle: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnUrbanBuses: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnCouch: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+            columnMotorcycle: [QtCore.QVariant.Int, QtCore.QVariant.Double, QtCore.QVariant.LongLong],
+        }
+        
+        for columnName, admissibleTypes in checkDict.items():
+            if not columnName:
+                continue
+            
+            field = fields.field(columnName)
+            if not field.type() in admissibleTypes:
+                message = self.tr("Validation error: column {} has incompatible type {}".format(columnName, field.typeName()))
+                iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+                return False
+        
+        # inter tab validation
+        index = self.roadLayer.fieldNameIndex(columnRoadType)
+        roadTypes = self.roadLayer.uniqueValues(index, -1)
+        if len(roadTypes) == 0:
+            message = self.tr("Validation error: column {} has no values".format(columnRoadType))
+            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+            return False
+        
+        # check if each road type is present in the list of road types in the fleet distribution tab
+        fleetDistributionRoadTypes = self.gui.getRoadTypes()
+        for roadType in roadTypes:
+            if not str(roadType) in fleetDistributionRoadTypes:
+                message = self.tr("Validation error: Road type value {} is not defined in fleet distribution tab".format(roadType))
+                iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+                return False
+        
+        return True
+    
+    # noinspection PyMethodMayBeStatic
+    def tr(self, message):
+        """Get the translation for a string using Qt translation API.
+
+        We implement this ourselves since we do not inherit QObject.
+
+        :param message: String for translation.
+        :type message: str, QString
+
+        :returns: Translated version of message.
+        :rtype: QString
+        """
+        # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
+        return QtCore.QCoreApplication.translate('QTraffic', message)
+    

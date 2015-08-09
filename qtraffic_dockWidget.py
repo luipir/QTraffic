@@ -95,3 +95,32 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         ''' Bridge method to get the current road layer
         '''
         return self.inputNetworkTabManager.getRoadLayer()
+    
+    def getRoadTypes(self):
+        ''' Bridge method to get list of roadTypes edited in the fleetDistribution tab
+        '''
+        if not self.fleetCompostionTabManager:
+            return []
+        
+        return self.fleetCompostionTabManager.currentRoadTypes()
+
+    def validate(self):
+        ''' Bridge method to allow inter tab validation
+        '''
+        if not self.projectTabManager.validate():
+            return False
+        
+        if not self.inputNetworkTabManager.validate():
+            return False
+        
+        if not self.fleetCompostionTabManager.validate():
+            return False
+        
+        if not self.fuelPropertiesTabManager.validate():
+            return False
+        
+        if not self.outputTabManager.validate():
+            return False
+        
+        return True
+    

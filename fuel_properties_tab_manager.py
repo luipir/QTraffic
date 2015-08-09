@@ -42,7 +42,6 @@ class FuelPropertiesTabManager(QtCore.QObject):
 
         # parent is the dock widget with all graphical elements
         self.gui = parent
-        self.plugin = parent.parent
         
         # init some globals
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
@@ -138,3 +137,24 @@ class FuelPropertiesTabManager(QtCore.QObject):
         self.formulaEditor.show()
         self.formulaEditor.exec_()
            
+    def validate(self):
+        ''' tab validation
+        No control is necessary
+        '''
+        return True
+        
+    # noinspection PyMethodMayBeStatic
+    def tr(self, message):
+        """Get the translation for a string using Qt translation API.
+
+        We implement this ourselves since we do not inherit QObject.
+
+        :param message: String for translation.
+        :type message: str, QString
+
+        :returns: Translated version of message.
+        :rtype: QString
+        """
+        # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
+        return QtCore.QCoreApplication.translate('QTraffic', message)
+    
