@@ -39,15 +39,24 @@ from qgis.gui import (QgsMessageBar)
 import newfuel_functions_utils
 import fleet_distribution_utils
 import traffic_volume_utils
+from time import sleep
 
-class Algorithm:
+class Algorithm(QtCore.QObject):
     ''' Class that hide:
-    A) algorithm runner
+    A) algorithm run
     B) running context prepare
     C) result preparation
     '''
+    started = QtCore.pyqtSignal()
+    progress = QtCore.pyqtSignal(int)
+    message = QtCore.pyqtSignal(str, int)
+    error = QtCore.pyqtSignal(Exception, basestring)
+    finished = QtCore.pyqtSignal(object)
+    
     def __init__(self):
         ''' constructor '''
+        super(Algorithm, self).__init__()
+        
         self.layer = None
         self.outLayer = None
         self.project = None
@@ -57,37 +66,44 @@ class Algorithm:
         self.newFuelFormulaJsonFile = None
         self.algNewFuelFormulasFileName = None
         self.algOutputFileName = None
+        
+        self.killed = False
  
     def run(self):
         ''' QTraffic executable runner '''
-        # create message bar to show progress
-        progressMessageBar = iface.messageBar().createMessage(self.tr('Executing {}'.format(self.executable)))
-        progress = QtGui.QProgressBar()
-        progress.setMaximum(0)
-        progress.setMinimum(0)
-        progress.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        progressMessageBar.layout().addWidget(progress)
-        iface.messageBar().pushWidget(progressMessageBar, QgsMessageBar.INFO)
+        self.started.emit()
+        
+        sleep(2)
+        
+        # get algorithm executable
+        srcpath = os.path.dirname(os.path.realpath(__file__))        
+        defaultExecutableLocation = os.path.join(srcpath, 'algorithm', 'QTraffic.exe')
+        executable = self.project.value('Processing/Executable', defaultExecutableLocation)
         
         success = False
         try:
             if platform.system() == 'Linux':
-                command = ['wine', self.executable]
+                command = ['wine', executable]
             if platform.system() == 'Windows':
-                command = [self.executable]
+                command = [executable]
             
             strCommand = ' '.join(command)
-            message = self.tr('Executing command {}'.format(strCommand))
-            QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.INFO)
+            msg = self.tr('Executing command {}'.format(strCommand))
+            #QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.INFO)
+            self.message.emit(msg, QgsMessageLog.INFO)
             
             proc = subprocess.Popen(command,
                                     stdout=subprocess.PIPE,
                                     stdin=subprocess.PIPE,
                                     stderr=subprocess.PIPE,
                                     cwd=self.projectPath)
-            progress.setValue(-1)
+            self.progress.emit(-1)
             for line in iter(proc.stdout.readline, ''):
-                QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
+                if self.killed:
+                    break
+                
+                #QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
+                self.message.emit(line, QgsMessageLog.INFO)
                 
                 # check the end of processing controlling the final keyword... seems
                 # that subprocess.popen.returncode return always None when run with Wine
@@ -95,19 +111,10 @@ class Algorithm:
                     success = True
             
         except Exception as ex:
-            traceback.print_exc()
-            QgsMessageLog.logMessage(str(ex), 'QTraffic', QgsMessageLog.CRITICAL)
-            iface.messageBar().pushCritical('QTraffic', self.tr("Error executing algorithm"))
-        else:
-            iface.messageBar().popWidget()
-            if success:
-                iface.messageBar().pushSuccess('QTraffic', self.tr('Alg terminated successfully'))
-            else:
-                QgsMessageLog.logMessage('Failed execution', 'QTraffic', QgsMessageLog.CRITICAL)
-                iface.messageBar().pushCritical('QTraffic', self.tr("Error executing algorithm"))
+            self.error.emit(ex, traceback.format_exc())
         
         # resturn true or false
-        return success
+        self.finished.emit(success)
                 
     def setProject(self, project=None):
         ''' setting the project on which the algorithm would be run
@@ -123,7 +130,7 @@ class Algorithm:
         '''
         self.layer = layer
     
-    def init(self):
+    def initConfig(self):
         ''' set some configuration params basing on project
         '''
         # origin for fleet distribution json
@@ -268,6 +275,9 @@ class Algorithm:
             if not newOutputLayer.commitChanges():
                 raise Exception(self.tr('Error committing changes in the result layer'))
         
+    
+    def kill(self):
+        self.killed = True
     
     def tr(self, string, context=''):
         if not context:

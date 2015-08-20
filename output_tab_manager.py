@@ -29,7 +29,8 @@ from qgis.core import (QgsMessageLog,
                        QgsErrorMessage,
                        QgsVectorFileWriter,
                        QgsVectorLayer,
-                       QgsMapLayerRegistry)
+                       QgsMapLayerRegistry,
+                       QgsApplication)
 from qgis.gui import (QgsMessageBar)
 from qgis.utils import iface
 
@@ -290,7 +291,7 @@ class OutputTabManager(QtCore.QObject):
         if not self.gui.validate():
             return
         
-        alg = Algorithm()
+        self.alg = Algorithm()
         roadLayer = self.gui.getRoadLayer()
         
         # prepare layer where to add result
@@ -318,10 +319,10 @@ class OutputTabManager(QtCore.QObject):
     
         # prepare environment
         try:
-            alg.setProject(self.project)
-            alg.setLayer( roadLayer )
-            alg.init()
-            alg.prepareRun()
+            self.alg.setProject(self.project)
+            self.alg.setLayer( roadLayer )
+            self.alg.initConfig()
+            self.alg.prepareRun()
         except:
             traceback.print_exc()
             message = self.tr('Error preparing context for the algoritm')
@@ -329,22 +330,113 @@ class OutputTabManager(QtCore.QObject):
             iface.messageBar().pushCritical('QTraffic', message)
             return
         
-        # run the alg
-        success = alg.run()
+        # run the self.alg
+        self.thread = QtCore.QThread(self)
+        self.thread.started.connect(self.alg.run)
+        self.thread.finished.connect(self.threadCleanup)
+        self.thread.terminated.connect(self.threadCleanup)
+        
+        self.alg.moveToThread(self.thread)
+        self.alg.started.connect(self.manageStarted)
+        self.alg.progress.connect(self.manageProgress)
+        self.alg.message.connect(self.manageMessage)
+        self.alg.error.connect(self.manageError)
+        self.alg.finished.connect(self.manageFinished)
+
+        # set wait cursor and start
+        QgsApplication.instance().setOverrideCursor(QtCore.Qt.WaitCursor)
+        self.thread.start()
+        
+    def threadCleanup(self):
+        ''' cleanup after thread run
+        '''
+        # restore cursor
+        QgsApplication.instance().restoreOverrideCursor()
+        
+        if self.alg:
+            self.alg.deleteLater()
+            self.alg = None
+        self.thread.wait()
+        self.thread.deleteLater()
+        
+        # remove progress bar
+        if self.progressMessageBarItem:
+            iface.messageBar().popWidget(self.progressMessageBarItem)
+            self.progressMessageBarItem = None
+        
+    def manageStarted(self):
+        ''' Setup GUI env to notify processing progress
+        '''
+        message = self.tr('Processing started')
+        QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.INFO)
+        
+        # create message bar to show progress
+        self.progressMessageBarItem = iface.messageBar().createMessage(self.tr('Executing alg'))
+        self.progress = QtGui.QProgressBar()
+        self.progress.setMaximum(0)
+        self.progress.setMinimum(0)
+        self.progress.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.progressMessageBarItem.layout().addWidget(self.progress)
+        iface.messageBar().pushWidget(self.progressMessageBarItem, QgsMessageBar.INFO)
+
+    def manageProgress(self, percentage):
+        ''' Update progress bar basing on alg nofify
+        '''
+        self.progress.setValue(percentage)
+    
+    def manageMessage(self, message, msgType): 
+        ''' expose alg thread messages to gui and log
+        '''
+        duration = 0
+        if msgType == QgsMessageLog.INFO:
+            # enough notify in the log
+            QgsMessageLog.logMessage(message, 'QTraffic', msgType)
+            return
+        
+        if msgType == QgsMessageLog.WARNING:
+            duration = 3
+        iface.messageBar().pushMessage(message, msgType, duration)
+            
+    def manageError(self, ex, exceptionMessage):
+        ''' Do actions in case of alg thread error. Now only notify exception 
+        '''
+        QgsMessageLog.logMessage(exceptionMessage, 'QTraffic', QgsMessageLog.CRITICAL)
+        iface.messageBar().pushMessage(exceptionMessage, QgsMessageLog.CRITICAL)
+        
+    def manageFinished(self, success):
+        ''' Do action after notify that alg is finished. These are the postprocessing steps
+        1) merge result to the output layer
+        2) add the layer to canvas in case it is new
+        3) notify edn of processing
+        4) terminate the thread
+        '''
+        # check result
         if not success:
+            QgsMessageLog.logMessage('Failed execution', 'QTraffic', QgsMessageLog.CRITICAL)
+            iface.messageBar().pushCritical('QTraffic', self.tr("Error executing algorithm"))
             return
         
         # prepare result
         try:
-            alg.addResultToLayer(self.outLayer)
-        except:
+            self.alg.addResultToLayer(self.outLayer)
+        except Exception as ex:
+            traceback.print_exc()
+            QgsMessageLog.logMessage('Cannot add result to layer: {}'.format(str(ex)), 'QTraffic', QgsMessageLog.CRITICAL)
+            iface.messageBar().pushCritical('QTraffic', self.tr("Cannot add result to layer"))
             return
         
         # add or refresh rsult vector layer
+        addToInputLayer = self.gui.addToOriginaLayer_RButton.isChecked()
         if not addToInputLayer:
             QgsMapLayerRegistry.instance().addMapLayer(self.outLayer)
         iface.mapCanvas().refresh()
-    
+        
+        # notify the user the end of process
+        iface.messageBar().pushSuccess('QTraffic', self.tr('Alg terminated successfully'))
+        
+        # finish the thread
+        self.thread.quit()
+        
     def validate(self):
         ''' pre calcluation validation related only to this tab
         Mandatory:
