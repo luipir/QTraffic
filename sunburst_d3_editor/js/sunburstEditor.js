@@ -63,7 +63,7 @@ var arc = d3.svg.arc()
 
 
 // Main function to draw and set up the visualization, once we have the data.
-function createVisualization(json) {
+function createVisualization(vechicleName, json) {
     
     // Basic setup of page elements.
     initializeBreadcrumbTrail();
@@ -119,6 +119,10 @@ function createVisualization(json) {
     // show lagend activating checkbox
     //d3.select("#togglelegend").property('checked', true);
     //d3.select("#togglelegend").on("click")();
+
+    // set vechicle name
+    d3.select("#vechicle").text(vechicleName);
+    //d3.select("#explanation").style("visibility", "");
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
@@ -131,12 +135,13 @@ function mouseover(d) {
     percentageString = "< 0.1%";
   }
 
-  d3.select("#percentage")
-    .text(percentageString);
+/*  d3.select("#percentage")
+    //.text(percentageString);
+    .text(vechicleName);
 
-  d3.select("#explanation")
+  d3.select("#  ")
     .style("visibility", "");
-
+*/
   var sequenceArray = getAncestors(d);
   updateBreadcrumbs(sequenceArray, percentageString);
 
@@ -171,10 +176,11 @@ function mouseleave(d) {
       d3.select(this).on("mouseover", mouseover);
     });
 
-  d3.select("#explanation")
+/*  d3.select("#explanation")
     .transition()
     .duration(500)
     .style("visibility", "hidden");
+*/
 }
 
 // Given a node in a partition layout, return an array of all of its ancestor
@@ -199,7 +205,7 @@ function initializeBreadcrumbTrail() {
     // Add the svg area.
     var trail = d3.select("#sequence").append("svg:svg")
         .attr("width", width)
-        .attr("height", 50)
+        .attr("height", 20)
         .attr("id", "trail");
     // Add the label at the end, for the percentage.
     trail.append("svg:text")
@@ -213,14 +219,16 @@ function initializeSunburst() {
     // erase and set info box
     // would be better to avoid add explanation here but leave in the html only and erase
     // only svg... but I've to focus on other part of the code
-    d3.select('#chart').html('<div id="explanation" style="visibility: hidden;"><span id="percentage"></span></div>');
+    d3.select('#chart').html('<div id="explanation"><span id="percentage"></span><span id="vechicle"></span></div>');
     
+    translateX =  (width / 2)-25;
+    translateY =  (height / 2);
     vis = d3.select("#chart").append("svg:svg")
       .attr("width", width)
       .attr("height", height)
       .append("svg:g")
       .attr("id", "container")
-      .attr("transform", "translate(" + width / 2 + "," + height/ 2 + ")");
+      .attr("transform", "translate(" + translateX + "," + translateY + ")");
 }
 
 // inizialize sliders to allow a clean redraw
@@ -330,10 +338,11 @@ function toggleLegend() {
     }
 }
 
-function showJson(jsonFromPython) {
+function showJson(vechicleName, jsonFromPython) {
     // show only Passenger Cars for test reason
     json = jsonFromPython;
-    createVisualization(json);
+    vechicle = vechicleName;
+    createVisualization(vechicle, json);
 }
 
 function loadTestData() {
@@ -343,7 +352,7 @@ function loadTestData() {
         // show only Passenger Cars for test reason
         json = data["children"][0]["children"][1];
         
-        createVisualization(json);
+        createVisualization("Passenger cars", json);
     });
 }
 

@@ -16,12 +16,10 @@ body {
 #sidebar {
   float: right;
   width: 0px;
-  hidden: 1;
 }
 
 #togglelegend {
   width: 0px;
-  hidden: 1;
 }
 
 #sliders {
@@ -30,13 +28,13 @@ body {
 }
 
 #sequence {
+  position: relative;
   width: 400px;
-  height: 30px;
+  height: 0px;
 }
 
 #legend {
   padding: 10px 0 0 3px;
-  hidden: 1;
 }
 
 #sequence text, #legend text, #sliders text {
@@ -46,17 +44,22 @@ body {
 
 #chart {
   position: relative;
+  top: 0;
+  left: 0;
 }
 
 #chart path {
+  position: relative;
+  top: 0;
+  left: 0;
   stroke: #fff;
 }
 
 #explanation {
-  position: fixed;
-  top: 240px;
-  left: 185px;
-  width: 140px;
+  position: relative;
+  top: 250px;
+  left: 160px;
+  width: 130px;
   text-align: center;
   color: #666;
   z-index: -1;
@@ -65,6 +68,11 @@ body {
 #percentage {
   font-size: 2.5em;
   opacity: 0;
+}
+
+#vechicle {
+  font-size: 2em;
+  opacity: 1;
 }
 
 #rangebox {

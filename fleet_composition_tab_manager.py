@@ -553,9 +553,8 @@ class FleetCompositionTabManager(QtCore.QObject):
                 
                 # init webview basing on json configuration
                 webView = tabWidget.findChildren(QtWebKit.QWebView)[0] # assume only a webview is present in the tab
-                print webView.objectName()
 
-                JsCommand = "showJson(%s)" % jsonString
+                JsCommand = "showJson('%s', %s)" % (vehicleClass, jsonString)
                 QgsLogger.debug(self.tr("Load config with with JS command: %s" % JsCommand), 3)
                 
                 webView.page().mainFrame().evaluateJavaScript(JsCommand)
