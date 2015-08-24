@@ -240,6 +240,9 @@ function createVisualization(vechicleName, json) {
     // set vechicle name
     d3.select("#vechicle").text(vechicleName);
     //d3.select("#explanation").style("visibility", "");
+    
+    // open sliders on the fist node
+    showSliders(json);
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
