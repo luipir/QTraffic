@@ -568,7 +568,7 @@ function showSliders(clickedNode) {
     
     // erase and set info box
     var li = {
-        w: 100, h: 30, s: 3, r: 3
+        w: 120, h: 30, s: 3, r: 3
     };
     
     var shift = 130;
@@ -607,7 +607,7 @@ function showSliders(clickedNode) {
         
         // create label
         var g = tr.append('td').append("svg")
-            .attr("width", li.w+10)
+            .attr("width", li.w)
             .attr("height", li.h)
             .append("svg:g");
         g.append("svg:rect")
