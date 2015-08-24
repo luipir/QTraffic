@@ -568,7 +568,7 @@ function showSliders(clickedNode) {
         w: 100, h: 30, s: 3, r: 3
     };
     
-    var shift = 130
+    var shift = 130;
     d3.select('#infoBox').html('');
     d3.select("#infoBox").append("svg:svg")
         .attr("width", li.w + shift)
