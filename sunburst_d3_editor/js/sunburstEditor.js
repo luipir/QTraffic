@@ -55,12 +55,46 @@ var arc = d3.svg.arc()
   //.innerRadius(function(d) { return radius * (d.y) / 100; })
   //.outerRadius(function(d) { return radius * (d.y + d.dy) / 100; });
 
+/*
+var x = d3.scale.linear()
+  .range([0, 2 * Math.PI]);
+var y = d3.scale.linear()
+  .range([0, radius * Math.sqrt(innerHole) / 10]);
+
+function computeTextRotation(d) {
+  return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
+}
+
+function getAngle(d) {
+    // Offset the angle by 90 deg since the '0' degree axis for arc is Y axis, while
+    // for text it is the X axis.
+    var thetaDeg = (180 / Math.PI * (arc.startAngle()(d) + arc.endAngle()(d)) / 2);
+    // If we are rotating the text by more than 90 deg, then "flip" it.
+    // This is why "text-anchor", "middle" is important, otherwise, this "flip" would
+    // a little harder.
+    return (thetaDeg > 90) ? thetaDeg - 180 : thetaDeg;
+}
+
+function pointIsInArc(pt, ptData, d3Arc) {
+    // Center of the arc is assumed to be 0,0
+    // (pt.x, pt.y) are assumed to be relative to the center
+    var r1 = arc.innerRadius()(ptData),
+        r2 = arc.outerRadius()(ptData),
+        theta1 = arc.startAngle()(ptData),
+        theta2 = arc.endAngle()(ptData);
+    
+    var dist = pt.x * pt.x + pt.y * pt.y,
+        angle = Math.atan2(pt.x, -pt.y);
+    
+    angle = (angle < 0) ? (angle + Math.PI * 2) : angle;
+        
+    return (r1 * r1 <= dist) && (dist <= r2 * r2) && 
+           (theta1 <= angle) && (angle <= theta2);
+}
+*/
+
+
 //loadTestData();
-
-
-
-
-
 
 // Main function to draw and set up the visualization, once we have the data.
 function createVisualization(vechicleName, json) {
@@ -100,19 +134,102 @@ function createVisualization(vechicleName, json) {
     
     // make sure this is done after setting the domain
     drawLegend();
-        
-    var path = vis.data([json]).selectAll("path")
-        .data(nodes)
-      .enter()
-        .append("svg:path")
-        //.attr("display", function(d) { return d.depth ? null : "none"; })
+    
+    // draw sunburst
+    var g = vis.data([json]).selectAll("g")
+            .data(nodes)
+        .enter()
+            .append("g");
+    
+    var path = g.append("path")
         .attr("d", arc)
         .attr("fill-rule", "evenodd")
         .style("fill", function(d) { return colors(d.name); })
         .style("opacity", 1)
         .on("mouseover", mouseover)
         .on("click", showSliders);
-
+/*   
+    var text = g.append("text")
+        .attr("transform", function(d) {
+            if (d.percentage > 0) {
+                return "translate(" + arc.centroid(d) + ")" + "rotate(" + getAngle(d) + ")";
+            }  else {
+                return null;
+            }
+         })
+        .style("text-anchor", "middle")
+        .attr("x", function(d) { return d.x; })
+        .attr("dx", "6") // margin
+        .attr("dy", ".35em") // vertical-align
+        .text(function(d) { return d.name; })
+        .style("fill-opacity", function(d) {
+            if (d.depth > 2 || d.depth <= 0) {
+              return '0';
+            } else {
+              return '1';
+            }
+         });
+     /*
+      .style("opacity", function() {
+          var box = this.getBBox();
+          if(box.width <= available.width && box.height <= available.height) {
+            return 1; // fits, show the text
+          } else {
+            return 0; // does not fit, make transparent
+          }
+        });
+    /*
+        .each(function (d) {
+             var bb = this.getBBox(),
+                 center = arc.centroid(d);
+                 
+             var topLeft = {
+               x : center[0] + bb.x,
+               y : center[1] + bb.y
+             };
+             
+             var topRight = {
+               x : topLeft.x + bb.width,
+               y : topLeft.y
+             };
+             
+             var bottomLeft = {
+               x : topLeft.x,
+               y : topLeft.y + bb.height
+             };
+             
+             var bottomRight = {
+               x : topLeft.x + bb.width,
+               y : topLeft.y + bb.height
+             };
+             
+             d.visible = pointIsInArc(topLeft, d, arc) &&
+                         pointIsInArc(topRight, d, arc) &&
+                         pointIsInArc(bottomLeft, d, arc) &&
+                         pointIsInArc(bottomRight, d, arc);
+            
+        })
+        .style('display', function (d) { return d.visible ? null : "none"; });
+*/
+/*
+    var g = vis.data([json]).selectAll("g")
+        .data(nodes)
+      .enter()
+        .append("text")
+          .attr("transform", function(d) {
+              if (d.percentage > 0.2) {
+                  return "translate(" + arc.centroid(d) + ")" +
+                         "rotate(" + getAngle(d) + ")";
+              }  else {
+                  return null;
+              }
+          })
+          //.attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
+          .attr("x", function(d) { return d.x; })
+          .attr("dx", "6") // margin
+          .attr("dy", ".35em") // vertical-align
+          .text(function(d) { return d.name; });
+*/    
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container").on("mouseleave", mouseleave);
 
@@ -234,7 +351,7 @@ function initializeSunburst() {
 // inizialize sliders to allow a clean redraw
 function initializeSliders() {
     // erase and set info box
-    d3.select('#infoBox tbody').html('');
+    d3.select('#infoBox').html('');
     d3.select('#rangebox tbody').html('');
 }
 
@@ -272,6 +389,9 @@ function updateBreadcrumbs(nodeArray, percentageString) {
     .attr("y", b.h / 2)
     .attr("dy", "0.35em")
     .attr("text-anchor", "middle")
+    .style("fill", "#fff")
+    .style("stroke", "none")
+    //.style("stroke-width", 0.3)
     .text(function(d) { return d.name; });
 
   // Set position for entering and updating nodes.
@@ -431,7 +551,7 @@ function updateVis() {
 function showSliders(clickedNode) {
     // do nothing in case of last leaf
     if (typeof clickedNode.children == "undefined") {
-        d3.select('#infoBox tbody').html('');
+        d3.select('#infoBox').html('');
         d3.select('#rangebox tbody').html('');
         return;
     }
@@ -444,11 +564,34 @@ function showSliders(clickedNode) {
     moving_id = null;
     
     // erase and set info box
-    d3.select('#infoBox tbody').html('');
-    d3.select('#infoBox tbody')
-        .style("background-color", function() {return colors(clickedNode.name);})
-        .text(clickedNode.name);
+    var li = {
+        w: 100, h: 30, s: 3, r: 3
+    };
     
+    var shift = 130
+    d3.select('#infoBox').html('');
+    d3.select("#infoBox").append("svg:svg")
+        .attr("width", li.w + shift)
+        .attr("height", li.h)
+        .append("svg:g")
+            .attr("transform", function(d, i) {
+                return "translate(" + (i  + shift) + ", 0)";
+            });
+
+    var g = d3.select("#infoBox").selectAll("g");
+    g.append("svg:rect")
+        .attr("rx", li.r)
+        .attr("ry", li.r)
+        .attr("width", li.w)
+        .attr("height", li.h)
+        .style("fill", function(d) { return colors(clickedNode.name); });
+    g.append("svg:text")
+        .attr("x", li.w / 2)
+        .attr("y", li.h / 2)
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "middle")
+        .text(function(d) { return clickedNode.name; });
+
     // erase previous sliders   
     d3.select('#rangebox tbody').html('');
 
@@ -458,12 +601,27 @@ function showSliders(clickedNode) {
         var color = colors(label);
         
         var tr = d3.select('#rangebox tbody').append('tr');
+        
+        // create label
+        var g = tr.append('td').append("svg")
+            .attr("width", li.w+10)
+            .attr("height", li.h)
+            .append("svg:g");
+        g.append("svg:rect")
+            .attr("rx", li.r)
+            .attr("ry", li.r)
+            .attr("width", li.w)
+            .attr("height", li.h)
+            .style("fill", function(d) { return color; });
+        g.append("svg:text")
+            .attr("x", li.w / 2)
+            .attr("y", li.h / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "middle")
+            .text(function(d) { return label; });
+       
+        // add slider with label and blocker checkbox
         tr.append('td')
-            .attr('class', 'edit')
-            .attr('contentEditable', false)
-            .style("background-color", color)
-            .text(label);
-       tr.append('td')
             .append('input')
             .attr('type', 'range')
             .attr('data-id', i)
