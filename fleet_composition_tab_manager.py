@@ -535,12 +535,12 @@ class FleetCompositionTabManager(QtCore.QObject):
         if not currentRoadTypeItem:
             return
         
+        # get classes from itemData (UserRole)
+        vehicleClasses = currentRoadTypeItem.data(QtCore.Qt.UserRole)
+        
         # create json string to create uniform legend am9ong tabs
         jsonString = json.dumps(vehicleClasses)
         setLegendJsCommand = "setColorLegend(%s)" % (jsonString)
-        
-        # get classes from itemData (UserRole)
-        vehicleClasses = currentRoadTypeItem.data(QtCore.Qt.UserRole)
         
         # then load config for each vehicle tab
         # for each tab get it's specific configuration to load in the webview tab

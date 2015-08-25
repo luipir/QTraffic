@@ -466,8 +466,9 @@ function toggleLegend() {
 }
 
 function showJson(vechicleName, jsonFromPython) {
-    // show only Passenger Cars for test reason
-    var json = jsonFromPython;
+    
+    // set global json to allow its update from other function
+    json = jsonFromPython;
     var vechicle = vechicleName;
 
     createVisualization(vechicle, json);
