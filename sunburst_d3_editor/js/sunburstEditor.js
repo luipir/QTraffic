@@ -84,8 +84,13 @@ function createVisualization(vechicleName, json) {
         .attr("fill-rule", "evenodd")
         .style("fill", function(d) { return colors(d.name); })
         .style("opacity", 1)
-        .on("mouseover", mouseover)
-        .on("click", showSliders);
+        .on("mouseover.breadcrumb", mouseover)
+        .on("mouseover.tooltip", showToolTip)
+        .on("mouseout", hideToolTip)
+        .on("click", showSliders)
+        // for each path data save it in _current to have it as reference 
+        // when angle is changed
+        .each(function(d) { this._oldArc = d; console.log("added", this._oldArc); });
 
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container").on("mouseleave", mouseleave);
@@ -100,6 +105,24 @@ function createVisualization(vechicleName, json) {
     
     // open sliders on the fist node
     showSliders(json);
+}
+
+function showToolTip(d) {
+    var tooltip = d3.select("#tooltip")
+        .style("left", d3.event.pageX + "px")
+        .style("top", d3.event.pageY + "px")
+        .style("opacity", 1)
+        .style("background-color", colors(d.name));
+        
+    tooltip.select("#value")
+            .text(d.percentage + '%');
+    tooltip.select("#arcName")
+            .text(d.name);
+}
+
+function hideToolTip() {
+    d3.select("#tooltip")
+        .style("opacity", 0);;
 }
 
 function setColorLegend(json) {
@@ -415,11 +438,34 @@ function updateVis() {
     var nodes = partition.nodes(json);
     
     vis.selectAll("path")
-      .data(nodes)
-    .transition()
-      .duration(700)
-      .attr("d", arc);
+            .data(nodes)
+        .transition()
+            .duration(700)
+            .attr("d", arc);
+            //.attrTween("d", arcTween);
 }
+
+// Store the displayed angles in _current.
+// Then, interpolate from _current to the new angles.
+// During the transition, _current is updated in-place by d3.interpolate.
+function arcTween(d) {
+    
+    console.log(d)
+    console.log(this._oldArc)
+    console.log("------------------------")
+    
+    if (d === this._oldArc) {
+        console.log("!!!!!!!!!!!!!!!!!!equals")
+        return arc(d)
+    }
+    
+    var i = d3.interpolate(this._oldArc, d);
+    this._current = i(0);
+    return function(t) {
+        return arc(i(t));
+    };
+}
+
 
 //////////////////////////////////////////////////////////
 // Slider management
@@ -515,6 +561,8 @@ function showSliders(clickedNode) {
             .attr('type', 'checkbox')
             .attr('class', 'lockCheckbox')
             .attr('data-id', i)
+            .style('color', '#000')
+            .style('opacity', 1)
             .attr('contentEditable', true);
 
         // memorize chidlren node of the current tr
