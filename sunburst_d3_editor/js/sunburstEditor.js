@@ -114,24 +114,11 @@ function createVisualization(vechicleName, json) {
       .style("opacity", 0);
 
     // For efficiency, filter nodes to keep only those large enough to see.
-    nodes = partition.nodes(json);
+    var nodes = partition.nodes(json);
         //.filter(function(d) {
         //    return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
         //});
-        
-    var uniqueNames = (function(a) {
-        var output = [];
-        a.forEach(function(d) {
-            if (output.indexOf(d.name) === -1) {
-              output.push(d.name);
-            }
-        });
-        return output;
-    })(nodes);
-    
-    // set domain of colors scale based on data
-    colors.domain(uniqueNames);
-    
+
     // make sure this is done after setting the domain
     drawLegend();
     
@@ -243,6 +230,23 @@ function createVisualization(vechicleName, json) {
     
     // open sliders on the fist node
     showSliders(json);
+}
+
+function setColorLegend(json) {
+    var ns = partition.nodes(json);
+    
+    var uniqueNames = (function(a) {
+        var output = [];
+        a.forEach(function(d) {
+            if (output.indexOf(d.name) === -1) {
+              output.push(d.name);
+            }
+        });
+        return output;
+    })(ns);
+    
+    // set domain of colors scale based on data
+    colors.domain(uniqueNames);
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
@@ -463,8 +467,9 @@ function toggleLegend() {
 
 function showJson(vechicleName, jsonFromPython) {
     // show only Passenger Cars for test reason
-    json = jsonFromPython;
-    vechicle = vechicleName;
+    var json = jsonFromPython;
+    var vechicle = vechicleName;
+
     createVisualization(vechicle, json);
 }
 
@@ -537,7 +542,7 @@ function recomputeTotals(node) {
 }
 
 function updateVis() {
-    nodes = partition.nodes(json);
+    var nodes = partition.nodes(json);
     
     vis.selectAll("path")
       .data(nodes)

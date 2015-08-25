@@ -535,6 +535,10 @@ class FleetCompositionTabManager(QtCore.QObject):
         if not currentRoadTypeItem:
             return
         
+        # create json string to create uniform legend am9ong tabs
+        jsonString = json.dumps(vehicleClasses)
+        setLegendJsCommand = "setColorLegend(%s)" % (jsonString)
+        
         # get classes from itemData (UserRole)
         vehicleClasses = currentRoadTypeItem.data(QtCore.Qt.UserRole)
         
@@ -548,12 +552,16 @@ class FleetCompositionTabManager(QtCore.QObject):
             # get confguration for the current vechicle class
             vehicleClassConf = self.getChildrensByName(vehicleClasses, vehicleClass)
             if vehicleClassConf:
-                # convert in json string
-                jsonString = json.dumps(vehicleClassConf)
-                
                 # init webview basing on json configuration
                 webView = tabWidget.findChildren(QtWebKit.QWebView)[0] # assume only a webview is present in the tab
 
+                # init color legend uniform among sunburst tabs
+                QgsLogger.debug(self.tr("Create uniform color legend with JS command: %s" % setLegendJsCommand), 3)
+                webView.page().mainFrame().evaluateJavaScript(setLegendJsCommand)
+                
+                # create sunburst
+                jsonString = json.dumps(vehicleClassConf)
+                
                 JsCommand = "showJson('%s', %s)" % (vehicleClass, jsonString)
                 QgsLogger.debug(self.tr("Load config with with JS command: %s" % JsCommand), 3)
                 
