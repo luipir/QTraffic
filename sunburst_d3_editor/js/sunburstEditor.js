@@ -3,7 +3,7 @@
                               -------------------
         begin                : 2015-04-20
         git sha              : $Format:%H$
-        copyright            : (C) 2015 by Luigi Pirelli (for EMSURE project)º
+        copyright            : (C) 2015 by Luigi Pirelli (for EMSURE project)
         email                : luipir@gmail.lcom
  ***************************************************************************/
 
@@ -44,47 +44,6 @@ var arc = d3.svg.arc()
     return radius * Math.sqrt(innerRadius) / 10; 
   })
   .outerRadius(function(d) { return radius * Math.sqrt(d.y + d.dy) / 10; });
-  //.innerRadius(function(d) { return radius * (d.y) / 100; })
-  //.outerRadius(function(d) { return radius * (d.y + d.dy) / 100; });
-
-/*
-var x = d3.scale.linear()
-  .range([0, 2 * Math.PI]);
-var y = d3.scale.linear()
-  .range([0, radius * Math.sqrt(innerHole) / 10]);
-
-function computeTextRotation(d) {
-  return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
-}
-
-function getAngle(d) {
-    // Offset the angle by 90 deg since the '0' degree axis for arc is Y axis, while
-    // for text it is the X axis.
-    var thetaDeg = (180 / Math.PI * (arc.startAngle()(d) + arc.endAngle()(d)) / 2);
-    // If we are rotating the text by more than 90 deg, then "flip" it.
-    // This is why "text-anchor", "middle" is important, otherwise, this "flip" would
-    // a little harder.
-    return (thetaDeg > 90) ? thetaDeg - 180 : thetaDeg;
-}
-
-function pointIsInArc(pt, ptData, d3Arc) {
-    // Center of the arc is assumed to be 0,0
-    // (pt.x, pt.y) are assumed to be relative to the center
-    var r1 = arc.innerRadius()(ptData),
-        r2 = arc.outerRadius()(ptData),
-        theta1 = arc.startAngle()(ptData),
-        theta2 = arc.endAngle()(ptData);
-    
-    var dist = pt.x * pt.x + pt.y * pt.y,
-        angle = Math.atan2(pt.x, -pt.y);
-    
-    angle = (angle < 0) ? (angle + Math.PI * 2) : angle;
-        
-    return (r1 * r1 <= dist) && (dist <= r2 * r2) && 
-           (theta1 <= angle) && (angle <= theta2);
-}
-*/
-
 
 //loadTestData();
 
@@ -127,88 +86,7 @@ function createVisualization(vechicleName, json) {
         .style("opacity", 1)
         .on("mouseover", mouseover)
         .on("click", showSliders);
-/*   
-    var text = g.append("text")
-        .attr("transform", function(d) {
-            if (d.percentage > 0) {
-                return "translate(" + arc.centroid(d) + ")" + "rotate(" + getAngle(d) + ")";
-            }  else {
-                return null;
-            }
-         })
-        .style("text-anchor", "middle")
-        .attr("x", function(d) { return d.x; })
-        .attr("dx", "6") // margin
-        .attr("dy", ".35em") // vertical-align
-        .text(function(d) { return d.name; })
-        .style("fill-opacity", function(d) {
-            if (d.depth > 2 || d.depth <= 0) {
-              return '0';
-            } else {
-              return '1';
-            }
-         });
-     /*
-      .style("opacity", function() {
-          var box = this.getBBox();
-          if(box.width <= available.width && box.height <= available.height) {
-            return 1; // fits, show the text
-          } else {
-            return 0; // does not fit, make transparent
-          }
-        });
-    /*
-        .each(function (d) {
-             var bb = this.getBBox(),
-                 center = arc.centroid(d);
-                 
-             var topLeft = {
-               x : center[0] + bb.x,
-               y : center[1] + bb.y
-             };
-             
-             var topRight = {
-               x : topLeft.x + bb.width,
-               y : topLeft.y
-             };
-             
-             var bottomLeft = {
-               x : topLeft.x,
-               y : topLeft.y + bb.height
-             };
-             
-             var bottomRight = {
-               x : topLeft.x + bb.width,
-               y : topLeft.y + bb.height
-             };
-             
-             d.visible = pointIsInArc(topLeft, d, arc) &&
-                         pointIsInArc(topRight, d, arc) &&
-                         pointIsInArc(bottomLeft, d, arc) &&
-                         pointIsInArc(bottomRight, d, arc);
-            
-        })
-        .style('display', function (d) { return d.visible ? null : "none"; });
-*/
-/*
-    var g = vis.data([json]).selectAll("g")
-        .data(nodes)
-      .enter()
-        .append("text")
-          .attr("transform", function(d) {
-              if (d.percentage > 0.2) {
-                  return "translate(" + arc.centroid(d) + ")" +
-                         "rotate(" + getAngle(d) + ")";
-              }  else {
-                  return null;
-              }
-          })
-          //.attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
-          .attr("x", function(d) { return d.x; })
-          .attr("dx", "6") // margin
-          .attr("dy", ".35em") // vertical-align
-          .text(function(d) { return d.name; });
-*/    
+
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container").on("mouseleave", mouseleave);
 
@@ -416,7 +294,6 @@ function updateBreadcrumbs(nodeArray, percentageString) {
 }
 
 function drawLegend() {
-
   // Dimensions of legend item: width, height, spacing, radius of rounded rect.
   var li = {
     w: 100, h: 20, s: 3, r: 3
