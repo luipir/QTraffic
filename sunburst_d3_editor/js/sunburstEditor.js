@@ -96,49 +96,8 @@ function createVisualization(vechicleName, json) {
         .text(function(d) { return d.name; })
         .attr("id", "arclabel")
         .attr("text-anchor", "middle")
-        .attr("transform", function(d) {
-            return "translate(" + arc.centroid(d) + ")" + "rotate(" + getAngle(d) + ")";
-        })
-        //.attr("dy", ".35em") // vertical-align
-        .attr("display", function(d) {
-            // display only fuel and euro levels
-            if ( (d.depth < 1) || (d.depth > 2)) {
-                return "none";
-            }
-            return null;
-        })
-        //.style("fill", "#fff")
-        .each(function (d) {
-           var bb = this.getBBox(),
-               center = arc.centroid(d);
-    
-           var topLeft = {
-             x : center[0] + bb.x,
-             y : center[1] + bb.y
-           };
-    
-           var topRight = {
-             x : topLeft.x + bb.width,
-             y : topLeft.y
-           };
-    
-           var bottomLeft = {
-             x : topLeft.x,
-             y : topLeft.y + bb.height
-           };
-    
-           var bottomRight = {
-             x : topLeft.x + bb.width,
-             y : topLeft.y + bb.height
-           };
-    
-           d.visible = pointIsInArc(topLeft, d, arc) &&
-                       pointIsInArc(topRight, d, arc) &&
-                       pointIsInArc(bottomLeft, d, arc) &&
-                       pointIsInArc(bottomRight, d, arc);
-    
-        })
-        .style('display', function (d) { return d.visible ? null : "none"; });
+        .attr("transform", placeLabel)
+        .attr("visibility", hideOrShowLabel);
     
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container")
@@ -156,6 +115,48 @@ function createVisualization(vechicleName, json) {
     // open sliders on the fist node
     showSliders(json);
 }
+
+function placeLabel(d) {
+    return "translate(" + arc.centroid(d) + ")" + "rotate(" + getAngle(d) + ")";
+}
+
+function hideOrShowLabel(d) {
+    // display only fuel and euro levels
+    if ( (d.depth < 1) || (d.depth > 2)) {
+        return "hidden";
+    }
+    
+    // if have to be shown check if it enter in the arc
+    var bb = this.getBBox(),
+        center = arc.centroid(d);
+    
+    var topLeft = {
+        x : center[0] + bb.x,
+        y : center[1] + bb.y
+    };
+    
+    var topRight = {
+        x : topLeft.x + bb.width,
+        y : topLeft.y
+    };
+    
+    var bottomLeft = {
+        x : topLeft.x,
+        y : topLeft.y + bb.height
+    };
+    
+    var bottomRight = {
+        x : topLeft.x + bb.width,
+        y : topLeft.y + bb.height
+    };
+    
+    var visible = pointIsInArc(topLeft, d, arc) &&
+                  pointIsInArc(topRight, d, arc) &&
+                  pointIsInArc(bottomLeft, d, arc) &&
+                  pointIsInArc(bottomRight, d, arc);
+                
+    return visible ? "visible" : "hidden";
+} 
 
 function pointIsInArc(pt, d, d3Arc) {
   // Center of the arc is assumed to be 0,0
@@ -267,13 +268,13 @@ function hideBreadCrumb(d) {
   // Transition each segment to full opacity and then reactivate it.
   d3.selectAll("path")
     .transition()
-    .duration(500)
-    .style("opacity", 1)
-    .each("end", function() {
-      d3.select(this)
-        .on("mouseover.breadcrumb", showBreadCrumb)
-        .on("mouseover.tooltip", showToolTip);
-    });
+        .duration(500)
+            .style("opacity", 1)
+            .each("end", function() {
+              d3.select(this)
+                .on("mouseover.breadcrumb", showBreadCrumb)
+                .on("mouseover.tooltip", showToolTip);
+            });
 
 /*  d3.select("#explanation")
     .transition()
@@ -521,10 +522,12 @@ function updateVis() {
     
     vis.selectAll("path")
             .data(nodes)
-        .transition()
-            .duration(700)
+        .transition().duration(700)
             .attr("d", arc);
-            //.attrTween("d", arcTween);
+    vis.selectAll("text")
+        .transition()
+            .attr("transform", placeLabel)
+            .attr("visibility", hideOrShowLabel);
 }
 
 // Store the displayed angles in _current.
