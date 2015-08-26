@@ -84,16 +84,18 @@ function createVisualization(vechicleName, json) {
         .attr("fill-rule", "evenodd")
         .style("fill", function(d) { return colors(d.name); })
         .style("opacity", 1)
-        .on("mouseover.breadcrumb", mouseover)
+        .on("mouseover.breadcrumb", showBreadCrumb)
         .on("mouseover.tooltip", showToolTip)
-        .on("mouseout", hideToolTip)
-        .on("click", showSliders)
+        .on("mousemove", moveToolTip)
+        .on("click", showSliders);
         // for each path data save it in _current to have it as reference 
         // when angle is changed
-        .each(function(d) { this._oldArc = d; console.log("added", this._oldArc); });
+        //.each(function(d) { this._oldArc = d; console.log("added", this._oldArc); });
 
     // Add the mouseleave handler to the bounding circle.
-    d3.select("#container").on("mouseleave", mouseleave);
+    d3.select("#container")
+        .on("mouseleave.hidebreadcrumb", hideBreadCrumb)
+        .on("mouseleave.hidetooltip", hideToolTip);
 
     // show lagend activating checkbox
     //d3.select("#togglelegend").property('checked', true);
@@ -122,7 +124,14 @@ function showToolTip(d) {
 
 function hideToolTip() {
     d3.select("#tooltip")
-        .style("opacity", 0);;
+        .transition().duration(500)
+            .style("opacity", 0);
+}
+
+function moveToolTip(d) {
+    d3.select("#tooltip")
+        .style("left", d3.event.pageX + "px")
+        .style("top", d3.event.pageY + "px");
 }
 
 function setColorLegend(json) {
@@ -143,7 +152,7 @@ function setColorLegend(json) {
 }
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
-function mouseover(d) {
+function showBreadCrumb(d) {
   
   var percentage = d.percentage;
   
@@ -175,14 +184,15 @@ function mouseover(d) {
 }
 
 // Restore everything to full opacity when moving off the visualization.
-function mouseleave(d) {
+function hideBreadCrumb(d) {
 
   // Hide the breadcrumb trail
   d3.select("#trail")
     .style("visibility", "hidden");
-
+  
   // Deactivate all segments during transition.
-  d3.selectAll("path").on("mouseover", null);
+  d3.selectAll("path").on("mouseover.breadcrumb", null);
+  d3.selectAll("path").on("mouseover.tooltip", null);
 
   // Transition each segment to full opacity and then reactivate it.
   d3.selectAll("path")
@@ -190,7 +200,9 @@ function mouseleave(d) {
     .duration(500)
     .style("opacity", 1)
     .each("end", function() {
-      d3.select(this).on("mouseover", mouseover);
+      d3.select(this)
+        .on("mouseover.breadcrumb", showBreadCrumb)
+        .on("mouseover.tooltip", showToolTip);
     });
 
 /*  d3.select("#explanation")

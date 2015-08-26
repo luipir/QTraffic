@@ -86,6 +86,7 @@ body {
 
 
 #tooltip {
+    pointer-events:none; /*let mouse events*/
     position: absolute;
     width: auto;
     height: auto;
