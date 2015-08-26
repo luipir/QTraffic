@@ -91,7 +91,55 @@ function createVisualization(vechicleName, json) {
         // for each path data save it in _current to have it as reference 
         // when angle is changed
         //.each(function(d) { this._oldArc = d; console.log("added", this._oldArc); });
-
+    
+    g.append("svg:text")
+        .text(function(d) { return d.name; })
+        .attr("id", "arclabel")
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+            return "translate(" + arc.centroid(d) + ")" + "rotate(" + getAngle(d) + ")";
+        })
+        //.attr("dy", ".35em") // vertical-align
+        .attr("display", function(d) {
+            // display only fuel and euro levels
+            if ( (d.depth < 1) || (d.depth > 2)) {
+                return "none";
+            }
+            return null;
+        })
+        //.style("fill", "#fff")
+        .each(function (d) {
+           var bb = this.getBBox(),
+               center = arc.centroid(d);
+    
+           var topLeft = {
+             x : center[0] + bb.x,
+             y : center[1] + bb.y
+           };
+    
+           var topRight = {
+             x : topLeft.x + bb.width,
+             y : topLeft.y
+           };
+    
+           var bottomLeft = {
+             x : topLeft.x,
+             y : topLeft.y + bb.height
+           };
+    
+           var bottomRight = {
+             x : topLeft.x + bb.width,
+             y : topLeft.y + bb.height
+           };
+    
+           d.visible = pointIsInArc(topLeft, d, arc) &&
+                       pointIsInArc(topRight, d, arc) &&
+                       pointIsInArc(bottomLeft, d, arc) &&
+                       pointIsInArc(bottomRight, d, arc);
+    
+        })
+        .style('display', function (d) { return d.visible ? null : "none"; });
+    
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container")
         .on("mouseleave.hidebreadcrumb", hideBreadCrumb)
@@ -107,6 +155,28 @@ function createVisualization(vechicleName, json) {
     
     // open sliders on the fist node
     showSliders(json);
+}
+
+function pointIsInArc(pt, d, d3Arc) {
+  // Center of the arc is assumed to be 0,0
+  // (pt.x, pt.y) are assumed to be relative to the center
+  var theta1 = d3Arc.startAngle()(d),
+      theta2 = d3Arc.endAngle()(d);
+
+  var angle = Math.atan2(pt.x, -pt.y); // Note: different coordinate system.
+  angle = (angle < 0) ? (angle + Math.PI * 2) : angle;
+
+  return (theta1 <= angle) && (angle <= theta2);
+}
+
+function getAngle(d) {
+    // Offset the angle by 90 deg since the '0' degree axis for arc is Y axis, while
+    // for text it is the X axis.
+    var thetaDeg = (180 / Math.PI * (arc.startAngle()(d) + arc.endAngle()(d)) / 2);
+    // If we are rotating the text by more than 90 deg, then "flip" it.
+    // This is why "text-anchor", "middle" is important, otherwise, this "flip" would
+    // a little harder.
+    return (thetaDeg > 90) ? thetaDeg - 180 : thetaDeg;
 }
 
 function showToolTip(d) {
