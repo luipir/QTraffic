@@ -101,7 +101,7 @@ function createVisualization(vechicleName, json) {
     
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container")
-        .on("mouseleave.hidebreadcrumb", hideBreadCrumb)
+        .on("mouseleave.resetGeneralOpacity", resetGeneralOpacity)
         .on("mouseleave.hidetooltip", hideToolTip);
 
     // show lagend activating checkbox
@@ -255,7 +255,7 @@ function showBreadCrumb(d) {
 }
 
 // Restore everything to full opacity when moving off the visualization.
-function hideBreadCrumb(d) {
+function resetGeneralOpacity(d) {
 
   // Hide the breadcrumb trail
   d3.select("#trail")
@@ -267,14 +267,13 @@ function hideBreadCrumb(d) {
 
   // Transition each segment to full opacity and then reactivate it.
   d3.selectAll("path")
-    .transition()
-        .duration(500)
-            .style("opacity", 1)
-            .each("end", function() {
-              d3.select(this)
+    .transition().duration(500)
+        .style("opacity", 1)
+        .each("end", function() {
+            d3.select(this)
                 .on("mouseover.breadcrumb", showBreadCrumb)
                 .on("mouseover.tooltip", showToolTip);
-            });
+        });
 
 /*  d3.select("#explanation")
     .transition()
@@ -654,6 +653,12 @@ function showSliders(clickedNode) {
         tr.attr('data-id', i);
         tr.on("mouseover", hilightAnchestors);
     }
+    
+    // reset visibility going outside of rangebox
+    d3.selectAll('#rangebox')
+        .on("mouseleave.resetGeneralOpacity", resetGeneralOpacity)
+        .on("mouseleave.hidetooltip", hideToolTip);
+
         
     // set slider values depending of the clicked class
     d3.selectAll('#rangebox .range').each(function () {
