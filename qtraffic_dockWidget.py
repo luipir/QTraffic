@@ -25,7 +25,6 @@ from PyQt4 import QtCore, QtGui, uic
 from project_tab_manager import ProjectTabManager
 from fleet_composition_tab_manager import FleetCompositionTabManager
 from input_network_tab_manager import InputNetworkTabManager
-from vehicle_countspeed_tab_manager import VechicleCountSpeedTabManager
 from fuel_properties_tab_manager import FuelPropertiesTabManager
 from output_tab_manager import OutputTabManager
 
