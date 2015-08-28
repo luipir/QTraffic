@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Mon Aug  3 13:53:38 2015
+# Created: Fri Aug 28 10:10:14 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,6 +27,9 @@ class Ui_qtraffic_dockWidget(object):
     def setupUi(self, qtraffic_dockWidget):
         qtraffic_dockWidget.setObjectName(_fromUtf8("qtraffic_dockWidget"))
         qtraffic_dockWidget.resize(790, 521)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("../icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        qtraffic_dockWidget.setWindowIcon(icon)
         qtraffic_dockWidget.setFloating(False)
         self.qtraffic_widget = QtGui.QWidget()
         self.qtraffic_widget.setObjectName(_fromUtf8("qtraffic_widget"))

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/newfuel_formula_editor_dialog.ui'
 #
-# Created: Wed Aug  5 16:07:52 2015
+# Created: Fri Aug 28 10:10:14 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -28,6 +28,9 @@ class Ui_newFuelFormula_dialog(object):
         newFuelFormula_dialog.setObjectName(_fromUtf8("newFuelFormula_dialog"))
         newFuelFormula_dialog.setWindowModality(QtCore.Qt.WindowModal)
         newFuelFormula_dialog.resize(780, 464)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("../icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        newFuelFormula_dialog.setWindowIcon(icon)
         self.verticalLayout = QtGui.QVBoxLayout(newFuelFormula_dialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.horizontalLayout_30 = QtGui.QHBoxLayout()

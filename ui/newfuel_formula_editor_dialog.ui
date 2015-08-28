@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>New fuel formula editor</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icon.png</normaloff>../icon.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_30">

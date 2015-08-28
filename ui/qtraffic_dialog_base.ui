@@ -10,6 +10,10 @@
     <height>521</height>
    </rect>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icon.png</normaloff>../icon.png</iconset>
+  </property>
   <property name="floating">
    <bool>false</bool>
   </property>
