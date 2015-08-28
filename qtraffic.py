@@ -167,7 +167,7 @@ class QTraffic:
         icon_path = ':/plugins/QTraffic/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'Road contamination modelling'),
+            text=self.tr(u'QTraffic - Road contamination modelling'),
             callback=self.run,
             parent=self.iface.mainWindow())
 
