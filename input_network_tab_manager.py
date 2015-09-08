@@ -29,8 +29,12 @@ from qgis.core import (QgsMessageLog,
                        QgsErrorMessage,
                        QgsMapLayerRegistry,
                        QgsVectorLayer)
-from qgis.gui import (QgsMessageBar)
+from qgis.gui import (QgsMessageBar,
+                      QgsMapLayerComboBox,
+                      QgsMapLayerProxyModel)
 from qgis.utils import iface
+
+from select_layer_dialog import SelectLayerDialog
 
 class InputNetworkTabManager(QtCore.QObject):
     ''' Class to hide managing of relative tab
@@ -59,6 +63,7 @@ class InputNetworkTabManager(QtCore.QObject):
         # set basic events
         self.gui.inputLayer_lineEdit.returnPressed.connect(self.loadLayer)
         self.gui.selectLayer_TButton.clicked.connect(self.askLayer)
+        self.gui.selectFile_TButton.clicked.connect(self.askLayerFile)
         self.gui.inputNetwork_validate_PButton.clicked.connect(self.validate)
 
     def initTabTabIndex(self):
@@ -101,15 +106,31 @@ class InputNetworkTabManager(QtCore.QObject):
         
         # if layer exist load it otherwise only reset comboboxes
         if os.path.exists(inputLayerFile):
-            # load layer
-            self.roadLayer = QgsVectorLayer(inputLayerFile, 'roadLayer', 'ogr')
-            if not self.roadLayer.isValid():
-                message = self.tr("Error loading layer: %s" % self.roadLayer.error().message(QgsErrorMessage.Text))
-                iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
-                return
+            # check if layer is already loaded in layer list checking it's source
+            # that would be equal to the inputLayerFile (for this reason is not simple 
+            # to work with db data)
+            found = False
+            for layerName, layer in QgsMapLayerRegistry.instance().mapLayers().items():
+                if inputLayerFile == layer.publicSource():
+                    # set the found layer as roadLayer
+                    self.roadLayer = layer
+                    found = True
+                    break
             
-            # show layer in the canvas
-            QgsMapLayerRegistry.instance().addMapLayer(self.roadLayer)
+            # if layer is not loaded... load it
+            if not found:
+                # get layer name to set as public name in the legend
+                layerName = os.path.splitext( os.path.basename(inputLayerFile) )[0]
+                
+                # load layer
+                self.roadLayer = QgsVectorLayer(inputLayerFile, layerName, 'ogr')
+                if not self.roadLayer.isValid():
+                    message = self.tr("Error loading layer: %s" % self.roadLayer.error().message(QgsErrorMessage.Text))
+                    iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+                    return
+                
+                # show layer in the canvas
+                QgsMapLayerRegistry.instance().addMapLayer(self.roadLayer)
         
         else:
             self.roadLayer = None
@@ -277,7 +298,25 @@ class InputNetworkTabManager(QtCore.QObject):
         self.projectModified.emit()
     
     def askLayer(self):
-        ''' Ask for tghe layer to load
+        ''' Ask for the layer to load
+            Look for layer already loaded in the layer list 
+        '''
+        # create dialog to select layer
+        dlg = SelectLayerDialog(self.gui)
+        ret = dlg.exec_()
+        if ret:
+            # get selected layer
+            newLayer = dlg.selectLayer_CBox.currentLayer()
+            
+            # set gui with the new layer name
+            self.gui.inputLayer_lineEdit.setText(newLayer.publicSource())
+            
+            # then load layer
+            self.loadLayer()
+        
+    def askLayerFile(self):
+        ''' Ask for the layer file to load
+            Don't load it if already loaded comparing source of tre layer
         '''
         if not self.project:
             return
@@ -314,11 +353,14 @@ class InputNetworkTabManager(QtCore.QObject):
             iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
             return
         
-        self.project.setValue('InputNetwork/inputLayer', layerFileName)
+        currentLayerFile = self.project.value('InputNetwork/inputLayer', '')
+        if currentLayerFile != layerFileName:
+            self.project.setValue('InputNetwork/inputLayer', layerFileName)
         self.setTabGUIBasingOnProject()
         
-        # notify project modification
-        self.projectModified.emit()
+        # notify project modification if layer source is modified
+        if currentLayerFile != layerFileName:
+            self.projectModified.emit()
     
     def getRoadLayer(self):
         return self.roadLayer
