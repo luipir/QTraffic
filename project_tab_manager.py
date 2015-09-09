@@ -28,7 +28,8 @@ import shutil
 from PyQt4 import QtCore, QtGui
 from qgis.core import (QgsVectorLayer,
                        QgsMessageLog,
-                       QgsErrorMessage)
+                       QgsErrorMessage,
+                       QgsLogger)
 from qgis.gui import (QgsMessageBar)
 from qgis.utils import iface
 
@@ -75,6 +76,9 @@ class ProjectTabManager(QtCore.QObject):
         ''' Set status of project GUI because the project has been modified
             This method is a slot called everytime a gui element has been modified
         '''
+        message = "QTraffic: setProjectModified by sender {}".format(str(type(self.sender())))
+        QgsLogger.debug(message, debuglevel=3)
+        
         # do nothing if the project already marked as modified
         if self.isModified():
             return
@@ -90,6 +94,9 @@ class ProjectTabManager(QtCore.QObject):
         ''' Set status of project GUI as saved = not modified
             This method is a slot called everytime a project is saved
         '''
+        message = "QTraffic: setProjectSaved by sender {}".format(str(type(self.sender())))
+        QgsLogger.debug(message, debuglevel=3)
+        
         # do nothing if the project already marked as modified
         if not self.isModified():
             return
@@ -104,6 +111,9 @@ class ProjectTabManager(QtCore.QObject):
     def setGuiProjectLoaded(self):
         ''' Set GUI if a project has loaded
         '''
+        message = "QTraffic: setGuiProjectLoaded by sender {}".format(str(type(self.sender())))
+        QgsLogger.debug(message, debuglevel=3)
+        
         self.gui.saveAsProject_PButton.setEnabled(True)
     
     def _reallyLoadProject(self):
@@ -233,13 +243,17 @@ class ProjectTabManager(QtCore.QObject):
         
         startPath = os.path.dirname( lastProjectIni )
         
-        # ask for the new conf file
-        projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
-                                                        self.tr("Ini (*.cfg);;All (*)"))
-        if not projectFile:
-            return
+        # check if something is wrote in the lineEdit
+        projectFile = self.gui.projectName_lineEdit.text()
+
+        if not os.path.exists(projectFile):
+            # ask for the new conf file
+            projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
+                                                            self.tr("Ini (*.cfg);;All (*)"))
+            if not projectFile:
+                return
         
-        # if projectFile does not exist copy template from the default project file
+        # if projectFile does not exist do nothing
         if not os.path.exists(projectFile):
             title = self.tr("Warning")
             message = self.tr("Project does not exist")
