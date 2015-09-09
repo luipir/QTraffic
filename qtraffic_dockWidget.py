@@ -58,14 +58,18 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.setupUi(self)
         
         # init tab managers
+        self.inputNetworkTabManager = None
+        self.fleetCompostionTabManager = None
+        self.fuelPropertiesTabManager = None
+        self.outputTabManager = None
         self.initTabs()
         
         # add listener that monitorise if layer is removed
         try:
-            QgsMapLayerRegistry.instance().layerRemoved['QString'].disconnect(self.checkLayerDeletion)
+            QgsMapLayerRegistry.instance().layerRemoved.disconnect(self.checkLayerDeletion)
         except:
             pass
-        QgsMapLayerRegistry.instance().layerRemoved['QString'].connect(self.checkLayerDeletion)
+        QgsMapLayerRegistry.instance().layerRemoved.connect(self.checkLayerDeletion)
     
     def initTabs(self):
         """ init all tab managers
@@ -78,18 +82,27 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         self.projectTabManager.projectLoaded.connect(self.setTabsOnCurrentProject)
         
         # init Input Network tab manager
+        if self.inputNetworkTabManager:
+            #self.inputNetworkTabManager.removeListeners()
+            self.inputNetworkTabManager.deleteLater()
         self.inputNetworkTabManager = InputNetworkTabManager(self)
         self.inputNetworkTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
         
         # init Fleet Composition tab Manager
+        if self.fleetCompostionTabManager:
+            self.fleetCompostionTabManager.deleteLater()
         self.fleetCompostionTabManager = FleetCompositionTabManager(self)
         self.fleetCompostionTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
         
         # fuel properties tab manager
+        if self.fuelPropertiesTabManager:
+            self.fuelPropertiesTabManager.deleteLater()
         self.fuelPropertiesTabManager = FuelPropertiesTabManager(self)
         self.fuelPropertiesTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
         
         # output tab manager
+        if self.outputTabManager:
+            self.outputTabManager.deleteLater()
         self.outputTabManager = OutputTabManager(self)
         self.outputTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
             
