@@ -22,6 +22,9 @@
 import os
 from PyQt4 import QtCore, QtGui, uic
 
+from qgis.utils import iface
+from qgis.core import QgsMapLayerRegistry
+
 from project_tab_manager import ProjectTabManager
 from fleet_composition_tab_manager import FleetCompositionTabManager
 from input_network_tab_manager import InputNetworkTabManager
@@ -54,7 +57,19 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
         
-        # init all tab managers
+        # init tab managers
+        self.initTabs()
+        
+        # add listener that monitorise if layer is removed
+        try:
+            QgsMapLayerRegistry.instance().layerRemoved['QString'].disconnect(self.checkLayerDeletion)
+        except:
+            pass
+        QgsMapLayerRegistry.instance().layerRemoved['QString'].connect(self.checkLayerDeletion)
+    
+    def initTabs(self):
+        """ init all tab managers
+        """
         # I decided to avoid strict class derivation and use aggregation 
         # to facilitate maintenance to other peaple not practical in OOP
         
@@ -77,6 +92,22 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         # output tab manager
         self.outputTabManager = OutputTabManager(self)
         self.outputTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
+            
+    def checkLayerDeletion(self, layerId):
+        ''' Notify that road layer has been deletad and plugin can't be operative
+        '''
+        roadLayerId = self.inputNetworkTabManager.getRoadLayerId()
+        if not roadLayerId:
+            return
+        
+        if layerId != roadLayerId:
+            return
+        
+        # notify layer has been removed
+        iface.messageBar().pushCritical('QTraffic', self.tr(u"Removed road layer. Please reload the plugin project!"))
+        
+        # reinitialize all tabs
+        self.initTabs()
         
     def setTabsOnCurrentProject(self):
         ''' A new project has loaded => set all tabs basing on that project
@@ -122,4 +153,19 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
             return False
         
         return True
+
+    # noinspection PyMethodMayBeStatic
+    def tr(self, message):
+        """Get the translation for a string using Qt translation API.
+
+        We implement this ourselves since we do not inherit QObject.
+
+        :param message: String for translation.
+        :type message: str, QString
+
+        :returns: Translated version of message.
+        :rtype: QString
+        """
+        # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
+        return QtCore.QCoreApplication.translate('QTraffic', message)
     

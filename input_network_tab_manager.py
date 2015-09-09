@@ -53,6 +53,7 @@ class InputNetworkTabManager(QtCore.QObject):
         self.project = None
         self.projectPath = None
         self.roadLayer = None
+        self.roadLayerId = None
         
         # retrieve the current tab index
         self.initTabTabIndex()
@@ -131,9 +132,12 @@ class InputNetworkTabManager(QtCore.QObject):
                 
                 # show layer in the canvas
                 QgsMapLayerRegistry.instance().addMapLayer(self.roadLayer)
-        
+            
+            # now layer is available
+            self.roadLayerId = self.roadLayer.id()
         else:
             self.roadLayer = None
+            self.roadLayerId = None
         
         # set text of loaded layer
         if self.roadLayer:
@@ -364,6 +368,9 @@ class InputNetworkTabManager(QtCore.QObject):
     
     def getRoadLayer(self):
         return self.roadLayer
+    
+    def getRoadLayerId(self):
+        return self.roadLayerId
     
     def removeRoadLayer(self):
         ''' Remove current road layer from canvas
