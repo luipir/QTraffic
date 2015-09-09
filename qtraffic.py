@@ -181,6 +181,12 @@ class QTraffic:
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
         del self.toolbar
+        
+        # remove listeners
+        try:
+            QgsMapLayerRegistry.instance().layerRemoved.disconnect(self.dlg.checkLayerDeletion)
+        except:
+            pass
 
 
     def run(self):
