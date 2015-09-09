@@ -28,7 +28,8 @@ from PyQt4 import QtCore, QtGui
 from qgis.core import (QgsMessageLog,
                        QgsErrorMessage,
                        QgsMapLayerRegistry,
-                       QgsVectorLayer)
+                       QgsVectorLayer,
+                       QgsLogger)
 from qgis.gui import (QgsMessageBar,
                       QgsMapLayerComboBox,
                       QgsMapLayerProxyModel)
@@ -139,12 +140,6 @@ class InputNetworkTabManager(QtCore.QObject):
             self.roadLayer = None
             self.roadLayerId = None
         
-        # set text of loaded layer
-        if self.roadLayer:
-            self.gui.inputLayer_lineEdit.setText(self.roadLayer.publicSource())
-        else:
-            self.gui.inputLayer_lineEdit.setText('')
-            
         # avoid emitting signal in case of reset of indexes
         try:
             # to avoid add multiple listener, remove previous listener
@@ -155,6 +150,12 @@ class InputNetworkTabManager(QtCore.QObject):
         except (Exception) as ex:
             pass
         
+        # set text of loaded layer
+        if self.roadLayer:
+            self.gui.inputLayer_lineEdit.setText(self.roadLayer.publicSource())
+        else:
+            self.gui.inputLayer_lineEdit.setText('')
+            
         # now populare combo boxes with layer colums
         if self.roadLayer:
             fieldNames = sorted([field.name() for field in self.roadLayer.pendingFields().toList()])
@@ -264,6 +265,10 @@ class InputNetworkTabManager(QtCore.QObject):
     def saveTabOnProject(self):
         ''' Save tab configuration in the project basing on GUI values
         '''
+        if self.sender():
+            message = "QTraffic: saveTabOnProject by sender {}".format(self.sender().objectName())
+            QgsLogger.debug(message, debuglevel=3)
+        
         # get values from the GUI
         inputLayerFile = self.gui.inputLayer_lineEdit.text()
         columnRoadType = self.gui.roadType_CBox.currentText()
