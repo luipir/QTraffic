@@ -77,6 +77,9 @@ class OutputTabManager(QtCore.QObject):
         '''
         self.project = project
         if self.project:
+            # write everything on disk
+            self.project.sync()
+            
             # set some globals
             confFileName = self.project.fileName()
             self.projectPath = os.path.dirname(confFileName)
@@ -291,6 +294,12 @@ class OutputTabManager(QtCore.QObject):
         if not self.gui.validate():
             return
         
+        # set number of classes in the project config (that is the temporary one... but equal to the official one)
+        fleetDistributionRoadTypes = self.gui.getRoadTypes()
+        self.project.setValue('Processing.Parameters/maximum_type', len(fleetDistributionRoadTypes))
+        self.project.sync()
+
+        # create the algorithm
         self.alg = Algorithm()
         roadLayer = self.gui.getRoadLayer()
         
