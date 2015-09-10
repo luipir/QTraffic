@@ -53,6 +53,9 @@ class OutputTabManager(QtCore.QObject):
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
         self.project = None
         self.projectPath = None
+        self.outLayer = None
+        self.outLayerId = None
+        self.outLayerRemoved = False
         
         # retrieve the current tab index
         self.initTabTabIndex()
@@ -234,7 +237,36 @@ class OutputTabManager(QtCore.QObject):
         self.gui.pollutantsSO2_CBox.clicked.connect(self.saveTabOnProject)
         self.gui.pollutantsPM25_CBox.clicked.connect(self.saveTabOnProject)
         self.gui.pollutantsC6H6_CBox.clicked.connect(self.saveTabOnProject)
-    
+        
+        # if and output file is specified and it's available => load it
+        if newOutputLayer and os.path.exists(newOutputLayer):
+            
+            # check if layer is already loaded in layer list checking it's source
+            found = False
+            for layerName, layer in QgsMapLayerRegistry.instance().mapLayers().items():
+                if newOutputLayer == layer.publicSource():
+                    # set the found layer as roadLayer
+                    self.outLayer = layer
+                    self.outLayerId = self.outLayer.id()
+                    found = True
+                    break
+            
+            if not found:
+                # get layer name to set as public name in the legend
+                layerName = os.path.splitext( os.path.basename(newOutputLayer) )[0]
+                    
+                # load layer
+                self.outLayer = QgsVectorLayer(newOutputLayer, layerName, 'ogr')
+                if not self.outLayer.isValid():
+                    message = self.tr("Error loading layer: %s" % self.outLayer.error().message(QgsErrorMessage.Text))
+                    iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+                    return
+                
+                self.outLayerId = self.outLayer.id()
+
+                # show layer in the canvas
+                QgsMapLayerRegistry.instance().addMapLayer(self.outLayer)
+        
     def saveTabOnProject(self):
         ''' Save tab configuration in the project basing on GUI values
         '''
@@ -307,8 +339,30 @@ class OutputTabManager(QtCore.QObject):
         addToInputLayer = self.gui.addToOriginaLayer_RButton.isChecked()
         newOutputLayer = self.gui.outFile_LEdit.text()
 
-        self.outLayer = roadLayer
-        if not addToInputLayer:
+        if addToInputLayer:
+            self.outLayer = roadLayer
+            self.outLayerId = self.outLayer.id()
+        else:
+            # if layer is present... remove it
+            # out layer would not be the same of input road layer... in thi scase don't remove it
+            if self.outLayer and self.outLayer.isValid():
+                # to be sure, remove only if roadLayer and outLayer are different
+                if self.outLayer.publicSource() != roadLayer.publicSource():
+                    self.outLayerRemoved = False
+                    QgsMapLayerRegistry.instance().layerRemoved.connect(self.checkOutLayerRemoved)
+                    QgsMapLayerRegistry.instance().removeMapLayer(self.outLayer.id())
+                    
+                    # remove file when it has been removed from qgis
+                    while not self.outLayerRemoved:
+                        sleep(0.1)
+                    QgsMapLayerRegistry.instance().layerRemoved.disconnect(self.checkOutLayerRemoved)
+                        
+                    if os.path.exists(newOutputLayer):
+                        if not QgsVectorFileWriter.deleteShapeFile(newOutputLayer):
+                            message = self.tr("Error removing shape: {}".format(newOutputLayer))
+                            iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
+                            return
+            
             # copy input layer to the new one
             writeError = QgsVectorFileWriter.writeAsVectorFormat(roadLayer, newOutputLayer, 'utf-8',  roadLayer.crs())
             if writeError != QgsVectorFileWriter.NoError:
@@ -326,6 +380,8 @@ class OutputTabManager(QtCore.QObject):
                 iface.messageBar().pushCritical('QTraffic', message)
                 return
     
+            self.outLayerId = self.outLayer.id()
+            
         # prepare environment
         try:
             self.alg.setProject(self.project)
@@ -355,6 +411,12 @@ class OutputTabManager(QtCore.QObject):
         # set wait cursor and start
         QgsApplication.instance().setOverrideCursor(QtCore.Qt.WaitCursor)
         self.thread.start()
+    
+    def checkOutLayerRemoved(self, layerId):
+        ''' check when outLayer has been removed settign semaphore to True
+        '''
+        if self.outLayerId == layerId:
+            self.outLayerRemoved = True
         
     def threadCleanup(self):
         ''' cleanup after thread run
