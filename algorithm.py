@@ -73,8 +73,6 @@ class Algorithm(QtCore.QObject):
         ''' QTraffic executable runner '''
         self.started.emit()
         
-        sleep(2)
-        
         # get algorithm executable
         srcpath = os.path.dirname(os.path.realpath(__file__))        
         defaultExecutableLocation = os.path.join(srcpath, 'algorithm', 'QTraffic.exe')
@@ -98,17 +96,22 @@ class Algorithm(QtCore.QObject):
                                     stderr=subprocess.PIPE,
                                     cwd=self.projectPath)
             self.progress.emit(-1)
-            for line in iter(proc.stdout.readline, ''):
-                if self.killed:
-                    break
+            while proc.poll() == None:
+                line = proc.stdout.readline()
+                if line:
+                    #QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
+                    self.message.emit(line, QgsMessageLog.INFO)
+                    
+                    # check the end of processing controlling the final keyword
+                    if "END OF CALCULATION" in line:
+                        success = True
+                        break
                 
-                #QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
-                self.message.emit(line, QgsMessageLog.INFO)
-                
-                # check the end of processing controlling the final keyword... seems
-                # that subprocess.popen.returncode return always None when run with Wine
-                if "END OF CALCULATION" in line:
-                    success = True
+                sleep(0.1)
+            
+            # check return
+            message = 'QTraffic: ' + strCommand + 'returned with code ' + str(proc.returncode)
+            self.message.emit(message, QgsMessageLog.INFO)
             
         except Exception as ex:
             self.error.emit(ex, traceback.format_exc())
