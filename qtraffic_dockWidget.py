@@ -83,7 +83,6 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # init Input Network tab manager
         if self.inputNetworkTabManager:
-            #self.inputNetworkTabManager.removeListeners()
             self.inputNetworkTabManager.deleteLater()
         self.inputNetworkTabManager = InputNetworkTabManager(self)
         self.inputNetworkTabManager.projectModified.connect(self.projectTabManager.setProjectModified)
@@ -109,6 +108,10 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
     def checkLayerDeletion(self, layerId):
         ''' Notify that road layer has been deletad and plugin can't be operative
         '''
+        # don't fo forward if listener is not related to any instance
+        if not iface:
+            return
+        
         roadLayerId = self.inputNetworkTabManager.getRoadLayerId()
         if not roadLayerId:
             return
