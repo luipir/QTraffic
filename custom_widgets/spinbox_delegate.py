@@ -28,7 +28,7 @@ from PyQt4 import QtCore, QtGui
 class SpinBoxDelegate(QtGui.QItemDelegate):
     def createEditor(self, parent, option, index):
         editor = QtGui.QSpinBox(parent)
-        editor.setMinimum(-999999)
+        editor.setMinimum(1)
         editor.setMaximum(999999)
 
         return editor
