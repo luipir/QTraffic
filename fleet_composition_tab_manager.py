@@ -109,7 +109,22 @@ class FleetCompositionTabManager(QtCore.QObject):
         
         # disable current tab because no project has been loaded yet
         self.gui.tabWidget.setTabEnabled(self.tabIndex, False)
+        
+        # add listener to load automaticallly first road type when entering in this tab
+        self.gui.tabWidget.currentChanged.connect(self.loadFirstRoadType)
     
+    def loadFirstRoadType(self, tabIndex):
+        ''' Load first road type when entering in the tab and no road tyle has been selected
+            In this way is sipler than set it wghen project loading because of async 
+            nature of loading these data and preparing JS code
+        '''
+        if tabIndex != self.tabIndex:
+            return
+        
+        # get list and check if something is selected
+        if len(self.gui.roadTypes_listWidget.selectedItems()) == 0:
+            self.gui.roadTypes_listWidget.setCurrentRow(0)
+        
     def setFleetGUIModified(self, status=True):
         ''' Set fleet composition tab interface basing if fleet statistic has modified or not
             tab gui will have:
