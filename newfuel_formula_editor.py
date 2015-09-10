@@ -33,6 +33,7 @@ from qgis.core import (QgsApplication,
 from qgis.utils import iface
 from PyQt4 import QtGui, QtCore
 from ui.newfuel_formula_editor_dialog_ui import Ui_newFuelFormula_dialog
+from utils import setFileWindowsHidden
 
 class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
     ''' Dynamic gui toedit Formula file
@@ -74,6 +75,8 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
         basename = os.path.basename(confFileName)
         self.temporaryFormulaFileName = os.path.join(self.projectPath, '.'+basename)
         shutil.copy(self.formulaFileName, self.temporaryFormulaFileName)
+        
+        setFileWindowsHidden(self.temporaryFormulaFileName)
         
         # set origin formula filename
         if not self.formulaFileName:
@@ -324,6 +327,8 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
         # create temporary formulaFileName useful to manage save and reset
         self.temporaryFormulaFileName = os.path.join(self.projectPath, '.'+formulaBasename)
         shutil.copy(completeFormulaFileName, self.temporaryFormulaFileName)
+        
+        setFileWindowsHidden(self.temporaryFormulaFileName)
            
         # load conf
         self.reloadFormulaConf()

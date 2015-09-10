@@ -33,6 +33,8 @@ from qgis.core import (QgsVectorLayer,
 from qgis.gui import (QgsMessageBar)
 from qgis.utils import iface
 
+from utils import setFileWindowsHidden
+
 class ProjectTabManager(QtCore.QObject):
     ''' Class to hide managing of project load and save
     '''
@@ -135,6 +137,9 @@ class ProjectTabManager(QtCore.QObject):
         # allowing management of Save
         completeTempProjectFileName = os.path.join(self.projectDir, self.tempProjectFileName)
         shutil.copyfile(lastProjectIni, completeTempProjectFileName)
+        
+        # set tempfile hidden in windows
+        setFileWindowsHidden(completeTempProjectFileName)
 
         # load the project ini from the saved copy instead from the original one
         self.project = QtCore.QSettings(completeTempProjectFileName, QtCore.QSettings.IniFormat)
