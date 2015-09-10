@@ -495,7 +495,7 @@ class InputNetworkTabManager(QtCore.QObject):
         fleetDistributionRoadTypes = self.gui.getRoadTypes()
         for roadType in roadTypes:
             if not str(roadType) in fleetDistributionRoadTypes:
-                message = self.tr("Validation error: Road type value {} is not defined in fleet distribution tab".format(roadType))
+                message = self.tr("Validation error: Road type value {} is not defined in Fleet Composition tab".format(roadType))
                 iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
                 return False
         
