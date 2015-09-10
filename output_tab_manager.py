@@ -486,10 +486,13 @@ class OutputTabManager(QtCore.QObject):
         3) notify edn of processing
         4) terminate the thread
         '''
+        # finish the thread
+        self.thread.quit()
+        
         # check result
         if not success:
             QgsMessageLog.logMessage('Failed execution', 'QTraffic', QgsMessageLog.CRITICAL)
-            iface.messageBar().pushCritical('QTraffic', self.tr("Error executing algorithm"))
+            iface.messageBar().pushCritical('QTraffic', self.tr("Error executing the algorithm"))
             return
         
         # prepare result
@@ -509,9 +512,6 @@ class OutputTabManager(QtCore.QObject):
         
         # notify the user the end of process
         iface.messageBar().pushSuccess('QTraffic', self.tr('Alg terminated successfully'))
-        
-        # finish the thread
-        self.thread.quit()
         
     def validate(self):
         ''' pre calcluation validation related only to this tab
