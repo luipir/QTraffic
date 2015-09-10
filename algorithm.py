@@ -98,8 +98,6 @@ class Algorithm(QtCore.QObject):
                                     cwd=self.projectPath)
             self.progress.emit(-1)
             for line in iter(proc.stdout.readline, ''):
-#             while proc.poll() == None:
-#                 line = proc.stdout.readline()
                 if line:
                     #QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
                     self.message.emit(line, QgsMessageLog.INFO)
