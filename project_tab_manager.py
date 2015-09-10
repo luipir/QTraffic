@@ -131,7 +131,7 @@ class ProjectTabManager(QtCore.QObject):
         self.projectDir = os.path.dirname(lastProjectIni)
         self.projectName = os.path.basename(self.projectDir)
         self.projectFileName = os.path.basename(lastProjectIni)
-        self.tempProjectFileName = "."+self.projectFileName
+        self.tempProjectFileName = ".temp."+self.projectFileName
         
         # make a copy of the current project file to work on the copy
         # allowing management of Save
@@ -139,7 +139,8 @@ class ProjectTabManager(QtCore.QObject):
         shutil.copyfile(lastProjectIni, completeTempProjectFileName)
         
         # set tempfile hidden in windows
-        setFileWindowsHidden(completeTempProjectFileName)
+        # commented because hiding in Windows lock the file
+        #setFileWindowsHidden(completeTempProjectFileName)
 
         # load the project ini from the saved copy instead from the original one
         self.project = QtCore.QSettings(completeTempProjectFileName, QtCore.QSettings.IniFormat)
