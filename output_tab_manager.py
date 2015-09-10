@@ -466,13 +466,18 @@ class OutputTabManager(QtCore.QObject):
         
         if msgType == QgsMessageLog.WARNING:
             duration = 3
+            msgType = QgsMessageBar.WARNING
+
+        if msgType == QgsMessageLog.CRITICAL:
+            msgType = QgsMessageBar.CRITICAL
+        
         iface.messageBar().pushMessage(message, msgType, duration)
             
     def manageError(self, ex, exceptionMessage):
         ''' Do actions in case of alg thread error. Now only notify exception 
         '''
         QgsMessageLog.logMessage(exceptionMessage, 'QTraffic', QgsMessageLog.CRITICAL)
-        iface.messageBar().pushMessage(exceptionMessage, QgsMessageLog.CRITICAL)
+        iface.messageBar().pushMessage(exceptionMessage, QgsMessageBar.CRITICAL)
         
     def manageFinished(self, success):
         ''' Do action after notify that alg is finished. These are the postprocessing steps
