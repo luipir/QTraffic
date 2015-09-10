@@ -48,7 +48,7 @@ var arc = d3.svg.arc()
 //loadTestData();
 
 // Main function to draw and set up the visualization, once we have the data.
-function createVisualization(vechicleName, json) {
+function createVisualization(roadType, vechicleName, json) {
     
     // Basic setup of page elements.
     initializeBreadcrumbTrail();
@@ -109,7 +109,8 @@ function createVisualization(vechicleName, json) {
     //d3.select("#togglelegend").on("click")();
 
     // set vechicle name
-    d3.select("#vechicle").text(vechicleName);
+    var message = 'Type ' + roadType + '\n' + vechicleName;
+    d3.select("#vechicle").text(message);
     //d3.select("#explanation").style("visibility", "");
     
     // open sliders on the fist node
@@ -439,13 +440,14 @@ function toggleLegend() {
     }
 }
 
-function showJson(vechicleName, jsonFromPython) {
+function showJson(roadTypeFromPython, vechicleNameFromPython, jsonFromPython) {
     
     // set global json to allow its update from other function
     json = jsonFromPython;
-    var vechicle = vechicleName;
+    var vechicleName = vechicleNameFromPython;
+    var roadType = roadTypeFromPython;
 
-    createVisualization(vechicle, json);
+    createVisualization(roadType, vechicleName, json);
 }
 
 function loadTestData() {
@@ -455,7 +457,7 @@ function loadTestData() {
         // show only Passenger Cars for test reason
         json = data["children"][0]["children"][1];
         
-        createVisualization("Passenger cars", json);
+        createVisualization("1", "Passenger cars", json);
     });
 }
 

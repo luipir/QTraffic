@@ -551,6 +551,9 @@ class FleetCompositionTabManager(QtCore.QObject):
         if not currentRoadTypeItem:
             return
         
+        # get current road type
+        roadType = currentRoadTypeItem.text()
+        
         # get classes from itemData (UserRole)
         vehicleClasses = currentRoadTypeItem.data(QtCore.Qt.UserRole)
         
@@ -578,7 +581,7 @@ class FleetCompositionTabManager(QtCore.QObject):
                 # create sunburst
                 jsonString = json.dumps(vehicleClassConf)
                 
-                JsCommand = "showJson('%s', %s)" % (vehicleClass, jsonString)
+                JsCommand = "showJson('%s', '%s', %s)" % (roadType, vehicleClass, jsonString)
                 QgsLogger.debug(self.tr("Load config with with JS command: %s" % JsCommand), 3)
                 
                 webView.page().mainFrame().evaluateJavaScript(JsCommand)
