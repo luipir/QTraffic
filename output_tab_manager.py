@@ -458,19 +458,19 @@ class OutputTabManager(QtCore.QObject):
     def manageMessage(self, message, msgType): 
         ''' expose alg thread messages to gui and log
         '''
+        QgsMessageLog.logMessage(message, 'QTraffic', msgType)
+        
         duration = 0
         if msgType == QgsMessageLog.INFO:
-            # enough notify in the log
-            QgsMessageLog.logMessage(message, 'QTraffic', msgType)
             return
+        
+        if msgType == QgsMessageLog.CRITICAL:
+            msgType = QgsMessageBar.CRITICAL
         
         if msgType == QgsMessageLog.WARNING:
             duration = 3
             msgType = QgsMessageBar.WARNING
 
-        if msgType == QgsMessageLog.CRITICAL:
-            msgType = QgsMessageBar.CRITICAL
-        
         iface.messageBar().pushMessage(message, msgType, duration)
             
     def manageError(self, ex, exceptionMessage):
@@ -479,7 +479,7 @@ class OutputTabManager(QtCore.QObject):
         QgsMessageLog.logMessage(exceptionMessage, 'QTraffic', QgsMessageLog.CRITICAL)
         iface.messageBar().pushMessage(exceptionMessage, QgsMessageBar.CRITICAL)
         
-    def manageFinished(self, success):
+    def manageFinished(self, success, reason):
         ''' Do action after notify that alg is finished. These are the postprocessing steps
         1) merge result to the output layer
         2) add the layer to canvas in case it is new
@@ -491,8 +491,8 @@ class OutputTabManager(QtCore.QObject):
         
         # check result
         if not success:
-            QgsMessageLog.logMessage('Failed execution', 'QTraffic', QgsMessageLog.CRITICAL)
-            iface.messageBar().pushCritical('QTraffic', self.tr("Error executing the algorithm"))
+            QgsMessageLog.logMessage('Failed execution: {}'.format(reason), 'QTraffic', QgsMessageLog.CRITICAL)
+            iface.messageBar().pushCritical('QTraffic', self.tr("Error executing the algorithm: {}".format(reason)))
             return
         
         # prepare result

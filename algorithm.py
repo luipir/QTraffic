@@ -51,7 +51,7 @@ class Algorithm(QtCore.QObject):
     progress = QtCore.pyqtSignal(int)
     message = QtCore.pyqtSignal(str, int)
     error = QtCore.pyqtSignal(Exception, basestring)
-    finished = QtCore.pyqtSignal(object)
+    finished = QtCore.pyqtSignal(object, basestring)
     
     def __init__(self):
         ''' constructor '''
@@ -79,6 +79,7 @@ class Algorithm(QtCore.QObject):
         executable = self.project.value('Processing/Executable', defaultExecutableLocation)
         
         success = False
+        reason = ''
         try:
             if platform.system() == 'Linux':
                 command = ['wine', executable]
@@ -96,17 +97,22 @@ class Algorithm(QtCore.QObject):
                                     stderr=subprocess.PIPE,
                                     cwd=self.projectPath)
             self.progress.emit(-1)
-            while proc.poll() == None:
-                line = proc.stdout.readline()
+            for line in iter(proc.stdout.readline, ''):
+#             while proc.poll() == None:
+#                 line = proc.stdout.readline()
                 if line:
                     #QgsMessageLog.logMessage(line, 'QTraffic', QgsMessageLog.INFO)
                     self.message.emit(line, QgsMessageLog.INFO)
                     
+                    if 'Error in syntax of function string' in line:
+                        reason = self.tr('Formula syntax error! Check it in Fuel properties tab -> Define emission factors for new fuel')
+                        success = False
+                    
                     # check the end of processing controlling the final keyword
-                    if "END OF CALCULATION" in line:
+                    if 'END OF CALCULATION' in line:
                         success = True
-                        break
-                
+            
+            while proc.poll() == None:
                 sleep(0.1)
             
             # check return
@@ -117,7 +123,7 @@ class Algorithm(QtCore.QObject):
             self.error.emit(ex, traceback.format_exc())
         
         # resturn true or false
-        self.finished.emit(success)
+        self.finished.emit(success, reason)
                 
     def setProject(self, project=None):
         ''' setting the project on which the algorithm would be run
