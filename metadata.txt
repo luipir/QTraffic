@@ -13,7 +13,7 @@ about=QTraffic model is able to quantify traffic emission and energy consumption
     It has been developed based on the updated European methodology for emission factors and a novel technology for producing dynamic interactive data visualization. 
     The emission and energy consumption model is implemented as a plugin for open-source QGIS and integrates D3.js library with the Python programming.
 
-version=0.7.1
+version=0.7.2
 qgisMinimumVersion=2.0
 
 author=University of Coimbra (http://www.uc.pt/) – Luigi Pirelli, Oxana Tchepel, Daniela Dias
@@ -24,7 +24,8 @@ email=luipir@gmail.lcom
 # Recommended items:
 
 # Uncomment the following line and add your changelog:
-changelog=0.7.1 - Fixed several bugs or features basing on comments
+changelog=0.7.2 Changed button tooltip
+    0.7.1 - Fixed several bugs or features basing on comments
     0.7 - Fixed bug on maximumType and added feature to load layer from loaded ones
     0.6 - D3 graphic reorganization
     0.5 - Added validation
