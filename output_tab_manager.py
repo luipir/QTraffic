@@ -357,6 +357,12 @@ class OutputTabManager(QtCore.QObject):
                         sleep(0.1)
                     QgsMapLayerRegistry.instance().layerRemoved.disconnect(self.checkOutLayerRemoved)
                         
+                    # reinit outLayer variables
+                    # If not, under windws remain a locking of the related file creating
+                    # an error during QgsVectorFileWriter.deleteShapeFile
+                    self.outLayer = None
+                    self.outLayerId = None
+
                     if os.path.exists(newOutputLayer):
                         if not QgsVectorFileWriter.deleteShapeFile(newOutputLayer):
                             message = self.tr("Error removing shape: {}".format(newOutputLayer))
@@ -416,6 +422,7 @@ class OutputTabManager(QtCore.QObject):
         ''' check when outLayer has been removed settign semaphore to True
         '''
         if self.outLayerId == layerId:
+            QgsMessageLog.logMessage('Completly removed outLayer', 'QTraffic', QgsMessageLog.INFO)
             self.outLayerRemoved = True
         
     def threadCleanup(self):
