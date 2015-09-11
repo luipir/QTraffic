@@ -57,7 +57,7 @@ class ProjectTabManager(QtCore.QObject):
 
         # create listeners to load, save and saveas
         self.gui.projectName_lineEdit.returnPressed.connect(self.loadProject)
-        self.gui.selectProject_TButton.clicked.connect(self.loadProject)
+        self.gui.selectProject_TButton.clicked.connect(self.askProject)
         self.gui.newProject_PButton.clicked.connect(self.createNewProject)
         self.gui.saveAsProject_PButton.clicked.connect(self.saveAsProject)
         self.gui.saveProject_PButton.clicked.connect(self.saveProject)
@@ -229,9 +229,47 @@ class ProjectTabManager(QtCore.QObject):
         
         # init the current project
         self._reallyLoadProject()
-                
+    
+    def askProject(self):
+        ''' Ask for a a project file
+        '''
+        # check if current project has been modified to 
+        # avoid to override modifications
+        if self.isModified():
+            title = self.tr("Warning")
+            message = self.tr("Project is modified, if you continue you can overwrite modifications. Continue?")
+            ret = QtGui.QMessageBox.question(self.gui, title, message, QtGui.QMessageBox.Ok, QtGui.QMessageBox.No)
+            if ret == QtGui.QMessageBox.No:
+                return
+        
+        # get last conf to start from its path
+        settings = QtCore.QSettings()
+        settings.setIniCodec("UTF-8")
+        lastProjectIni = settings.value('/QTraffic/lastProject', self.gui.defaultProjectFileName)
+        
+        startPath = os.path.dirname( lastProjectIni )
+        
+        # ask for the new conf file
+        projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
+                                                        self.tr("Ini (*.cfg);;All (*)"))
+        if not projectFile:
+            return
+        
+        # if projectFile does not exist do nothing
+        if not os.path.exists(projectFile):
+            title = self.tr("Warning")
+            message = self.tr("Project does not exist")
+            iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
+            return            
+
+        # set line edit value
+        self.gui.projectName_lineEdit.setText(projectFile)
+        
+        # then load it
+        self.loadProject()
+
     def loadProject(self):
-        ''' Load or create a new project if the selected project does not exist
+        ''' Load a project
         '''
         # check if current project has been modified to 
         # avoid to override modifications
@@ -253,6 +291,11 @@ class ProjectTabManager(QtCore.QObject):
         projectFile = self.gui.projectName_lineEdit.text()
 
         if not os.path.exists(projectFile):
+            # notify that what is in the line edit is a wrong project filename
+            # don't do it if a empty string!
+            if projectFile:
+                message = self.tr('QTraffic: project {} does not exist! please select one'.format(projectFile))
+                iface.messageBar().pushMessage(message, QgsMessageBar.WARNING, 6)
             # ask for the new conf file
             projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
                                                             self.tr("Ini (*.cfg);;All (*)"))
