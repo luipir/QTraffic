@@ -394,9 +394,9 @@ class OutputTabManager(QtCore.QObject):
             self.alg.setLayer( roadLayer )
             self.alg.initConfig()
             self.alg.prepareRun()
-        except:
+        except Exception as ex:
             traceback.print_exc()
-            message = self.tr('Error preparing context for the algoritm')
+            message = self.tr('Error preparing running contex for the algoritm: %s' % str(ex))
             QgsMessageLog.logMessage(message, 'QTraffic', QgsMessageLog.CRITICAL)
             iface.messageBar().pushCritical('QTraffic', message)
             return
