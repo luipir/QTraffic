@@ -137,6 +137,9 @@ class InputNetworkTabManager(QtCore.QObject):
             # now layer is available
             self.roadLayerId = self.roadLayer.id()
         else:
+            message = self.tr("Input network does not exist: %s" % inputLayerFile)
+            iface.messageBar().pushMessage(message, QgsMessageBar.WARNING)
+            
             self.roadLayer = None
             self.roadLayerId = None
         
@@ -154,7 +157,7 @@ class InputNetworkTabManager(QtCore.QObject):
         if self.roadLayer:
             self.gui.inputLayer_lineEdit.setText(self.roadLayer.publicSource())
         else:
-            self.gui.inputLayer_lineEdit.setText('')
+            self.gui.inputLayer_lineEdit.setText(inputLayerFile)
             
         # now populare combo boxes with layer colums
         if self.roadLayer:
