@@ -46,7 +46,7 @@ class QTrafficDockWidget(QtGui.QDockWidget, Ui_qtraffic_dockWidget):
         
         # init some globals
         self.applicationPath = os.path.dirname(os.path.realpath(__file__))
-        self.defaultProjectFileName = os.path.join(self.applicationPath, 'config','defaultProject.cfg')
+        self.defaultProjectFileName = os.path.join(self.applicationPath, 'config','defaultProject.ini')
         self.defaultVehicleClassesFileName = os.path.join(self.applicationPath, 'config', 'VehicleDistributionClasses', 'FleetDistribution.json')
         self.defaultNewFuelFormulaFileName = os.path.join(self.applicationPath, 'config', 'NewFuelFormulas.json')
         

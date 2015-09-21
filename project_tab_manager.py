@@ -194,7 +194,7 @@ class ProjectTabManager(QtCore.QObject):
         self.projectName = newProjectName
         
         # set project config file 
-        self.projectFileName = self.projectName + ".cfg"
+        self.projectFileName = self.projectName + ".ini"
         
         # check if project is empty
         # ask to the user if he/she want to overwrite the project
@@ -250,8 +250,8 @@ class ProjectTabManager(QtCore.QObject):
         startPath = os.path.dirname( lastProjectIni )
         
         # ask for the new conf file
-        projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
-                                                        self.tr("Ini (*.cfg);;All (*)"))
+        projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a project file", startPath, 
+                                                        self.tr("QTraffic project (*.ini);;All (*)"))
         if not projectFile:
             return
         
@@ -297,8 +297,8 @@ class ProjectTabManager(QtCore.QObject):
                 message = self.tr('QTraffic: project {} does not exist! please select one'.format(projectFile))
                 iface.messageBar().pushMessage(message, QgsMessageBar.WARNING, 6)
             # ask for the new conf file
-            projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a INI project file", startPath, 
-                                                            self.tr("Ini (*.cfg);;All (*)"))
+            projectFile = QtGui.QFileDialog.getOpenFileName(self.gui, "Select a project file", startPath, 
+                                                            self.tr("QTraffic project (*.ini);;All (*)"))
             if not projectFile:
                 return
         
@@ -390,7 +390,7 @@ class ProjectTabManager(QtCore.QObject):
                 os.rename(oldFileName, newFileName)
         
         # then change current project to the new one
-        projectFile = os.path.join(projectDir, newProjectName + '.cfg')
+        projectFile = os.path.join(projectDir, newProjectName + '.ini')
         
         # set new conf file as default
         settings.setValue('/QTraffic/lastProject', projectFile)

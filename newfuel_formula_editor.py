@@ -437,7 +437,7 @@ if __name__ == '__main__':
         QgsApplication.initQgis()
     
         # load project
-        projectFile = os.path.join( os.path.dirname(os.path.realpath(__file__)), 'config', 'defaultProject.cfg')
+        projectFile = os.path.join( os.path.dirname(os.path.realpath(__file__)), 'config', 'defaultProject.ini')
         project = QtCore.QSettings(projectFile, QtCore.QSettings.IniFormat)
         project.setIniCodec("UTF-8")
         

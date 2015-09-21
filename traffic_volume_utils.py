@@ -114,7 +114,7 @@ if __name__ == '__main__':
         QgsApplication.initQgis()
     
         # run application
-        projectFileName = os.path.join(srcpath, 'testdata', 'TestProject', 'TestProject.cfg')
+        projectFileName = os.path.join(srcpath, 'testdata', 'TestProject', 'TestProject.ini')
         project = QtCore.QSettings(projectFileName, QtCore.QSettings.IniFormat)
         
         layerPath = os.path.join(srcpath, 'testdata', 'shape', 'roadlinks.shp')
