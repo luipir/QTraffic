@@ -128,14 +128,14 @@
              <item>
               <widget class="QToolButton" name="selectLayer_TButton">
                <property name="text">
-                <string>From Layer</string>
+                <string>From an active layer</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QToolButton" name="selectFile_TButton">
                <property name="text">
-                <string>From Shape</string>
+                <string>From Shapefile</string>
                </property>
               </widget>
              </item>

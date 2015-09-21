@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/qtraffic_dialog_base.ui'
 #
-# Created: Tue Sep  8 18:24:05 2015
+# Created: Mon Sep 21 16:07:39 2015
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -585,8 +585,8 @@ class Ui_qtraffic_dockWidget(object):
         self.saveProject_PButton.setText(_translate("qtraffic_dockWidget", "Save", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.project_tab), _translate("qtraffic_dockWidget", "Project", None))
         self.groupBox.setTitle(_translate("qtraffic_dockWidget", "Input Layer", None))
-        self.selectLayer_TButton.setText(_translate("qtraffic_dockWidget", "From Layer", None))
-        self.selectFile_TButton.setText(_translate("qtraffic_dockWidget", "From Shape", None))
+        self.selectLayer_TButton.setText(_translate("qtraffic_dockWidget", "From an active layer", None))
+        self.selectFile_TButton.setText(_translate("qtraffic_dockWidget", "From Shapefile", None))
         self.groupBox_2.setTitle(_translate("qtraffic_dockWidget", "Table Column Select", None))
         self.label_2.setText(_translate("qtraffic_dockWidget", "Road type (link to fleet composition)", None))
         self.label_8.setText(_translate("qtraffic_dockWidget", "Average vehicle speed (km/h)", None))
