@@ -441,7 +441,7 @@ class InputNetworkTabManager(QtCore.QObject):
             return False
         
         if not columnRoadSlope:
-            message = self.tr("Validation error: Road slope column have to be selected from input layer")
+            message = self.tr("Validation error: Road gradient column have to be selected from input layer")
             iface.messageBar().pushMessage(message, QgsMessageBar.CRITICAL)
             return False
         
