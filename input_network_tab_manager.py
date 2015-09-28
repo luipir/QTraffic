@@ -66,7 +66,7 @@ class InputNetworkTabManager(QtCore.QObject):
         self.gui.inputLayer_lineEdit.returnPressed.connect(self.loadLayer)
         self.gui.selectLayer_TButton.clicked.connect(self.askLayer)
         self.gui.selectFile_TButton.clicked.connect(self.askLayerFile)
-        self.gui.inputNetwork_validate_PButton.clicked.connect(self.validate)
+        self.gui.inputNetwork_validate_PButton.clicked.connect(self.validateWithNotification)
 
     def initTabTabIndex(self):
         ''' Retrieve what tab index refer the current tab manager
@@ -386,6 +386,13 @@ class InputNetworkTabManager(QtCore.QObject):
         if self.roadLayer and self.roadLayer.isValid():
             # do nothing if layer already removed by user
             QgsMapLayerRegistry.instance().removeMapLayer(self.roadLayer.id())
+    
+    def validateWithNotification(self):
+        ''' Do validation and notify if it success
+        ''' 
+        if self.validate():
+            message = self.tr("QTraffic: Input Network validation passed successfully")
+            iface.messageBar().pushMessage(message, QgsMessageBar.SUCCESS)
     
     def validate(self):
         ''' Validate parameters inserted in the Input Network tab:
