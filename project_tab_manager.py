@@ -51,7 +51,7 @@ class ProjectTabManager(QtCore.QObject):
         self.projectDir = None
         self.projectName =None
         self.projectFileName = None
-        self.tempProjectFileName = None
+        self.tempProjectFileName = '.temp.project'
         self.project = None
         self.roadLayer = None
 
@@ -131,7 +131,6 @@ class ProjectTabManager(QtCore.QObject):
         self.projectDir = os.path.dirname(lastProjectIni)
         self.projectName = os.path.basename(self.projectDir)
         self.projectFileName = os.path.basename(lastProjectIni)
-        self.tempProjectFileName = ".temp."+self.projectFileName
         
         # make a copy of the current project file to work on the copy
         # allowing management of Save

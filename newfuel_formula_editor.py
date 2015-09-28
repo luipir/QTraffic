@@ -72,8 +72,7 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
             self.formulaFileName = os.path.join(self.projectPath, confFileName)
         
         # create temporary formulaFileName useful to manage save and reset
-        basename = os.path.basename(confFileName)
-        self.temporaryFormulaFileName = os.path.join(self.projectPath, '.temp.'+basename)
+        self.temporaryFormulaFileName = os.path.join(self.projectPath, '.temp.formulas')
         shutil.copy(self.formulaFileName, self.temporaryFormulaFileName)
         
         # commented because hiding in Windows lock the file
@@ -326,7 +325,7 @@ class NewFuelFormulaEditor(QtGui.QDialog, Ui_newFuelFormula_dialog):
         shutil.copyfile(self.gui.defaultNewFuelFormulaFileName, completeFormulaFileName)
                 
         # create temporary formulaFileName useful to manage save and reset
-        self.temporaryFormulaFileName = os.path.join(self.projectPath, '.temp.'+formulaBasename)
+        self.temporaryFormulaFileName = os.path.join(self.projectPath, '.temp.formulas')
         shutil.copy(completeFormulaFileName, self.temporaryFormulaFileName)
         
         # commented because hiding in Windows lock the file
