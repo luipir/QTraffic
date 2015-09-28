@@ -325,6 +325,10 @@ class OutputTabManager(QtCore.QObject):
         # perform validation
         if not self.gui.validate():
             return
+        else:
+            # notify successful validation
+            message = self.tr("QTraffic: Parameters validation passed successfully")
+            iface.messageBar().pushMessage(message, QgsMessageBar.SUCCESS)
         
         # set number of classes in the project config (that is the temporary one... but equal to the official one)
         fleetDistributionRoadTypes = self.gui.getRoadTypes()
