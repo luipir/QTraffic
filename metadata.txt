@@ -15,6 +15,7 @@ about=QTraffic model is able to quantify traffic emission and energy consumption
     NOTE for Linux users:
     TEM Algoritm was developed and compiled in Fortran under Win environment. To allow execution in a Linux environment
     it's necessary to have wine (https://www.winehq.org/) installed.
+    LIMITATIONS: The plugin manage only shapfiles 
 
 version=0.7.4
 qgisMinimumVersion=2.0
