@@ -6,7 +6,7 @@ a novel technology for producing dynamic interactive data visualization.
 The emission and energy consumption model is implemented as a plugin for open-source QGIS and
 integrates D3.js library with the Python programming.
 
-Developped by Luigi Pirelli inside EMSURE project with techincal support of Oxana Tchepel, Daniela Dias
+Developped by Luigi Pirelli inside EMSURE project with technical support by Oxana Tchepel, Daniela Dias
 
 EMSURE Project in Coimbra Univerity: http://www.uc.pt/en/efs/research/emsure/
 
