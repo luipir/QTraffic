@@ -8,10 +8,13 @@
 
 [general]
 name=QTraffic
-description=Traffic Emission and Energy Consumption Model for open-source QGIS
+description=Traffic Emission and Energy Consumption Model (TEM) for open-source QGIS
 about=QTraffic model is able to quantify traffic emission and energy consumption on the urban level.
     It has been developed based on the updated European methodology for emission factors and a novel technology for producing dynamic interactive data visualization. 
     The emission and energy consumption model is implemented as a plugin for open-source QGIS and integrates D3.js library with the Python programming.
+    NOTE for Linux users:
+    TEM Algoritm was developed and compiled in Fortran under Win environment. To allow execution in a Linux environment
+    it's necessary to have wine (https://www.winehq.org/) installed.
 
 version=0.7.4
 qgisMinimumVersion=2.0
