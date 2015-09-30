@@ -14,4 +14,4 @@ NOTE for Linux users:
 TEM Algoritm was developed and compied in Fortran under Win environment. To allow execution in a Linux environment
 it's necessary to have wine (https://www.winehq.org/) installed.
 
-LIMITATIONS: Due to algorithm structure, the plugin manage only shapefiles 
+LIMITATIONS: Due to algorithm structure, the plugin manages only shapefiles 
