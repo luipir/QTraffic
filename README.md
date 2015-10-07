@@ -14,7 +14,7 @@ EMSURE Project in Coimbra Univerity: http://www.uc.pt/en/efs/research/emsure/
 
 LIMITATIONS: Due to algorithm structure, the plugin manages only shapefiles 
 
-[![QTraffic Screenshot](https://dl.dropboxusercontent.com/u/12837459/qgis_plugins/QTrafficScreenshot.png)](https://github.com/luipir/QTraffic)
+[![QTraffic Screenshot](https://www.dropbox.com/s/kvof3ihafntkfyo/QTrafficScreenshot.png?dl=0)](https://github.com/luipir/QTraffic)
 
 Quick Installation Guide
 ========================
